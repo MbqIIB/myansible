@@ -1,0 +1,6 @@
+---
+- hosts : ent-op-server
+  tasks :
+    - name: update /etc/hosts
+      copy: src=./ent-hosts  dest=/etc/hosts
+                 owner=root group=root mode=0644

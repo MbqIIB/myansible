@@ -1,0 +1,6 @@
+---
+- hosts : ent-op-server
+  remote_user: root
+  tasks :
+    - name: ping {{ hosts }}
+      ping:
