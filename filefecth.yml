@@ -1,0 +1,5 @@
+---
+- hosts :  bluem4
+  tasks :
+    - name: fetch one file to /tmp
+      fetch: src=/tmp/date.log dest=/tmp/fetched
