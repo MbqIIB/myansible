@@ -1,0 +1,10 @@
+---
+- hosts: compute-server-tyan
+  vars:
+    user: linzhbj
+    #password: "passw0rd"
+    password: "$6$Sr9oy7KU$oPz55u9fwkXq8UYP2q4dgAjDzTfzFVLBBRnpe/TIWgOCOYLIg86rK.Vx612HhTX6G7hPRSFX0kNhIMNh6CPlZ/"
+  remote_user: root
+  tasks:
+  - name: Add user {{ user }}
+    user: name={{user}} comment="ceph user" password={{ password }}

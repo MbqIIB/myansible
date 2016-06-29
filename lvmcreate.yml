@@ -1,0 +1,18 @@
+---
+- hosts : redpower5
+  remote_user: root
+  gather_facts: no
+  vars :
+    vgname : vgdata
+    lvname : lvdata
+  tasks :
+    - name: lvm create for redpower5
+      lvg: vg={{vgname}} pvs=/dev/sde,/dev/sdf,/dev/sdg,/dev/sdh,/dev/sdi,/dev/sdj
+
+    - name: lvol create for redpower5
+      lvol: vg={{vgname}} lv={{lvname}} size=+100%FREE
+
+
+    - filesystem: fstype=ext4 dev=/dev/mapper/{{vgname}}-{{lvname}}
+
+    - mount: name=/data src=/dev/mapper/{{vgname}}-{{lvname}} fstype=ext4 state=mounted

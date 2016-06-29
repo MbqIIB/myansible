@@ -1,5 +1,7 @@
 ---
 - hosts : ent-op-server
+  remote_user: root
+  gather_facts: no
   tasks :
     - name: update /etc/hosts
       copy: src=./ent-hosts  dest=/etc/hosts
