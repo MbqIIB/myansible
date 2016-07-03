@@ -1,5 +1,5 @@
 ---
-- hosts : bluem4
+- hosts : ent-op-server
   remote_user: root
   gather_facts: no
   tasks :

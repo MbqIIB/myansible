@@ -1,0 +1,18 @@
+---
+- hosts : bluem4
+  remote_user: root
+  gather_facts: no
+  vars_files:
+    - varfile
+  tasks :
+    - name: ping all bluem4
+      template: src=/root/myansible/tfile1.txt dest=/tmp/tfile1.txt
+      notify:
+        - print date
+        - print file
+
+  handlers:
+    - name : print date
+      shell : date >> /tmp/tfile1.txt
+    - name : print file
+      shell : cat /tmp/tfile1.txt
