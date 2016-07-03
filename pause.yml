@@ -1,0 +1,8 @@
+- hosts : bluem4
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : wail time
+      pause : seconds=2
+    - copy : src=varfile  dest=/tmp/varsfile
+
