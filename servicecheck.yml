@@ -1,0 +1,32 @@
+---
+#- hosts: compute-server
+- hosts: cp9,cp12,cp13,chuanghe1,chuanghe2,chuanghe3,cp8
+  remote_user: root
+  gather_facts: no
+  remote_user: root
+  vars :
+    - monitordir : /home/linzhbj/servicemonitor
+  tasks:
+    - name : create log dir
+      file : name={{monitordir}}/curlog state=directory
+
+#    - name : delete old crontab for service check
+#      shell : crontab -l  | grep -v "/home/linzhbj/servicecheck.sh"  | crontab
+
+    - name : copy monitor script
+      copy: src=openstackfile/servicecheck.sh  dest={{monitordir}}  owner=root group=root mode=0755
+
+    - name : config crontab
+      cron : name="Monitor nova-compute & neutron-openvswitch-agent" minute=0 hour=*/1
+             job="pushd {{monitordir}}; ./servicecheck.sh >> curlog/servicecheck.log 2>>curlog/servicecheck.log.err ; popd" 
+
+
+    - name : config client service monitor
+      copy : src=openstackfile/crontab_servicemoitor.sh dest={{monitordir}} owner=root group=root mode=0755
+
+#    - name : delete old crontab for service monitor
+#      shell : crontab -l  | grep -v "/home/linzhbj/servicemonitor/crontab_servicemoitor.sh"  | crontab
+
+    - name : config crontab nova & nutron client api monitor
+      cron : name="Monitor client api  nova-compute & neutron-openvswitch-agent" minute=30 hour=*/1
+             job="pushd {{monitordir}}; ./crontab_servicemoitor.sh >> curlog/servicemoitor.log 2>>curlog/servicemoitor.log.err ; popd" 
