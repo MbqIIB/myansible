@@ -1,0 +1,6 @@
+- hosts: redpower5
+  gather_facts: no
+  tasks:
+  - name: apt-get install qemu libvirt-bin linzhbj
+    apt : name=aufs-tools,cgroup-lite,git,git-man,liberror-perl,patch,lvm2,system-storage-manager,python-pip,git,vim,tree state=latest
+

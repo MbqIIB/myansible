@@ -1,0 +1,19 @@
+- hosts: cp9
+  gather_facts: no
+  tasks:
+  - name : config repo command
+    apt : name=software-properties-common state=latest
+
+  - name :  config ubuntu-cloud-keyrin
+    apt: name=ubuntu-cloud-keyring state=latest
+
+  - name : repo url
+    #apt_repository: repo='deb http://9.186.61.76/openstack trusty-updates/kilo main' state=present
+    apt_repository: repo='deb http://ubuntu-cloud.archive.canonical.com/ubuntu trusty-updates/kilo main' state=present
+
+  - name: apt-get install openstack linzhbj
+    apt : name=nova-compute,sysfsutils,python-novaclient,python-heatclient,neutron-plugin-ml2,neutron-plugin-openvswitch-agent,python-pip,git,python-dev state=latest
+
+  - name: copy config file
+    fetch: src=root@cp17:/etc/nova dest=/etc/nova
+

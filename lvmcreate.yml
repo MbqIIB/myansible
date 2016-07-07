@@ -7,7 +7,7 @@
     lvname : lvdata
   tasks :
     - name: lvm create for redpower5
-      lvg: vg={{vgname}} pvs=/dev/sde,/dev/sdf,/dev/sdg,/dev/sdh,/dev/sdi,/dev/sdj
+      lvg: vg={{vgname}} pvs=/dev/sdi,/dev/sdj
 
     - name: lvol create for redpower5
       lvol: vg={{vgname}} lv={{lvname}} size=+100%FREE
