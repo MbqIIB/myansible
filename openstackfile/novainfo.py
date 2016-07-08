@@ -42,7 +42,7 @@ def get_nova_credentials_v2():
     d['auth_url'] = os.environ['OS_AUTH_URL']
     d['project_id'] = os.environ['OS_TENANT_NAME']
     d['region_name'] = os.environ['OS_REGION_NAME']
-    d['endpoint_type'] = os.environ['OS_ENDPOINT_TYPE']
+#    d['endpoint_type'] = os.environ['OS_ENDPOINT_TYPE']
     return d
 
 
@@ -483,6 +483,9 @@ class NovaInformations:
     def novapingtest(self,iplist):
         ip_ok=[]
         ip_failed=[]
+        iplen=len(iplist)
+        print "iplist len %d" % iplen
+
         for (id,ip) in iplist:
             #my module
             ret=perfMoni.pingT(ip)
@@ -493,6 +496,15 @@ class NovaInformations:
 
             else:
                 ip_ok.append(ip)
+
+        print "ip ok %d" % len(ip_ok)
+        print "ip faild %d" % len(ip_failed)
+        if iplen == 0:
+            return True
+        elif iplen < 5 and len(ip_ok) > 0 :
+            return True
+        else :
+            return False
 
         if len(ip_ok) >= 5 :
             return True
