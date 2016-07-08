@@ -1,7 +1,7 @@
 ---
 #- hosts: compute-server
-- hosts: cp9,cp12,cp13,chuanghe1,chuanghe2,chuanghe3,cp8
-#- hosts: redpower5
+#- hosts: cp9,cp12,cp13,chuanghe1,chuanghe2,chuanghe3,cp8
+- hosts: redpower5,cp17,cp9
   remote_user: root
   gather_facts: no
   remote_user: root
@@ -24,10 +24,16 @@
 
     - name : config client service monitor
       copy : src=openstackfile/crontab_servicemoitor.sh dest={{monitordir}} owner=root group=root mode=0755
+      tags : tag_copy
+
     - name : copy novainfo.py 
       copy : src=openstackfile/novainfo.py dest={{monitordir}} owner=root group=root mode=0755
+      tags : tag_copy
+
     - name : copy performanceMonitor.py
       copy : src=openstackfile/performanceMonitor.py dest={{monitordir}} owner=root group=root mode=0755
+      tags : tag_copy
+
 
 #    - name : delete old crontab for service monitor
 #      shell : crontab -l  | grep -v "/home/linzhbj/servicemonitor/crontab_servicemoitor.sh"  | crontab
