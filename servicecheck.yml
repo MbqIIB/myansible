@@ -23,6 +23,7 @@
 
     - name : config client service monitor
       copy : src=openstackfile/crontab_servicemoitor.sh dest={{monitordir}} owner=root group=root mode=0755
+      copy : src=openstackfile/novainfo.py dest={{monitordir}} owner=root group=root mode=0755
 
 #    - name : delete old crontab for service monitor
 #      shell : crontab -l  | grep -v "/home/linzhbj/servicemonitor/crontab_servicemoitor.sh"  | crontab
