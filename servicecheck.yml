@@ -14,12 +14,15 @@
 #    - name : delete old crontab for service check
 #      shell : crontab -l  | grep -v "/home/linzhbj/servicecheck.sh"  | crontab
 
+#    - name : delete old crontab for killpid check
+#      shell : crontab -l  | grep -v "/home/linzhbj/clearwork/killpid.sh"  | crontab
+
     - name : copy monitor script
       copy: src=openstackfile/servicecheck.sh  dest={{monitordir}}  owner=root group=root mode=0755
 
     - name : config crontab
       cron : name="Monitor nova-compute & neutron-openvswitch-agent" minute=0 hour=*/1
-             job="pushd {{monitordir}}; ./servicecheck.sh >> curlog/servicecheck.log 2>>curlog/servicecheck.log.err ; popd" 
+             job="{{monitordir}}/servicecheck.sh >> {{monitordir}}/curlog/servicecheck.log 2>>{{monitordir}}/curlog/servicecheck.log.err"
 
 
     - name : config client service monitor
@@ -34,4 +37,4 @@
 
     - name : config crontab nova & nutron client api monitor
       cron : name="Monitor client api  nova-compute & neutron-openvswitch-agent" minute=30 hour=*/1
-             job="pushd {{monitordir}}; ./crontab_servicemoitor.sh >> curlog/servicemoitor.log 2>>curlog/servicemoitor.log.err ; popd" 
+             job="{{monitordir}}/crontab_servicemoitor.sh >> {{monitordir}}/curlog/servicemoitor.log 2>>{{monitordir}}/curlog/servicemoitor.log.err"
