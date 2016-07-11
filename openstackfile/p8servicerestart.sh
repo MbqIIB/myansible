@@ -12,7 +12,6 @@ echo "action = ${action}"
 
 run()
 {
-#    ./qpidd ${action}
 #	/etc/init.d/openstack-ceilometer-compute ${action}
 #	/etc/init.d/openstack-nova-compute ${action}
 #	/etc/init.d/neutron-openvswitch-agent ${action}

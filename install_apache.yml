@@ -1,0 +1,24 @@
+---
+# cat install_apache.yml
+- hosts: cp16,redpower5
+  remote_user: root
+  gather_facts: True
+  tasks:
+    - name : debug ansible_os_family
+      debug : msg={{ansible_os_family}}
+
+    - name : ping all
+      ping :
+
+    - name : install apache on RedHat 
+      yum  : name=httpd state=present
+      when : ansible_os_family =="RedHat" 
+
+    - name : install apache on CentOS
+      yum  : name=httpd state=present
+      when : ansible_os_family =="CentOS" 
+
+    - name: install apache on Debian
+      apt: name=apache2 state=present
+      when: ansible_os_family =="Debian"
+

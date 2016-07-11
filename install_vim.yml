@@ -1,0 +1,17 @@
+---
+- name: Install VIM
+  hosts: redpower5,cp16,neucloud1
+  tasks:
+
+  - name: Install VIM via yum
+    yum: name=vim-enhanced state=installed
+    when: ansible_os_family =="RedHat"
+
+  - name: Install VIM via apt
+    apt: name=vim state=installed
+    when: ansible_os_family =="Debian"
+
+  - name: Unexpected OS family
+    debug: msg="OS Family {{ inventory_hostname }}  {{ ansible_os_family }} is not supported"
+    when: not ansible_os_family =="RedHat" or ansible_os_family =="Debian"
+

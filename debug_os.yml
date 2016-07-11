@@ -1,0 +1,13 @@
+---
+# cat install_apache.yml
+- hosts: redpower5
+  remote_user: root
+  gather_facts: True
+  tasks:
+    - name : setup  all
+      setup: fact_path=facts
+
+    - name : debug ansible_os_family
+      debug : msg={{ansible_os_family}}
+
+
