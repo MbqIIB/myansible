@@ -1,14 +1,14 @@
 ---
-- hosts: ent-op-server
-  #- hosts: ctl
+#- hosts: ent-op-server
+- hosts: redpower5
   vars:
-    user: root
-    # xxxxx
-    #password2: "$6$rounds=40000$3mBJ1KoxU7KPgmqx$Q/92Y64H/.sPuH9J3VAJxu5K5htaZK3ejOHMlPb5.tNPQJuD21BDgAKhvp2Q1/1qw1jGksOp0uhvZup0kO6gW1"
-    password: "$6$rounds=40000$t/DWJ/817RthjXSt$y7Wf0L6S3zG.FdvelFtx03jBOc.FblgYoZXNhG/tUdBhdz4XRccR/rxojlk3Tj7vNNAGuLuiMiT3vmcfh3ssR1"
+    user: opadmin 
+    # love123456
+    password: "$6$rounds=656000$p1iyrz9Qqsoddl8D$cruJgbi5eb7j6y6v4y1kRPSaVWxrc6RviNRQNA.gGTCkZutvLr0iHSomx7Z.VGAU9S9uuXWADWXjDLjyE97Yd/"
 
   remote_user: root
   tasks:
     - name: Add user {{ user }}
-      user: name={{user}} shell=/bin/bash password={{ password }}
+      user: name={{user}} shell=/bin/bash password={{ password }} createhome=yes remove=yes state=present
+      #user: name={{user}} shell=/bin/bash password={{ password }} expires=1468503387 createhome=yes
 
