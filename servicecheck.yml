@@ -1,13 +1,16 @@
 ---
 #- hosts: compute-server
-#- hosts: cp9,cp12,cp13,chuanghe1,chuanghe2,chuanghe3,cp8
-- hosts: redpower5,cp17,cp9
+- hosts: cp9,cp10,cp11,cp12,cp13,chuanghe1,chuanghe2,chuanghe3,cp8
+#- hosts: redpower5,cp17,cp9
   remote_user: root
   gather_facts: no
   remote_user: root
   vars :
     - monitordir : /home/linzhbj/servicemonitor
   tasks:
+    - name : create service dir
+      file : name={{monitordir}} state=directory
+
     - name : create log dir
       file : name={{monitordir}}/curlog state=directory
 
