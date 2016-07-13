@@ -4,7 +4,6 @@
 #- hosts: redpower5,cp17,cp9
   remote_user: root
   gather_facts: no
-  remote_user: root
   vars :
     - monitordir : /home/linzhbj/servicemonitor
   tasks:
