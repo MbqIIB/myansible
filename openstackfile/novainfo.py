@@ -499,17 +499,20 @@ class NovaInformations:
 
         print "ip ok %d" % len(ip_ok)
         print "ip faild %d" % len(ip_failed)
+
         if iplen == 0:
+            print "ping test p1"
             return True
         elif iplen < 5 and len(ip_ok) > 0 :
+            print "ping test p2"
             return True
-        else :
-            return False
-
-        if len(ip_ok) >= 5 :
-            return True
-        else:
-            return False
+        elif iplen > 5 :
+            if len(ip_ok) >= 5 :
+                print "ping test p3"
+                return True
+            else:
+                print "ping test p4"
+                return False
 
 
 
