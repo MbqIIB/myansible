@@ -1,4 +1,4 @@
-- hosts: cp9
+- hosts: neucloud4
   gather_facts: no
   tasks:
   - name: apt-get install qemu libvirt-bin linzhbj

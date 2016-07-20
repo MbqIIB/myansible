@@ -1,7 +1,7 @@
-- hosts: redpower5
+- hosts: neucloud3
   gather_facts: no
   remote_user: root
   tasks:
   - name: apt-get install system command
-    apt : name=vim,tree,python-pip,git,system-storage-manager state=latest
+    apt : name=vim,tree,python-pip,git,system-storage-manager,ipmitool state=latest
 
