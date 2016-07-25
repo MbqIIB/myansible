@@ -1,6 +1,6 @@
 ---
 #- hosts: compute-server
-- hosts: cp9,cp10,cp11,cp12,cp13,chuanghe1,chuanghe2,chuanghe3,cp8
+- hosts: cp9,cp10,cp11,cp12,cp13,chuanghe1,chuanghe2,chuanghe3,cp8,x3550m5n01,neucloud4
 #- hosts: redpower5,cp17,cp9
   remote_user: root
   gather_facts: no

@@ -1,8 +1,10 @@
-- hosts: ent-op-server
+#- hosts: ent-op-server
+- hosts: op-server
+  remote_user: root
+  gather_facts: no
   vars:
     filepath : /etc/ssh/ssh_config
     options : StrictHostKeyChecking
-  remote_user: root
   tasks:
     - name: Config {{filepath}}
       lineinfile: dest={{filepath}} state=present regexp='^{{options}}' line='{{item}}'
