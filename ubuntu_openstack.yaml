@@ -1,4 +1,4 @@
-- hosts: cp9
+- hosts: cp11
   gather_facts: no
   tasks:
   - name : config repo command
