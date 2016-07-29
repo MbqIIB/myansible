@@ -3,7 +3,7 @@
   gather_facts: no
   tasks:
   - name: install command
-    apt : name=python-pip,git,vim,tree,lvm2,system-storage-manager,patch state=latest
+    apt : name=python-pip,python-dev,git,vim,tree,lvm2,system-storage-manager,patch state=latest
 
   - name: install libvirt
     apt : name=qemu,qemu-kvm,qemu-user,qemu-system-sparc,qemu-system-x86,qemu-system-misc,qemu-system-mips,qemu-system-arm,libvirt-bin,sysfsutils state=latest
