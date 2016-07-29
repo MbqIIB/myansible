@@ -1,6 +1,7 @@
-- hosts: neucloud3
-  gather_facts: no
+#- hosts: neucloud3
+- hosts: compute-server
   remote_user: root
+  gather_facts: no
   tasks:
   - name: apt-get install system command
     apt : name=vim,tree,python-pip,git,system-storage-manager,ipmitool state=latest
