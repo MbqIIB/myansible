@@ -8,7 +8,7 @@ import argparse
 import time
 import fcntl
 
-capi_dev_board = "Nallatect"
+capi_dev_board = "Alphadata-KU3"
 capi_dev_path = r"/dev/cxl/"
 capi_db_path = "/var/lib/capi"
 lock_file_path = capi_db_path + "/capi_locked"
