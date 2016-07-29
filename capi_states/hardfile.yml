@@ -1,0 +1,20 @@
+---
+- hosts: compute-server
+#- hosts: svf12
+  remote_user: root
+  gather_facts: true
+  vars :
+    - toolsdir : /usr/lib/python2.7/dist-packages/nova/compute/
+  tasks:
+
+    - name : copy gpu_states.py
+      copy: src=gpu_states.py  dest={{toolsdir}}  owner=root group=root mode=0644
+      when: ansible_os_family =="Debian"
+
+    - name : copy capi_states.py
+      copy: src=gpu_states.py  dest={{toolsdir}}  owner=root group=root mode=0644
+      when: ansible_os_family =="Debian"
+
+    - name : copy sdaccel_states.py
+      copy: src=gpu_states.py  dest={{toolsdir}}  owner=root group=root mode=0644
+      when: ansible_os_family =="Debian"
