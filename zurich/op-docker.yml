@@ -14,3 +14,6 @@
   - name: apt-get install openstack
     apt : name=nova-compute,sysfsutils,python-novaclient,python-heatclient,neutron-plugin-ml2,neutron-plugin-openvswitch-agent state=latest
 
+  - name : config nova docker grants
+    shell : usermod -aG docker nova
+
