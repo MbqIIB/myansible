@@ -1,0 +1,18 @@
+---
+- hosts : bluem4
+  remote_user: root
+  gather_facts: no
+  vars :
+    vgname : vgkvm
+    lvname : lvkvm
+  tasks :
+    - name: lvm create for bluem4
+      lvg: vg={{vgname}} pvs=/dev/sdd1,/dev/sde1
+
+    - name: lvol create for bluem4
+      lvol: vg={{vgname}} lv={{lvname}} size=+100%FREE
+
+
+    - filesystem: fstype=ext4 dev=/dev/mapper/{{vgname}}-{{lvname}}
+
+    - mount: name=/var/lib/libvirt src=/dev/mapper/{{vgname}}-{{lvname}} fstype=ext4 state=mounted
