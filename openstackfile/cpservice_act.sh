@@ -1,6 +1,5 @@
 #!/bin/sh
-
-cd /etc/init.d
+set -x
 #echo $#
 
 if [ $# != 1 ]
@@ -16,10 +15,8 @@ then
 
 run()
 {
-#    ./qpidd ${action}
-    /etc/init.d/openstack-ceilometer-compute ${action}
-    /etc/init.d/openstack-nova-compute ${action}
-    /etc/init.d/neutron-openvswitch-agent ${action}
+    service openstack-nova-compute ${action}
+    service neutron-openvswitch-agent ${action}
 }
 
 run ${action}
