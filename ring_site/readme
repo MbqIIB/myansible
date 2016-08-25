@@ -1,0 +1,15 @@
+
+
+ansible physical -m ping
+ansible physical -m script -a setbash.sh
+
+ansible svx05,svx06,svx07,svx08 -m copy -a "src=CentOS-openstack.repo dest=/etc/yum.repos.d/CentOS-openstack.repo states=`"
+
+ansible svx05,svx06,svx07,svx08,svx10,svx11 -m file -a "name=/etc/yum.repos.d/CentOS-openstack.repo state=absent"
+
+
+
+
+ansible svx06,svx07,svx08,svx10,svx11 -m copy -a "src=rdo-mitaka.repo dest=/etc/yum.repos.d/rdo-mitaka.repo owner=root group=root mode=0644"
+ansible svx06,svx07,svx08,svx10,svx11 -m copy -a "src=epel.repo dest=/etc/yum.repos.d/epel.repo owner=root group=root mode=0644"
+

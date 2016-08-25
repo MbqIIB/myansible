@@ -1,0 +1,6 @@
+[RDO-mitaka]
+name=RDO-mitaka
+baseurl=http://centos.ustc.edu.cn/centos/7.2.1511/cloud/x86_64/openstack-mitaka/
+enabled=1
+gpgcheck=0
+

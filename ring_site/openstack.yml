@@ -1,0 +1,21 @@
+- hosts: svx06,svx07,svx08,svx10,svx11
+  remote_user : root
+  gather_facts: True
+  tasks:
+    - name : install vim tree
+      yum : name=vim,tree state=latest
+
+    - name : install nova-compute neutron agent
+      #yum : name=openstack-nova-compute,openstack-neutron-openvswitch,telnet,ipset state=latest
+      yum : name=openstack-nova-compute,openstack-neutron-openvswitch,openstack-neutron,telnet,ipset state=latest
+
+    - name : enable openvswitch
+      service : name=openvswitch state=started enabled=yes
+
+#    - name : enable openstack-nova-compute
+#      service : name=openstack-nova-compute state=started enabled=yes
+#
+#    - name : enable neutron-openvswitch-agent
+#      service : name=neutron-openvswitch-agent state=started enabled=yes
+#   
+
