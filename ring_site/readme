@@ -18,3 +18,11 @@ ansible svx06,svx07,svx08,svx10,svx11 -m copy -a "src=epel.repo dest=/etc/yum.re
 
 ansible svx06,svx07,svx08 -m copy -a "src=ring_openrc dest=/root/openrc"
 ansible svx06,svx07,svx08 -m copy -a "src=bashrc dest=/root/.bashrc"
+
+
+ip addr add 10.0.0.212/16 dev eno1
+ip addr add 10.0.0.213/16 dev eno1
+ip addr add 10.0.0.214/16 dev eno1
+
+ansible svx12,svx13,svx14 -m copy -a "src=ring_openrc dest=/root/openrc"
+ansible svx12,svx13,svx14 -m copy -a "src=bashrc dest=/root/.bashrc"

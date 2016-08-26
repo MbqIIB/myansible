@@ -1,6 +1,7 @@
 ---
-- hosts: compute-server
-#- hosts: svf12
+#- hosts: compute-server
+- hosts: ceph-server
+ 
   remote_user: root
   gather_facts: true
   vars :
