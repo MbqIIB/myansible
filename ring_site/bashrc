@@ -1,0 +1,25 @@
+# .bashrc
+
+# User specific aliases and functions
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+
+if [ -f /root/openrc ]; then
+        . /root/openrc
+fi
+
+HISTTIMEFORMAT="%F %T "
+HISTSIZE="100000"
+export HISTTIMEFORMAT
+export HISTSIZE
+
+#export http_proxy=http://9.115.78.100:8085
+#export https_proxy=https://9.115.78.100:8085

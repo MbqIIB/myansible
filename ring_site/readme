@@ -13,3 +13,8 @@ ansible svx05,svx06,svx07,svx08,svx10,svx11 -m file -a "name=/etc/yum.repos.d/Ce
 ansible svx06,svx07,svx08,svx10,svx11 -m copy -a "src=rdo-mitaka.repo dest=/etc/yum.repos.d/rdo-mitaka.repo owner=root group=root mode=0644"
 ansible svx06,svx07,svx08,svx10,svx11 -m copy -a "src=epel.repo dest=/etc/yum.repos.d/epel.repo owner=root group=root mode=0644"
 
+
+
+
+ansible svx06,svx07,svx08 -m copy -a "src=ring_openrc dest=/root/openrc"
+ansible svx06,svx07,svx08 -m copy -a "src=bashrc dest=/root/.bashrc"
