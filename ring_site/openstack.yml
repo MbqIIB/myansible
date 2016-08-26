@@ -2,15 +2,15 @@
   remote_user : root
   gather_facts: True
   tasks:
-    - name : install vim tree
-      yum : name=vim,tree state=latest
+#    - name : install vim tree
+#      yum : name=vim,tree state=latest
 
-    - name : install nova-compute neutron agent
-      #yum : name=openstack-nova-compute,openstack-neutron-openvswitch,telnet,ipset state=latest
-      yum : name=openstack-nova-compute,openstack-neutron-openvswitch,openstack-neutron,telnet,ipset state=latest
+#    - name : install nova-compute neutron agent
+#      #yum : name=openstack-nova-compute,openstack-neutron-openvswitch,telnet,ipset state=latest
+#      yum : name=openstack-nova-compute,openstack-neutron-openvswitch,openstack-neutron,telnet,ipset state=latest
 
-    - name : enable openvswitch
-      service : name=openvswitch state=started enabled=yes
+#    - name : enable openvswitch
+#      service : name=openvswitch state=started enabled=yes
 
 #    - name : enable openstack-nova-compute
 #      service : name=openstack-nova-compute state=started enabled=yes
@@ -19,3 +19,9 @@
 #      service : name=neutron-openvswitch-agent state=started enabled=yes
 #   
 
+
+    - name : dir nova owner
+      file : path=/etc/nova state=directory owner=nova group=nova recurse=yes
+
+    - name : dir neutron owner
+      file : path=/etc/neutron state=directory owner=neutron group=neutron recurse=yes
