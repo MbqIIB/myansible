@@ -1,0 +1,7 @@
+---
+- hosts : r1-elk-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: install wget
+      yum : name=wget,tree,vim 

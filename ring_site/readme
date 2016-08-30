@@ -26,3 +26,11 @@ ip addr add 10.0.0.214/16 dev eno1
 
 ansible svx12,svx13,svx14 -m copy -a "src=ring_openrc dest=/root/openrc"
 ansible svx12,svx13,svx14 -m copy -a "src=bashrc dest=/root/.bashrc"
+
+
+
+  ansible r1-elk-server -m ping
+  ansible r1-elk-server -m copy -a "src=local-repository.repo dest=/etc/yum.repos.d mode=0644"
+  ansible r1-elk-server -m copy -a "src=epel.repo dest=/etc/yum.repos.d mode=0644"
+
+  ansible r1-elk-server -m file -a "name=/etc/yum.repos.d/CentOS-Media.repo state=absent"

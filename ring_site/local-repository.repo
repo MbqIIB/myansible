@@ -1,0 +1,6 @@
+[local-centos7.2-x86_64-x86_64]
+name=xCAT configured yum repository for centos7.2/x86_64/x86_64
+baseurl=http://9.111.112.150/install/centos7.2/x86_64/
+enabled=1
+gpgcheck=0
+
