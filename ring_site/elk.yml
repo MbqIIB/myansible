@@ -1,0 +1,66 @@
+---
+- hosts : poc-elk1,poc-elk2,poc-elk3
+  remote_user: root
+  gather_facts: no
+  tasks :
+
+    - name: Add repository
+      yum_repository:
+        name: epel
+        description: EPEL YUM repo
+        file : epel
+        baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+        proxy : http://9.115.78.100:8085
+        enabled : yes
+        gpgcheck: no
+
+
+    - name: Add elasticsearch-2.x repository
+      yum_repository:
+        name: elasticsearch-2.x
+        description: Elasticsearch repository for 2.x packages
+        file :  elasticsearch
+        baseurl: http://packages.elastic.co/elasticsearch/2.x/centos
+        proxy : http://9.115.78.100:8085
+        enabled : yes
+        gpgcheck: no
+
+
+
+    - name: install elasticsearch
+      yum : name=elasticsearch state=latest
+
+    - name: Add kibana-4.4
+      yum_repository:
+        name: kibana-4.4
+        description: Kibana repository for 4.4.x packages
+        file : kibana 
+        baseurl: http://packages.elastic.co/kibana/4.4/centos
+        proxy : http://9.115.78.100:8085
+        enabled : yes
+        gpgcheck: no
+        gpgkey : http://packages.elastic.co/GPG-KEY-elasticsearch
+
+
+    - name: install kibana
+      yum : name=kibana state=latest
+
+
+- hosts : poc-log
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: Add logstash-2.2
+      yum_repository:
+        name: logstash-2.2
+        description: logstash repository for 2.2 packages
+        file : logstash
+        baseurl: http://packages.elasticsearch.org/logstash/2.2/centos
+        proxy : http://9.115.78.100:8085
+        enabled : yes
+        gpgcheck: no
+        gpgkey : http://packages.elastic.co/GPG-KEY-elasticsearch
+
+
+    - name: install logstash
+      yum : name=logstash state=latest
