@@ -26,9 +26,15 @@
         gpgcheck: no
 
 
+    - name : firewalld 9200 tcp
+      firewalld: port=9200/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 9300 tcp
+      firewalld: port=9300/tcp permanent=true state=enabled immediate=yes
 
     - name: install elasticsearch
-      yum : name=elasticsearch state=latest
+      yum : name=elasticsearch,java-1.8.0-openjdk state=latest
+
 
     - name: Add kibana-4.4
       yum_repository:
@@ -44,6 +50,42 @@
 
     - name: install kibana
       yum : name=kibana state=latest
+
+    - name : firewalld 5601 tcp
+      firewalld: port=5601/tcp permanent=true state=enabled immediate=yes
+
+    - name : service kibana
+      service : name=kibana state=restarted enabled=yes
+
+- hosts : poc-elk1
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : copy node1_elasticsearch.yml
+      copy : src=node1_elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml mode=0644
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=restarted enabled=yes
+
+- hosts : poc-elk2
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : copy node2_elasticsearch.yml
+      copy : src=node2_elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml mode=0644
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=restarted enabled=yes
+
+- hosts : poc-elk3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : copy node3_elasticsearch.yml
+      copy : src=node3_elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml mode=0644
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=restarted enabled=yes
 
 
 - hosts : poc-log
