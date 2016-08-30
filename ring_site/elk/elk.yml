@@ -64,3 +64,54 @@
 
     - name: install logstash
       yum : name=logstash state=latest
+    
+    - name : copy logrotate_rsyslog.conf
+      copy : src=logrotate_rsyslog.conf dest=/etc/logrotate.d/rsyslog  mode=0644
+
+    - name : copy logcollector-mgmt_rsyslog.conf
+      copy : src=logcollector-mgmt_rsyslog.conf dest=/etc/rsyslog.conf mode=0644
+
+    - name : copy logcollector-mgmt_60-openstack.conf
+      copy : src=logcollector-mgmt_60-openstack.conf dest=/etc/rsyslog.d/60-openstack.conf mode=0644
+   
+
+    - name : firewalld 514 tcp
+      firewalld: port=514/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 514 udp
+      firewalld: port=514/udp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 8080 tcp
+      firewalld: port=8080/tcp permanent=true state=enabled immediate=yes
+
+    - name : rsyslog start
+      service : name=rsyslog state=restarted enabled=yes
+
+- hosts : r1-compute-server
+  remote_user: root
+  gather_facts: no
+  tasks:
+    - name : copy castelnaud_rsyslog.conf
+      copy : src=castelnaud_rsyslog.conf dest=/etc/rsyslog.conf mode=0644
+
+    - name : copy castelnaud_60-openstack-compute.conf
+      copy : src=castelnaud_60-openstack-compute.conf dest=/etc/rsyslog.d/60-openstack-compute.conf mode=0644
+
+    - name : rsyslog start
+      service : name=rsyslog state=restarted enabled=yes
+
+
+
+- hosts : r1-controller
+  remote_user: root
+  gather_facts: no
+  tasks:
+    - name : copy ctl_rsyslog.conf  
+      copy : src=ctl_rsyslog.conf dest=/etc/rsyslog.conf mode=0644
+
+    - name : copy ctl_60-openstack-agent.conf
+      copy : src=ctl_60-openstack-agent.conf dest=/etc/rsyslog.d/60-openstack-agent.conf mode=0644
+
+    - name : rsyslog start
+      service : name=rsyslog state=restarted enabled=yes
+
