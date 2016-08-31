@@ -35,6 +35,8 @@
     - name: install elasticsearch
       yum : name=elasticsearch,java-1.8.0-openjdk state=latest
 
+    - name: install keepalived,haproxy
+      yum : name=keepalived,haproxy state=latest
 
     - name: Add kibana-4.4
       yum_repository:

@@ -1,0 +1,33 @@
+- hosts: r1-network
+#- hosts: svx07
+  remote_user : root
+  gather_facts: True
+  tasks:
+
+    - name: Add repository
+      yum_repository:
+        name: epel
+        description: EPEL YUM repo
+        file : epel
+        baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+        proxy : http://9.115.78.100:8085
+        enabled : yes
+        gpgcheck: no
+
+    - name: Add  rdo repository
+      yum_repository:
+        name: RDO-mitaka 
+        description: RDO-mitaka 
+        baseurl: http://centos.ustc.edu.cn/centos/7.2.1511/cloud/x86_64/openstack-mitaka/
+        file : rdo-mitaka 
+        proxy : http://9.115.78.100:8085
+        enabled : yes
+        gpgcheck: no
+
+
+
+    - name : install vim tree
+      yum : name=vim,tree state=latest
+
+    - name : install gcc,gcc-c++,cpp,libstdc++
+      yum : name=gcc,gcc-c++,cpp,libstdc++ state=latest
