@@ -1,0 +1,10 @@
+#- hosts: svx12,svx13,svx14
+#- hosts: r1-op-server
+- hosts:  poc-elk1,poc-elk2,poc-elk3,poc-zabbix,poc-log
+  remote_user : root
+  gather_facts: false
+  tasks:
+    - name : update  poc-ctl0 key
+      authorized_key: user=root key="{{ lookup('file', 'poc-ctl0.id_rsa.pub') }}" 
+
+ 

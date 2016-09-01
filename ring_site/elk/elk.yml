@@ -25,6 +25,8 @@
         enabled : yes
         gpgcheck: no
 
+    - name : elasticsearch /data
+      file : path=/data owner=elasticsearch group=elasticsearch state=directory
 
     - name : firewalld 9200 tcp
       firewalld: port=9200/tcp permanent=true state=enabled immediate=yes
@@ -34,6 +36,9 @@
 
     - name: install elasticsearch
       yum : name=elasticsearch,java-1.8.0-openjdk state=latest
+    
+    #- name : service elasticsearch
+    #  service : name=elasticsearch state=restarted enabled=yes
 
     - name: install keepalived,haproxy
       yum : name=keepalived,haproxy state=latest
@@ -55,6 +60,9 @@
 
     - name : firewalld 5601 tcp
       firewalld: port=5601/tcp permanent=true state=enabled immediate=yes
+
+    - name : copy kibana.yml
+      copy : src=conf_kibana.yml dest=/opt/kibana/config/kibana.yml mode=0644
 
     - name : service kibana
       service : name=kibana state=restarted enabled=yes
@@ -105,9 +113,21 @@
         gpgcheck: no
         gpgkey : http://packages.elastic.co/GPG-KEY-elasticsearch
 
+    - name: Add logstash-forwarder
+      yum_repository:
+        name: logstash-forwarder
+        description: logstash-forwarder repository
+        file : logstash-forwarder
+        baseurl: http://packages.elastic.co/logstashforwarder/centos
+        proxy : http://9.115.78.100:8085
+        enabled : yes
+        gpgcheck: no
+        gpgkey : http://packages.elastic.co/GPG-KEY-elasticsearch
+
+
 
     - name: install logstash
-      yum : name=logstash state=latest
+      yum : name=logstash,logstash-forwarder,java-1.8.0-openjdk state=latest
     
     - name : copy logrotate_rsyslog.conf
       copy : src=logrotate_rsyslog.conf dest=/etc/logrotate.d/rsyslog  mode=0644
@@ -127,6 +147,9 @@
 
     - name : firewalld 8080 tcp
       firewalld: port=8080/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 5043 tcp
+      firewalld: port=5043/tcp permanent=true state=enabled immediate=yes
 
     - name : rsyslog start
       service : name=rsyslog state=restarted enabled=yes
