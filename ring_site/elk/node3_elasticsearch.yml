@@ -22,8 +22,8 @@ cluster.name: sv-els-cluster
 #
 node.name: els-node-3
 
-node.master: false
-node.data: false
+#node.master: false
+node.data: true
 #
 # Add custom attributes to the node:
 #
@@ -43,7 +43,7 @@ path.logs: /var/log/elasticsearch
 #
 # Lock the memory on startup:
 #
-index.number_of_replicas: 0
+index.number_of_replicas: 3
 index.number_of_shards: 3
 # bootstrap.mlockall: true
 #

@@ -36,12 +36,24 @@
 
     - name: install elasticsearch
       yum : name=elasticsearch,java-1.8.0-openjdk state=latest
+
+    #- name: install elasticsearch
+    #  shell : /usr/share/elasticsearch/bin/plugin install mobz/elasticsearch-head
+
+    - name : copy /etc/sysconfig/elasticsearch
+      copy : src=elasticsearch dest=/etc/sysconfig/elasticsearch mode=0644
     
     #- name : service elasticsearch
     #  service : name=elasticsearch state=restarted enabled=yes
 
     - name: install keepalived,haproxy
       yum : name=keepalived,haproxy state=latest
+    
+    - name : copy keepalived.conf
+      copy : src=keepalived.conf dest=/etc/keepalived/keepalived.conf mode=0644
+
+    - name : service keepalived
+      service : name=keepalived  state=restarted enabled=yes
 
     - name: Add kibana-4.4
       yum_repository:

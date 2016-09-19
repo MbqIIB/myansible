@@ -12,7 +12,7 @@ server.host: "0.0.0.0"
 # server.maxPayloadBytes: 1048576
 
 # The URL of the Elasticsearch instance to use for all your queries.
-# elasticsearch.url: "http://localhost:9200"
+elasticsearch.url: "http://localhost:9200"
 
 # When this setting’s value is true Kibana uses the hostname specified in the server.host
 # setting. When the value of this setting is false, Kibana uses the hostname of the host
@@ -69,6 +69,7 @@ server.host: "0.0.0.0"
 
 # Enables you specify a file where Kibana stores log output.
 # logging.dest: stdout
+logging.dest: stdout
 
 # Set the value of this setting to true to suppress all logging output.
 # logging.silent: false
@@ -78,4 +79,4 @@ server.host: "0.0.0.0"
 
 # Set the value of this setting to true to log all events, including system usage information 
 # and all requests.
-# logging.verbose: false
+logging.verbose: false
