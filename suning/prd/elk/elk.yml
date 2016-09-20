@@ -37,6 +37,12 @@
     - name : elasticsearch /data
       file : path=/data owner=elasticsearch group=elasticsearch state=directory
 
+    #- name: install elasticsearch plugin
+    #  shell : /usr/share/elasticsearch/bin/plugin install mobz/elasticsearch-head
+  
+    - name : copy etc_sysconfig_elasticsearch
+      copy : src=etc_sysconfig_elasticsearch dest=/etc/sysconfig/elasticsearch mode=0644
+
     #- name : service elasticsearch
     #  service : name=elasticsearch state=restarted enabled=yes
 
@@ -48,7 +54,7 @@
 
     - name : service keepalived
       service : name=keepalived state=restarted enabled=yes
-     
+
     - name: Add kibana-4.4
       yum_repository:
         name: kibana-4.4
@@ -69,6 +75,9 @@
 
     - name : copy kibana.yml
       copy : src=conf_kibana.yml dest=/opt/kibana/config/kibana.yml mode=0644
+
+    - name : service kibana
+      service : name=kibana state=started enabled=yes
 
     - name : service kibana
       service : name=kibana state=restarted enabled=yes
@@ -130,10 +139,11 @@
         gpgcheck: no
         gpgkey : http://packages.elastic.co/GPG-KEY-elasticsearch
 
+    - name : rsyslog /var/log/openstack
+      file : path=/var/log/openstack owner=root group=root state=directory mode=0755
 
-
-    - name: install logstash
-      yum : name=logstash,logstash-forwarder,java-1.8.0-openjdk state=latest
+#    - name: install logstash
+#      yum : name=logstash,logstash-forwarder,java-1.8.0-openjdk state=latest
     
     - name : copy logrotate_rsyslog.conf
       copy : src=logrotate_rsyslog.conf dest=/etc/logrotate.d/rsyslog  mode=0644

@@ -1,0 +1,7 @@
+---
+- hosts : prd-elk1,prd-elk2,prd-elk3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : service elasticsearch
+      service: name=elasticsearch state=restarted enabled=yes
