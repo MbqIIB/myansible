@@ -1,0 +1,9 @@
+---
+- hosts : elk
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: selinux disable 
+      selinux : state=disabled
+    - name: selinux disable 
+      selinux : state=disabled
