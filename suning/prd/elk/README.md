@@ -23,3 +23,6 @@ conf.d/03-openstack.conf
 conf.d/99-output.conf
 
 scp conf.d/*.conf prd-log:/etc/logstash/conf.d/
+
+
+ htpasswd -b -c site_pass admin sv1xxxxx
