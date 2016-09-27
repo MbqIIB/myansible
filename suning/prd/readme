@@ -1,0 +1,2 @@
+
+ansible compute -m shell -a "/root/mitaka_servicerestart.sh restart"
