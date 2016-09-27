@@ -6,3 +6,7 @@ ansible controller-server -m shell -a 'grep -rn "172.18.32.52" /etc/nginx/conf.d
 ansible controller-server -m shell -a 'sed -i "s/172.18.32.52/172.18.32.111/g" /etc/nginx/conf.d/default.conf'
 
 ansible controller-server -m shell -a 'systemctl reload nginx'
+
+
+
+ansible controller-server -m shell -a 'sed -i "s/172.18.32.81/172.18.32.118/g" /etc/nginx/conf.d/default.conf'

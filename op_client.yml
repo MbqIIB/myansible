@@ -1,0 +1,5 @@
+- hosts: cmd-server
+  gather_facts: no
+  tasks:
+  - name : install openstack client
+    yum : name=python-keystoneclient,python-novaclient,python-glanceclient,python-heatclient,python-neutronclient,python-cinderclient,python-swiftclient state=latest

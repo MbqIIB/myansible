@@ -1,0 +1,9 @@
+BMX_HDS passw0rd xiaoyanc@cn.ibm.com  
+BMX_NER passw0rd guozhili@cn.ibm.com  
+BMX_DSM passw0rd guozhili@cn.ibm.com  
+BMX_ASR passw0rd liuwen@cn.ibm.com    
+BMX_QA  passw0rd huangsf@cn.ibm.com   
+BMX_CIC passw0rd wangqing@cn.ibm.com  
+BMX_MMC passw0rd dangyb@cn.ibm.com    
+BMX_Broker passw0rd liutc@cn.ibm.com  
+BMX_DLASS  passw0rd liyubobj@cn.ibm.com
