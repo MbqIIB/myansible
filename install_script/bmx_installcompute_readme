@@ -1,0 +1,147 @@
+
+
+ cat /etc/apt/sources.list
+###### Ubuntu Main Repos
+deb http://192.168.32.2/ubuntu-ports/ xenial main restricted universe multiverse
+
+###### Ubuntu Update Repos
+deb http://192.168.32.2/ubuntu-ports/ xenial-security main restricted universe multiverse
+deb http://192.168.32.2/ubuntu-ports/ xenial-updates main restricted universe multiverse
+deb http://192.168.32.2/ubuntu-ports/ xenial-proposed main restricted universe multiverse
+deb http://192.168.32.2/ubuntu-ports/ xenial-backports main restricted universe multiverse
+
+
+
+ansbile-playbook docker.svp4_op.yaml
+
+tail -f /var/log/nova/nova-compute.log
+tail -f /var/log/neutron/neutron-openvswitch-agent.log
+
+
+
+
+
+scp svp3:/etc/nova/nova.conf  /etc/nova/
+scp svp3:/etc/nova/nova-compute.conf /etc/nova/
+scp svp3:/etc/neutron/neutron.conf /etc/neutron/
+scp svp3:/etc/neutron/plugins/ml2/* /etc/neutron/plugins/ml2/
+
+ml2_conf.ini                                                                                                                                                       100% 8944     8.7KB/s   00:00
+ml2_conf_sriov.ini                                                                                                                                                 100% 4638     4.5KB/s   00:00
+openvswitch_agent.ini                                                                                                                                              100%   11KB  10.6KB/s   00:00
+sriov_agent.ini   
+
+
+grep -rn "my_ip" /etc/nova/
+/etc/nova/nova.conf:141:my_ip=192.168.32.103
+
+
+
+
+
+ovs-vsctl show
+17de32ee-0e23-496a-b093-6f19eb7e7cc3
+    Bridge br-int
+        fail_mode: secure
+        Port br-int
+            Interface br-int
+                type: internal
+    ovs_version: "2.5.0"
+
+146  2016-05-19 14:09:20 :: ovs-vsctl add-br br-eth1
+  147  2016-05-19 14:09:28 :: grep -nr "br-eth1" /etc/neutron/
+  151  2016-05-19 14:10:02 :: tcpdump -nei enP1p19s0f3
+  154  2016-05-19 14:10:46 :: ovs-vsctl add-port br-eth1 enP1p19s0f3
+
+ifconfig enP1p19s0f3 0 up
+ifconfig br-eth1 0 up
+ifconfig br-int 0 up
+
+#add to /etc/rc.local
+vim /etc/rc.local
+
+
+p8servicerestart.sh stop / start
+
+
+
+fdisk /dev/sde 
+fdisk /dev/sdf 
+pvcreate /dev/sde1 /dev/sdf1
+vgcreate vg_data /dev/sde1 /dev/sdf1
+lvcreate  -l 100%FREE -n lv_data vg_data
+lvdisplay 
+mkfs.ext4 /dev/vg_data/lv_data
+
+mkdir /data
+mount -t ext4 /dev/vg_data/lv_data /data
+df -h
+/dev/mapper/vg_data-lv_data 3.6T
+
+service docker stop 
+mv /var/lib/docker/* /data
+
+umount /data
+mount -t ext4 /dev/vg_data/lv_data /var/lib/docker/
+
+vim /etc/fstab
+#/dev/vg_data/lv_data/ /data ext4 defaults 1 2
+
+/dev/vg_data/lv_data/ /var/lib/docker ext4 defaults 1 2
+
+vim /etc/fstab
+mount -a
+ls /var/lib/nova/
+
+service docker start
+
+#########docker #####
+
+novadocker
+change /etc/nova/nova.conf nova-compute.conf
+
+#compute_driver=libvirt.LibvirtDriver
+compute_driver=novadocker.virt.docker.DockerDriver
+
+
+  254  2016-05-19 14:40:12 :: ./p8servicerestart.sh stop
+  255  2016-05-19 14:40:15 :: ./p8servicerestart.sh start
+  256  2016-05-19 14:40:22 :: cat ./p8servicerestart.sh
+  257  2016-05-19 14:40:35 :: nova hypervisor-show svp5
+  258  2016-05-19 14:40:53 :: history  20 > x
+install novadocker
+
+cd nova-docker
+ pip install ./
+sudo usermod -aG docker nova
+
+cat /etc/group | grep docker
+docker:x:116:nova
+
+
+
+/usr/lib/python2.7/dist-packages/nova/compute/
+cp bluemix/*.py /usr/lib/python2.7/dist-packages/nova/compute/
+chmod a+r /usr/lib/python2.7/dist-packages/nova/compute/capi_states.py
+chmod a+r /usr/lib/python2.7/dist-packages/nova/compute/sdaccel_states.py
+
+service docker stop
+lvremove lv_data vg_data
+vgremove vg_data
+pvremove /dev/sdf1 /dev/sde1
+
+rm -rf /var/lib/docker
+zpool create -f zpool-docker /dev/sde /dev/sdf
+zfs create -o mountpoint=/var/lib/docker zpool-docker/docker
+
+
+update /etc/default/docker with line DOCKER_OPTS="--storage-driver=zfs"
+
+
+service docker start
+
+docker info
+
+apt-get install zfs-fuse zfsutils-linux
+service zfs-fuse restart
+ 
