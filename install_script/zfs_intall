@@ -1,0 +1,52 @@
+
+1. 安装docker-py
+ 
+apt-get install libpython-dev python-pip python-setuptools unzip
+pip install docker-py==1.7.2  
+ 
+2. 安装zfs
+apt-get install -y software-properties-common
+add-apt-repository ppa:zfs-native/stable
+apt-get install spl spl-dkms
+ 
+从svf4上面拷贝安装包，/home/install/packages
+ 
+dpkg -i zfs-dkms_0.6.5.7-1~trusty_ppc64el.deb
+dpkg -i zfsutils_0.6.5.7-1~trusty_ppc64el.deb
+然后把除了带有dbg的deb包之外的其它包挨着装一下，注意，上面两个包必须单独分别装
+ 
+装好之后，加载模块
+modprobe spl
+modprobe zfs
+ 
+然后看看，模块是否加载上
+lsmod | grep zfs
+lsmod | grep spl
+3. 配置zfs
+ 
+用空的硬盘创建docker
+zpool create -f zpool-docker /dev/sda
+然后用光成发给你的命令，把docker挂到zfs上面，记得修改/etc/default/docker, DOCKER_OPTS = "--storage-driver=zfs"
+ 
+4. 安装新的nova-docker
+ 
+a) 从svf4拷贝nova-docker过去，/home/install/nova-docker-alchemy
+b) 卸载原来的nova-docker
+     pip uninstall nova-docker
+c) 安装新的nova-docker
+d) 更新nova.conf
+     在最末尾加上这个：
+    [docker]
+    cpu_capping=true
+    set_fs_size=true
+ 
+5. 安装containerplus
+  拷贝svf4上面/home/install/containerplus-master
+  
+cd containerplus-master
+pip install -r requirements.txt
+ ./start-daemon
+ 
+6. 重启nova-compute
+ 
+ 
