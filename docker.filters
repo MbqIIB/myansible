@@ -1,0 +1,13 @@
+# nova-rootwrap command filters for setting up network in the docker driver
+# This file should be owned by (and only-writeable by) the root user
+
+[Filters]
+# nova/virt/docker/driver.py: 'ln', '-sf', '/var/run/netns/.*'
+ln: CommandFilter, /bin/ln, root
+mv: CommandFilter, /bin/mv, root
+cat: CommandFilter, /bin/cat, root
+mount: CommandFilter, /usr/bin/mount, root
+umount: CommandFilter, /usr/bin/umount, root
+blkid: CommandFilter, /usr/sbin/blkid, root
+mkfs: CommandFilter, /usr/sbin/mkfs, root
+capi_flash.sh: CommandFilter, /usr/bin/capi_flash.sh, root
