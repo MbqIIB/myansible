@@ -1,0 +1,71 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+10.0.0.4    ansible.ibm.com  ansible
+10.0.0.5    xcat.ibm.com     xcat
+10.0.0.18   blueM4
+10.0.0.199  svx11
+
+10.0.0.165 redpower5
+10.0.0.166 redpower6 redpower6.ibm.com 
+10.0.0.167 redpower7 redpower7.ibm.com 
+
+10.0.0.109 dp-srv43.test.com dp-srv43  gdt-dp43 gdt-dp43.test.com bluechef
+10.0.0.79  repos.test.com repos
+
+
+10.0.0.71  bluezone-ctl43.test.com   bluezone-ctl43 ent-ctl0 ctl
+10.0.0.209 opuser-KVM   blue-ent-dashboard
+
+10.0.0.101 HA-rabbitmq-n1
+10.0.0.102 HA-rabbitmq-n2
+10.0.0.103 HA-rabbitmq-n3
+10.0.0.105 HA-rabbitmq-ha
+
+10.0.0.106 swift1
+10.0.0.107 swift2
+10.0.0.108 swift3
+
+# compute
+10.0.0.119 neucloud1
+10.0.0.55  cp17
+
+# x86 compute
+10.0.0.42   op-cp9-x86-64-docker  op-cp9-x86-64-docker.ibm.com           x2 cp9  
+10.0.0.43   op-cp11-x86-64-docker op-cp11-x86-64-docker.ibm.com          x3 cp11 
+10.0.0.45   op-cp16-x86-64-kvm    op-cp16-x86-64-kvm.ibm.com             x4 cp16 
+
+10.0.0.57    ent1 ent-compute-cp1-x86-64
+10.0.0.58    ent-compute-cp1-x86-64-bmc
+10.0.0.59    ent2 ent-compute-cp2-x86-64
+10.0.0.60    ent-compute-cp2-x86-64-bmc
+
+
+10.0.0.81   docker-new
+#10.0.0.82   docker-new2
+10.0.0.83   rhel7.1-docker
+10.0.0.84   centos100g
+
+172.71.0.1 softrepo.ptopenlab.com
+
+10.0.1.187 es1
+10.0.1.188 es2
+10.0.1.189 es3
+
+# kvm 
+# dlaas cluster
+10.0.15.18  registry
+10.0.15.19  test1
+10.0.15.20  auto1
+10.0.15.21  auto2
+10.0.15.22  auto3
+10.0.15.25  auto4
+
+# bmc
+10.0.1.198 blueM4-bmc
+10.0.1.165 redpower5-bmc
+10.0.1.166 redpower6-bmc
+10.0.1.167 redpower7-bmc
+
+# floating ip
+172.71.140.148  bluezone-ctl43-public
