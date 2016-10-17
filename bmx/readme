@@ -1,0 +1,1 @@
+ansible op-server -m copy -a "src=/etc/hosts dest=/etc/hosts"
