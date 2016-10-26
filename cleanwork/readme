@@ -1,0 +1,7 @@
+cat tenantlist  | awk -F "|" '{print $4}'  > vmtenantlist.txt
+
+keystone tenant-list > alltenantlist.txt
+
+getmail.sh
+
+awk -F " " '{print $4}' mail.txt | wc -l

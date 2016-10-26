@@ -320,7 +320,7 @@ class SvUser:
             #print user
             uid=user[1].strip()
             u=user[2].strip()
-            #print "id=%s" % u
+            #print "%s = %s" % (uid, u)
             self.UserList.append((uid,u))
         fp.close()
 
@@ -334,6 +334,7 @@ class SvUser:
                 JsonData=Data.read()
                 #print type(JsonData)
                 if len(JsonData) == 0:
+                    print "%s,%s" % (user[0], user[1])
                     continue
                 id=json.loads(JsonData)
 
@@ -357,7 +358,8 @@ class SvUser:
 
 if __name__ == '__main__' :
     svuser=SvUser()
-    svuser.GetUserList('alluserlist.txt')
+    #svuser.GetUserList('alluserlist.txt')
+    svuser.GetUserList('mail.txt')
     #print svuser.UserList
     svuser.GetUserInfo(svuser.UserList)
     #svuser.AllUserPrint(svuser.AllUserList)
