@@ -7,11 +7,15 @@ logallcreatefailed=${logname}_createfailed.log
 logallcreatecomplete=${logname}_createcomplete.log
 logalldeletefailed=${logname}_deletefailed.log
 
-tidlist=$(awk -F ' ' '{print $6}' ${logallcreatefailed})
+passfile=stackpass.txt
 
-for tid in ${tidlist[@]}
+sidlist=$(awk -F ' ' '{print $2}' ${logallcreatefailed})
+
+
+for sid in ${sidlist[@]}
 do
-	tidinfo=$(grep $tid stackpass.txt)
+    tid=$(grep $sid ${logallcreatefailed} | awk -F ' ' '{print $6}')
+    tidinfo=$(grep $tid ${passfile})
     if [ $? != 0 ];then
 		echo "$tidinfo==xxxxxxxxxxxxxxxxxxxxxxx"
 	else
@@ -25,14 +29,13 @@ do
 	export OS_TENANT_NAME=${OS_USERNAME}
 
 	heat stack-list
-	sid_err=$(grep $tid ${logallcreatefailed} | awk -F ' ' '{print $2}')
-	heat stack-delete ${sid_err}
+	heat stack-delete ${sid}
 
 	while true;
 	do
-		heat stack-list | grep ${sid_err}
+		heat stack-list | grep ${sid}
 		if [ $? == 0 ];then
-		    sleep 1
+		    sleep 2
 			continue
 		else 
 			break

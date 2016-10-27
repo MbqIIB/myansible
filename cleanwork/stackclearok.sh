@@ -1,8 +1,15 @@
 #!/bin/bash
 
 #set -x
-tidlist=$(awk -F ' ' '{print $6}' stacklist.log.ok)
+logname=stacklist
+logall=${logname}.log
+logallcreatefailed=${logname}_createfailed.log
+logallcreatecomplete=${logname}_createcomplete.log
+logalldeletefailed=${logname}_deletefailed.log
 
+passfile=stackpass.txt
+
+sidlist=$(awk -F ' ' '{print $2}' ${logallcreatecomplete})
 
 function StackDelete()
 {
@@ -13,17 +20,19 @@ function StackDelete()
 		heat stack-list | grep ${sid}
 		if [ $? == 0 ];then
 		    sleep 2
-			continue
+		    continue
 		else 
-			break
+	            break
+	            echo "======================= Delete Success ===================="
 		fi
 	done
 }
 
 
-for tid in ${tidlist[@]}
+for sid in ${sidlist[@]}
 do
-	tidinfo=$(grep $tid stackpass.txt)
+    tid=$(grep $sid ${logallcreatecomplete} | awk -F ' ' '{print $6}')
+    tidinfo=$(grep $tid ${passfile})
     if [ $? != 0 ];then
 		echo "$tidinfo==xxxxxxxxxxxxxxxxxxxxxxx"
 	else
@@ -36,14 +45,14 @@ do
 	export OS_PASSWORD="${pass}"
 	export OS_TENANT_NAME=${OS_USERNAME}
 
-	sid_name=$(grep $tid stacklist.log.ok | awk -F ' ' '{print $4}')
+	sid_name=$(grep $sid ${logallcreatecomplete} | awk -F ' ' '{print $4}')
 	nova list --all-tenants --tenant $tid | grep $sid_name
 	if [ $? != 0 ];then
-		echo "======================= Will Delete ===================="
-		nova list
-		sleep 2
-		StackDelete $sid_name
-		heat stack-list
+	    echo "======================= Will Delete ===================="
+	    nova list
+	    sleep 2
+	    StackDelete $sid
+	    heat stack-list
 	    nova list --all-tenants --tenant $tid
 	else
 		echo "======================= Do Not Delete ===================="

@@ -324,8 +324,10 @@ class SvUser:
             self.UserList.append((uid,u))
         fp.close()
 
-    def GetUserInfo(self, UserList):
+    def GetUserInfo(self, UserList, PassFile):
 
+        fp=open(PassFile, 'w')
+       
         for user in UserList: 
             #print "====== user %s =======" % user[1]
             try:
@@ -350,8 +352,21 @@ class SvUser:
                                  id['username'],
                                  id['rawPasswd'],
                                 )
+                      
+                info= "%s,   %s,   %d,   %s,   %s\n" % (
+                                 id['balance'],
+                                 id['isActivated'],
+                                 id['timestamp'],
+                                 id['username'],
+                                 id['rawPasswd'],
+                                )
+                fp.write(info)
+                fp.flush(None)
             except Exception as e:
                 print "users list err" , e
+                fp.write("users list err %s %s" %(user[0], user[1]))
+                fp.flush(None)
+        fp.close()
 
 
 
@@ -359,9 +374,10 @@ class SvUser:
 if __name__ == '__main__' :
     svuser=SvUser()
     #svuser.GetUserList('alluserlist.txt')
-    svuser.GetUserList('mail.txt')
+    #svuser.GetUserList('mail.txt')
+    svuser.GetUserList('stackTenantList.txt.uniq')
     #print svuser.UserList
-    svuser.GetUserInfo(svuser.UserList)
+    svuser.GetUserInfo(svuser.UserList , "pass.log")
     #svuser.AllUserPrint(svuser.AllUserList)
     #svuser.GetNewUsers()
     #svuser.GetAllUserName()
