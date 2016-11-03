@@ -1,0 +1,203 @@
+---
+- hosts : els-n1,els-n2,els-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+
+#    - name: Add repository
+#      yum_repository:
+#        name: epel
+#        description: EPEL YUM repo
+#        file : epel
+#        baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+#        proxy : http://9.115.78.100:8085
+#        enabled : yes
+#        gpgcheck: no
+#
+
+####    - name: Add elasticsearch-2.x repository
+####      yum_repository:
+####        name: elasticsearch-2.x
+####        description: Elasticsearch repository for 2.x packages
+####        file :  elasticsearch
+####        baseurl: http://packages.elastic.co/elasticsearch/2.x/centos
+#####        proxy : http://9.115.78.100:8085
+####        enabled : yes
+####        gpgcheck: no
+
+    - name : firewalld 9080 tcp
+      firewalld: port=9080/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 9200 tcp
+      firewalld: port=9200/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 9300 tcp
+      firewalld: port=9300/tcp permanent=true state=enabled immediate=yes
+
+    - name: install elasticsearch
+      yum : name=elasticsearch,java-1.8.0-openjdk state=latest
+    
+    - name : elasticsearch /data
+      file : path=/data owner=elasticsearch group=elasticsearch state=directory
+
+    - name: install elasticsearch plugin
+      shell : /usr/share/elasticsearch/bin/plugin install mobz/elasticsearch-head
+ 
+    - name : copy etc_sysconfig_elasticsearch
+      copy : src=etc_sysconfig_elasticsearch dest=/etc/sysconfig/elasticsearch mode=0644
+
+    #- name : service elasticsearch
+    #  service : name=elasticsearch state=restarted enabled=yes
+
+    - name: install keepalived,haproxy
+      yum : name=keepalived,haproxy state=latest
+
+    - name : copy keepalived.conf
+      copy : src=keepalived.conf dest=/etc/keepalived/keepalived.conf mode=0644
+
+    - name : service keepalived
+      service : name=keepalived state=restarted enabled=yes
+
+####    - name: Add kibana-4.4
+####      yum_repository:
+####        name: kibana-4.4
+####        description: Kibana repository for 4.4.x packages
+####        file : kibana 
+####        baseurl: http://packages.elastic.co/kibana/4.4/centos
+#####        proxy : http://9.115.78.100:8085
+####        enabled : yes
+####        gpgcheck: no
+#@#$        gpgkey : http://packages.elastic.co/GPG-KEY-elasticsearch
+
+
+    - name: install kibana
+      yum : name=kibana state=latest
+
+    - name : firewalld 5601 tcp
+      firewalld: port=5601/tcp permanent=true state=enabled immediate=yes
+
+    - name : copy kibana.yml
+      copy : src=conf_kibana.yml dest=/opt/kibana/config/kibana.yml mode=0644
+
+    - name : service kibana
+      service : name=kibana state=started enabled=yes
+
+    - name : service kibana
+      service : name=kibana state=restarted enabled=yes
+
+- hosts : els-n1
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : copy node1_elasticsearch.yml
+      copy : src=node1_elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml mode=0644
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=restarted enabled=yes
+
+- hosts : els-n2
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : copy node2_elasticsearch.yml
+      copy : src=node2_elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml mode=0644
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=restarted enabled=yes
+
+- hosts : els-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : copy node3_elasticsearch.yml
+      copy : src=node3_elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml mode=0644
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=restarted enabled=yes
+
+
+- hosts : log-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+####    - name: Add logstash-2.2
+####      yum_repository:
+####        name: logstash-2.2
+####        description: logstash repository for 2.2 packages
+####        file : logstash
+####        baseurl: http://packages.elasticsearch.org/logstash/2.2/centos
+#####        proxy : http://9.115.78.100:8085
+####        enabled : yes
+####        gpgcheck: no
+####        gpgkey : http://packages.elastic.co/GPG-KEY-elasticsearch
+
+####    - name: Add logstash-forwarder
+####      yum_repository:
+####        name: logstash-forwarder
+####        description: logstash-forwarder repository
+####        file : logstash-forwarder
+####        baseurl: http://packages.elastic.co/logstashforwarder/centos
+#####        proxy : http://9.115.78.100:8085
+####        enabled : yes
+####        gpgcheck: no
+####        gpgkey : http://packages.elastic.co/GPG-KEY-elasticsearch
+
+    - name : rsyslog /var/log/openstack
+      file : path=/var/log/openstack owner=root group=root state=directory mode=0755
+
+#    - name: install logstash
+#      yum : name=logstash,logstash-forwarder,java-1.8.0-openjdk state=latest
+    
+    - name : copy logrotate_rsyslog.conf
+      copy : src=logrotate_rsyslog.conf dest=/etc/logrotate.d/rsyslog  mode=0644
+
+    - name : copy logcollector-mgmt_rsyslog.conf
+      copy : src=logcollector-mgmt_rsyslog.conf dest=/etc/rsyslog.conf mode=0644
+
+    - name : copy logcollector-mgmt_60-openstack.conf
+      copy : src=logcollector-mgmt_60-openstack.conf dest=/etc/rsyslog.d/60-openstack.conf mode=0644
+   
+
+    - name : firewalld 514 tcp
+      firewalld: port=514/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 514 udp
+      firewalld: port=514/udp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 8080 tcp
+      firewalld: port=8080/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 5043 tcp
+      firewalld: port=5043/tcp permanent=true state=enabled immediate=yes
+
+    - name : rsyslog start
+      service : name=rsyslog state=restarted enabled=yes
+
+- hosts : compute-server
+  remote_user: root
+  gather_facts: no
+  tasks:
+    - name : copy castelnaud_rsyslog.conf
+      copy : src=castelnaud_rsyslog.conf dest=/etc/rsyslog.conf mode=0644
+
+    - name : copy castelnaud_60-openstack-compute.conf
+      copy : src=castelnaud_60-openstack-compute.conf dest=/etc/rsyslog.d/60-openstack-compute.conf mode=0644
+
+    - name : rsyslog start
+      service : name=rsyslog state=restarted enabled=yes
+
+
+
+- hosts : controller-server
+  remote_user: root
+  gather_facts: no
+  tasks:
+    - name : copy ctl_rsyslog.conf  
+      copy : src=ctl_rsyslog.conf dest=/etc/rsyslog.conf mode=0644
+
+    - name : copy ctl_60-openstack-agent.conf
+      copy : src=ctl_60-openstack-agent.conf dest=/etc/rsyslog.d/60-openstack-agent.conf mode=0644
+
+    - name : rsyslog start
+      service : name=rsyslog state=restarted enabled=yes
+

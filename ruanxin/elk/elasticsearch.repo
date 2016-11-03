@@ -1,0 +1,6 @@
+[elasticsearch-2.x]
+baseurl = http://packages.elastic.co/elasticsearch/2.x/centos
+enabled = 1
+gpgcheck = 0
+name = Elasticsearch repository for 2.x packages
+

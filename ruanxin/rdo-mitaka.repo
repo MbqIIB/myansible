@@ -1,0 +1,7 @@
+[RDO-mitaka]
+baseurl = http://centos.ustc.edu.cn/centos/7.2.1511/cloud/x86_64/openstack-mitaka/
+enabled = 1
+gpgcheck = 0
+name = RDO-mitaka
+proxy = http://9.115.78.100:8085
+
