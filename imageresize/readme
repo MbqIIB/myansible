@@ -72,3 +72,53 @@ virt-resize --expand /dev/sda3 --LV-expand /dev/ubuntu-vg/root Ubuntu14.04.5-ppc
 ./rc_kvm2glance.sh.mitaka Ubuntu14.04.5-ppc64el-100G-nocheck.cfg.mitaka 
 ./rc_kvm2glance.sh.mitaka Ubuntu14.04.5-ppc64el-200G-nocheck.cfg.mitaka 
 
+IMAGENAME=CentOS7.2-x86_64
+qemu-img create -f qcow2 ${IMAGENAME}-50G-nocheck.qcow2 50G
+qemu-img create -f qcow2 ${IMAGENAME}-100G-nocheck.qcow2 100G
+qemu-img create -f qcow2 ${IMAGENAME}-200G-nocheck.qcow2 200G
+
+
+virt-filesystems --long --parts --blkdevs -h -a new_CentOS7.2-x86_64-20G-nocheck.qcow2
+virt-filesystems --long -h --all -a new_CentOS7.2-x86_64-20G-nocheck.qcow2
+Name              Type        VFS   Label  MBR  Size  Parent
+/dev/sda1         filesystem  xfs   -      -    500M  -
+/dev/centos/root  filesystem  xfs   -      -    17G   -
+/dev/centos/swap  filesystem  swap  -      -    2.0G  -
+/dev/centos/root  lv          -     -      -    17G   /dev/centos
+/dev/centos/swap  lv          -     -      -    2.0G  /dev/centos
+/dev/centos       vg          -     -      -    20G   /dev/sda2
+/dev/sda2         pv          -     -      -    20G   -
+/dev/sda1         partition   -     -      83   500M  /dev/sda
+/dev/sda2         partition   -     -      8e   20G   /dev/sda
+/dev/sda          device      -     -      -    20G   -
+
+virt-resize --expand /dev/sda2 --LV-expand /dev/centos/root new_CentOS7.2-x86_64-20G-nocheck.qcow2 ${IMAGENAME}-50G-nocheck.qcow2 
+virt-resize --expand /dev/sda2 --LV-expand /dev/centos/root new_CentOS7.2-x86_64-20G-nocheck.qcow2 ${IMAGENAME}-100G-nocheck.qcow2
+virt-resize --expand /dev/sda2 --LV-expand /dev/centos/root new_CentOS7.2-x86_64-20G-nocheck.qcow2 ${IMAGENAME}-200G-nocheck.qcow2
+
+
+IMAGENAME=Ubuntu16.04.1-x86_64
+SRCIMAGE=Ubuntu16.04.1-x86_64-20G-nocheck
+
+IMAGENAME=Ubuntu14.04.3-x86_64
+SRCIMAGE=Ubuntu14.04.3-x86_64-20G-nocheck
+
+qemu-img create -f qcow2 ${IMAGENAME}-20G-nocheck.qcow2 20G
+
+qemu-img create -f qcow2 ${IMAGENAME}-50G-nocheck.qcow2 50G
+qemu-img create -f qcow2 ${IMAGENAME}-100G-nocheck.qcow2 100G
+qemu-img create -f qcow2 ${IMAGENAME}-200G-nocheck.qcow2 200G
+
+virt-filesystems --long -h --all -a ${SRCIMAGE}.qcow2
+virt-resize --expand /dev/sda5 --LV-expand /dev/ubuntu-vg/root ${SRCIMAGE}.qcow2  ${IMAGENAME}-50G-nocheck.qcow2
+virt-resize --expand /dev/sda5 --LV-expand /dev/ubuntu-vg/root ${SRCIMAGE}.qcow2  ${IMAGENAME}-100G-nocheck.qcow2
+virt-resize --expand /dev/sda5 --LV-expand /dev/ubuntu-vg/root ${SRCIMAGE}.qcow2  ${IMAGENAME}-200G-nocheck.qcow2
+
+SRCIMAGE=nopart_Ubuntu16.04.1-x86_64-20G-nocheck
+virt-resize --expand /dev/sda1 ${SRCIMAGE}.qcow2  ${IMAGENAME}-50G-nocheck.qcow2
+virt-resize --expand /dev/sda1 ${SRCIMAGE}.qcow2  ${IMAGENAME}-100G-nocheck.qcow2
+virt-resize --expand /dev/sda1 ${SRCIMAGE}.qcow2  ${IMAGENAME}-200G-nocheck.qcow2
+
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-50G-nocheck.qcow2  compress_${IMAGENAME}-50G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-100G-nocheck.qcow2 compress_${IMAGENAME}-100G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-200G-nocheck.qcow2 compress_${IMAGENAME}-200G-nocheck.qcow2

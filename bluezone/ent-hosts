@@ -16,11 +16,12 @@
 
 10.0.0.71  bluezone-ctl43.test.com   bluezone-ctl43 ent-ctl0 ctl
 10.0.0.209 opuser-KVM   blue-ent-dashboard
+10.0.0.170 blue-ui  lintestui
 
-10.0.0.101 HA-rabbitmq-n1
-10.0.0.102 HA-rabbitmq-n2
-10.0.0.103 HA-rabbitmq-n3
-10.0.0.105 HA-rabbitmq-ha
+10.0.0.101 HA-rabbitmq-n1 rb1
+10.0.0.102 HA-rabbitmq-n2 rb2
+10.0.0.103 HA-rabbitmq-n3 rb3
+10.0.0.105 HA-rabbitmq-ha rbha
 
 10.0.0.106 swift1
 10.0.0.107 swift2
