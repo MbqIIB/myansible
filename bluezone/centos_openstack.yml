@@ -1,0 +1,19 @@
+- hosts: cp9
+  gather_facts: no
+  tasks:
+
+  - name: yum install openstack linzhbj
+    yum : name=openstack-nova-compute,python-novaclient,python-neutronclient,ipset,python-glanceclient,python-heatclient,openstack-neutron-openvswitch,git,python-devel state=latest
+  
+  - name : service openvswitch
+    service : name=openvswitch state=started enabled=yes
+
+  - name : service libvirtd
+    service : name=libvirtd state=started enabled=yes
+
+  - name : service openstack-nova-compute
+    service : name=openstack-nova-compute state=started enabled=yes
+
+  - name : service neutron-openvswitch-agent
+    service : name=neutron-openvswitch-agent state=started enabled=yes
+
