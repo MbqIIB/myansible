@@ -19,7 +19,8 @@ function StackDelete()
 	do
 		heat stack-list | grep ${sid}
 		if [ $? == 0 ];then
-		    sleep 2
+                    heat stack-delete ${sid}
+		    sleep 5
 		    continue
 		else 
 	            break
@@ -46,6 +47,7 @@ do
 	export OS_TENANT_NAME=${OS_USERNAME}
 
 	sid_name=$(grep $sid ${logallcreatecomplete} | awk -F ' ' '{print $4}')
+        #sid_name2=$(echo "$sid_name" | sed "s/spark_//g")
 	nova list --all-tenants --tenant $tid | grep $sid_name
 	if [ $? != 0 ];then
 	    echo "======================= Will Delete ===================="
@@ -58,6 +60,6 @@ do
 		echo "======================= Do Not Delete ===================="
 	fi
 
-	sleep 5
+	sleep 3
 done
 
