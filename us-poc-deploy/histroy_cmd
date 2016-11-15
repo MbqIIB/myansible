@@ -1,0 +1,1003 @@
+    1  2016-11-15 03:46:58 service neutron-server stop
+    2  2016-11-15 03:46:58 ps -ef|grep neutron
+    3  2016-11-15 03:46:58 ls
+    4  2016-11-15 03:46:58 vim /usr/lib/systemd/system/neutron-server.service 
+    5  2016-11-15 03:46:58 vim /var/log/neutron/server.log 
+    6  2016-11-15 03:46:58 ls
+    7  2016-11-15 03:46:58 cd answer-new.conf 
+    8  2016-11-15 03:46:58 vim answer-new.conf 
+    9  2016-11-15 03:46:58 ls /etc/neutron/conf.d/
+   10  2016-11-15 03:46:58 cat READ
+   11  2016-11-15 03:46:58 cd /etc/neutron/conf.d/
+   12  2016-11-15 03:46:58 ls
+   13  2016-11-15 03:46:58 vim /etc/neutron/neutron_lbaas.conf 
+   16  2016-11-15 03:46:58 ovs-vsctl show
+   24  2016-11-15 03:46:58 cd /too
+   26  2016-11-15 03:46:58 cd /root
+   27  2016-11-15 03:46:58 ls
+   28  2016-11-15 03:46:58 cd install/
+   29  2016-11-15 03:46:58 ls
+   30  2016-11-15 03:46:58 vim answer-new.conf 
+   31  2016-11-15 03:46:58 packstack --answer-file answer-new.conf
+   32  2016-11-15 03:46:58 ls
+   33  2016-11-15 03:46:58 rm diff
+   34  2016-11-15 03:46:58 diff -urN answer.conf answer-new.conf >diff
+   35  2016-11-15 03:46:58 vim diff
+   36  2016-11-15 03:46:58 openstack-service restart
+   37  2016-11-15 03:46:58 ps -ef
+   38  2016-11-15 03:46:58 mysql -uroot -pdemopass
+   39  2016-11-15 03:46:58 vim /etc/my.cnf.d/galera.cnf 
+   40  2016-11-15 03:46:58 pwd
+   41  2016-11-15 03:46:58 ls
+   42  2016-11-15 03:46:58 cd /etc/my.cnf.d/
+   43  2016-11-15 03:46:58 grep cache_size =-r .
+   44  2016-11-15 03:46:58 grep cache_size -r .
+   45  2016-11-15 03:46:58 grep wsrep_on -r .
+   46  2016-11-15 03:46:58 vim ./mariadb-server.cnf
+   47  2016-11-15 03:46:58 vim ./galera.cnf 
+   48  2016-11-15 03:46:58 hostname
+   49  2016-11-15 03:46:58 vim /etc/my.cnf.d/mariadb-server.cnf 
+   50  2016-11-15 03:46:58 ls
+   51  2016-11-15 03:46:58 cd /etc/ha
+   52  2016-11-15 03:46:58 cd /etc/haproxy/haproxy.cfg 
+   53  2016-11-15 03:46:58 cd /etc/haproxy/
+   54  2016-11-15 03:46:58 ls
+   55  2016-11-15 03:46:58 vim haproxy.cfg 
+   56  2016-11-15 03:46:58 ls
+   57  2016-11-15 03:46:58 mv haproxy.cfg haproxy.cfg.old
+   58  2016-11-15 03:46:58 ls
+   59  2016-11-15 03:46:58 vim haproxy.cfg
+   60  2016-11-15 03:46:58 chmod 400 /var/lib/rabbitmq/.erlang.cookie
+   61  2016-11-15 03:46:58 cd /etc/nova/
+   62  2016-11-15 03:46:58 ls
+   63  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+   64  2016-11-15 03:46:58 cd ../neutron/
+   65  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+   66  2016-11-15 03:46:58 cd ../glance/
+   67  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+   68  2016-11-15 03:46:58 cd /etc/nova/
+   69  2016-11-15 03:46:58 ls
+   70  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+   71  2016-11-15 03:46:58 vim ./nova.conf
+   72  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+   73  2016-11-15 03:46:58 vim nova.conf 
+   74  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+   75  2016-11-15 03:46:58 cd /etc/neutron/
+   76  2016-11-15 03:46:58 ll
+   77  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+   78  2016-11-15 03:46:58 vim /etc/neutron/neutron.conf 
+   79  2016-11-15 03:46:58 cd /etc/glance/
+   80  2016-11-15 03:46:58 ls
+   81  2016-11-15 03:46:58 g
+   82  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+   83  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+   84  2016-11-15 03:46:58 cd ../keystone/
+   85  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+   86  2016-11-15 03:46:58 cd /etc/cinder/
+   87  2016-11-15 03:46:58 ls
+   88  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+   89  2016-11-15 03:46:58 cd ../heat
+   90  2016-11-15 03:46:58 ls
+   91  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+   92  2016-11-15 03:46:58 vim heat.conf
+   93  2016-11-15 03:46:58 vim /etc/haproxy/haproxy.cfg
+   94  2016-11-15 03:46:58 cd /etc/
+   95  2016-11-15 03:46:58 ls
+   96  2016-11-15 03:46:58 cd httpd/
+   97  2016-11-15 03:46:58 ls
+   98  2016-11-15 03:46:58 ll
+   99  2016-11-15 03:46:58 cd conf.d
+  100  2016-11-15 03:46:58 ls
+  101  2016-11-15 03:46:58 grep 5000 -r .
+  102  2016-11-15 03:46:58 grep 35357 -r .
+  103  2016-11-15 03:46:58 cd ..
+  104  2016-11-15 03:46:58 ls
+  105  2016-11-15 03:46:58 grep 35357 -r .
+  106  2016-11-15 03:46:58 vim conf/ports.conf 
+  107  2016-11-15 03:46:58 cat conf/ports.conf 
+  108  2016-11-15 03:46:58 pwd
+  109  2016-11-15 03:46:58 cat conf/ports.conf 
+  110  2016-11-15 03:46:58 passwd hacluster
+  111  2016-11-15 03:46:58 ls
+  112  2016-11-15 03:46:58 cd /root/
+  113  2016-11-15 03:46:58 ls
+  114  2016-11-15 03:46:58 rm test
+  115  2016-11-15 03:46:58 ls
+  116  2016-11-15 03:46:58 vim init.sh 
+  117  2016-11-15 03:46:58 vim /etc/heat/heat.conf 
+  118  2016-11-15 03:46:58 systemctl start pcsd.service
+  119  2016-11-15 03:46:58 systemctl enable pcsd.service
+  120  2016-11-15 03:46:58 shutdown -h 0
+  121  2016-11-15 03:46:58 ls
+  122  2016-11-15 03:46:58 vim init.sh
+  123  2016-11-15 03:46:58 ls
+  124  2016-11-15 03:46:58 chmod +x init.sh 
+  125  2016-11-15 03:46:58 ./init.sh 
+  126  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  127  2016-11-15 03:46:58 ./init.sh 
+  128  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  129  2016-11-15 03:46:58 vim init.sh
+  130  2016-11-15 03:46:58 ./init.sh 
+  131  2016-11-15 03:46:58 vim init.sh
+  132  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  133  2016-11-15 03:46:58 vim init.sh
+  134  2016-11-15 03:46:58 ./init.sh 
+  135  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  136  2016-11-15 03:46:58 vim init.sh
+  137  2016-11-15 03:46:58 ./init.sh 
+  138  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  139  2016-11-15 03:46:58 vim init.sh 
+  140  2016-11-15 03:46:58 ./init.sh 
+  141  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  142  2016-11-15 03:46:58 vim init.sh 
+  143  2016-11-15 03:46:58 ./init.sh 
+  144  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  145  2016-11-15 03:46:58 vim init.sh 
+  146  2016-11-15 03:46:58 ls
+  147  2016-11-15 03:46:58 vim test
+  148  2016-11-15 03:46:58 cat init.sh 
+  149  2016-11-15 03:46:58 perl -pi -e 's/^ssss.*$/test/g' test
+  150  2016-11-15 03:46:58 vim test 
+  151  2016-11-15 03:46:58 ls
+  152  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  153  2016-11-15 03:46:58 ls
+  154  2016-11-15 03:46:58 vim init.sh 
+  155  2016-11-15 03:46:58 ./init.sh 
+  156  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  157  2016-11-15 03:46:58 ./init.sh 
+  158  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  159  2016-11-15 03:46:58 ./init.sh 
+  160  2016-11-15 03:46:58 vim init.sh 
+  161  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  162  2016-11-15 03:46:58 ./init.sh 
+  163  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  164  2016-11-15 03:46:58 vim init.sh 
+  165  2016-11-15 03:46:58 ./init.sh 
+  166  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  167  2016-11-15 03:46:58 vim init.sh 
+  168  2016-11-15 03:46:58 ./init.sh 
+  169  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  170  2016-11-15 03:46:58 ./init.sh 
+  171  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  172  2016-11-15 03:46:58 ./init.sh 
+  173  2016-11-15 03:46:58 vim init.sh 
+  174  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  175  2016-11-15 03:46:58 ./init.sh 
+  176  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  177  2016-11-15 03:46:58 vim init.sh 
+  178  2016-11-15 03:46:58 ./init.sh 
+  179  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  180  2016-11-15 03:46:58 vim init.sh 
+  181  2016-11-15 03:46:58 ./init.sh 
+  182  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  183  2016-11-15 03:46:58 vim init.sh 
+  184  2016-11-15 03:46:58 ./init.sh 
+  185  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  186  2016-11-15 03:46:58 vim init.sh 
+  187  2016-11-15 03:46:58 ./init.sh 
+  188  2016-11-15 03:46:58 vim init.sh 
+  189  2016-11-15 03:46:58 ./init.sh 
+  190  2016-11-15 03:46:58 vim init.sh 
+  191  2016-11-15 03:46:58 ./init.sh 
+  192  2016-11-15 03:46:58 ls
+  193  2016-11-15 03:46:58 cd sc
+  194  2016-11-15 03:46:58 ls
+  195  2016-11-15 03:46:58 vim setup.sh 
+  196  2016-11-15 03:46:58 ls
+  197  2016-11-15 03:46:58 vim init.sh 
+  198  2016-11-15 03:46:58 vim /etc/rabbitmq/rabbitmq-env.conf 
+  199  2016-11-15 03:46:58 cd /etc/my.cnf.d
+  200  2016-11-15 03:46:58 ls
+  201  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+  202  2016-11-15 03:46:58 pwd
+  203  2016-11-15 03:46:58 ifconfig
+  204  2016-11-15 03:46:58 vim /etc/sysconfig/network-scripts/ifcfg-eth0
+  205  2016-11-15 03:46:58 ls
+  206  2016-11-15 03:46:58 ls
+  207  2016-11-15 03:46:58 cd /etc/ironic
+  208  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+  209  2016-11-15 03:46:58 cd /root/
+  210  2016-11-15 03:46:58 ls
+  211  2016-11-15 03:46:58 vim setupctl.sh
+  212  2016-11-15 03:46:58 ls
+  213  2016-11-15 03:46:58 vim init.sh 
+  214  2016-11-15 03:46:58 vim setupctl.sh 
+  215  2016-11-15 03:46:58 ls
+  216  2016-11-15 03:46:58 cat init.sh 
+  217  2016-11-15 03:46:58 vim init.sh 
+  218  2016-11-15 03:46:58 ./init.sh 
+  219  2016-11-15 03:46:58 ls
+  220  2016-11-15 03:46:58 vim /etc/my.cnf.d/galera.cnf 
+  221  2016-11-15 03:46:58 ls
+  222  2016-11-15 03:46:58 cd /etc/my.cnf
+  223  2016-11-15 03:46:58 cd /etc/my.cnf.d
+  224  2016-11-15 03:46:58 ls
+  225  2016-11-15 03:46:58 ll
+  226  2016-11-15 03:46:58 ls -a
+  227  2016-11-15 03:46:58 rm .galera.cnf.swp
+  228  2016-11-15 03:46:58 cd /etc/ironic/
+  229  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+  230  2016-11-15 03:46:58 vim ironic.conf 
+  231  2016-11-15 03:46:58 cd /root/
+  232  2016-11-15 03:46:58 ls
+  233  2016-11-15 03:46:58 chmod +x setupctl.sh 
+  234  2016-11-15 03:46:58 ls
+  235  2016-11-15 03:46:58 mkdir scripts
+  236  2016-11-15 03:46:58 mv *.sh scripts/
+  237  2016-11-15 03:46:58 ls
+  238  2016-11-15 03:46:58 cd scripts/
+  239  2016-11-15 03:46:58 ls
+  240  2016-11-15 03:46:58 cat setupctl.sh 
+  241  2016-11-15 03:46:58 shutdown -h 0
+  242  2016-11-15 03:46:58 ls
+  243  2016-11-15 03:46:58 cd scripts/
+  244  2016-11-15 03:46:58 ls
+  245  2016-11-15 03:46:58 ./setupctl.sh 
+  246  2016-11-15 03:46:58 vim setupctl.sh 
+  247  2016-11-15 03:46:58 vim /etc/hostname
+  248  2016-11-15 03:46:58 vim setupctl.sh 
+  249  2016-11-15 03:46:58 ./setupctl.sh 
+  250  2016-11-15 03:46:58 vim setupctl.sh 
+  251  2016-11-15 03:46:58 perl -pi -e "s/poc-ctl0/poc-ctl1/g" /etc/hostname
+  252  2016-11-15 03:46:58 vim /etc/hostname
+  253  2016-11-15 03:46:58 cat ls
+  254  2016-11-15 03:46:58 cat setupctl.sh 
+  255  2016-11-15 03:46:58 cat /etc/sysconfig/network-scripts/ifcfg-eth0
+  256  2016-11-15 03:46:58 shutdown -h 0
+  257  2016-11-15 03:46:58 ls
+  258  2016-11-15 03:46:58 mysql -uroot
+  259  2016-11-15 03:46:58 ls
+  260  2016-11-15 03:46:58 mysqldump -uroot -pdemopass --opt --events --all-databases > openstack.sql
+  261  2016-11-15 03:46:58 ls
+  262  2016-11-15 03:46:58 service mariadb stop
+  263  2016-11-15 03:46:58 cd /etc/my.cnf.d/
+  264  2016-11-15 03:46:58 ls
+  265  2016-11-15 03:46:58 vim enable_encryption.preset 
+  266  2016-11-15 03:46:58 ls
+  267  2016-11-15 03:46:58 vim server.cnf 
+  268  2016-11-15 03:46:58 netstat -natp|grep 3306
+  269  2016-11-15 03:46:58 service mysql start
+  270  2016-11-15 03:46:58 ls
+  271  2016-11-15 03:46:58 vim galera.cnf 
+  272  2016-11-15 03:46:58 service mariadb start
+  273  2016-11-15 03:46:58 ps -ef|grep mysqld
+  274  2016-11-15 03:46:58 vim /var/log/mariadb/mariadb.log 
+  275  2016-11-15 03:46:58 service mariadb stop
+  276  2016-11-15 03:46:58 ls
+  277  2016-11-15 03:46:58 vim server.cnf 
+  278  2016-11-15 03:46:58 ps -ef|grep mysql
+  279  2016-11-15 03:46:58 /usr/bin/galera_new_cluster
+  280  2016-11-15 03:46:58 mysql -uroot -pdemopass
+  281  2016-11-15 03:46:58 netstat -natp|grep 3306
+  282  2016-11-15 03:46:58 mysql -u root -e "SHOW STATUS LIKE 'wsrep%';"
+  283  2016-11-15 03:46:58 service mysql stop
+  284  2016-11-15 03:46:58 ls
+  285  2016-11-15 03:46:58 vim server.cnf 
+  286  2016-11-15 03:46:58 ps -ef|grep mysql
+  287  2016-11-15 03:46:58 service mysql stop
+  288  2016-11-15 03:46:58 service mariadb stop
+  289  2016-11-15 03:46:58 ps -ef|grep mysql
+  290  2016-11-15 03:46:58 /usr/bin/galera_new_cluster
+  291  2016-11-15 03:46:58 ps -ef|grep mysql
+  292  2016-11-15 03:46:58 ls
+  293  2016-11-15 03:46:58 vim galera.cnf 
+  294  2016-11-15 03:46:58 service mariadb start
+  295  2016-11-15 03:46:58 ps -ef|grep mysql
+  296  2016-11-15 03:46:58 /usr/bin/galera_new_cluster
+  297  2016-11-15 03:46:58 ps -ef|Grep mariadb
+  298  2016-11-15 03:46:58 ps -ef|grep mysql
+  299  2016-11-15 03:46:58 netstat -natp|grep 3306
+  300  2016-11-15 03:46:58 ls
+  301  2016-11-15 03:46:58 scp * poc-ctl1:/etc/my.cnf.d/
+  302  2016-11-15 03:46:58 scp * poc-ctl2:/etc/my.cnf.d/
+  303  2016-11-15 03:46:58 mysql -uroot -pdemopass
+  304  2016-11-15 03:46:58 ls
+  305  2016-11-15 03:46:58 cd ..
+  306  2016-11-15 03:46:58 ls
+  307  2016-11-15 03:46:58 cd /root/
+  308  2016-11-15 03:46:58 ls
+  309  2016-11-15 03:46:58 cd scripts/
+  310  2016-11-15 03:46:58 ls
+  311  2016-11-15 03:46:58 vim init.sh 
+  312  2016-11-15 03:46:58 ls
+  313  2016-11-15 03:46:58 vim setupctl.sh 
+  314  2016-11-15 03:46:58 vim init.sh 
+  315  2016-11-15 03:46:58 vim /etc/my.cnf.d/server.cnf 
+  316  2016-11-15 03:46:58 ls
+  317  2016-11-15 03:46:58 vim init.sh 
+  318  2016-11-15 03:46:58 vim setupctl.sh 
+  319  2016-11-15 03:46:58 servie mariadb stop
+  320  2016-11-15 03:46:58 service mariadb stop
+  321  2016-11-15 03:46:58 ps -ef|grep mysql
+  322  2016-11-15 03:46:58 ls
+  323  2016-11-15 03:46:58 cat setupctl.sh 
+  324  2016-11-15 03:46:58 shutdown -h 0
+  325  2016-11-15 03:46:58 ls
+  326  2016-11-15 03:46:58 cd /etc/my.cnf.d/
+  327  2016-11-15 03:46:58 ls
+  328  2016-11-15 03:46:58 vim galera.cnf 
+  329  2016-11-15 03:46:58 cd /usr/lib/systemd/
+  330  2016-11-15 03:46:58 ls
+  331  2016-11-15 03:46:58 cd system
+  332  2016-11-15 03:46:58 ls | grep maria
+  333  2016-11-15 03:46:58 cd mariadb@bootstrap.service.d
+  334  2016-11-15 03:46:58 ls
+  335  2016-11-15 03:46:58 cat use_galera_new_cluster.conf 
+  336  2016-11-15 03:46:58 cd /etc/my.cnf.d/
+  337  2016-11-15 03:46:58 ls
+  338  2016-11-15 03:46:58 virsh lsit
+  339  2016-11-15 03:46:58 service mariadb stop
+  340  2016-11-15 03:46:58 ps -ef|grep mariadb
+  341  2016-11-15 03:46:58 ls
+  342  2016-11-15 03:46:58 cd /usr/lib/systemd/system
+  343  2016-11-15 03:46:58 grep maria
+  344  2016-11-15 03:46:58 grep maria -r .
+  345  2016-11-15 03:46:58 galera_new_cluster
+  346  2016-11-15 03:46:58 netstat -natp|grep 4567
+  347  2016-11-15 03:46:58 vim /etc/my.cnf.d/server.cnf 
+  348  2016-11-15 03:46:58 mysql -u root -e "SHOW STATUS LIKE 'wsrep%';"
+  349  2016-11-15 03:46:58 ls
+  350  2016-11-15 03:46:58 cd /root/
+  351  2016-11-15 03:46:58 ls
+  352  2016-11-15 03:46:58 cd scripts/
+  353  2016-11-15 03:46:58 ls
+  354  2016-11-15 03:46:58 vim setupctl.sh 
+  355  2016-11-15 03:46:58 scp setupctl.sh poc-ctl1:/root/scripts/
+  356  2016-11-15 03:46:58 scp setupctl.sh poc-ctl2:/root/scripts/
+  357  2016-11-15 03:46:58 ls
+  358  2016-11-15 03:46:58 mysql -u root -e "SHOW STATUS LIKE 'wsrep%';"
+  359  2016-11-15 03:46:58 pcs cluster auth poc-ctl0 poc-ctl1 poc-ctl2
+  360  2016-11-15 03:46:58 pcs cluster setup --start --name openstack_cluster poc-ctl0 poc-ctl1 poc-ctl2
+  361  2016-11-15 03:46:58 pcs property set stonith-enabled=false
+  362  2016-11-15 03:46:58 pcs property set start-failure-is-fatal=false
+  363  2016-11-15 03:46:58 service mariadb stop
+  364  2016-11-15 03:46:58 pcs resource create MYSQL systemd:mariadb op monitor interval=20s timeout=30s
+  365  2016-11-15 03:46:58 cd /etc/my.cnf.d/
+  366  2016-11-15 03:46:58 ls
+  367  2016-11-15 03:46:58 vim server.cnf 
+  368  2016-11-15 03:46:58 pcs resource clone MYSQL
+  369  2016-11-15 03:46:58 pcs resource
+  370  2016-11-15 03:46:58 dmesg
+  371  2016-11-15 03:46:58 vim /var/log/messages 
+  372  2016-11-15 03:46:58 ls
+  373  2016-11-15 03:46:58 pcs resource 
+  374  2016-11-15 03:46:58 mysql -u root -e "SHOW STATUS LIKE 'wsrep%';"
+  375  2016-11-15 03:46:58 ls
+  376  2016-11-15 03:46:58 vim server.cnf 
+  377  2016-11-15 03:46:58 ls
+  378  2016-11-15 03:46:58 mysql -uroot -pdemopass
+  379  2016-11-15 03:46:58 pcs resource
+  380  2016-11-15 03:46:58 ls
+  381  2016-11-15 03:46:58 vim server.cnf 
+  382  2016-11-15 03:46:58 systemctl stop rabbitmq-server.service
+  383  2016-11-15 03:46:58 rabbitmqctl cluster_status
+  384  2016-11-15 03:46:58 systemctl start rabbitmq-server.service
+  385  2016-11-15 03:46:58 rabbitmqctl cluster_status
+  386  2016-11-15 03:46:58 rabbitmqctl set_policy ha-all '^(?!amq\.).*' '{"ha-mode": "all"}'
+  387  2016-11-15 03:46:58 rabbitmqctl set_cluster_name rabbit_cluster
+  388  2016-11-15 03:46:58 rabbitmqctl cluster_status
+  389  2016-11-15 03:46:58 vim /var/log/rabbitmq/rabbit\@poc-ctl0.log 
+  390  2016-11-15 03:46:58 systemctl stop rabbitmq-server.service
+  391  2016-11-15 03:46:58 systemctl disable rabbitmq-server.service
+  392  2016-11-15 03:46:58 pcs resource create RABBITMQ ocf:rabbitmq:rabbitmq-server op monitor interval=10s timeout=30s
+  393  2016-11-15 03:46:58 vim /usr/lib/ocf/resource.d/rabbitmq/rabbitmq-server
+  394  2016-11-15 03:46:58 scp /usr/lib/ocf/resource.d/rabbitmq/rabbitmq-server poc-ctl1:/usr/lib/ocf/resource.d/rabbitmq/rabbitmq-server 
+  395  2016-11-15 03:46:58 scp /usr/lib/ocf/resource.d/rabbitmq/rabbitmq-server poc-ctl2:/usr/lib/ocf/resource.d/rabbitmq/rabbitmq-server 
+  396  2016-11-15 03:46:58 pcs resource clone RABBITMQ
+  397  2016-11-15 03:46:58 pcs resource
+  398  2016-11-15 03:46:58 pcs resource clone RABBITMQ
+  399  2016-11-15 03:46:58 pcs resource
+  400  2016-11-15 03:46:58 ps -ef|grep rabbit
+  401  2016-11-15 03:46:58 vim /var/log/rabbitmq/rabbit\@poc-ctl0.log 
+  402  2016-11-15 03:46:58 pcs resource
+  403  2016-11-15 03:46:58 pcs resource cleanup RABBITMQ-clone
+  404  2016-11-15 03:46:58 pcs resource
+  405  2016-11-15 03:46:58 pcs resource unmanaged RABBITMQ-clone
+  406  2016-11-15 03:46:58 pcs resource unmanage RABBITMQ-clone
+  407  2016-11-15 03:46:58 pcs resource
+  408  2016-11-15 03:46:58 service rabbitmq-server status
+  409  2016-11-15 03:46:58 service rabbitmq-server staart
+  410  2016-11-15 03:46:58 service rabbitmq-server start
+  411  2016-11-15 03:46:58 systemctl status rabbitmq-server.service
+  412  2016-11-15 03:46:58 hostname
+  413  2016-11-15 03:46:58 vim /etc/rabbitmq/rabbitmq.config 
+  414  2016-11-15 03:46:58 vim /etc/rabbitmq/rabbitmq-env.conf 
+  415  2016-11-15 03:46:58 service rabbitmq-server stop
+  416  2016-11-15 03:46:58 ls
+  417  2016-11-15 03:46:58 vim /var/log/rabbitmq/rabbit@poc-ctl0.log 
+  418  2016-11-15 03:46:58 ps -ef|grep rabbit
+  419  2016-11-15 03:46:58 kill -9 5723 5749 5754 
+  420  2016-11-15 03:46:58 ps -ef|grep rabbit
+  421  2016-11-15 03:46:58 kill -9 5945
+  422  2016-11-15 03:46:58 ps -ef|grep rabbit
+  423  2016-11-15 03:46:58 service rabbitmq-server start
+  424  2016-11-15 03:46:58 pcs resource
+  425  2016-11-15 03:46:58 pcs manage RABBITMQ-clone
+  426  2016-11-15 03:46:58 pcs resource manage RABBITMQ-clone
+  427  2016-11-15 03:46:58 pcs resource
+  428  2016-11-15 03:46:58 systemctl disable httpd
+  429  2016-11-15 03:46:58 systemctl stop openstack-keystone.service
+  430  2016-11-15 03:46:58 systemctl disable openstack-keystone.service
+  431  2016-11-15 03:46:58 systemctl stop openstack-glance-api.service
+  432  2016-11-15 03:46:58 systemctl disable openstack-glance-api.service
+  433  2016-11-15 03:46:58 systemctl stop openstack-glance-registry.service
+  434  2016-11-15 03:46:58 systemctl disable openstack-glance-registry.service
+  435  2016-11-15 03:46:58 systemctl stop neutron-server.service
+  436  2016-11-15 03:46:58 systemctl disable neutron-server.service
+  437  2016-11-15 03:46:58 systemctl stop neutron-dhcp-agent.service
+  438  2016-11-15 03:46:58 systemctl disable neutron-dhcp-agent.service
+  439  2016-11-15 03:46:58 systemctl stop neutron-metadata-agent.service
+  440  2016-11-15 03:46:58 systemctl disable neutron-metadata-agent.service
+  441  2016-11-15 03:46:58 systemctl stop openstack-nova-api.service
+  442  2016-11-15 03:46:58 systemctl disable openstack-nova-api.service
+  443  2016-11-15 03:46:58 systemctl stop openstack-nova-cert.service
+  444  2016-11-15 03:46:58 systemctl disable openstack-nova-cert.service
+  445  2016-11-15 03:46:58 systemctl stop openstack-nova-conductor.service
+  446  2016-11-15 03:46:58 systemctl disable openstack-nova-conductor.service
+  447  2016-11-15 03:46:58 systemctl stop openstack-nova-console.service
+  448  2016-11-15 03:46:58 systemctl disable openstack-nova-console.service
+  449  2016-11-15 03:46:58 systemctl stop openstack-nova-consoleauth.service
+  450  2016-11-15 03:46:58 systemctl disable openstack-nova-consoleauth.service
+  451  2016-11-15 03:46:58 systemctl stop openstack-nova-novncproxy.service
+  452  2016-11-15 03:46:58 systemctl disable openstack-nova-novncproxy.service
+  453  2016-11-15 03:46:58 systemctl stop openstack-nova-scheduler.service
+  454  2016-11-15 03:46:58 systemctl disable openstack-nova-scheduler.service
+  455  2016-11-15 03:46:58 systemctl stop openstack-cinder-api.service
+  456  2016-11-15 03:46:58 systemctl disable openstack-cinder-api.service
+  457  2016-11-15 03:46:58 systemctl stop openstack-cinder-backup.service
+  458  2016-11-15 03:46:58 systemctl disable openstack-cinder-backup.service
+  459  2016-11-15 03:46:58 systemctl stop openstack-cinder-scheduler.service
+  460  2016-11-15 03:46:58 systemctl disable openstack-cinder-scheduler.service
+  461  2016-11-15 03:46:58 systemctl stop openstack-cinder-volume.service
+  462  2016-11-15 03:46:58 systemctl disable openstack-cinder-volume.service
+  463  2016-11-15 03:46:58 systemctl stop openstack-heat-api.service
+  464  2016-11-15 03:46:58 systemctl disable openstack-heat-api.service
+  465  2016-11-15 03:46:58 systemctl stop openstack-heat-engine.service
+  466  2016-11-15 03:46:58 systemctl disable openstack-heat-engine.service
+  467  2016-11-15 03:46:58 systemctl stop openstack-ceilometer-alarm-evaluator.service
+  468  2016-11-15 03:46:58 systemctl disable openstack-ceilometer-alarm-evaluator.service
+  469  2016-11-15 03:46:58 systemctl stop openstack-ceilometer-alarm-notifier.service
+  470  2016-11-15 03:46:58 systemctl disable openstack-ceilometer-alarm-notifier.service
+  471  2016-11-15 03:46:58 systemctl stop openstack-ceilometer-api.service
+  472  2016-11-15 03:46:58 systemctl disable openstack-ceilometer-api.service
+  473  2016-11-15 03:46:58 systemctl stop openstack-ceilometer-central.service
+  474  2016-11-15 03:46:58 systemctl disable openstack-ceilometer-central.service
+  475  2016-11-15 03:46:58 systemctl stop openstack-ceilometer-collector.service
+  476  2016-11-15 03:46:58 systemctl disable openstack-ceilometer-collector.service
+  477  2016-11-15 03:46:58 systemctl stop openstack-ceilometer-notification.service
+  478  2016-11-15 03:46:58 systemctl disable openstack-ceilometer-notification.service
+  479  2016-11-15 03:46:58 pcs resource create KEYSTONE-HTTPD systemd:httpd op monitor interval=20s timeout=30s
+  480  2016-11-15 03:46:58 pcs resource clone KEYSTONE-HTTPD
+  481  2016-11-15 03:46:58 pcs resource
+  482  2016-11-15 03:46:58 ps -ef|grep httpd
+  483  2016-11-15 03:46:58 pcs resource
+  484  2016-11-15 03:46:58 pcs resource create GLANCE_API systemd:openstack-glance-api op monitor interval=20s timeout=30s
+  485  2016-11-15 03:46:58 pcs resource clone GLANCE_API
+  486  2016-11-15 03:46:58 pcs resource
+  487  2016-11-15 03:46:58 pcs resource create GLANCE_REGISTRY systemd:openstack-glance-registry op monitor interval=20s timeout=30s
+  488  2016-11-15 03:46:58 pcs resource clone GLANCE_REGISTRY
+  489  2016-11-15 03:46:58 pcs resource
+  490  2016-11-15 03:46:58 ifconfig
+  491  2016-11-15 03:46:58 pcs resource create INTERNAL_VIP ocf:heartbeat:IPaddr2 ip=10.0.0.130 cidr_netmask=16 op monitor interval=10s
+  492  2016-11-15 03:46:58 ping 10.0.0.130 
+  493  2016-11-15 03:46:58 vim /etc/hosts
+  494  2016-11-15 03:46:58 ls
+  495  2016-11-15 03:46:58 vim /var/log/glance/api.log 
+  496  2016-11-15 03:46:58 pcs resource
+  497  2016-11-15 03:46:58 pcs resource create NEUTRON_SERVER systemd:neutron-server op monitor interval=20s timeout=30s
+  498  2016-11-15 03:46:58 pcs resource clone NEUTRON_SERVER
+  499  2016-11-15 03:46:58 pcs resource create NOVA_API systemd:openstack-nova-api op monitor interval=20s timeout=30s
+  500  2016-11-15 03:46:58 pcs resource clone NOVA_API
+  501  2016-11-15 03:46:58 pcs resource
+  502  2016-11-15 03:46:58 ls /usr/lib/systemd/system | grep nova
+  503  2016-11-15 03:46:58 pcs resource create NOVA_CERT systemd:openstack-nova-cert op monitor interval=20s timeout=30s
+  504  2016-11-15 03:46:58 pcs resource clone NOVA_CERT
+  505  2016-11-15 03:46:58 pcs resource create NOVA_CONDUCTOR systemd:openstack-nova-conductor op monitor interval=20s timeout=30s
+  506  2016-11-15 03:46:58 pcs resource clone NOVA_CONDUCTOR
+  507  2016-11-15 03:46:58 pcs resource create NOVA_CONSOLE systemd:openstack-nova-console op monitor interval=20s timeout=30s
+  508  2016-11-15 03:46:58 pcs resource clone NOVA_CONSOLE
+  509  2016-11-15 03:46:58 pcs resource create NOVA_CONSOLEAUTH systemd:openstack-nova-consoleauth op monitor interval=20s timeout=30s
+  510  2016-11-15 03:46:58 pcs resource clone NOVA_CONSOLEAUTH
+  511  2016-11-15 03:46:58 pcs resource create NOVA_NOVNCPROXY systemd:openstack-nova-novncproxy op monitor interval=20s timeout=30s
+  512  2016-11-15 03:46:58 pcs resource clone NOVA_NOVNCPROXY
+  513  2016-11-15 03:46:58 pcs resource create NOVA_SCHEDULER systemd:openstack-nova-scheduler op monitor interval=20s timeout=30s
+  514  2016-11-15 03:46:58 pcs resource clone NOVA_SCHEDULER
+  515  2016-11-15 03:46:58 pcs resource
+  516  2016-11-15 03:46:58 pcs resource create CINDER_API systemd:openstack-cinder-api op monitor interval=20s timeout=30s
+  517  2016-11-15 03:46:58 pcs resource clone CINDER_API
+  518  2016-11-15 03:46:58 pcs resource clone CINDER_BACKUP
+  519  2016-11-15 03:46:58 pcs resource create CINDER_SCHEDULER systemd:openstack-cinder-scheduler op monitor interval=20s timeout=30s
+  520  2016-11-15 03:46:58 pcs resource clone CINDER_SCHEDULER
+  521  2016-11-15 03:46:58 pcs resource create HEAT_API systemd:openstack-heat-api op monitor interval=20s timeout=30s
+  522  2016-11-15 03:46:58 pcs resource clone HEAT_API
+  523  2016-11-15 03:46:58 pcs resource create HEAT_ENGINE systemd:openstack-heat-engine op monitor interval=20s timeout=30s
+  524  2016-11-15 03:46:58 pcs resource clone HEAT_ENGINE
+  525  2016-11-15 03:46:58 pcs resource
+  526  2016-11-15 03:46:58 pcs resource delete INTERNAL_VIP
+  527  2016-11-15 03:46:58 pcs resource
+  528  2016-11-15 03:46:58 cat /etc/haproxy/
+  529  2016-11-15 03:46:58 cat /etc/haproxy/haproxy.cfg
+  530  2016-11-15 03:46:58 history | grep VIP
+  531  2016-11-15 03:46:58 pcs resource create INTERNAL_VIP ocf:heartbeat:IPaddr2 ip=10.0.0.130 cidr_netmask=16 op monitor interval=10s
+  532  2016-11-15 03:46:58 pcs resource create HAPROXY systemd:haproxy op monitor interval=10s timeout=15s
+  533  2016-11-15 03:46:58 pcs constraint colocation add INTERNAL_VIP HAPROXY INFINITY
+  534  2016-11-15 03:46:58 pcs constraint order INTERNAL_VIP then HAPROXY
+  535  2016-11-15 03:46:58 pcs resource
+  536  2016-11-15 03:46:58 ps -ef|grep hap
+  537  2016-11-15 03:46:58 vim /var/log/messages 
+  538  2016-11-15 03:46:58 pcs resource
+  539  2016-11-15 03:46:58 ping 10.0.0.130
+  540  2016-11-15 03:46:58 ls
+  541  2016-11-15 03:46:58 haproxy
+  542  2016-11-15 03:46:58 dmesg
+  543  2016-11-15 03:46:58 iptables -nVL
+  544  2016-11-15 03:46:58 iptables -L
+  545  2016-11-15 03:46:58 ls
+  546  2016-11-15 03:46:58 pcs resource
+  547  2016-11-15 03:46:58 pcs resource unmanage HAPROXY
+  548  2016-11-15 03:46:58 service haproxy status
+  549  2016-11-15 03:46:58 netstat -natp|grep 5672
+  550  2016-11-15 03:46:58 ls
+  551  2016-11-15 03:46:58 vim /etc/rabbitmq/rabbitmq.config 
+  552  2016-11-15 03:46:58 cd /etc/rabbitmq/
+  553  2016-11-15 03:46:58 grep 5672 -r .
+  554  2016-11-15 03:46:58 grep 0.0.0.0 -r .
+  555  2016-11-15 03:46:58 vim ./rabbitmq-env.conf
+  556  2016-11-15 03:46:58 pcs resource 
+  557  2016-11-15 03:46:58 pcs resource unmanage RABBITMQ-clone
+  558  2016-11-15 03:46:58 pcs resource 
+  559  2016-11-15 03:46:58 service rabbitmq-server stop
+  560  2016-11-15 03:46:58 ps -ef|grep rab
+  561  2016-11-15 03:46:58 service rabbitmq-server start
+  562  2016-11-15 03:46:58 journalctl -xe
+  563  2016-11-15 03:46:58 vim /var/log/rabbitmq/rabbit\@poc-ctl0.log 
+  564  2016-11-15 03:46:58 vim /var/log/rabbitmq/startup_log 
+  565  2016-11-15 03:46:58 ps -ef|grep rabbit
+  566  2016-11-15 03:46:58 ls
+  567  2016-11-15 03:46:58 vim rabbitmq-env.conf 
+  568  2016-11-15 03:46:58 service rabbitmq-server status
+  569  2016-11-15 03:46:58 service rabbitmq-server start
+  570  2016-11-15 03:46:58 netstat -natp|grep rabbit
+  571  2016-11-15 03:46:58 netstat -natp|grep 5672
+  572  2016-11-15 03:46:58 ls
+  573  2016-11-15 03:46:58 cat rabbitmq-env.conf
+  574  2016-11-15 03:46:58 cp rabbitmq-env.conf poc-ctl1:/etc/rabbitmq/
+  575  2016-11-15 03:46:58 scp rabbitmq-env.conf poc-ctl1:/etc/rabbitmq/
+  576  2016-11-15 03:46:58 scp rabbitmq-env.conf poc-ctl2:/etc/rabbitmq/
+  577  2016-11-15 03:46:58 pcs resource 
+  578  2016-11-15 03:46:58 pcs resource manage RABBITMQ-clone
+  579  2016-11-15 03:46:58 pcs resource 
+  580  2016-11-15 03:46:58 pcs resource disable  RABBITMQ-clone
+  581  2016-11-15 03:46:58 pcs resource 
+  582  2016-11-15 03:46:58 pcs resource disable  RABBITMQ-clone
+  583  2016-11-15 03:46:58 pcs resource 
+  584  2016-11-15 03:46:58 pcs resource enable  RABBITMQ-clone
+  585  2016-11-15 03:46:58 pcs resource cleanup  RABBITMQ-clone
+  586  2016-11-15 03:46:58 pcs resource
+  587  2016-11-15 03:46:58 pcs resource manage HAPROXY
+  588  2016-11-15 03:46:58 pcs resource
+  589  2016-11-15 03:46:58 service haproxy status
+  590  2016-11-15 03:46:58 pcs resource cleanup HAPROXY
+  591  2016-11-15 03:46:58 pcs resource
+  592  2016-11-15 03:46:58 service haproxy status
+  593  2016-11-15 03:46:58 pcs resource
+  594  2016-11-15 03:46:58 pcs resource cleanup HEAT_ENGINE-clone
+  595  2016-11-15 03:46:58 pcs resource cleanup NOVA_SCHEDULER-clone
+  596  2016-11-15 03:46:58 pcs resource
+  597  2016-11-15 03:46:58 vim /var/log/heat/heat-engine.log 
+  598  2016-11-15 03:46:58 mysql -uroot -pdemopass
+  599  2016-11-15 03:46:58 nova lsit
+  600  2016-11-15 03:46:58 keystone endpoint-list
+  601  2016-11-15 03:46:58 vim /var/log/keystone/keystone.log 
+  602  2016-11-15 03:46:58 vim /etc/keystone/keystone.conf 
+  603  2016-11-15 03:46:58 netstat -natp|grep 3306
+  604  2016-11-15 03:46:58 vim /etc/haproxy/haproxy.cfg
+  605  2016-11-15 03:46:58 #!/bin/bash
+  606  2016-11-15 03:46:58 #
+  607  2016-11-15 03:46:58 # Script to make a proxy (ie HAProxy) capable of monitoring Percona XtraDB Cluster nodes properly
+  608  2016-11-15 03:46:58 #
+  609  2016-11-15 03:46:58 # Author: Olaf van Zandwijk <olaf.vanzandwijk@nedap.com>
+  610  2016-11-15 03:46:58 # Author: Raghavendra Prabhu <raghavendra.prabhu@percona.com>
+  611  2016-11-15 03:46:58 #
+  612  2016-11-15 03:46:58 # Documentation and download: https://github.com/olafz/percona-clustercheck
+  613  2016-11-15 03:46:58 #
+  614  2016-11-15 03:46:58 # Based on the original script from Unai Rodriguez
+  615  2016-11-15 03:46:58 #
+  616  2016-11-15 03:46:58 if [[ $1 == '-h' || $1 == '--help' ]];then     echo "Usage: $0 <user> <pass> <available_when_donor=0|1> <log_file> <available_when_readonly=0|1> <defaults_extra_file>";     exit; fi
+  617  2016-11-15 03:46:58 # if the disabled file is present, return 503. This allows
+  618  2016-11-15 03:46:58 # admins to manually remove a node from a cluster easily.
+  619  2016-11-15 03:46:58 if [ -e "/var/tmp/clustercheck.disabled" ]; then     echo -en "HTTP/1.1 503 Service Unavailable\r\n";     echo -en "Content-Type: text/plain\r\n";     echo -en "Connection: close\r\n";     echo -en "Content-Length: 51\r\n";     echo -en "\r\n";     echo -en "Percona XtraDB Cluster Node is manually disabled.\r\n";     sleep 0.1;     exit 1; fi
+  620  2016-11-15 03:46:58 MYSQL_USERNAME="${1-clustercheckuser}"
+  621  2016-11-15 03:46:58 AVAILABLE_WHEN_DONOR=${3:-0}
+  622  2016-11-15 03:46:58 ERR_FILE="${4:-/dev/null}"
+  623  2016-11-15 03:46:58 AVAILABLE_WHEN_READONLY=${5:-1}
+  624  2016-11-15 03:46:58 DEFAULTS_EXTRA_FILE=${6:-/etc/my.cnf}
+  625  2016-11-15 03:46:58 #Timeout exists for instances where mysqld may be hung
+  626  2016-11-15 03:46:58 TIMEOUT=10
+  627  2016-11-15 03:46:58 EXTRA_ARGS=""
+  628  2016-11-15 03:46:58 if [[ -n "$MYSQL_USERNAME" ]]; then     EXTRA_ARGS="$EXTRA_ARGS --user=${MYSQL_USERNAME}"; fi
+  629  2016-11-15 03:46:58 if [[ -n "$MYSQL_PASSWORD" ]]; then     EXTRA_ARGS="$EXTRA_ARGS --password=${MYSQL_PASSWORD}"; fi
+  630  2016-11-15 03:46:58 if [[ -r $DEFAULTS_EXTRA_FILE ]];then     MYSQL_CMDLINE="mysql --defaults-extra-file=$DEFAULTS_EXTRA_FILE -nNE --connect-timeout=$TIMEOUT \
+  631  2016-11-15 03:46:58                     ${EXTRA_ARGS}"; else     MYSQL_CMDLINE="mysql -nNE --connect-timeout=$TIMEOUT ${EXTRA_ARGS}"; fi
+  632  2016-11-15 03:46:58 #
+  633  2016-11-15 03:46:58 # Perform the query to check the wsrep_local_state
+  634  2016-11-15 03:46:58 #
+  635  2016-11-15 03:46:58 WSREP_STATUS=$($MYSQL_CMDLINE -e "SHOW STATUS LIKE 'wsrep_local_state';" \
+  636  2016-11-15 03:46:58     2>${ERR_FILE} | tail -1 2>>${ERR_FILE})
+  637  2016-11-15 03:46:58 if [[ "${WSREP_STATUS}" == "4" ]] || [[ "${WSREP_STATUS}" == "2" && ${AVAILABLE_WHEN_DONOR} == 1 ]]; then     if [[ $AVAILABLE_WHEN_READONLY -eq 0 ]];then         READ_ONLY=$($MYSQL_CMDLINE -e "SHOW GLOBAL VARIABLES LIKE 'read_only';" \
+  638  2016-11-15 03:46:58                     2>${ERR_FILE} | tail -1 2>>${ERR_FILE});          if [[ "${READ_ONLY}" == "ON" ]];then             echo -en "HTTP/1.1 503 Service Unavailable\r\n"
+  639  2016-11-15 03:46:58 vim /etc/haproxy/haproxy.cfg
+  640  2016-11-15 03:46:58 mysql-check user glance
+  641  2016-11-15 03:46:58 mysqlcheck user glance
+  642  2016-11-15 03:46:58 mysql -uroot -pdemopass
+  643  2016-11-15 03:46:58 pcs resoruce
+  644  2016-11-15 03:46:58 netstat -natp|grep 9200
+  645  2016-11-15 03:46:58 vim /etc/glance/glance-api.conf 
+  646  2016-11-15 03:46:58 netstat -ntpa | grep 9200
+  647  2016-11-15 03:46:58 vim /etc/haproxy/haproxy.cfg
+  648  2016-11-15 03:46:58 mysql -uroot -pdemopass
+  649  2016-11-15 03:46:58 vim /etc/haproxy/haproxy.cfg
+  650  2016-11-15 03:46:58 ls
+  651  2016-11-15 03:46:58 cd scripts/
+  652  2016-11-15 03:46:58 ls
+  653  2016-11-15 03:46:58 vim setupctl.sh 
+  654  2016-11-15 03:46:58 scp setupctl.sh poc-ctl1:/root/scripts/
+  655  2016-11-15 03:46:58 scp setupctl.sh poc-ctl2:/root/scripts/
+  656  2016-11-15 03:46:58 pcs resource
+  657  2016-11-15 03:46:58 pcs resource restart HAPROXY
+  658  2016-11-15 03:46:58 netstat -natp|grep 3306
+  659  2016-11-15 03:46:58 ls
+  660  2016-11-15 03:46:58 scp /etc/haproxy/haproxy.cfg poc-ctl1:/etc/haproxy/
+  661  2016-11-15 03:46:58 scp /etc/haproxy/haproxy.cfg poc-ctl2:/etc/haproxy/
+  662  2016-11-15 03:46:58 pcs reource
+  663  2016-11-15 03:46:58 pcs resource
+  664  2016-11-15 03:46:58 pcs resource cleanup HEAT_ENGINE-clone
+  665  2016-11-15 03:46:58 pcs resource
+  666  2016-11-15 03:46:58 vim /var/log/heat/en
+  667  2016-11-15 03:46:58 vim /var/log/heat/heat-engine.log 
+  668  2016-11-15 03:46:58 ls
+  669  2016-11-15 03:46:58 vim /etc/heat/heat.conf 
+  670  2016-11-15 03:46:58 ls
+  671  2016-11-15 03:46:58 vim setupctl.sh 
+  672  2016-11-15 03:46:58 ls
+  673  2016-11-15 03:46:58 vim init.sh 
+  674  2016-11-15 03:46:58 vim /etc/heat/heat.conf 
+  675  2016-11-15 03:46:58 mysql -h
+  676  2016-11-15 03:46:58 mysql --help
+  677  2016-11-15 03:46:58 mysql -h 10.0.0.130 -uroot -pdemopass
+  678  2016-11-15 03:46:58 mysql -h 10.0.0.130 -ukeystone
+  679  2016-11-15 03:46:58 telnet 10.0.0.130 3306
+  680  2016-11-15 03:46:58 netstat -ntap|grep 3306
+  681  2016-11-15 03:46:58 ls
+  682  2016-11-15 03:46:58 ps -ef|grep haproxy
+  683  2016-11-15 03:46:58 vim /etc/haproxy/haproxy.cfg
+  684  2016-11-15 03:46:58 telnet localhost 3306
+  685  2016-11-15 03:46:58 mysql -uroot 
+  686  2016-11-15 03:46:58 mysql -h 10.0.0.131 -uroot
+  687  2016-11-15 03:46:58 mysql -h 10.0.0.131 -ukeystone
+  688  2016-11-15 03:46:58 mysql -h 10.0.0.131 -uroot -pdemopass
+  689  2016-11-15 03:46:58 mysql -uroot -pdemopass
+  690  2016-11-15 03:46:58 ls
+  691  2016-11-15 03:46:58 vim /etc/nova/nova.conf 
+  692  2016-11-15 03:46:58 mysql -unova_api -pnovadbpw
+  693  2016-11-15 03:46:58 mysql -h 10.0.0.130  -unova_api -pnovadbpw
+  694  2016-11-15 03:46:58 mysql -uroot -pdemopass
+  695  2016-11-15 03:46:58 mysql -h 10.0.0.130  -unova_api -pnovadbpw
+  696  2016-11-15 03:46:58 vim /etc/haproxy/haproxy.cfg
+  697  2016-11-15 03:46:58 pcs resource 
+  698  2016-11-15 03:46:58 pcs resource disable HAPROXY
+  699  2016-11-15 03:46:58 pcs resource
+  700  2016-11-15 03:46:58 pcs resource enable HAPROXY
+  701  2016-11-15 03:46:58 pcs resource
+  702  2016-11-15 03:46:58 pcs resource enable HAPROXY
+  703  2016-11-15 03:46:58 pcs resource
+  704  2016-11-15 03:46:58 telnet 10.0.0.130 3306
+  705  2016-11-15 03:46:58 telnet 10.0.0.131 3306
+  706  2016-11-15 03:46:58 dmesg
+  707  2016-11-15 03:46:58 vim /var/log/messages 
+  708  2016-11-15 03:46:58 vim /etc/haproxy/haproxy.cfg
+  709  2016-11-15 03:46:58 pcs resource disable HAPROXY
+  710  2016-11-15 03:46:58 pcs resource enable HAPROXY
+  711  2016-11-15 03:46:58 pcs resource disable HAPROXY
+  712  2016-11-15 03:46:58 ps -ef|grep haproxy
+  713  2016-11-15 03:46:58 pcs resource
+  714  2016-11-15 03:46:58 ps -ef|hapro
+  715  2016-11-15 03:46:58 ps -ef|grep haproxy
+  716  2016-11-15 03:46:58 pcs resource enable HAPROXY
+  717  2016-11-15 03:46:58 ls
+  718  2016-11-15 03:46:58 vim /etc/my.cnf.d/server.cnf 
+  719  2016-11-15 03:46:58 pcs resource
+  720  2016-11-15 03:46:58 pcs resource disable MYSQL-clone
+  721  2016-11-15 03:46:58 pcs resource
+  722  2016-11-15 03:46:58 pcs resource enable MYSQL-clone
+  723  2016-11-15 03:46:58 pcs resource
+  724  2016-11-15 03:46:58 netstat -natp|grep 3306
+  725  2016-11-15 03:46:58 pcs resource
+  726  2016-11-15 03:46:58 pcs resource cleanup HEAT_ENGINE-clone
+  727  2016-11-15 03:46:58 pcs resource
+  728  2016-11-15 03:46:58 mysql -u root -e "SHOW STATUS LIKE 'wsrep%';"
+  729  2016-11-15 03:46:58 pcs resource
+  730  2016-11-15 03:46:58 vim /var/log/heat/heat-engine.log 
+  731  2016-11-15 03:46:58 ls
+  732  2016-11-15 03:46:58 pcs resource cleanup NOVA_SCHEDULER-clone
+  733  2016-11-15 03:46:58 keystone endpoint-list
+  734  2016-11-15 03:46:58 glance image-list
+  735  2016-11-15 03:46:58 neutron net-list
+  736  2016-11-15 03:46:58 pcs resource
+  737  2016-11-15 03:46:58 vim /var/log/nova/nova-scheduler.log 
+  738  2016-11-15 03:46:58 pcs resource cleanup NOVA_SCHEDULER-clone
+  739  2016-11-15 03:46:58 pcs resource
+  740  2016-11-15 03:46:58 telnet controller_vip 5672
+  741  2016-11-15 03:46:58 netstat -netp|grep 5672
+  742  2016-11-15 03:46:58 ps -ef|grep hap
+  743  2016-11-15 03:46:58 pcs resource
+  744  2016-11-15 03:46:58 service haproxy status
+  745  2016-11-15 03:46:58 pcs resource enable HAPROXY
+  746  2016-11-15 03:46:58 pcs resource
+  747  2016-11-15 03:46:58 service haproxy status
+  748  2016-11-15 03:46:58 vim /var/log/messages 
+  749  2016-11-15 03:46:58 pcs resource unmanage HAPROXY
+  750  2016-11-15 03:46:58 service haproxy start
+  751  2016-11-15 03:46:58 service haproxy status
+  752  2016-11-15 03:46:58 ps -ef|grep hap
+  753  2016-11-15 03:46:58 netstat -natp|grep 8774
+  754  2016-11-15 03:46:58 vim /etc/haproxy/haproxy.cfg
+  755  2016-11-15 03:46:58 service haproxy stop
+  756  2016-11-15 03:46:58 service haproxy start
+  757  2016-11-15 03:46:58 service haproxy status
+  758  2016-11-15 03:46:58 ping 10.0.0.130
+  759  2016-11-15 03:46:58 pcs resource
+  760  2016-11-15 03:46:58 pcs resource enable INTERNAL_VIP 
+  761  2016-11-15 03:46:58 pcs resource
+  762  2016-11-15 03:46:58 pcs resource --help
+  763  2016-11-15 03:46:58 pcs resource --help|grep standby
+  764  2016-11-15 03:46:58 pcs status
+  765  2016-11-15 03:46:58 pcs --help
+  766  2016-11-15 03:46:58 pcs cluser --help
+  767  2016-11-15 03:46:58 pcs cluster
+  768  2016-11-15 03:46:58 pcs cluster standby --all
+  769  2016-11-15 03:46:58 pcs cluster staus
+  770  2016-11-15 03:46:58 pcs status
+  771  2016-11-15 03:46:58 pcs resource
+  772  2016-11-15 03:46:58 shutdown -h 0
+  773  2016-11-15 03:46:58 ps -ef|grep httpd
+  774  2016-11-15 03:46:58 vim /var/log/messages 
+  775  2016-11-15 03:46:58 cd /usr/lib/systemd/
+  776  2016-11-15 03:46:58 ls
+  777  2016-11-15 03:46:58 cd system
+  778  2016-11-15 03:46:58 ls
+  779  2016-11-15 03:46:58 find -name python-django-horizon-systemd.conf
+  780  2016-11-15 03:46:58 ls | grep hori
+  781  2016-11-15 03:46:58 cd httpd.service.d
+  782  2016-11-15 03:46:58 ls
+  783  2016-11-15 03:46:58 vim openstack-dashboard.conf 
+  784  2016-11-15 03:46:58 vim /var/log/messages 
+  785  2016-11-15 03:46:58 vim openstack-dashboard.conf 
+  786  2016-11-15 03:46:58 vim /var/log/messages 
+  787  2016-11-15 03:46:58 vim openstack-dashboard.conf 
+  788  2016-11-15 03:46:58 ls
+  789  2016-11-15 03:46:58 rpm -qa|grep horizon
+  790  2016-11-15 03:46:58 rpm -qa|grep dashboard
+  791  2016-11-15 03:46:58 ls
+  792  2016-11-15 03:46:58 mv openstack-dashboard.conf /tmp/
+  793  2016-11-15 03:46:58 ls
+  794  2016-11-15 03:46:58 mv /tmp/openstack-dashboard.conf .
+  795  2016-11-15 03:46:58 ls
+  796  2016-11-15 03:46:58 mkdir backup
+  797  2016-11-15 03:46:58 mv openstack-dashboard.conf backup/
+  798  2016-11-15 03:46:58 ls
+  799  2016-11-15 03:46:58 pwd
+  800  2016-11-15 03:46:58 ls
+  801  2016-11-15 03:46:58 cd backup/
+  802  2016-11-15 03:46:58 ls
+  803  2016-11-15 03:46:58 ps -ef|grep heat
+  804  2016-11-15 03:46:58 cd ../..
+  805  2016-11-15 03:46:58 ls
+  806  2016-11-15 03:46:58 ls | grepl heat
+  807  2016-11-15 03:46:58 ls | grep heat
+  808  2016-11-15 03:46:58 service openstack-heat-engine status
+  809  2016-11-15 03:46:58 service openstack-heat-engine start
+  810  2016-11-15 03:46:58 service openstack-heat-engine status
+  811  2016-11-15 03:46:58 vim /var/log/heat/heat-engine.log 
+  812  2016-11-15 03:46:58 vim /root/scripts/setupctl.sh 
+  813  2016-11-15 03:46:58 systemctl disable openstack-heat-engine 
+  814  2016-11-15 03:46:58 systemctl disable openstack-heat-api
+  815  2016-11-15 03:46:58 chkconfig
+  816  2016-11-15 03:46:58 systemctl stop openstack-heat-engine 
+  817  2016-11-15 03:46:58 ps -ef|grep heat
+  818  2016-11-15 03:46:58 pcs resource
+  819  2016-11-15 03:46:58 service pcsd status
+  820  2016-11-15 03:46:58 pcs cluster start poc-ctl0
+  821  2016-11-15 03:46:58 pcs cluster start poc-ctl1
+  822  2016-11-15 03:46:58 pcs cluster start poc-ctl2
+  823  2016-11-15 03:46:58 pcs resource
+  824  2016-11-15 03:46:58 pcs cluster unstandby --all
+  825  2016-11-15 03:46:58 pcs resource
+  826  2016-11-15 03:46:58 route -n
+  827  2016-11-15 03:46:58 ip addr 
+  828  2016-11-15 03:46:58 pcs resource
+  829  2016-11-15 03:46:58 vim /var/log/messages 
+  830  2016-11-15 03:46:58 pcs resource disable 
+  831  2016-11-15 03:46:58 pcs resource disable  INTERNAL_VIP
+  832  2016-11-15 03:46:58 pcs resource --help
+  833  2016-11-15 03:46:58 pcs resource 
+  834  2016-11-15 03:46:58 pcs resource delete INTERNAL_VIP
+  835  2016-11-15 03:46:58 history|grep INTERNAL
+  836  2016-11-15 03:46:58 pcs resource create INTERNAL_VIP ocf:heartbeat:IPaddr2 ip=10.0.0.130 cidr_netmask=16 op monitor interval=10s
+  837  2016-11-15 03:46:58 ping 10.0.0.130
+  838  2016-11-15 03:46:58 pcs resource
+  839  2016-11-15 03:46:58 pcs resource 
+  840  2016-11-15 03:46:58 pcs resource manage HAPROXY
+  841  2016-11-15 03:46:58 pcs resource
+  842  2016-11-15 03:46:58 dmesg
+  843  2016-11-15 03:46:58 vim /var/log/messages 
+  844  2016-11-15 03:46:58 pcs resource
+  845  2016-11-15 03:46:58 pcs resource cleanup HAPROXY
+  846  2016-11-15 03:46:58 pcs resource
+  847  2016-11-15 03:46:58 pcs resource enable HAPROXY
+  848  2016-11-15 03:46:58 pcs resource
+  849  2016-11-15 03:46:58 service haproxy status
+  850  2016-11-15 03:46:58 pcs resource
+  851  2016-11-15 03:46:58 pcs resource disable HAPROXY
+  852  2016-11-15 03:46:58 pcs resource
+  853  2016-11-15 03:46:58 pcs resource delete HAPROXY
+  854  2016-11-15 03:46:58 pcs resource
+  855  2016-11-15 03:46:58 service haproxy status
+  856  2016-11-15 03:46:58 service haproxy start
+  857  2016-11-15 03:46:58 service haproxy status
+  858  2016-11-15 03:46:58 netstat -ntap|grep 8774
+  859  2016-11-15 03:46:58 service haproxy stop
+  860  2016-11-15 03:46:58 ps -ef|grep haproxy
+  861  2016-11-15 03:46:58 service haproxy start
+  862  2016-11-15 03:46:58 ps -ef|grep haproxy
+  863  2016-11-15 03:46:58 vim /usr/lib/systemd/system/haproxy.service 
+  864  2016-11-15 03:46:58 vim /etc/sysconfig/haproxy
+  865  2016-11-15 03:46:58 haproxy
+  866  2016-11-15 03:46:58 vim /etc/sysconfig/haproxy
+  867  2016-11-15 03:46:58 vim /usr/lib/systemd/system/haproxy.service 
+  868  2016-11-15 03:46:58 /usr/sbin/haproxy-systemd-wrapper -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid
+  869  2016-11-15 03:46:58 ping 10.0.0.130
+  870  2016-11-15 03:46:58 ll /run/haproxy/admin.sock 
+  871  2016-11-15 03:46:58 ll /var/run/haproxy.sock 
+  872  2016-11-15 03:46:58 ps -ef|grep haproxy
+  873  2016-11-15 03:46:58 rm /var/run/haproxy.sock
+  874  2016-11-15 03:46:58 ls
+  875  2016-11-15 03:46:58 service haproxy start
+  876  2016-11-15 03:46:58 service haproxy status
+  877  2016-11-15 03:46:58 vim /etc/sysctl.d/99-sysctl.conf 
+  878  2016-11-15 03:46:58 sysctl -a
+  879  2016-11-15 03:46:58 sysctl -p
+  880  2016-11-15 03:46:58 sysctl -w net.ipv4.ip_nonlocal_bind=1
+  881  2016-11-15 03:46:58 vim /etc/sysctl.d/99-sysctl.conf 
+  882  2016-11-15 03:46:58 service haproxy start
+  883  2016-11-15 03:46:58 service haproxy status
+  884  2016-11-15 03:46:58 service haproxy stop
+  885  2016-11-15 03:46:58 service haproxy status
+  886  2016-11-15 03:46:58 service haproxy start
+  887  2016-11-15 03:46:58 service haproxy status
+  888  2016-11-15 03:46:58 service haproxy stop
+  889  2016-11-15 03:46:58 pcs resource
+  890  2016-11-15 03:46:58 pcs resource create HAPROXY systemd:haproxy op monitor interval=10s timeout=15s
+  891  2016-11-15 03:46:58 pcs constraint colocation add INTERNAL_VIP HAPROXY INFINITY
+  892  2016-11-15 03:46:58 pcs constraint order INTERNAL_VIP then HAPROXY
+  893  2016-11-15 03:46:58 pcs resource
+  894  2016-11-15 03:46:58 pcs resource cleanup KEYSTONE-HTTPD-clone
+  895  2016-11-15 03:46:58 pcs resource cleanup NOVA_SCHEDULER-clone
+  896  2016-11-15 03:46:58 pcs resource
+  897  2016-11-15 03:46:58 pcs resource cleanup KEYSTONE-HTTPD-clone
+  898  2016-11-15 03:46:58 ps -ef|grep httpd
+  899  2016-11-15 03:46:58 service httpd status
+  900  2016-11-15 03:46:58 cd /etc/httpd
+  901  2016-11-15 03:46:58 grep ctl0 -r .
+  902  2016-11-15 03:46:58 vim /etc/httpd/conf.d/15-horizon_vhost.conf 
+  903  2016-11-15 03:46:58 service httpd stop
+  904  2016-11-15 03:46:58 service httpd start
+  905  2016-11-15 03:46:58 ps -ef|grep httpd
+  906  2016-11-15 03:46:58 service httpd stop
+  907  2016-11-15 03:46:58 service httpd status
+  908  2016-11-15 03:46:58 ps -ef|grep httpd
+  909  2016-11-15 03:46:58 service httpd start
+  910  2016-11-15 03:46:58 ps -ef|grep http
+  911  2016-11-15 03:46:58 netstat -natp|grep 5000
+  912  2016-11-15 03:46:58 netstat -natp|grep 25257
+  913  2016-11-15 03:46:58 netstat -natp|grep 35357
+  914  2016-11-15 03:46:58 service httpd stop
+  915  2016-11-15 03:46:58 ps -ef|grep http
+  916  2016-11-15 03:46:58 service httpd start
+  917  2016-11-15 03:46:58 ps -ef|grep dashboard
+  918  2016-11-15 03:46:58 ps -ef|grep keystone
+  919  2016-11-15 03:46:58 netstat -natp|grep http
+  920  2016-11-15 03:46:58 cd /root/
+  921  2016-11-15 03:46:58 ls
+  922  2016-11-15 03:46:58 cd scripts/
+  923  2016-11-15 03:46:58 ls
+  924  2016-11-15 03:46:58 vim setupctl.sh 
+  925  2016-11-15 03:46:58 scp setupctl.sh poc-ctl1:/root/scripts/
+  926  2016-11-15 03:46:58 scp setupctl.sh poc-ctl2:/root/scripts/
+  927  2016-11-15 03:46:58 pcs resource
+  928  2016-11-15 03:46:58 pcs resource manage KEYSTONE-HTTPD-clone
+  929  2016-11-15 03:46:58 pcs resource
+  930  2016-11-15 03:46:58 pcd resource cleanup KEYSTONE-HTTPD-clone
+  931  2016-11-15 03:46:58 pcs resource cleanup KEYSTONE-HTTPD-clone
+  932  2016-11-15 03:46:58 pcs resouce
+  933  2016-11-15 03:46:58 vim /var/log/heat/heat-engine.log 
+  934  2016-11-15 03:46:58 rabbitmqctl cluster_status
+  935  2016-11-15 03:46:58 pcs resource
+  936  2016-11-15 03:46:58 keystone endpoint-list
+  937  2016-11-15 03:46:58 nova list
+  938  2016-11-15 03:46:58 neutron net-list
+  939  2016-11-15 03:46:58 ls
+  940  2016-11-15 03:46:58 glance image-list
+  941  2016-11-15 03:46:58 vim /var/log/heat/heat-api.log 
+  942  2016-11-15 03:46:58 vim /etc/heat/heat.conf 
+  943  2016-11-15 03:46:58 pcs resource
+  944  2016-11-15 03:46:58 pce resource cleanup HEAT_ENGINE-clone
+  945  2016-11-15 03:46:58 pcs resource cleanup HEAT_ENGINE-clone
+  946  2016-11-15 03:46:58 pcs resource
+  947  2016-11-15 03:46:58 vim /var/log/heat/heat-engine.log 
+  948  2016-11-15 03:46:58 pcd resource
+  949  2016-11-15 03:46:58 pcs resource
+  950  2016-11-15 03:46:58 pcs resource cleanup HEAT_ENGINE-clone 
+  951  2016-11-15 03:46:58 pcs resource
+  952  2016-11-15 03:46:58 pcs resource disable HEAT_ENGINE-clone 
+  953  2016-11-15 03:46:58 ps -ef|grep heat
+  954  2016-11-15 03:46:58 ls
+  955  2016-11-15 03:46:58 pcs resource
+  956  2016-11-15 03:46:58 pce resource unmanage HEAT_ENGINE-clone 
+  957  2016-11-15 03:46:58 pcs resource unmanage HEAT_ENGINE-clone 
+  958  2016-11-15 03:46:58 pcs resource manage HEAT_ENGINE-clone
+  959  2016-11-15 03:46:58 pcs resource
+  960  2016-11-15 03:46:58 pcs resouce
+  961  2016-11-15 03:46:58 pcs resource
+  962  2016-11-15 03:46:58 pce resouce enable HEAT_ENGINE-clone
+  963  2016-11-15 03:46:58 pcs resouce enable HEAT_ENGINE-clone
+  964  2016-11-15 03:46:58 pcs resource enable HEAT_ENGINE-clone
+  965  2016-11-15 03:46:58 pcs resource cleanup HEAT_ENGINE-clone
+  966  2016-11-15 03:46:58 pcs resource
+  967  2016-11-15 03:46:58 heat stack-list
+  968  2016-11-15 03:46:58 pcs resource manage NOVA_SCHEDULER-clone
+  969  2016-11-15 03:46:58 pcs resource
+  970  2016-11-15 03:46:58 pcs resource|grep stop
+  971  2016-11-15 03:46:58 nova list
+  972  2016-11-15 03:46:58 nova service-list
+  973  2016-11-15 03:46:58 pcs resource 
+  974  2016-11-15 03:46:58 pcs cluster standby --all
+  975  2016-11-15 03:46:58 pcs cluster status
+  976  2016-11-15 03:46:58 pcs resource
+  977  2016-11-15 03:46:58 pcs cluster status
+  978  2016-11-15 03:46:58 pcs resource
+  979  2016-11-15 03:46:58 shutdown -h 0
+  980  2016-11-15 03:46:58 route -n
+  981  2016-11-15 03:46:58 ls
+  982  2016-11-15 03:46:58 cat /etc/hosts
+  983  2016-11-15 03:46:58 ifconfig 
+  984  2016-11-15 03:46:58 ls
+  985  2016-11-15 03:46:58 exit
+  986  2016-11-15 03:46:58 pcs resource
+  987  2016-11-15 03:46:58 history 
+  988  2016-11-15 03:46:58 history  | grep new
+  989  2016-11-15 03:46:58 galera_new_cluster
+  990  2016-11-15 03:46:58 history  > x
+  991  2016-11-15 03:46:58 vim x
+  992  2016-11-15 03:46:58 pcs resource
+  993  2016-11-15 03:46:58 pcs resouce
+  994  2016-11-15 03:46:58 pcs resource
+  995  2016-11-15 03:46:58 ls
+  996  2016-11-15 03:46:58 rm x
+  997  2016-11-15 03:46:58 lls
+  998  2016-11-15 03:46:58 history 
+  999  2016-11-15 03:46:58 cat /root/.bashrc 
+ 1000  2016-11-15 03:46:58 exit
+ 1001  2016-11-15 03:19:26 history 
+ 1002  2016-11-15 03:23:09 exit
+ 1003  2016-11-15 03:44:40 cd /var/lib/rabbitmq/mnesia/rabbit\@poc-ctl0
+ 1004  2016-11-15 03:44:41 ls
+ 1005  2016-11-15 03:44:46 cd msg_store_persistent/
+ 1006  2016-11-15 03:44:47 ls
+ 1007  2016-11-15 03:44:50 rm * -rf
+ 1008  2016-11-15 03:44:52 ls
+ 1009  2016-11-15 03:45:00 pwd
+ 1010  2016-11-15 03:45:08 exit
+ 1011  2016-11-15 03:47:06 pcs cluster unstandby --all
+ 1012  2016-11-15 03:47:12 pcs resource
+ 1013  2016-11-15 03:47:44 history  > x

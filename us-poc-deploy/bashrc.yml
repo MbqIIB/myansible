@@ -12,4 +12,13 @@
       lineinfile: dest={{filepath}} state=present regexp='^HISTFILESIZE' line='HISTFILESIZE=20000'
 
     - name: Config {{filepath}}
-      lineinfile: dest={{filepath}} state=present regexp='^HISTTIMEFORMAT' line='HISTTIMEFORMAT="%F %T "'
+      lineinfile: "dest={{filepath}} state=present regexp='^HISTTIMEFORMAT' line='HISTTIMEFORMAT=\"%F %T :: \"' "
+
+    - name: Config {{filepath}}
+      lineinfile: " dest={{filepath}} state=present regexp='^HISTIGNORE' line='HISTIGNORE=\"ls\"' "
+
+    - name: Config {{filepath}}
+      lineinfile: dest={{filepath}} state=present regexp='^HISTCONTROL' line='HISTCONTROL=ignoreboth'
+
+    - name: Config {{filepath}}
+      lineinfile: dest={{filepath}} state=present regexp='^shopt -s' line='shopt -s histappend'
