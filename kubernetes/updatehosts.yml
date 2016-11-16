@@ -1,0 +1,8 @@
+---
+- hosts : kubernetes-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: update /etc/hosts
+      copy: src=/etc/hosts  dest=/etc/hosts
+                 owner=root group=root mode=0644
