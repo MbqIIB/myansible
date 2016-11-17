@@ -1,0 +1,5 @@
+- hosts: compute-server
+  gather_facts: no
+  tasks:
+  - name: apt-get install openstack linzhbj
+    apt : name=nova-compute,sysfsutils,python-novaclient,python-heatclient,neutron-plugin-ml2,neutron-plugin-openvswitch-agent,python-pip,git,python-dev state=latest

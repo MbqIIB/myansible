@@ -1,6 +1,6 @@
 ---
-#- hosts: compute-server
-- hosts: compute
+- hosts: compute-server
+#- hosts: compute
 #- hosts: ceph-server
  
   remote_user: root
