@@ -1,0 +1,51 @@
+
+$1$QC9f0wJn$ejSVJfwLgdnWHQMrZrKGO1
+
+
+  - name: Config /etc/sudoers
+    lineinfile: dest=/etc/sudoers state=present  line='{{item}}' validate='visudo -cf %s'
+    with_items:
+           - "{{ user}} ALL=(ALL) NOPASSWD: ALL"
+           - "Defaults: {{user}}  !requiretty"
+
+
+
+
+reference:
+
+http://my.oschina.net/firxiao/blog/382214
+
+
+playbook:
+
+---
+- hosts: all
+  vars:
+    user: test
+    password: "$6$rounds=100000$O2BHfT2XIF6oDb9w$8Hhv4vOrLN6JF/nRVYDd8zZdnn9TNkQutyYYywIcPF2kRiHgkwAjqHIN7sDUkd1DcjLRABWT9ULHZPBOF2bZS/"
+  remote_user: root
+  tasks:
+  - name: Add user {{ user }}
+    user: name={{user}} comment="ceph user" password={{ password }}
+  - name: Config /etc/sudoers
+    lineinfile: dest=/etc/sudoers state=present  line='{{item}}' validate='visudo -cf %s'
+    with_items:
+           - "{{ user}} ALL=(ALL) NOPASSWD: ALL"
+           - "Defaults: {{user}}  !requiretty"
+
+
+此playbook将添加一个具有sudo权限的 test 用户 密码为password
+
+更改用户只用更改vars:中的user 即可
+
+生成密码:
+?
+1
+2
+	
+#pip install passlib
+python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"
+
+输入密码后确认
+
+会生成一长窜字符替换playbook中的即可
