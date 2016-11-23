@@ -13,9 +13,9 @@
       when: ansible_os_family =="Debian"
 
     - name : copy capi_states.py
-      copy: src=gpu_states.py  dest={{toolsdir}}  owner=root group=root mode=0644
+      copy: src=capi_states.py  dest={{toolsdir}}  owner=root group=root mode=0644
       when: ansible_os_family =="Debian"
 
     - name : copy sdaccel_states.py
-      copy: src=gpu_states.py  dest={{toolsdir}}  owner=root group=root mode=0644
+      copy: src=sdaccel_states.py  dest={{toolsdir}}  owner=root group=root mode=0644
       when: ansible_os_family =="Debian"
