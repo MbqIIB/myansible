@@ -12,10 +12,10 @@
       when: ansible_os_family =="Debian"
 
     - name: Config /etc/nova/nova.conf
-      lineinfile: dest=/etc/nova/nova.conf state=present regexp='^compute_driver=libvirt.LibvirtDriver' line='compute_driver=novadocker.virt.docker.DockerDriver'
+      lineinfile: dest=/etc/nova/nova.conf state=present regexp='^compute_driver=' line='compute_driver=novadocker.virt.docker.DockerDriver'
 
     - name: Config /etc/nova/nova-compute.conf
-      lineinfile: dest=/etc/nova/nova-compute.conf state=present regexp='^compute_driver=libvirt.LibvirtDriver' line='compute_driver=novadocker.virt.docker.DockerDriver'
+      lineinfile: dest=/etc/nova/nova-compute.conf state=present regexp='^compute_driver=' line='compute_driver=novadocker.virt.docker.DockerDriver'
 
     - name : docker group
       shell : usermod -a -G docker nova
