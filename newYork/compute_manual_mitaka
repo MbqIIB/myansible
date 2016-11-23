@@ -3,3 +3,6 @@
 apt update
 apt install  nova-compute sysfsutils python-novaclient python-heatclient neutron-plugin-ml2 neutron-plugin-openvswitch-agent python-pip git python-dev
 
+
+apt
+apt install -y docker.io=1.10.3-0ubuntu6  docker.io aufs-tools btrfs-tools debootstrap docker-doc rinse 
