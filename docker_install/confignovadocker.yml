@@ -1,0 +1,14 @@
+---
+- hosts: compute-server
+  remote_user: root
+  gather_facts: true
+  vars :
+    - toolsdir : /etc/nova/rootwrap.d/
+  tasks:
+
+    - name : copy docker.filters
+      copy: src=docker.filters  dest={{toolsdir}}  owner=nova group=nova mode=0644
+      when: ansible_os_family =="Debian"
+
+    - name : docker group
+    - shell : usermod -a -G docker nova
