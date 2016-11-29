@@ -1,0 +1,53 @@
+
+
+
+HOST_PREFIX=poc-ctl
+perl -pi -e "s/$HOST_PREFIX"3"/$HOST_PREFIX"0"/g" /etc/haproxy/*
+perl -pi -e "s/$HOST_PREFIX"3"/$HOST_PREFIX"0"/g" /etc/my.cnf.d/server.cnf
+perl -pi -e "s/$HOST_PREFIX"3"/$HOST_PREFIX"0"/g" /etc/corosync/corosync.conf
+
+
+
+pcs cluster start --all
+/usr/bin/galera_new_cluster
+pcs cluster unstandby --all
+pcs resource
+
+resource update INTERNAL_VIP ip=192.168.191.190 cidr_netmask=18
+
+
+
+HOSTVIP=192.168.191.190
+OLDVIP=10.0.0.131
+perl -pi -e "s/$OLDVIP/$HOSTVIP/g" /etc/sysconfig/iptables
+perl -pi -e "s/$OLDVIP/$HOSTVIP/g" /etc/sysconfig/iptables.save
+
+HOSTVIP=192.168.191.194
+OLDVIP=10.0.0.134
+perl -pi -e "s/$OLDVIP/$HOSTVIP/g" /etc/sysconfig/iptables
+perl -pi -e "s/$OLDVIP/$HOSTVIP/g" /etc/sysconfig/iptables.save
+
+iptables-restore < /etc/sysconfig/iptables.save
+
+
+ansible controller-server -m shell -a "date -u"
+ansible controller-server -m shell -a "rm -rf /var/log/rabbitmq/*localhost*"
+
+ansible controller-server -m shell -a "rm -rf /var/log/rabbitmq/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/*localhost*"
+
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl0/msg_store_persistent/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl1/msg_store_persistent/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl2/msg_store_persistent/*"
+
+
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl0/msg_store_transient/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl1/msg_store_transient/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl2/msg_store_transient/*"
+
+
+ansible controller-server -m shell -a "timedatectl"
+ansible controller-server -m shell -a "timedatectl list-timezones"
+ansible controller-server -m shell -a "timedatectl set-timezone America/New_York"
+
+ansible controller-server -m shell -a "timedatectl set-timezone Asia/Shanghai"
