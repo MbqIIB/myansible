@@ -1,0 +1,17 @@
+
+
+pcs resource disable RABBITMQ-clone
+pcs resource unmanaged RABBITMQ-clone
+pcs resource unmanage RABBITMQ-clone
+
+pcs resource manage RABBITMQ-clone
+pcs resource enable RABBITMQ-clone
+
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/erl_crash.dump"
+
+
+ansible controller-server -m shell -a "chown  rabbitmq:rabbitmq -R /var/lib/rabbitmq/"
+ansible controller-server -m shell -a "chown  rabbitmq:rabbitmq -R /etc/rabbitmq/"
+ansible controller-server -m shell -a "chown  rabbitmq:rabbitmq -R /var/log/rabbitmq/"
+
+

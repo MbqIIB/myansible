@@ -1,0 +1,44 @@
+
+poc0
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl start_app
+
+
+
+poc1 / poc2 
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl join_cluster rabbit@poc-ctl0
+
+rabbitmqctl start_app
+
+
+
+poc0
+
+rabbitmqctl cluster_status
+
+
+rabbitmqctl add_user amqp_user amqpass
+rabbitmqctl set_user_tags amqp_user administrator
+rabbitmqctl set_permissions -p /  amqp_user '.*' '.*' '.*'
+rabbitmqctl set_policy ha-all '^(?!amq\.).*' '{"ha-mode": "all"}'
+
+
+rabbitmqctl set_cluster_name  DevOps
+
+
+poc0/1/2
+systemctl stop rabbitmq-server
+
+
+pcs resource unmanage RABBITMQ-clone
+
+pcs cluster start --all
+pcs cluster status
+
+/usr/bin/galera_new_cluster
+pcs resource
+
+pcs resource manage RABBITMQ-clone

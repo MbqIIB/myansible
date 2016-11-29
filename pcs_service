@@ -1,0 +1,39 @@
+
+
+
+
+pcs resource disable NOVA_API-clone
+pcs resource disable NOVA_CERT-clone
+pcs resource disable NOVA_CONDUCTOR-clone
+pcs resource disable NOVA_SCHEDULER-clone
+pcs resource disable NOVA_NOVNCPROXY-clone
+pcs resource disable NOVA_CONSOLEAUTH-clone
+pcs resource disable NOVA_CONSOLE-clone
+
+pcs resource disable HEAT_API-clone
+pcs resource disable HEAT_ENGINE-clone
+
+pcs resource cleanup  NOVA_API-clone
+pcs resource cleanup  NOVA_CERT-clone
+pcs resource cleanup  NOVA_CONDUCTOR-clone
+pcs resource cleanup  NOVA_SCHEDULER-clone
+pcs resource cleanup NOVA_NOVNCPROXY-clone
+pcs resource cleanup NOVA_CONSOLEAUTH-clone
+pcs resource cleanup NOVA_CONSOLE-clone
+
+pcs resource cleanup HEAT_API-clone
+pcs resource cleanup HEAT_ENGINE-clone
+
+
+pcs resource enable NOVA_API-clone
+pcs resource enable NOVA_CERT-clone
+pcs resource enable NOVA_CONDUCTOR-clone
+pcs resource enable NOVA_SCHEDULER-clone
+pcs resource enable NOVA_NOVNCPROXY-clone
+pcs resource enable NOVA_CONSOLEAUTH-clone
+pcs resource enable NOVA_CONSOLE-clone
+
+pcs resource enable HEAT_API-clone
+pcs resource enable HEAT_ENGINE-clone
+
+
