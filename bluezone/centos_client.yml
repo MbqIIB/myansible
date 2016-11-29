@@ -1,0 +1,7 @@
+- hosts: ansible
+  gather_facts: no
+  tasks:
+
+  - name: yum install openstack linzhbj
+    yum : name=python-novaclient,python-neutronclient,ipset,python-glanceclient,python-heatclient,git,python-devel state=latest
+  

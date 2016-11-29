@@ -1,0 +1,7 @@
+- hosts: svx11
+  remote_user : root
+  gather_facts: True 
+  tasks:
+    - name : install nova-compute neutron agent 
+      yum : name=openstack-nova-compute,openstack-neutron-openvswitch,telnet,ipset state=latest
+    
