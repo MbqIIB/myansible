@@ -1,0 +1,13 @@
+- hosts: fstgb013,fstgb014,fstgb015
+  gather_facts: no
+  tasks:
+
+  - name: apt-get install docker linzhbj
+    shell : apt remove -y docker.io
+
+  - name: apt-get install docker linzhbj
+    shell : apt install -y docker.io=1.10.3-0ubuntu6
+
+  - name: apt-get install docker linzhbj
+    apt : name=aufs-tools,btrfs-tools,debootstrap,rinse,python-pip,git,python-dev state=latest
+

@@ -1,0 +1,20 @@
+---
+- hosts : poc-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+#    - name: update /etc/hosts
+#      copy: src=/etc/hosts  dest=/etc/hosts
+#                 owner=root group=root mode=0644
+
+    - name : sed nova.conf
+      shell : sed -i "s/ctl-rhel/10.1.2.9/g" /etc/nova/nova.conf
+
+    - name : sed nova.conf
+      shell : sed -i "s/10.1.2.3/10.1.2.9/g" /etc/nova/nova.conf
+
+    - name : sed neutron.conf
+      shell : sed -i "s/ctl-rhel/10.1.2.9/g" /etc/neutron/neutron.conf 
+
+    - name : restart
+      shell : /root/mitaka_servicerestart.sh restart

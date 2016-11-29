@@ -5,4 +5,5 @@ apt install  nova-compute sysfsutils python-novaclient python-heatclient neutron
 
 
 apt
-apt install -y docker.io=1.10.3-0ubuntu6  docker.io aufs-tools btrfs-tools debootstrap docker-doc rinse 
+apt remove docker.io
+apt install -y docker.io=1.10.3-0ubuntu6   aufs-tools btrfs-tools debootstrap docker-doc rinse 

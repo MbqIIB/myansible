@@ -15,8 +15,11 @@ echo "${configfile}"
 source  ${configfile}
 
 
-net_id=4cf20833-94ef-4a9f-afb5-4753485deea9
-ext_net=431c4194-409e-410d-9e06-9712108b9a24
+#net_id=4cf20833-94ef-4a9f-afb5-4753485deea9
+#ext_net=431c4194-409e-410d-9e06-9712108b9a24
+
+net_id=a3979bed-dcaa-4d3f-b38a-678d24391161
+ext_net=83ee5060-de13-4065-9496-ad61f787cb72
 mang_net=
 
 echo "${Prefix}-${Node}-${FlavorOption}-${ImageName}"
