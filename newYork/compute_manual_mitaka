@@ -7,3 +7,10 @@ apt install  nova-compute sysfsutils python-novaclient python-heatclient neutron
 apt
 apt remove docker.io
 apt install -y docker.io=1.10.3-0ubuntu6   aufs-tools btrfs-tools debootstrap docker-doc rinse 
+
+
+
+
+# compute config 
+
+ansible compute-server -m shell -a "ppc64_cpu  --smt=off"
