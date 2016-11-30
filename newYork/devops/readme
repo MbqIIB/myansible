@@ -51,3 +51,20 @@ ansible controller-server -m shell -a "timedatectl list-timezones"
 ansible controller-server -m shell -a "timedatectl set-timezone America/New_York"
 
 ansible controller-server -m shell -a "timedatectl set-timezone Asia/Shanghai"
+
+
+VLAN_RANGE=physnet1:2000:2020
+sed -i "s/^network_vlan_ranges.*$/network_vlan_ranges=$VLAN_RANGE/g" /etc/neutron/plugin.ini
+sed -i "s/^network_vlan_ranges.*$/network_vlan_ranges=$VLAN_RANGE/g" /etc/neutron/plugins/ml2/ml2_conf.ini
+
+
+
+ansible net-server -m shell -a "timedatectl set-timezone Asia/Shanghai"
+ansible net-server -m shell -a "date -s '15:53:30' "
+
+
+ovs-vsctl add-br br-data
+ssh svp2
+route -n
+ovs-vsctl add-port br-data enp1s0
+

@@ -1,0 +1,24 @@
+
+
+#comments here
+
+#listen aqmp_front-5672
+#  bind poc-ctl-vip:5672
+#  mode tcp
+#  balance         roundrobin
+#  timeout client  3h
+#  timeout server  3h
+#  option          clitcpka
+#  server poc-ctl0 poc-ctl0:5672 check inter 5s rise 2 fall 3
+#  server poc-ctl1 poc-ctl1:5672 check inter 5s rise 2 fall 3
+#  server poc-ctl2 poc-ctl2:5672 check inter 5s rise 2 fall 3
+
+
+/etc/rabbitmq/rabbitmq-env.conf
+
+NODE_PORT=5672
+NODE_IP_ADDRESS=0.0.0.0
+ulimit -n 8192
+
+
+pcs resource restart HAPROXY

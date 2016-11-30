@@ -3,5 +3,5 @@
   tasks:
 
   - name: yum install openstack linzhbj
-    yum : name=python-novaclient,python-neutronclient,ipset,python-glanceclient,python-heatclient,git,python-devel state=latest
+    yum : name=python-novaclient,python-neutronclient,ipset,python-cinderclient,python-swiftclient,python-keystoneclient,python-glanceclient,python-heatclient,git,python-devel state=latest
   
