@@ -64,7 +64,35 @@ ansible net-server -m shell -a "date -s '15:53:30' "
 
 
 ovs-vsctl add-br br-data
+
+
+
+
+rpm -ivh https://repos.fedorapeople.org/repos/openstack/openstack-mitaka/rdo-release-mitaka-6.noarch.rpm
 ssh svp2
 route -n
 ovs-vsctl add-port br-data enp1s0
 
+
+yum install  http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
+virt-edit -d CentOS7.2-x86_64_poc-HA-ctl0  /etc/sysconfig/network-scripts/ifcfg-eth0
+virt-edit -d CentOS7.2-x86_64_poc-HA-net0  /etc/sysconfig/network-scripts/ifcfg-eth0
+ 165  2016-11-30 23:37:46 :: scp -r /root/.ssh/  net-vip:/root/
+ 1066  2016-11-30 23:37:56 :: scp -r /root/.ssh/  ctl-vip:/root/
+ 1067  2016-11-30 23:38:32 :: scp -r eth2  ctl-vip://etc/sysconfig/network-scripts/ifcfg-eth2
+ 1068  2016-11-30 23:38:49 :: scp -r net2  net-vip://etc/sysconfig/network-scripts/ifcfg-eth2
+
+ scp -r /etc/resolv.conf   net-vip:/etc/
+ scp -r /etc/resolv.conf   ctl-vip:/etc/
+
+ scp -r /etc/selinux/config   net-vip:/etc/selinux/config
+ scp -r /etc/selinux/config   ctl-vip:/etc/selinux/config
+
+
+hostnamectl set-hostname net-vip
+hostnamectl set-hostname ctl-vip
+
+ yum install -y yum-utils
+packstack --answer-file=install/answer.conf 
+
+mysql -u root -p
