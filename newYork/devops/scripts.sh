@@ -50,9 +50,9 @@ perl -pi -e "s/poc-ctl/$HOST_PREFIX/g" /etc/my.cnf.d/server.cnf
 perl -pi -e "s/poc-ctl/$HOST_PREFIX/g" /etc/corosync/corosync.conf
 
 # if the controller is ctl1-3, then enable this
-perl -pi -e "s/$HOST_PREFIX"0"/$HOST_PREFIX"3"/g" /etc/haproxy/*
-perl -pi -e "s/$HOST_PREFIX"0"/$HOST_PREFIX"3"/g" /etc/my.cnf.d/server.cnf
-perl -pi -e "s/$HOST_PREFIX"0"/$HOST_PREFIX"3"/g" /etc/corosync/corosync.conf
+#perl -pi -e "s/$HOST_PREFIX"0"/$HOST_PREFIX"3"/g" /etc/haproxy/*
+#perl -pi -e "s/$HOST_PREFIX"0"/$HOST_PREFIX"3"/g" /etc/my.cnf.d/server.cnf
+#perl -pi -e "s/$HOST_PREFIX"0"/$HOST_PREFIX"3"/g" /etc/corosync/corosync.conf
 
 perl -pi -e "s/controller_vip/$VIP/g" /etc/nova/*
 perl -pi -e "s/controller_vip/$VIP/g" /etc/glance/*

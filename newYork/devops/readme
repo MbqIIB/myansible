@@ -121,3 +121,6 @@ copy haproxy.cfg to /etc/haproxy/haproxy.cfg
 /etc/neutron/plugins/ml2/openvswitch_agent.ini:206:local_ip = 10.31.252.66
 /etc/sysconfig/network-scripts/ifcfg-eth1
 sed -i "s/^local_ip.*/local_ip=10.10.72.25/g" /etc/neutron/plugins/ml2/openvswitch_agent.ini
+
+
+passwd hacluster / devops1cloud
