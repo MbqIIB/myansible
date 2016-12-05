@@ -96,3 +96,28 @@ hostnamectl set-hostname ctl-vip
 packstack --answer-file=install/answer.conf 
 
 mysql -u root -p
+
+
+
+yum install -y pcs fence-agents-all
+
+
+yum install -y haproxy
+
+
+Chao Zhu(祝超): 
+11:32:52 AM: yum install -y pcs fence-agents-all
+passwd hacluster
+systemctl start pcsd.service
+systemctl enable pcsd.service
+ 
+
+11:33:07 AM: yum install -y haproxy
+copy haproxy.cfg to /etc/haproxy/haproxy.cfg
+
+
+
+
+/etc/neutron/plugins/ml2/openvswitch_agent.ini:206:local_ip = 10.31.252.66
+/etc/sysconfig/network-scripts/ifcfg-eth1
+sed -i "s/^local_ip.*/local_ip=10.10.72.25/g" /etc/neutron/plugins/ml2/openvswitch_agent.ini

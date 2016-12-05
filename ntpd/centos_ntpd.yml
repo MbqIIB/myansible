@@ -1,0 +1,11 @@
+#- hosts: controller-server,net-server
+- hosts: other-server
+  gather_facts: no
+  tasks:
+
+  - name: yum install openstack linzhbj
+    yum : name=ntp state=latest
+
+  - name : enable ntp
+    service : name=ntpd state=started enabled=yes
+  
