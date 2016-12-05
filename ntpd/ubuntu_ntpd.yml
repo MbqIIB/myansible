@@ -1,0 +1,11 @@
+#- hosts: controller-server,net-server
+- hosts: compute-server
+  gather_facts: no
+  tasks:
+
+  - name: apt install openstack linzhbj
+    apt : name=ntp state=latest
+
+  - name : enable ntp
+    service : name=ntp state=started enabled=yes
+  
