@@ -124,3 +124,17 @@ sed -i "s/^local_ip.*/local_ip=10.10.72.25/g" /etc/neutron/plugins/ml2/openvswit
 
 
 passwd hacluster / devops1cloud
+
+
+
+
+
+
+
+
+
+pcs cluster auth 192.168.191.201 192.168.191.202 192.168.191.203 -uhacluster -pdevops1cloud
+pcs cluster setup --start --name openstack_cluster 192.168.191.201 192.168.191.202 192.168.191.203
+pcs property set stonith-enabled=false
+pcs property set start-failure-is-fatal=false
+
