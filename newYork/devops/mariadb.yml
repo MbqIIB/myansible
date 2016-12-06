@@ -6,5 +6,5 @@
     - name: start mariadb service
       service: name=mariadb state=stopped  enabled=no
 
-#    - name : copy haproxy.cfg
-#      copy : src=haproxy.cfg  dest=/etc/haproxy/haproxy.cfg   owner=root group=root mode=0644
+    - name : copy server.conf
+      copy : src=my.cnf.d/server.cnf dest=/etc/my.cnf.d/server.cnf   owner=root group=root mode=0644
