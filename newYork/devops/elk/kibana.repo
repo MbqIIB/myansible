@@ -1,0 +1,7 @@
+[kibana-4.4]
+baseurl = http://packages.elastic.co/kibana/4.4/centos
+enabled = 1
+gpgcheck = 0
+gpgkey = http://packages.elastic.co/GPG-KEY-elasticsearch
+name = Kibana repository for 4.4.x packages
+

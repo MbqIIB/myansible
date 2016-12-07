@@ -1,5 +1,5 @@
 ---
-- hosts : poc-server,phy-server,elk-server
+- hosts : controller-server,network-server,elk-server,compute-server
   remote_user: root
   gather_facts: no
   tasks :

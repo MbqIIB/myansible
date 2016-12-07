@@ -1,5 +1,6 @@
 #- hosts: controller-server,net-server
-- hosts: other-server
+#- hosts: other-server
+- hosts: elk-server
   gather_facts: no
   tasks:
 
