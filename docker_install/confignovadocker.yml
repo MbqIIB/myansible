@@ -1,6 +1,7 @@
 ---
 #- hosts: compute-server
-- hosts: fstgb013,fstgb014,fstgb015
+#- hosts: fstgb013,fstgb014,fstgb015
+- hosts: fnode3-6
   remote_user: root
   gather_facts: true
   vars :

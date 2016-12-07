@@ -36,14 +36,14 @@ ansible controller-server -m shell -a "rm -rf /var/log/rabbitmq/*localhost*"
 ansible controller-server -m shell -a "rm -rf /var/log/rabbitmq/*"
 ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/*localhost*"
 
-ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl0/msg_store_persistent/*"
-ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl1/msg_store_persistent/*"
-ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl2/msg_store_persistent/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@`hostname -s`/msg_store_persistent/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@`hostname -s`/msg_store_persistent/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@`hostname -s`/msg_store_persistent/*"
 
 
-ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl0/msg_store_transient/*"
-ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl1/msg_store_transient/*"
-ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@poc-ctl2/msg_store_transient/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@`hostname -s`/msg_store_transient/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@`hostname -s`/msg_store_transient/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit@`hostname -s`/msg_store_transient/*"
 
 
 ansible controller-server -m shell -a "timedatectl"
@@ -131,10 +131,220 @@ passwd hacluster / devops1cloud
 
 
 
-
+step1
 
 pcs cluster auth 192.168.191.201 192.168.191.202 192.168.191.203 -uhacluster -pdevops1cloud
 pcs cluster setup --start --name openstack_cluster 192.168.191.201 192.168.191.202 192.168.191.203
 pcs property set stonith-enabled=false
 pcs property set start-failure-is-fatal=false
+
+step2
+
+pcs resource create HAPROXY_VIP ocf:heartbeat:IPaddr2 ip=192.168.191.200 cidr_netmask=32 op monitor interval=10s
+pcs resource create HAPROXY systemd:haproxy op monitor interval=10s timeout=15s
+pcs constraint colocation add HAPROXY_VIP HAPROXY INFINITY
+pcs constraint order HAPROXY_VIP then HAPROXY
+
+step3
+
+pcs resource create MYSQL systemd:mariadb op monitor interval=20s timeout=30s
+pcs resource clone MYSQL
+
+mysql -u root -e "SHOW STATUS LIKE 'wsrep%';"
+
+scp /var/lib/rabbitmq/.erlang.cookie \
+root@NODE:/var/lib/rabbitmq/.erlang.cookie
+
+
+chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie
+chmod 400 /var/lib/rabbitmq/.erlang.cookie
+
+ansible controller-server -m shell -a "rm -rf /var/log/rabbitmq/*"
+ansible controller-server -m shell -a "rm -rf /var/lib/rabbitmq/mnesia"
+ansible controller-server -m shell -a "systemctl start rabbitmq-server"
+ansible controller-server -m shell -a "rabbitmqctl cluster_status"
+rabbitmqctl cluster_status
+
+ansible ctl-n1,ctl-n2,ctl-n3 -m shell -a "rabbitmqctl stop_app"
+ansible ctl-n1,ctl-n2,ctl-n3 -m shell -a "rabbitmqctl reset"
+ansible ctl-n1 -m shell -a "rabbitmqctl start_app"
+
+ansible ctl-n2,ctl-n3 -m shell -a "rabbitmqctl stop_app"
+ansible ctl-n2,ctl-n3 -m shell -a "rabbitmqctl join_cluster rabbit@ctl-n1"
+ansible ctl-n2,ctl-n3 -m shell -a "rabbitmqctl start_app"
+
+ctl-n1
+rabbitmqctl set_policy ha-all '^(?!amq\.).*' '{"ha-mode": "all"}'
+
+
+rabbitmqctl add_user amqp_user cloudamqpw
+rabbitmqctl set_user_tags amqp_user administrator
+rabbitmqctl set_permissions -p /  amqp_user '.*' '.*' '.*'
+rabbitmqctl set_policy ha-all '^(?!amq\.).*' '{"ha-mode": "all"}'
+rabbitmqctl set_cluster_name  DevOps
+
+ansible controller-server -m shell -a "systemctl stop rabbitmq-server"
+
+pcs resource create RABBITMQ ocf:rabbitmq:rabbitmq-server op monitor interval=10s timeout=30s
+pcs resource clone RABBITMQ
+
+
+440  2016-12-06 03:02:07 :: vim /usr/lib/ocf/resource.d/rabbitmq/rabbitmq-server
+: ${OCF_RESKEY_config_file}=/etc/rabbitmq/rabbitmq
+OCF_RESKEY_nodename_default="rabbit@"`hostname -s`
+
+441  2016-12-06 03:06:16 :: scp /usr/lib/ocf/resource.d/rabbitmq/rabbitmq-server ctl-n2:/usr/lib/ocf/resource.d/rabbitmq/rabbitmq-server
+442  2016-12-06 03:06:23 :: scp /usr/lib/ocf/resource.d/rabbitmq/rabbitmq-server ctl-n3:/usr/lib/ocf/resource.d/rabbitmq/rabbitmq-server
+
+
+
+
+
+
+systemctl stop httpd
+systemctl disable httpd
+
+
+
+systemctl stop openstack-keystone.service
+systemctl disable openstack-keystone.service
+systemctl stop openstack-glance-api.service
+systemctl disable openstack-glance-api.service
+systemctl stop openstack-glance-registry.service
+systemctl disable openstack-glance-registry.service
+systemctl stop neutron-server.service
+systemctl disable neutron-server.service
+systemctl stop neutron-dhcp-agent.service
+systemctl disable neutron-dhcp-agent.service
+systemctl stop neutron-metadata-agent.service
+systemctl disable neutron-metadata-agent.service
+systemctl stop openstack-nova-api.service
+systemctl disable openstack-nova-api.service
+systemctl stop openstack-nova-cert.service
+systemctl disable openstack-nova-cert.service
+systemctl stop openstack-nova-conductor.service
+systemctl disable openstack-nova-conductor.service
+systemctl stop openstack-nova-console.service
+systemctl disable openstack-nova-console.service
+systemctl stop openstack-nova-consoleauth.service
+systemctl disable openstack-nova-consoleauth.service
+systemctl stop openstack-nova-novncproxy.service
+systemctl disable openstack-nova-novncproxy.service
+systemctl stop openstack-nova-scheduler.service
+systemctl disable openstack-nova-scheduler.service
+systemctl stop openstack-cinder-api.service
+systemctl disable openstack-cinder-api.service
+systemctl stop openstack-cinder-backup.service
+systemctl disable openstack-cinder-backup.service
+systemctl stop openstack-cinder-scheduler.service
+systemctl disable openstack-cinder-scheduler.service
+systemctl stop openstack-cinder-volume.service
+systemctl disable openstack-cinder-volume.service
+systemctl stop openstack-heat-api.service
+systemctl disable openstack-heat-api.service
+systemctl stop openstack-heat-engine.service
+systemctl disable openstack-heat-engine.service
+systemctl stop openstack-ceilometer-alarm-evaluator.service
+systemctl disable openstack-ceilometer-alarm-evaluator.service
+systemctl stop openstack-ceilometer-alarm-notifier.service
+systemctl disable openstack-ceilometer-alarm-notifier.service
+systemctl stop openstack-ceilometer-api.service
+systemctl disable openstack-ceilometer-api.service
+systemctl stop openstack-ceilometer-central.service
+systemctl disable openstack-ceilometer-central.service
+systemctl stop openstack-ceilometer-collector.service
+systemctl disable openstack-ceilometer-collector.service
+systemctl stop openstack-ceilometer-notification.service
+systemctl disable openstack-ceilometer-notification.service
+
+
+
+添加pacemaker资源：
+#pcs resource create KEYSTONE systemd:openstack-keystone op monitor interval=20s timeout=30s
+#pcs resource clone KEYSTONE
+
+
+/etc/httpd/conf/ports.conf
+Listen ctl-nXXXXx:35357
+Listen ctl-nXXXXx:5000
+Listen ctl-nXXXXx:80
+perl -pi -e "s/^Listen $OLDHOST:35357/Listen $NEWHOST:35357/g" /etc/httpd/conf/ports.conf
+perl -pi -e "s/^Listen $OLDHOST:5000/Listen $NEWHOST:5000/g" /etc/httpd/conf/ports.conf
+perl -pi -e "s/^Listen $OLDHOST:80/Listen $NEWHOST:80/g" /etc/httpd/conf/ports.conf
+
+
+
+pcs resource create KEYSTONE systemd:httpd op monitor interval=20s timeout=30s
+pcs resource clone KEYSTONE
+
+
+pcs resource create GLANCE_API systemd:openstack-glance-api op monitor interval=20s timeout=30s
+pcs resource clone GLANCE_API
+pcs resource create GLANCE_REGISTRY systemd:openstack-glance-registry op monitor interval=20s timeout=30s
+pcs resource clone GLANCE_REGISTRY
+
+pcs resource create NEUTRON_SERVER systemd:neutron-server op monitor interval=20s timeout=30s
+pcs resource clone NEUTRON_SERVER
+/etc/neutron/neutron.conf
+bind_host=ctl-n2
+
+
+#pcs resource create NEUTRON_DHCP systemd:neutron-dhcp-agent op monitor interval=20s timeout=30s
+#pcs resource clone NEUTRON_DHCP
+#
+#pcs resource create NEUTRON_METADATA systemd:neutron-metadata-agent op monitor interval=20s timeout=30s
+#pcs resource clone NEUTRON_METADATA
+
+pcs resource create NOVA_API systemd:openstack-nova-api op monitor interval=20s timeout=30s
+pcs resource clone NOVA_API
+pcs resource create NOVA_CERT systemd:openstack-nova-cert op monitor interval=20s timeout=30s
+pcs resource clone NOVA_CERT
+pcs resource create NOVA_CONDUCTOR systemd:openstack-nova-conductor op monitor interval=20s timeout=30s
+pcs resource clone NOVA_CONDUCTOR
+pcs resource create NOVA_CONSOLE systemd:openstack-nova-console op monitor interval=20s timeout=30s
+pcs resource clone NOVA_CONSOLE
+pcs resource create NOVA_CONSOLEAUTH systemd:openstack-nova-consoleauth op monitor interval=20s timeout=30s
+pcs resource clone NOVA_CONSOLEAUTH
+pcs resource create NOVA_NOVNCPROXY systemd:openstack-nova-novncproxy op monitor interval=20s timeout=30s
+pcs resource clone NOVA_NOVNCPROXY
+pcs resource create NOVA_SCHEDULER systemd:openstack-nova-scheduler op monitor interval=20s timeout=30s
+pcs resource clone NOVA_SCHEDULER
+
+pcs resource create CINDER_API systemd:openstack-cinder-api op monitor interval=20s timeout=30s
+pcs resource clone CINDER_API
+pcs resource create CINDER_BACKUP systemd:openstack-cinder-backup op monitor interval=20s timeout=30s
+pcs resource clone CINDER_BACKUP
+pcs resource create CINDER_SCHEDULER systemd:openstack-cinder-scheduler op monitor interval=20s timeout=30s
+pcs resource clone CINDER_SCHEDULER
+pcs resource create CINDER_VOLUME systemd:openstack-cinder-volume op monitor interval=20s timeout=30s
+pcs resource clone CINDER_VOLUME
+
+pcs resource create HEAT_API systemd:openstack-heat-api op monitor interval=20s timeout=30s
+pcs resource clone HEAT_API
+pcs resource create HEAT_ENGINE systemd:openstack-heat-engine op monitor interval=20s timeout=30s
+pcs resource clone HEAT_ENGINE
+
+#pcs resource create CEILOMETER_ALARM systemd:openstack-ceilometer-alarm-evaluator op monitor interval=20s timeout=30s
+#pcs resource clone CEILOMETER_ALARM
+#pcs resource create CEILOMETER_ALARM_NOTIFIER systemd:openstack-ceilometer-alarm-notifier op monitor interval=20s timeout=30s
+#pcs resource clone CEILOMETER_ALARM_NOTIFIER
+#pcs resource create CEILOMETER_API systemd:openstack-ceilometer-api op monitor interval=20s timeout=30s
+#pcs resource clone CEILOMETER_API
+#pcs resource create CEILOMETER_CENTRAL systemd:openstack-ceilometer-central op monitor interval=20s timeout=30s
+#pcs resource clone CEILOMETER_CENTRAL
+#pcs resource create CEILOMETER_COLLECTOR systemd:openstack-ceilometer-collector op monitor interval=20s timeout=30s
+#pcs resource clone CEILOMETER_COLLECTOR
+#pcs resource create CEILOMETER_NOTIFICATION systemd:openstack-ceilometer-notification op monitor interval=20s timeout=30s
+#pcs resource clone CEILOMETER_NOTIFICATION
+
+[root@ctl-n1 ~]# nova service-delete 5
+[root@ctl-n1 ~]# nova service-delete 6
+[root@ctl-n1 ~]# nova service-delete 7
+[root@ctl-n1 ~]# nova service-delete 8
+
+
+
+sed -i "s/^local_ip.*/local_ip=10.10.68.4/g" /etc/neutron/plugins/ml2/openvswitch_agent.ini
+
+
 

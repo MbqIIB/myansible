@@ -1,4 +1,5 @@
-- hosts: fstgb013,fstgb014,fstgb015
+#- hosts: fstgb013,fstgb014,fstgb015
+- hosts: fnode3-6
   gather_facts: no
   tasks:
 
