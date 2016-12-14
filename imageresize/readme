@@ -53,7 +53,16 @@ qemu-img create -f qcow2 ubuntu16.04.1-ppc64el-50G-nocheck.qcow2 50G
 qemu-img create -f qcow2 ubuntu16.04.1-ppc64el-100G-nocheck.qcow2 100G
 qemu-img create -f qcow2 ubuntu16.04.1-ppc64el-200G-nocheck.qcow2 200G
 
-virt-resize --expand /dev/sda3 --LV-expand /dev/ubuntu-vg/root ubuntu16.04.1-ppc64el-20G-nocheck.qcow2  ubuntu16.04.1-ppc64el-50G-nocheck.qcow2
+virt-resize --expand /dev/sda3 --LV-expand /dev/ubuntu-vg/root compress_ubuntu16.04.1-ppc64el-20G-nocheck.qcow2  ubuntu16.04.1-ppc64el-50G-nocheck.qcow2
+virt-resize --expand /dev/sda3 --LV-expand /dev/ubuntu-vg/root compress_ubuntu16.04.1-ppc64el-20G-nocheck.qcow2  ubuntu16.04.1-ppc64el-100G-nocheck.qcow2
+virt-resize --expand /dev/sda3 --LV-expand /dev/ubuntu-vg/root compress_ubuntu16.04.1-ppc64el-20G-nocheck.qcow2  ubuntu16.04.1-ppc64el-200G-nocheck.qcow2
+
+IMAGENAME=ubuntu16.04.1-ppc64el
+SRCIMAGE=ubuntu16.04.1-ppc64el
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-50G-nocheck.qcow2  compress_${IMAGENAME}-50G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-100G-nocheck.qcow2 compress_${IMAGENAME}-100G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-200G-nocheck.qcow2 compress_${IMAGENAME}-200G-nocheck.qcow2
+
 ./rc_kvm2glance.sh.mitaka ubuntu16.04.1-ppc64el-50G-nocheck.cfg.mitaka
 ./rc_kvm2glance.sh.mitaka ubuntu16.04.1-ppc64el-100G-nocheck.cfg.mitaka 
 ./rc_kvm2glance.sh.mitaka ubuntu16.04.1-ppc64el-200G-nocheck.cfg.mitaka 
