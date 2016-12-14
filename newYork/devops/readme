@@ -348,3 +348,8 @@ sed -i "s/^local_ip.*/local_ip=10.10.68.4/g" /etc/neutron/plugins/ml2/openvswitc
 
 
 
+/etc/systemd/system/rabbitmq-server.service.d/limits.conf
+[Service]
+LimitNOFILE=10000
+
+

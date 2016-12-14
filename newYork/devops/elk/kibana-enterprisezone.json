@@ -67,7 +67,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:keystone\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:keystone\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -81,7 +81,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"loglevel:(ERROR OR TRACE)\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"loglevel:(ERROR OR TRACE)\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -95,7 +95,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -109,7 +109,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -123,7 +123,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:glance-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:glance-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -137,7 +137,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\n  \"index\": \"logstash-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"loglevel:(ERROR OR TRACE OR CRITICAL)\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+        "searchSourceJSON": "{\n  \"index\": \"openstack-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"loglevel:(ERROR OR TRACE OR CRITICAL)\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
       }
     }
   },
@@ -151,7 +151,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\n  \"index\": \"logstash-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"loglevel:(ERROR OR TRACE OR CRITICAL)\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+        "searchSourceJSON": "{\n  \"index\": \"openstack-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"loglevel:(ERROR OR TRACE OR CRITICAL)\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
       }
     }
   },
@@ -165,7 +165,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\n  \"index\": \"logstash-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"*\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+        "searchSourceJSON": "{\n  \"index\": \"openstack-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"*\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
       }
     }
   },
@@ -179,7 +179,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:cinder-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:cinder-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -193,7 +193,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:nova-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:nova-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -207,7 +207,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:heat-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:heat-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -221,7 +221,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"http_method:* and type.raw:glance-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"http_method:* and type.raw:glance-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -235,7 +235,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"http_method:* and type.raw:nova-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"http_method:* and type.raw:nova-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -249,7 +249,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -263,7 +263,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -277,7 +277,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:nova-compute AND loglevel.raw:(ERROR OR TRACE OR CRITICAL)\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:nova-compute AND loglevel.raw:(ERROR OR TRACE OR CRITICAL)\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -291,7 +291,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:neutron-ovs-agent AND loglevel.raw:(ERROR OR TRACE OR CRITICAL)\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"type.raw:neutron-ovs-agent AND loglevel.raw:(ERROR OR TRACE OR CRITICAL)\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -305,7 +305,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"http_method:* and type.raw:cinder-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"http_method:* and type.raw:cinder-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -319,7 +319,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"http_method:* and type.raw:keystone\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"http_method:* and type.raw:keystone\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -333,7 +333,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"http_status.raw:(4?? OR 5??)\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"http_status.raw:(4?? OR 5??)\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -347,7 +347,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"http_status.raw:(4?? OR 5??)\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"http_status.raw:(4?? OR 5??)\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -361,7 +361,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"http_status.raw:*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"http_status.raw:*\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -375,7 +375,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\n  \"index\": \"logstash-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"loglevel.raw:(ERROR OR TRACE OR CRITICAL) AND type.raw:nova-compute\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+        "searchSourceJSON": "{\n  \"index\": \"openstack-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"loglevel.raw:(ERROR OR TRACE OR CRITICAL) AND type.raw:nova-compute\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
       }
     }
   },
@@ -389,7 +389,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"http_status.raw:*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"http_status.raw:*\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -403,7 +403,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"http_status.raw:(4?? OR 5??)\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"http_status.raw:(4?? OR 5??)\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   },
@@ -417,7 +417,7 @@
       "description": "",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"http_method:* and type.raw:heat-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"openstack-*\",\"query\":{\"query_string\":{\"query\":\"http_method:* and type.raw:heat-api\",\"analyze_wildcard\":true}},\"filter\":[]}"
       }
     }
   }

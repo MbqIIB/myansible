@@ -15,6 +15,8 @@ del : logstash:{}
 changed : logstash-* to openstack-*
 curl -XPUT "http://localhost:9200/_template/openstack"   -d@template.json
 
+delete all inss:
+curl -XDELETE 'http://localhost:9200/*/'
 
 sed -i "s/prd-elk-vip/yourvip/g" conf.d/99-output.conf
 
@@ -28,3 +30,5 @@ scp conf.d/*.conf prd-log:/etc/logstash/conf.d/
 yum install httpd-tools
 
  htpasswd -b -c site_pass admin sv1xxxxx
+
+
