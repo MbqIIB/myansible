@@ -1,0 +1,24 @@
+---
+- hosts : controller-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: start pcs service
+      service: name=pcsd state=started  enabled=yes
+
+    - name : copy haproxy.cfg
+      copy : src=haproxy.cfg  dest=/etc/haproxy/haproxy.cfg   owner=root group=root mode=0644
+
+#    - name : copy corosync.conf
+#      copy : src=corosync.conf  dest=/etc/corosync/corosync.conf   owner=root group=root mode=0644 
+
+- hosts : controller-server
+  vars:
+    user: hacluster
+    # devops1cloud 
+    password: $6$V4XQHEoF$/ffraz4Xl5vD47maXQ55GqvaZyBDM6NmZSC3IIUuvlrRVNlUmgkwMye5jUnzw1cq1lXxlmgDIILHjWCN7j1OO1
+  remote_user: root
+  tasks:
+    - name: Add user {{ user }}
+      user: name={{user}} shell=/bin/bash password={{ password }} createhome=yes remove=yes state=present
+ 

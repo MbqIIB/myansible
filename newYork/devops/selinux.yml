@@ -1,0 +1,10 @@
+---
+- hosts : controller-server,net-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: update selinux permissive
+      selinux:
+        policy: targeted
+        state: permissive
+

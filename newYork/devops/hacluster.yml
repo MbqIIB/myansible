@@ -1,0 +1,11 @@
+- hosts: 
+  vars:
+    user: opadmin 
+    # love123456
+    password: "$6$rounds=656000$p1iyrz9Qqsoddl8D$cruJgbi5eb7j6y6v4y1kRPSaVWxrc6RviNRQNA.gGTCkZutvLr0iHSomx7Z.VGAU9S9uuXWADWXjDLjyE97Yd/"
+
+  remote_user: root
+  tasks:
+    - name: Add user {{ user }}
+      user: name={{user}} shell=/bin/bash password={{ password }} createhome=yes remove=yes state=present
+ 

@@ -1,0 +1,7 @@
+---
+- hosts : elk-server
+  remote_user: root
+  gather_facts: yes
+  tasks :
+    - name : all
+      ping :
