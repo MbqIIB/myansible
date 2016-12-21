@@ -1,6 +1,11 @@
+
+
+
+
 #- hosts: controller-server,net-server
 #- hosts: other-server
-- hosts: elk-server
+#- hosts: elk-server
+- hosts: phy-server2
   gather_facts: no
   tasks:
 
