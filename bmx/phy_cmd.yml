@@ -1,0 +1,7 @@
+---
+- hosts : svx1,svx2,svx3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: yum install  system-storage-manager
+      yum : name=system-storage-manager state=latest
