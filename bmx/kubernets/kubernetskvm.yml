@@ -1,0 +1,38 @@
+---
+- hosts : kbn1,kbn2,kbn3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : ping
+      ping :
+
+#    - name: yum install  system-storage-manager
+#      yum : name=system-storage-manager state=latest
+
+
+- hosts : kbn1
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: hostname kubernets-n1
+      hostname:
+        name : kubernets-n1
+
+
+
+- hosts : kbn2
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: hostname kubernets-n2
+      hostname:
+        name : kubernets-n2
+
+
+- hosts : kbn3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: hostname kubernets-n3
+      hostname:
+        name : kubernets-n3
