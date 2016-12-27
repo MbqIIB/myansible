@@ -1,0 +1,21 @@
+
+
+
+ansible  syh1 -m shell -a "ls /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n1/msg_store_persistent"
+ansible  syh2 -m shell -a "ls /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n2/msg_store_persistent"
+ansible  syh3 -m shell -a "ls /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n3/msg_store_persistent"
+
+ansible  syh1 -m shell -a "rm -f /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n1/msg_store_persistent/*"
+ansible  syh2 -m shell -a "rm -f /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n2/msg_store_persistent/*"
+ansible  syh3 -m shell -a "rm -f /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n3/msg_store_persistent/*"
+
+
+
+ansible  syh1 -m shell -a "rm -f /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n1/msg_store_transient/*"
+ansible  syh2 -m shell -a "rm -f /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n2/msg_store_transient/*"
+ansible  syh3 -m shell -a "rm -f /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n3/msg_store_transient/*"
+
+
+
+ansible  syh1,syh2,syh3 -m shell -a "rm -f /var/lib/rabbitmq/mnesia/rabbit@localhost/msg_store_persistent/*"
+ansible  syh1,syh2,syh3 -m shell -a "rm -f /var/lib/rabbitmq/mnesia/rabbit@localhost/msg_store_transient/*"
