@@ -19,3 +19,39 @@ ansible  syh3 -m shell -a "rm -f /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n3/
 
 ansible  syh1,syh2,syh3 -m shell -a "rm -f /var/lib/rabbitmq/mnesia/rabbit@localhost/msg_store_persistent/*"
 ansible  syh1,syh2,syh3 -m shell -a "rm -f /var/lib/rabbitmq/mnesia/rabbit@localhost/msg_store_transient/*"
+
+
+pcs resource | grep NOVA    |awk '{print $3}'|xargs -i pcs resource disable {}      
+pcs resource | grep NEUTRON |awk '{print $3}'|xargs -i pcs resource disable {}    
+pcs resource | grep GLANCE  |awk '{print $3}'|xargs -i pcs resource disable {}
+pcs resource | grep CINDER  |awk '{print $3}'|xargs -i pcs resource disable {}      
+pcs resource | grep HEAT    |awk '{print $3}'|xargs -i pcs resource disable {}    
+
+
+mysql> select * from ml2_port_bindings where vif_type='binding_failed';
+mysql> update ml2_port_bindings set vif_type="unbound" where vif_type='binding_failed';
+
+
+
+
+pcs resource | grep NOVA   |awk '{print $3}'  |xargs -i pcs resource  enable {}      
+pcs resource | grep NEUTRON|awk '{print $3}'  |xargs -i pcs resource  enable {}    
+pcs resource | grep GLANCE |awk '{print $3}'  |xargs -i pcs resource  enable {}
+pcs resource | grep CINDER |awk '{print $3}'  |xargs -i pcs resource  enable {}      
+pcs resource | grep HEAT   |awk '{print $3}'  |xargs -i pcs resource  enable {}
+
+
+pcs resource cleanup XXXunmanged
+
+pcs resource | grep NOVA     |awk '{print $3}'|xargs -i pcs resource cleanup {}      
+pcs resource | grep NEUTRON  |awk '{print $3}'|xargs -i pcs resource cleanup {}    
+pcs resource | grep GLANCE   |awk '{print $3}'|xargs -i pcs resource cleanup {}
+pcs resource | grep CINDER   |awk '{print $3}'|xargs -i pcs resource cleanup {}      
+pcs resource | grep HEAT     |awk '{print $3}'|xargs -i pcs resource cleanup {}    
+
+
+pcs resource disable RABBITMQ-clone
+pcs resource enable RABBITMQ-clone
+
+
+

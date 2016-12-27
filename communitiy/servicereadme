@@ -1,0 +1,10 @@
+
+
+
+ ansible op-server   -m shell  -a "/root/p8servicerestart.sh stop"
+ ansible compute-server-ubuntu   -m shell  -a "/root/p8servicerestart.sh stop"
+ ansible compute-server-ubuntu   -m shell  -a "/root/p8servicerestart.sh start"
+ ansible compute-server-rhel   -m shell  -a "/root/cpservice_act.sh stop"
+ ansible compute-server-rhel   -m shell  -a "/root/cpservice_act.sh start"
+
+
