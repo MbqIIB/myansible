@@ -1,5 +1,6 @@
 ---
-- hosts : op-server,svx-server,kb-server,es-server
+#- hosts : op-server,svx-server,kb-server,es-server
+- hosts : op-server,svx-server,es-server
   remote_user: root
   gather_facts: no
   tasks :
