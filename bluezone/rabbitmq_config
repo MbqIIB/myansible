@@ -1,0 +1,33 @@
+
+rb3
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl start_app
+
+
+
+poc1 / poc2 
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl join_cluster rabbit@HA-rabbitmq-n3
+
+rabbitmqctl start_app
+
+
+
+poc0
+
+rabbitmqctl cluster_status
+
+
+rabbitmqctl add_user rabbitclient openstack1
+rabbitmqctl set_user_tags rabbitclient administrator
+rabbitmqctl set_permissions -p /  rabbitclient '.*' '.*' '.*'
+rabbitmqctl set_policy ha-all '^(?!amq\.).*' '{"ha-mode": "all"}'
+
+
+rabbitmqctl set_cluster_name  BlueMQ-HA
+
+
+rb1/2/3
+systemctl restart haproxy.service
