@@ -1,0 +1,18 @@
+ mysql -u root -e "SHOW STATUS LIKE 'wsrep%';"
+ mysql -u root -e "SHOW STATUS LIKE 'wsrep%';" -p123456
+ mysql -uroot -p123456
+ vim .mysql_history 
+ mysql -uroot -p123456
+ vim .mysql_history 
+ mysql -uroot -p123456 -e "select @@max_connections;"
+ cat mysql_command 
+ vim .mysql_history 
+ mysql -u root -p123456 -h 192.168.11.120
+ history  | grep mysql
+ mysql -u root -e "SHOW STATUS LIKE 'wsrep%';"
+ mysql -u root -e "SHOW STATUS LIKE 'wsrep%';" -p123456
+ cat .mysql_history 
+ mysql -u root -e "set global max_connections=65535;" -p123456
+ history  | grep mysql
+ mysql -u root -e "SHOW STATUS LIKE 'wsrep%';" -p123456
+
