@@ -1,0 +1,24 @@
+
+
+CentOS7.2-x86_64-20G-nocheck.qcow2
+
+
+
+IMAGENAME=CentOS7.2-x86_64
+SRCIMAGE=CentOS7.2-x86_64-20G-nocheck
+
+qemu-img create -f qcow2 ${IMAGENAME}-20G-nocheck.qcow2 20G
+
+qemu-img create -f qcow2 ${IMAGENAME}-50G-nocheck.qcow2 50G
+qemu-img create -f qcow2 ${IMAGENAME}-100G-nocheck.qcow2 100G
+qemu-img create -f qcow2 ${IMAGENAME}-200G-nocheck.qcow2 200G
+
+virt-filesystems --long -h --all -a ${SRCIMAGE}.qcow2
+virt-resize --expand /dev/sda2 --LV-expand /dev/centos/root ${SRCIMAGE}.qcow2  ${IMAGENAME}-50G-nocheck.qcow2
+virt-resize --expand /dev/sda2 --LV-expand /dev/centos/root ${SRCIMAGE}.qcow2  ${IMAGENAME}-100G-nocheck.qcow2
+virt-resize --expand /dev/sda2 --LV-expand /dev/centos/root ${SRCIMAGE}.qcow2  ${IMAGENAME}-200G-nocheck.qcow2
+
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-20G-nocheck.qcow2  compress_${IMAGENAME}-20G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-50G-nocheck.qcow2  compress_${IMAGENAME}-50G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-100G-nocheck.qcow2 compress_${IMAGENAME}-100G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-200G-nocheck.qcow2 compress_${IMAGENAME}-200G-nocheck.qcow2
