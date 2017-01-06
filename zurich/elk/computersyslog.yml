@@ -1,0 +1,14 @@
+- hosts : compute-server
+  remote_user: root
+  gather_facts: no
+  tasks:
+    - name : copy castelnaud_rsyslog.conf
+      copy : src=castelnaud_rsyslog.conf dest=/etc/rsyslog.conf mode=0644
+
+    - name : copy castelnaud_60-openstack-compute.conf
+      copy : src=castelnaud_60-openstack-compute.conf dest=/etc/rsyslog.d/60-openstack-compute.conf mode=0644
+
+    - name : rsyslog start
+      service : name=rsyslog state=restarted enabled=yes
+
+

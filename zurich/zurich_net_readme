@@ -1,0 +1,31 @@
+
+
+
+
+
+
+pcs cluster auth 192.168.191.201 192.168.191.202 192.168.191.203 -uhacluster -pdevops1cloud
+
+
+
+mysql -u root -e "SHOW STATUS LIKE 'wsrep%';"
+
+mysql -u root -e "select * from keystone.endpoint;"
+mysql -u root -e "select * from keystone.region;"
+
+
+
+1709  2017-01-05 09:21:12 :: neutron net-create vpn_net --provider:network_type flat --provider:physical_network physnet3 --router:external=True
+ 1710  2017-01-05 09:21:30 :: history | grep subnet
+ 1711  2017-01-05 09:21:42 :: subnet-create --allocation-pool start=10.12.1.8,end=10.12.1.240 --disable-dhcp --name vpn_subnet vpn_net 10.12.0.0/23
+ 1712  2017-01-05 09:21:49 :: neutron subnet-create --allocation-pool start=10.12.1.8,end=10.12.1.240 --disable-dhcp --name vpn_subnet vpn_net 10.12.0.0/23
+ 1713  2017-01-05 09:22:05 :: neutron net-list
+ 1714  2017-01-05 09:24:26 :: history | grep for
+ 1715  2017-01-05 09:24:42 :: history | grep error
+ 1716  2017-01-05 09:24:47 :: exit
+ 1717  2017-01-05 09:29:10 :: cat admin_user_create.sh 
+ 1718  2017-01-05 09:29:33 :: PRJ_NAME=admin
+ 1719  2017-01-05 09:29:41 :: neutron router-gateway-set ${PRJ_NAME}_router vpn_net
+ 1720  2017-01-05 09:29:48 :: neutron router-interface-add ${PRJ_NAME}_router ${PRJ_NAME}_subnet
+ 1721  2017-01-05 09:30:28 :: exit
+ 1

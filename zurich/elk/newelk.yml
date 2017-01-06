@@ -1,0 +1,26 @@
+- hosts : ctl-server
+  remote_user: root
+  gather_facts: no
+  tasks:
+    - name : copy ctl_rsyslog.conf  
+      copy : src=ctl_rsyslog.conf dest=/etc/rsyslog.conf mode=0644
+
+    - name : copy ctl_60-openstack-agent.conf
+      copy : src=ctl_60-openstack-agent.conf dest=/etc/rsyslog.d/60-openstack-agent.conf mode=0755
+
+    - name : rsyslog start
+      service : name=rsyslog state=restarted enabled=yes
+
+- hosts : net-server
+  remote_user: root
+  gather_facts: no
+  tasks:
+    - name : copy ctl_rsyslog.conf  
+      copy : src=ctl_rsyslog.conf dest=/etc/rsyslog.conf mode=0644
+
+    - name : copy network-neutron_60-openstack.conf
+      copy : src=network-neutron_60-openstack.conf dest=/etc/rsyslog.d/network-neutron_60-openstack.conf mode=0644
+
+    - name : rsyslog start
+      service : name=rsyslog state=restarted enabled=yes
+
