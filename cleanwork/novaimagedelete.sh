@@ -1,6 +1,7 @@
 #!/bin/bash 
 
-uuids=$(awk -F ' ' '{print $2}' image2015.log)
+#uuids=$(awk -F ' ' '{print $2}' image2015.log)
+uuids=$(awk -F ' ' '{print $2}' 20170105imagelist.log)
 
 HOST=""
 set -x

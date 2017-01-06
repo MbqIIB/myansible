@@ -32,3 +32,13 @@ yum install httpd-tools
  htpasswd -b -c site_pass admin sv1xxxxx
 
 
+
+# delete index
+curl -XDELETE 192.168.11.4:9200/oslog-2014*
+curl -XDELETE 192.168.11.4:9200/oslog-2015.01*
+curl -XDELETE 192.168.11.4:9200/oslog-2015.02*
+curl -XDELETE 192.168.11.4:9200/oslog-2015.02*
+curl -XDELETE 192.168.11.4:9200/oslog-2015.03*
+curl -XDELETE 192.168.11.4:9200/oslog-2015.02*
+curl -XDELETE 192.168.11.4:9200/oslog-2015.04*
+
