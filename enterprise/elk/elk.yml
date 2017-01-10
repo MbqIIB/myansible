@@ -1,0 +1,38 @@
+---
+- hosts : els-n1,els-n2,els-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+
+    - name : firewalld 9200 tcp
+      firewalld: port=9200/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 9300 tcp
+      firewalld: port=9300/tcp permanent=true state=enabled immediate=yes
+
+
+    - name : firewalld 5601 tcp
+      firewalld: port=5601/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 80 tcp
+      firewalld: port=80/tcp permanent=true state=enabled immediate=yes
+
+
+
+    - name : firewalld 514 tcp
+      firewalld: port=514/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 514 udp
+      firewalld: port=514/udp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 8080 tcp
+      firewalld: port=8080/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 5043 tcp
+      firewalld: port=5043/tcp permanent=true state=enabled immediate=yes
+
+
+
+    #- name : service elasticsearch
+    #  service : name=elasticsearch state=restarted enabled=yes
+ 
