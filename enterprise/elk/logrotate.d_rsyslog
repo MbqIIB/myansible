@@ -1,0 +1,15 @@
+/gpfs/gpfs_enterprise/openstack/log/*.log {
+        rotate 10
+        create 0644 root root
+        compress
+        size 200M
+        #dateext
+        #dateformat .%Y%m%d
+        missingok
+        sharedscripts
+        copytruncate
+        postrotate
+        #/bin/kill -HUP $(/bin/cat /var/run/rsyslogd.pid 2>/dev/null) &>/dev/null
+        service rsyslog restart
+        endscript
+}
