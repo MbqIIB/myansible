@@ -42,3 +42,17 @@ pcs cluster status
 pcs resource
 
 pcs resource manage RABBITMQ-clone
+
+
+
+
+rabbitmq-plugins enable rabbitmq_management
+rabbitmq-plugins enable rabbitmq_shovel  rabbitmq_shovel_management
+rabbitmq-plugins disable rabbitmq_shovel  rabbitmq_shovel_management
+
+ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins disable rabbitmq_shovel  rabbitmq_shovel_management"
+ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins list"
+
+
+
+
