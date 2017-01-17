@@ -19,19 +19,9 @@ ansible controller-server -m shell -a "chown  rabbitmq:rabbitmq -R /var/log/rabb
 
 
 rabbitmq-plugins enable rabbitmq_shovel rabbitmq_management
-The following plugins have been enabled:
-  rabbitmq_shovel
 
-Applying plugin configuration to rabbit@HA-svyz-ctl-n2... started 1 plugin.
-[root@HA-svyz-ctl-n2 ~]# tail -f /var/log/rabbitmq/rabbit\@HA-svyz-ctl-n2.log
-accepting AMQP connection <0.7615.225> (192.168.11.34:44794 -> 192.168.11.122:5671)
+#ansible syh1,syh2,syh3 -m shell -a "cat /etc/rabbitmq/enable*"
 
-=INFO REPORT==== 13-Jan-2017::14:30:46 ===
-Mirrored queue 'q-agent-notifier-security_group-update_fanout_59eed13ec9614a99b11ffa2ff94c81da' in vhost '/': Adding mirror on node 'rabbit@HA-svyz-ctl-n3': <7805.4894.299>
-
-=INFO REPORT==== 13-Jan-2017::14:30:46 ===
-Mirrored queue 'q-agent-notifier-security_group-update_fanout_59eed13ec9614a99b11ffa2ff94c81da' in vhost '/': Adding mirror on node 'rabbit@HA-svyz-ctl-n1': <7804.7638.376>
-
-=INFO REPORT==== 13-Jan-2017::14:55:43 ===
-Plugins changed; enabled [rabbitmq_shovel], disabled []
-
+#ansible controller-server -m shell -a "cat /etc/rabbitmq/enabled_plugins"
+ansible controller-server -m shell -a "rabbitmq-plugins list"
+ansible controller-server -m shell -a "rabbitmq-plugins disable rabbitmq_management rabbitmq_management_visualiser rabbitmq_shovel rabbitmq_shovel_management rabbitmq_tracing"
