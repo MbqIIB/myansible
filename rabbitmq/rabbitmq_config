@@ -54,5 +54,5 @@ ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins disable rabbitmq_shovel  ra
 ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins list"
 
 
-
+ansible ent-rb-server -m shell -a "rabbitmq-plugins enable rabbitmq_management"
 
