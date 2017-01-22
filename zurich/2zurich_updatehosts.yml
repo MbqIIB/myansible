@@ -1,11 +1,6 @@
-
-
-
-
-
-
 ---
-- hosts : op-server2,phy-server2
+#- hosts : op-server2,phy-server2
+- hosts : op-server2,phy-server2,elk-server
   remote_user: root
   gather_facts: no
   tasks :
