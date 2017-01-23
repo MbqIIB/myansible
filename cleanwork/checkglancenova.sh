@@ -2,7 +2,8 @@
 
 set -x
 curdir=`pwd`
-imagefile=allimage.log.saving
+#imagefile=allimage.log.saving
+imagefile=allimage.log
 glanceimage=glanceimagelist
 
 uuids=$(awk -F '|' '{print $2}' ${imagefile})

@@ -5,6 +5,8 @@ DateTime=$(date +%Y%m%d_%H%M%S)
 TenantListFile=alltenant${DateTime}.txt
 UserTenantList=User_${TenantListFile}
 
+OldTenantlist=alltenant20170116_103707.txt
+
 keystone tenant-list > ${TenantListFile}
 
 #filter admin service
@@ -17,8 +19,20 @@ alltenant=$(awk -F ' ' '{print $2}' ${UserTenantList})
 #set -x
 #exit 0
 
+> ${UserTenantList}.new
+> ${UserTenantList}.old
+
 for  tenantid in ${alltenant[@]}
 do
+        grep ${tenantid} ${OldTenantlist}
+        if [ $? == 0 ];then
+             grep ${tenantid} ${OldTenantlist} >> ${UserTenantList}.old
+             #sleep 1
+             continue
+        else 
+             grep ${tenantid} ${UserTenantList} >> ${UserTenantList}.new
+        fi
+
 	echo "${tenantid}"
 	grep ${tenantid} ${UserTenantList}
 	#neutron security-group-list --tenant-id  ${tenantid}
