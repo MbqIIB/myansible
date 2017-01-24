@@ -1,0 +1,17 @@
+
+set data network mtu
+
+
+ansible net-server -m ping
+ansible net-server -m shell -a "echo '1454' > /sys/class/net/eth1/mtu"
+ansible net-server -m shell -a "echo '1454' > /sys/class/net/eth3/mtu"
+ansible net-server -m shell -a "echo '1454' > /sys/class/net/br-vpn/mtu"
+ansible net-server -m shell -a "echo '1454' > /sys/class/net/br-phy/mtu"
+
+
+
+
+echo '1454' > /sys/class/net/eth1/mtu
+echo '1454' > /sys/class/net/eth3/mtu
+echo '1454' > /sys/class/net/br-vpn/mtu
+echo '1454' > /sys/class/net/br-phy/mtu

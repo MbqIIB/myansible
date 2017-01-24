@@ -1,0 +1,76 @@
+#!/bin/bash 
+
+curdir=`pwd`
+imagefile=allimage.log.saving
+imagefilemore1=allimage.log.saving.more1
+
+uuids=$(awk -F ' ' '{print $1}' ${imagefilemore1})
+
+#set -x
+for id in ${uuids[@]}
+do
+
+     singleimagename=$(grep ${id} ${imagefile} | tail -n 1| awk -F '|' '{print $2}')
+
+    echo "SAFE IMAGE ID $singleimagename"
+    grep $singleimagename ${imagefile}
+
+    #dockerimage=$(grep ${id} ${imagefile}   |  grep -v $singleimagename | awk -F '|' '{print $3}' | sed "s/\n/ /g")
+    #name=$(echo $dockerimage)
+
+    #dockerimage=$(grep ${id} ${imagefile}   |  grep -v $singleimagename | awk -F '|' '{print $3}')
+    dockerimage=$(grep ${id} ${imagefile}   |  grep -v $singleimagename | awk -F '|' '{print $2}')
+
+    echo "$dockerimage"
+
+    #sleep 1
+
+
+    for name in ${dockerimage[@]}
+    do
+    	echo "Search $name"
+        grep $name ${imagefile} >> deleteimagelist.log
+        imageid=$(grep $name ${imagefile} | awk -F '|' '{print $2}')
+        echo "$imageid"
+ 
+        sleep 1
+        nova image-delete $imageid
+  
+####    	servername=$(grep -l "${name}" \
+####    	        dockerimageslist_cp12 \
+####    	        dockerimageslist_cp13 \
+####    	        dockerimageslist_cp8 \
+####    	        dockerimageslist_cp9 \
+####    	        dockerimageslist_neucloud4 )
+####    	
+####    	#servername=$(grep -l "${name}" dockerimagelist20170112_131658_* )
+####
+####        
+####    	if [ $? != 0 ];then
+####    	    echo "Don't have ${name}"
+####    	    #sleep 1
+####    	    continue
+####    	else
+####            computeserver=$(echo "${servername}" | sed "s/dockerimageslist_//g")
+####    	    echo "will del ${name} from ${computeserver}"
+####    	    #ansible cp9,cp8,cp12,neucloud4,cp13 -m shell -a "docker rmi ${name}"
+####            set -x
+####    	    #ansible ${computeserver} -m shell -a "docker rmi ${name}"
+####    	    ansible ${computeserver} -m script -a "../deletedocker.sh ${name}"
+####            set +x
+####    	    sleep 3
+####
+####    	fi
+    done
+
+#    echo $id
+#    nova image-delete $id
+#
+#
+#    #done
+#    echo "sleep 5 to next"
+#    sleep 5
+#
+
+done
+
