@@ -1,0 +1,36 @@
+heat_template_version: 2015-10-15
+description: Launch a basic instance with CirrOS image using the
+             ``m1.tiny`` flavor, ``mykey`` key,  and one network.
+
+parameters:
+  NetID:
+    type: string
+    description: Network ID to use for the instance.
+    default: 690a6f71-c7e1-423e-9c95-cf5ca2440b8c
+
+  image:
+    type: string
+    description: Image used for servers
+    default: ubuntu_14.04.2_docker_aufs_x86_64_v0.0.4
+
+  flavor:
+    type: string
+    description: flavor used by the servers
+    default: docker.6c10g40G
+
+resources:
+  server:
+    type: OS::Nova::Server
+    properties:
+      flavor: { get_param: flavor }
+      image: { get_param: image }
+      networks:
+      - network: { get_param: NetID }
+
+outputs:
+  instance_name:
+    description: Name of the instance.
+    value: { get_attr: [ server, name ] }
+  instance_ip:
+    description: IP address of the instance.
+    value: { get_attr: [ server, first_address ] }

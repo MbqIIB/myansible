@@ -2,20 +2,25 @@
 
 set -x
 curdir=`pwd`
-#imagefile=allimage.log.saving
-imagefile=allimage.log
 glanceimage=glanceimagelist
+imagefile=allimage.log
 
-uuids=$(awk -F '|' '{print $2}' ${imagefile})
+> ${glanceimage}.find
+> ${glanceimage}.nonfind
+> ${glanceimage}.nonfind.log
+> ${imagefile}.find
+> ${imagefile}.nonfind
+
+uuids=$(awk -F ' ' '{print $9}' ${glanceimage})
 
 #set -x
 for id in ${uuids[@]}
 do
     echo "Check $id"
-    grep $id ${glanceimage}
+    grep $id ${imagefile}
     if [ $? != 0 ];then
         echo $id >> ${glanceimage}.nonfind
-        grep $id ${imagefile}  >>  ${imagefile}.nonfind
+        grep $id ${glanceimage}  >>  ${glanceimage}.nonfind.log
         continue
     fi
     echo $id >> ${glanceimage}.find
