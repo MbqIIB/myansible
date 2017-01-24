@@ -1,0 +1,80 @@
+heat_template_version: '2013-05-23'
+description: A template to create a spark cluster which has its own net subnet and router.
+
+parameters:
+  # Paramters to define the network topology in stack
+  public_net_id:
+    type: string
+    description: >
+      ID of public network for which floating IP addresses will be allocated
+    default: 78b71d0a-760d-4c90-a3ad-45af5e16b732
+  private_net_id:
+    type: string
+    description: ID of private network on which nova server is created
+    default: 6903b280-3140-4cc7-93c3-8c5bcdd2b6f4
+  # Server configuration
+  fixedip_master_node:
+    type: string
+    description: Private ip address for master node
+    default: 30.0.0.10    
+  image:
+    type: string
+    description: Image used for servers
+    #default: Spark-1.0.2-RHEL-7.0-ppc64be-docker-bigdata-v0.6.1RC
+    #default: Spark-1.4.0-RHEL-7.1-ppc64le-docker-bigdata-v0.0.6RC-shell
+    #default: ubuntu_14_lts_docker_aufs_ppc64le_spark2.0_v1.0.4
+    #default: ubuntu_14.04.2_docker_aufs_x86_64_v0.0.4
+    default: compress_Ubuntu16.04.1-x86_64-100G-nocheck
+  flavor:
+    type: string
+    description: flavor used by the servers
+    #default: docker.small
+    #default: docker.6c10g40G
+    default: kvm.4c16g100G
+  #key_name:
+    #type: string
+    #description: SSH key to connect to the servers
+    #default: user_key
+  # Slave node info, e.g. name and fixed ip
+  privileged:
+    type: string
+    default: 'false'
+
+  metadata:
+    type: json
+    description: k-v metadata for billing
+    default:
+      SPN: BigData
+      TYPE: 1m2s-cluster
+      ACCOUNT: banker@admin.grp
+      SERVICE_TYPE: spark
+
+resources:
+  # Master server
+  sparkMaster:
+    type: OS::Nova::Server
+    properties:
+      flavor: { get_param: flavor }
+      image: { get_param: image }
+      networks:
+        - port: { get_resource: server_port_1 }
+      #key_name: { get_param: key_name }
+      metadata: { get_param: metadata}
+
+  # Neutron port for master server
+  server_port_1:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_param: private_net_id }
+
+  # Neutron floatingip for master server
+  server_fip_1:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network_id: { get_param: public_net_id }
+      port_id: { get_resource: server_port_1 }
+outputs: 
+  master_server_internal_ip: 
+    value: {get_attr: [server_port_1, fixed_ips, 0, ip_address]} 
+  master_server_floating_ip: 
+    value: {get_attr: [server_fip_1, floating_ip_address]} 
