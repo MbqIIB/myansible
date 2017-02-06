@@ -131,3 +131,38 @@ virt-resize --expand /dev/sda1 ${SRCIMAGE}.qcow2  ${IMAGENAME}-200G-nocheck.qcow
 qemu-img convert -c  -O qcow2 ${IMAGENAME}-50G-nocheck.qcow2  compress_${IMAGENAME}-50G-nocheck.qcow2
 qemu-img convert -c  -O qcow2 ${IMAGENAME}-100G-nocheck.qcow2 compress_${IMAGENAME}-100G-nocheck.qcow2
 qemu-img convert -c  -O qcow2 ${IMAGENAME}-200G-nocheck.qcow2 compress_${IMAGENAME}-200G-nocheck.qcow2
+
+######################################################################
+# RHEL
+virt-filesystems --long --parts --blkdevs -h -a rhel7.3-ppc64el-20G-nocheck-v1.qcow2
+virt-filesystems --long -h --all -a rhel7.3-ppc64el-20G-nocheck-v1.qcow2
+Name            Type        VFS      Label  MBR  Size  Parent
+/dev/sda1       filesystem  unknown  -      -    4.0M  -
+/dev/sda2       filesystem  xfs      -      -    1.0G  -
+/dev/rhel/root  filesystem  xfs      -      -    17G   -
+/dev/rhel/swap  filesystem  swap     -      -    2.0G  -
+/dev/rhel/root  lv          -        -      -    17G   /dev/rhel
+/dev/rhel/swap  lv          -        -      -    2.0G  /dev/rhel
+/dev/rhel       vg          -        -      -    19G   /dev/sda3
+/dev/sda3       pv          -        -      -    19G   -
+/dev/sda1       partition   -        -      41   4.0M  /dev/sda
+/dev/sda2       partition   -        -      83   1.0G  /dev/sda
+/dev/sda3       partition   -        -      8e   19G   /dev/sda
+/dev/sda        device      -        -      -    20G   -
+
+
+
+IMAGENAME=rhel7.3-ppc64el
+SRCIMAGE=rhel7.3-ppc64el-20G-nocheck-v1
+qemu-img create -f qcow2 ${IMAGENAME}-50G-nocheck.qcow2 50G
+qemu-img create -f qcow2 ${IMAGENAME}-100G-nocheck.qcow2 100G
+qemu-img create -f qcow2 ${IMAGENAME}-200G-nocheck.qcow2 200G
+virt-resize --expand /dev/sda3 --LV-expand /dev/rhel/root ${SRCIMAGE}.qcow2 ${IMAGENAME}-50G-nocheck.qcow2
+virt-resize --expand /dev/sda3 --LV-expand /dev/rhel/root ${SRCIMAGE}.qcow2 ${IMAGENAME}-100G-nocheck.qcow2
+virt-resize --expand /dev/sda3 --LV-expand /dev/rhel/root ${SRCIMAGE}.qcow2 ${IMAGENAME}-200G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-20G-nocheck.qcow2 compress_${IMAGENAME}-20G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-50G-nocheck.qcow2  compress_${IMAGENAME}-50G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-100G-nocheck.qcow2 compress_${IMAGENAME}-100G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-200G-nocheck.qcow2 compress_${IMAGENAME}-200G-nocheck.qcow2
+
+######################################################################
