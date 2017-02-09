@@ -1,5 +1,6 @@
 #- hosts: neucloud3
-- hosts: compute-server
+#- hosts: compute-server
+- hosts: redpower8
   remote_user: root
   gather_facts: no
   tasks:

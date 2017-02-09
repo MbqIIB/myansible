@@ -166,3 +166,24 @@ qemu-img convert -c  -O qcow2 ${IMAGENAME}-100G-nocheck.qcow2 compress_${IMAGENA
 qemu-img convert -c  -O qcow2 ${IMAGENAME}-200G-nocheck.qcow2 compress_${IMAGENAME}-200G-nocheck.qcow2
 
 ######################################################################
+
+
+RHEL7.2-X86_64-20G-nocheck-v1.qcow2
+IMAGENAME=RHEL7.2-X86_64
+SRCIMAGE=RHEL7.2-X86_64-20G-nocheck-v1
+qemu-img create -f qcow2 ${IMAGENAME}-50G-nocheck.qcow2 50G
+qemu-img create -f qcow2 ${IMAGENAME}-100G-nocheck.qcow2 100G
+qemu-img create -f qcow2 ${IMAGENAME}-200G-nocheck.qcow2 200G
+virt-resize --expand /dev/sda2 --LV-expand /dev/rhel/root ${SRCIMAGE}.qcow2 ${IMAGENAME}-50G-nocheck.qcow2
+virt-resize --expand /dev/sda2 --LV-expand /dev/rhel/root ${SRCIMAGE}.qcow2 ${IMAGENAME}-100G-nocheck.qcow2
+virt-resize --expand /dev/sda2 --LV-expand /dev/rhel/root ${SRCIMAGE}.qcow2 ${IMAGENAME}-200G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-20G-nocheck.qcow2 compress_${IMAGENAME}-20G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-50G-nocheck.qcow2  compress_${IMAGENAME}-50G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-100G-nocheck.qcow2 compress_${IMAGENAME}-100G-nocheck.qcow2
+qemu-img convert -c  -O qcow2 ${IMAGENAME}-200G-nocheck.qcow2 compress_${IMAGENAME}-200G-nocheck.qcow2
+
+
+
+
+
+

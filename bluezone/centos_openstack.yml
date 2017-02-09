@@ -1,4 +1,5 @@
-- hosts: cp9
+#- hosts: cp9
+- hosts: svx11 
   gather_facts: no
   tasks:
 

@@ -1,5 +1,6 @@
 #- hosts:  ent-op-server
-- hosts:  neucloud5
+#- hosts:  neucloud5
+- hosts: ansible 
   remote_user : root
   gather_facts: true
   vars:
@@ -15,11 +16,11 @@
     - name : rm /root/.ssh/known_hosts
       file : path=/root/.ssh/known_hosts state=absent
 
-    - name : service sshd
+    - name : RHEL service sshd
       service : name=sshd state=restarted enabled=yes
       when : ansible_os_family =="RedHat" 
 
-    - name : service ssh
+    - name : UBUNTU service ssh
       service : name=ssh state=restarted enabled=yes
       when : ansible_os_family =="Debian" 
 

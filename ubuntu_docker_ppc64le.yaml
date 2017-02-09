@@ -1,5 +1,6 @@
 #- hosts: redpower5
-- hosts: neucloud4
+#- hosts: neucloud4
+- hosts: redpower8 
   gather_facts: no
   tasks:
   - name: apt-get install qemu libvirt-bin linzhbj

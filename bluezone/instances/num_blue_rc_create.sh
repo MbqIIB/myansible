@@ -34,7 +34,7 @@ do
     nodename=$(echo ${Node} | sed "s/ent-//g" | sed "s/.ibm.com//g")
     insname=${Prefix}-${nodename}-${FlavorOption}-n${i}
     InstanceId=$(nova boot \
-         --flavor ${FlavorOption} \
+         --flavor "${FlavorOption}" \
          --image   ${ImageName} \
          --nic net-id=${net_id} \
          --availability-zone nova:${Node}  \
