@@ -16,3 +16,4 @@ nova flavor-create docker.6c10g40G auto 10240  40 6
 
 
 nova flavor-create kvm.4c4g100G  auto 4096 100 4
+nova flavor-create kvm.10c64g100G  auto 65536 100 10
