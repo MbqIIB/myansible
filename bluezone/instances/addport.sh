@@ -20,3 +20,4 @@ nova secgroup-list-rules default
 
 #nova secgroup-add-rule default tcp 5901 5909 0.0.0.0/0
 nova secgroup-add-rule default tcp 5901 5999 0.0.0.0/0
+nova secgroup-add-rule default tcp 5000 5000 0.0.0.0/0
