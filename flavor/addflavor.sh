@@ -21,19 +21,29 @@
 #
 #nova flavor-create smt4c.1s1c4t20g100G auto  20480 100 4
 
-set -x
+fp=flavorlist.log
+#nova flavor-list > $fp
+nova flavor-list --all --extra-specs  > $fp
+#set -x
 # smt flaovr
 CpuNum=4
 CPU_THREADS=4
 CPU_CORES=1
 CPU_SOCKETS=1
 Disk=100
-for MemGB in 16 20 32
+for MemGB in 8 16 20 32 64
 do
         fname="smt${CpuNum}c.1s1c${CpuNum}t${MemGB}g${Disk}G"
+
+        grep "${fname}" $fp
+        if [ $? == 0 ];then
+                #echo "Have $fname"
+		continue
+        fi
+
 	nova flavor-create ${fname} auto  $((${MemGB}*1024)) ${Disk} ${CpuNum}
-
-        nova flavor-key ${fname} set hw:cpu_cores=${CPU_CORES} hw:cpu_sockets=${CPU_SOCKETS} hw:cpu_threads=${CPU_THREADS}
-
-        nova flavor-show ${fname}
+        fid=$(nova flavor-list | grep ${fname}| awk -F '|' '{print $2}')
+        nova flavor-key ${fid} set hw:cpu_cores=${CPU_CORES} hw:cpu_sockets=${CPU_SOCKETS} hw:cpu_threads=${CPU_THREADS}
+        nova flavor-show ${fid}
+        sleep 1
 done
