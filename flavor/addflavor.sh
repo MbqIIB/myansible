@@ -21,11 +21,12 @@
 #
 #nova flavor-create smt4c.1s1c4t20g100G auto  20480 100 4
 
-
+set -x
+# smt flaovr
 CpuNum=4
+CPU_THREADS=4
 CPU_CORES=1
-cpu_sockets=1
-cpu_threads=4
+CPU_SOCKETS=1
 Disk=100
 for MemGB in 16 20 32
 do
