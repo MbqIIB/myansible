@@ -15,6 +15,7 @@
 
 
 10.0.0.71  bluezone-ctl43.test.com   bluezone-ctl43 ent-ctl0 ctl
+10.0.0.72  blue-ui.ibm.com blue-ui
 10.0.0.209 opuser-KVM   blue-ent-dashboard
 10.0.0.170 redpower8
 
