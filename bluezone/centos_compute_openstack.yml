@@ -1,10 +1,12 @@
 #- hosts: cp9
-- hosts: svx11 
+#- hosts: svx11 
+- hosts: redpower8
   gather_facts: no
   tasks:
 
+
   - name: yum install openstack linzhbj
-    yum : name=openstack-nova-compute,python-novaclient,python-neutronclient,ipset,python-glanceclient,python-heatclient,openstack-neutron-openvswitch,git,python-devel state=latest
+    yum : name=python-novaclient,python-neutronclient,ipset,python-glanceclient,python-heatclient,openstack-neutron-openvswitch state=latest
   
   - name : service openvswitch
     service : name=openvswitch state=started enabled=yes
@@ -18,3 +20,5 @@
   - name : service neutron-openvswitch-agent
     service : name=neutron-openvswitch-agent state=started enabled=yes
 
+  - name: yum install command linzhbj
+    yum : name=git,python-devel state=latest

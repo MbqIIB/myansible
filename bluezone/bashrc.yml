@@ -1,6 +1,6 @@
 #- hosts:  neucloud5
-- hosts:  svx11
-  #- hosts:  redpower8
+#- hosts:  svx11
+- hosts:  redpower8
   remote_user : root
   gather_facts: true
   vars:
