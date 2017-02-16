@@ -17,9 +17,14 @@ set -x
 #node=ent-redpower2.ibm.com
 #flavoroption=kvm.8c8g20G
 
-net_id=9d8b2e30-1bd2-4bda-b44b-33c09bb45b87
-ext_net=c24ebbf6-8d64-4dd5-b59d-c9a5d66274c0
-mang_net=ca699bbc-c793-4a8a-95c3-1ca56f0962d4
+#net_id=9d8b2e30-1bd2-4bda-b44b-33c09bb45b87
+#ext_net=c24ebbf6-8d64-4dd5-b59d-c9a5d66274c0
+#mang_net=ca699bbc-c793-4a8a-95c3-1ca56f0962d4
+
+#newyork1
+net_id=066a1f7d-40ea-455a-ad03-33ae82c6705d
+ext_net=32670b8e-e0eb-4cb9-8c58-10c779d3bb17
+mang_net=7099a27b-f514-4613-8c9f-44b4d1ec61a1
 
 echo "${Prefix}-${Node}-${FlavorOption}-${ImageName}"
 

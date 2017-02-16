@@ -5,9 +5,9 @@ CURDIR=`pwd`
 
 echo $CURDIR
 dockerlist=dockerlist.log
-cplist=cplist
+cplist=cplist.log
 
-uuids=$(awk -F '|' '{print $5}' ${dockerlist})
+uuids=$(awk -F '|' '{print $1}' ${dockerlist})
 
 #set -x
 for id in ${uuids[@]}
@@ -19,7 +19,7 @@ do
         grep $id ${dockerlist}  >>  ${dockerlist}.nonfindvm
         continue
     fi
-    echo $id >> ${cplist}.find
+    grep $id ${cplist} >> ${cplist}.find
     grep $id ${dockerlist}  >>  ${dockerlist}.findvm
 
 done
