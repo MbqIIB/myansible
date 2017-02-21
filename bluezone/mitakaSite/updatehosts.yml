@@ -1,0 +1,8 @@
+---
+- hosts : mitaka-op-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: update ./mitaka/hosts
+      copy: src=./mitaka-hosts  dest=/etc/hosts
+                 owner=root group=root mode=0644

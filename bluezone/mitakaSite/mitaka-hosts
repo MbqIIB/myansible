@@ -1,0 +1,63 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+
+### phy Managment IP
+### phy Public IP
+### phy Data IP
+########## OS #################
+192.168.191.189  ansible
+192.168.191.190  els-vip
+192.168.191.191  els-n1
+192.168.191.192  els-n2
+192.168.191.193  els-n3
+192.168.191.194  log-server
+#192.168.191.195  
+#192.168.191.196  
+#192.168.191.197  
+#192.168.191.198
+#192.168.191.199
+10.0.19.200  ctl-vip
+10.0.19.201  ctl-n1        ctl1
+10.0.19.202  ctl-n2        ctl2
+10.0.19.203  ctl-n3        ctl3
+10.0.19.204  net-vip
+10.0.19.205  net-n1        net1
+10.0.19.206  net-n2        net2
+10.0.19.207  net-n3        net3
+#192.168.191.208
+
+
+### data ##
+#10.10.72.20
+10.10.72.21  ctl-n1-data
+10.10.72.22  ctl-n2-data
+10.10.72.23  ctl-n3-data
+#10.10.72.24
+10.10.72.25  net-n1-data
+10.10.72.26  net-n2-data
+10.10.72.27  net-n3-data
+
+### pub ###
+172.31.252.53 ansible-pub
+172.31.252.54 els-n1-pub
+172.31.252.55 els-n2-pub
+172.31.252.56 els-n3-pub
+172.31.252.57 log-server-pub
+#172.31.252.58 
+#172.31.252.59
+#172.31.252.60
+172.31.252.61 ctl-n1-pub
+172.31.252.62 ctl-n2-pub
+172.31.252.63 ctl-n3-pub
+#172.31.252.64
+172.31.252.65 net-n1-pub
+172.31.252.66 net-n2-pub
+172.31.252.67 net-n3-pub
+#172.31.252.68
+#172.31.252.69
+#172.31.252.70
+#172.31.252.71
+#172.31.252.72
+
+

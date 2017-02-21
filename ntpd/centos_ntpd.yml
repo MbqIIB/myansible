@@ -1,16 +1,14 @@
-
-
-
-
 #- hosts: controller-server,net-server
 #- hosts: other-server
 #- hosts: elk-server
-- hosts: cmd-server
+#- hosts: cmd-server
 #- hosts: phy-server2
+#- hosts: cp16
+- hosts: gongyan-gpu
   gather_facts: no
   tasks:
 
-  - name: yum install openstack linzhbj
+  - name: yum install ntp linzhbj
     yum : name=ntp state=latest
 
   - name : enable ntp
