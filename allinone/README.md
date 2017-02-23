@@ -154,6 +154,12 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 
+update subnets set cidr="172.24.4.224/24" where subnetpool_id="afca3972-d0ff-4c05-826a-5b1e211ed3f6";
+neutron subnet-update  --allocation-pool start=172.24.4.2,end=172.24.4.238  afca3972-d0ff-4c05-826a-5b1e211ed3f6
+
+
+
+
 
 
 
