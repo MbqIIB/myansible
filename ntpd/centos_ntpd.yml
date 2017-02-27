@@ -4,6 +4,7 @@
 #- hosts: cmd-server
 #- hosts: phy-server2
 #- hosts: cp16
+#- hosts: phy-server-rhel
 - hosts: gongyan-gpu
   gather_facts: no
   tasks:

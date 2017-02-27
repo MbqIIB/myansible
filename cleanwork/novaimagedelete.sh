@@ -2,7 +2,8 @@
 
 #uuids=$(awk -F ' ' '{print $2}' image2015.log)
 #uuids=$(awk -F ' ' '{print $2}' 20170105imagelist.log)
-filename=allimage.log.saving.nonfindvm
+#filename=allimage.log.saving.nonfindvm
+filename=allimage.log.saving
 uuids=$(awk -F ' ' '{print $2}' $filename)
 
 HOST=""

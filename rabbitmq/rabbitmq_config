@@ -52,7 +52,19 @@ rabbitmq-plugins disable rabbitmq_shovel  rabbitmq_shovel_management
 
 ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins disable rabbitmq_shovel  rabbitmq_shovel_management"
 ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins list"
+ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins enable rabbitmq_shovel rabbitmq_management"
+ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins disable rabbitmq_shovel rabbitmq_management"
 
 
 ansible ent-rb-server -m shell -a "rabbitmq-plugins enable rabbitmq_management"
+ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins enable rabbitmq_management"
+
+ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins disable rabbitmq_management"
+
+
+ansible  syh1 -m shell -a "ls -lh /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n1/msg_store_persistent"
+ansible  syh2 -m shell -a "ls -lh /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n2/msg_store_persistent"
+ansible  syh3 -m shell -a "ls -lh /var/lib/rabbitmq/mnesia/rabbit@HA-svyz-ctl-n3/msg_store_persistent"
+
+
 

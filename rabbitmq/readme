@@ -25,3 +25,5 @@ rabbitmq-plugins enable rabbitmq_shovel rabbitmq_management
 #ansible controller-server -m shell -a "cat /etc/rabbitmq/enabled_plugins"
 ansible controller-server -m shell -a "rabbitmq-plugins list"
 ansible controller-server -m shell -a "rabbitmq-plugins disable rabbitmq_management rabbitmq_management_visualiser rabbitmq_shovel rabbitmq_shovel_management rabbitmq_tracing"
+
+
