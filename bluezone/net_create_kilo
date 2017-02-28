@@ -1,0 +1,64 @@
+
+
+[root@cp9 ~]# neutron subnet-update --allocation-pool start=172.71.0.2,end=172.71.14.254 dc3aef06-50b9-4c78-842f-81530e2a76e9
+Updated subnet: dc3aef06-50b9-4c78-842f-81530e2a76e9
+[root@cp9 ~]# neutron subnet-show dc3aef06-50b9-4c78-842f-81530e2a76e9
++-------------------+-------------------------------------------------+
+| Field             | Value                                           |
++-------------------+-------------------------------------------------+
+| allocation_pools  | {"start": "172.71.0.2", "end": "172.71.14.254"} |
+| cidr              | 172.71.0.0/16                                   |
+| dns_nameservers   | 114.114.114.114                                 |
+| enable_dhcp       | False                                           |
+| gateway_ip        | 172.71.0.1                                      |
+| host_routes       |                                                 |
+| id                | dc3aef06-50b9-4c78-842f-81530e2a76e9            |
+| ip_version        | 4                                               |
+| ipv6_address_mode |                                                 |
+| ipv6_ra_mode      |                                                 |
+| name              | ext_net_s1                                      |
+| network_id        | 78b71d0a-760d-4c90-a3ad-45af5e16b732            |
+| subnetpool_id     |                                                 |
+| tenant_id         | 9ac807a1cdb244fba9fcbf494e3f5346                |
++-------------------+-------------------------------------------------+
+[root@cp9 ~]# neutron subnet-show 1bbb948c-d7f6-433e-804d-ca04d274007f
++-------------------+------------------------------------------------+
+| Field             | Value                                          |
++-------------------+------------------------------------------------+
+| allocation_pools  | {"start": "10.71.0.2", "end": "10.71.255.254"} |
+| cidr              | 10.71.0.0/16                                   |
+| dns_nameservers   | 114.114.114.114                                |
+| enable_dhcp       | True                                           |
+| gateway_ip        | 10.71.0.1                                      |
+| host_routes       |                                                |
+| id                | 1bbb948c-d7f6-433e-804d-ca04d274007f           |
+| ip_version        | 4                                              |
+| ipv6_address_mode |                                                |
+| ipv6_ra_mode      |                                                |
+| name              | net_vlan_s1                                    |
+| network_id        | 6903b280-3140-4cc7-93c3-8c5bcdd2b6f4           |
+| subnetpool_id     |                                                |
+| tenant_id         | 9ac807a1cdb244fba9fcbf494e3f5346               |
++-------------------+------------------------------------------------+
+[root@cp9 ~]# neutron subnet-update --allocation-pool start=10.71.0.2,end=10.71.14.254 1bbb948c-d7f6-433e-804d-ca04d274007f
+Updated subnet: 1bbb948c-d7f6-433e-804d-ca04d274007f
+[root@cp9 ~]# neutron subnet-show 1bbb948c-d7f6-433e-804d-ca04d274007f
++-------------------+-----------------------------------------------+
+| Field             | Value                                         |
++-------------------+-----------------------------------------------+
+| allocation_pools  | {"start": "10.71.0.2", "end": "10.71.14.254"} |
+| cidr              | 10.71.0.0/16                                  |
+| dns_nameservers   | 114.114.114.114                               |
+| enable_dhcp       | True                                          |
+| gateway_ip        | 10.71.0.1                                     |
+| host_routes       |                                               |
+| id                | 1bbb948c-d7f6-433e-804d-ca04d274007f          |
+| ip_version        | 4                                             |
+| ipv6_address_mode |                                               |
+| ipv6_ra_mode      |                                               |
+| name              | net_vlan_s1                                   |
+| network_id        | 6903b280-3140-4cc7-93c3-8c5bcdd2b6f4          |
+| subnetpool_id     |                                               |
+| tenant_id         | 9ac807a1cdb244fba9fcbf494e3f5346              |
++-------------------+-----------------------------------------------+
+
