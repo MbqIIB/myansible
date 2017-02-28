@@ -1,0 +1,179 @@
+
+neutron net-create  pub-net1 --shared --provider:segmentation_id 1101  -- --router:external=True --provider:network_type vxlan
+Created a new network:
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | True                                 |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2017-02-24T02:35:25                  |
+| description               |                                      |
+| id                        | 7110a589-da91-4361-b66c-53077cd6ae34 |
+| ipv4_address_scope        |                                      |
+| ipv6_address_scope        |                                      |
+| is_default                | False                                |
+| mtu                       | 1450                                 |
+| name                      | pub-net1                             |
+| provider:network_type     | vxlan                                |
+| provider:physical_network |                                      |
+| provider:segmentation_id  | 1101                                 |
+| router:external           | True                                 |
+| shared                    | True                                 |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| tenant_id                 | 7de3dec9204e4f52b704f391cd4413c4     |
+| updated_at                | 2017-02-24T02:35:25                  |
++---------------------------+--------------------------------------+
+
+
+
+neutron subnet-create pub-net1  \
+        --name   pub-subnet1 \
+        --allocation-pool start=172.71.11.50,end=172.71.15.200 \
+        --gateway=172.71.255.254 --enable_dhcp=False  \
+        --dns-nameserver 114.114.114.114 \
+        172.71.255.254/16
+
+
+Created a new subnet:
++-------------------+---------------------------------------------------+
+| Field             | Value                                             |
++-------------------+---------------------------------------------------+
+| allocation_pools  | {"start": "172.71.11.50", "end": "172.71.15.200"} |
+| cidr              | 172.71.0.0/16                                     |
+| created_at        | 2017-02-24T02:37:59                               |
+| description       |                                                   |
+| dns_nameservers   | 8.8.8.8                                           |
+| enable_dhcp       | False                                             |
+| gateway_ip        | 172.71.255.254                                    |
+| host_routes       |                                                   |
+| id                | 5da2aec8-b90c-4e5a-8a31-79be44322012              |
+| ip_version        | 4                                                 |
+| ipv6_address_mode |                                                   |
+| ipv6_ra_mode      |                                                   |
+| name              | pub-subnet1                                       |
+| network_id        | 7110a589-da91-4361-b66c-53077cd6ae34              |
+| subnetpool_id     |                                                   |
+| tenant_id         | 7de3dec9204e4f52b704f391cd4413c4                  |
+| updated_at        | 2017-02-24T02:37:59                               |
++-------------------+---------------------------------------------------+
+
+[root@net-n1 ~]# neutron router-create pub-router
+Created a new router:
++-------------------------+--------------------------------------+
+| Field                   | Value                                |
++-------------------------+--------------------------------------+
+| admin_state_up          | True                                 |
+| availability_zone_hints |                                      |
+| availability_zones      |                                      |
+| description             |                                      |
+| distributed             | False                                |
+| external_gateway_info   |                                      |
+| ha                      | True                                 |
+| id                      | 41a05543-d36d-482b-88ef-958aa80d100e |
+| name                    | pub-router                           |
+| routes                  |                                      |
+| status                  | ACTIVE                               |
+| tenant_id               | 7de3dec9204e4f52b704f391cd4413c4     |
++-------------------------+--------------------------------------+
+
+routeid=41a05543-d36d-482b-88ef-958aa80d100e
+pubnetid=7110a589-da91-4361-b66c-53077cd6ae34
+neutron router-gateway-set ${routeid} ${pubnetid}
+Set gateway for router 41a05543-d36d-482b-88ef-958aa80d100e
+
+[root@net-n1 ~]# neutron net-create priv-net-vxlan1 --shared  --provider:segmentation_id 1100
+Created a new network:
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | True                                 |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2017-02-24T02:45:49                  |
+| description               |                                      |
+| id                        | 01dde567-f267-44e3-9ad4-cec200e4a11c |
+| ipv4_address_scope        |                                      |
+| ipv6_address_scope        |                                      |
+| mtu                       | 1450                                 |
+| name                      | priv-net-vxlan1                      |
+| provider:network_type     | vxlan                                |
+| provider:physical_network |                                      |
+| provider:segmentation_id  | 99                                   |
+| router:external           | False                                |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| tenant_id                 | 7de3dec9204e4f52b704f391cd4413c4     |
+| updated_at                | 2017-02-24T02:45:49                  |
++---------------------------+--------------------------------------+
+
+neutron subnet-create --name priv-subnet-vxlan1 \
+                --enable_dhcp=True \
+                --allocation-pool start=10.71.11.50,end=10.71.15.200 \
+                priv-net-vxlan1 10.71.0.0/16
+
+Created a new subnet:
++-------------------+-------------------------------------------------+
+| Field             | Value                                           |
++-------------------+-------------------------------------------------+
+| allocation_pools  | {"start": "10.71.11.50", "end": "10.71.15.200"} |
+| cidr              | 10.71.0.0/16                                    |
+| created_at        | 2017-02-24T02:48:21                             |
+| description       |                                                 |
+| dns_nameservers   |                                                 |
+| enable_dhcp       | True                                            |
+| gateway_ip        | 10.71.0.1                                       |
+| host_routes       |                                                 |
+| id                | 5ab659dd-8535-4e69-8d67-7e7ea0323858            |
+| ip_version        | 4                                               |
+| ipv6_address_mode |                                                 |
+| ipv6_ra_mode      |                                                 |
+| name              | priv-subnet-vxlan1                              |
+| network_id        | 01dde567-f267-44e3-9ad4-cec200e4a11c            |
+| subnetpool_id     |                                                 |
+| tenant_id         | 7de3dec9204e4f52b704f391cd4413c4                |
+| updated_at        | 2017-02-24T02:48:21                             |
++-------------------+-------------------------------------------------+
+
+
+routeid=41a05543-d36d-482b-88ef-958aa80d100e
+subnetid=5ab659dd-8535-4e69-8d67-7e7ea0323858
+neutron router-interface-add ${routeid} ${subnetid}
+Added interface d2f47a94-dd58-48a8-bdb2-93dc5931de33 to router 41a05543-d36d-482b-88ef-958aa80d100e
+
+
+################################ why segmentation_id ###########################
+[root@net-n1 ~]# neutron net-create priv-net-vxlan3 --shared  --provider:segmentation_id 1100 --provider:network_type vxlan
+Created a new network:
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | True                                 |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2017-02-24T03:03:32                  |
+| description               |                                      |
+| id                        | d7d64639-aa59-4211-9bcf-475e9334e3b6 |
+| ipv4_address_scope        |                                      |
+| ipv6_address_scope        |                                      |
+| mtu                       | 1450                                 |
+| name                      | priv-net-vxlan3                      |
+| provider:network_type     | vxlan                                |
+| provider:physical_network |                                      |
+| provider:segmentation_id  | 1100                                 |
+| router:external           | False                                |
+| shared                    | True                                 |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| tenant_id                 | 7de3dec9204e4f52b704f391cd4413c4     |
+| updated_at                | 2017-02-24T03:03:32                  |
++---------------------------+--------------------------------------+
+
+
+
+

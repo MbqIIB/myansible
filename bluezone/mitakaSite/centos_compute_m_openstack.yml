@@ -1,0 +1,33 @@
+#- hosts: cp9
+#- hosts: svx11 
+#- hosts: redpower8
+- hosts: cp11
+  gather_facts: no
+  tasks:
+
+  - name: yum install openstack linzhbj
+    yum : name=centos-release-openstack-mitaka state=latest
+
+  - name: yum install openstack linzhbj
+    yum : name=python-novaclient,python-neutronclient,ipset,python-glanceclient,python-heatclient,openstack-neutron-openvswitch state=latest
+
+  - name: yum install openstack linzhbj
+    yum : name=openstack-nova-compute,openstack-neutron-openvswitch state=latest
+
+  - name: yum install openstack linzhbj
+    yum : name=libvirt,qemu-kvm state=latest
+  
+  - name : service openvswitch
+    service : name=openvswitch state=started enabled=yes
+
+  - name : service libvirtd
+    service : name=libvirtd state=started enabled=yes
+
+  - name : service openstack-nova-compute
+    service : name=openstack-nova-compute state=started enabled=yes
+
+  - name : service neutron-openvswitch-agent
+    service : name=neutron-openvswitch-agent state=started enabled=yes
+
+  - name: yum install command linzhbj
+    yum : name=git,python-devel state=latest
