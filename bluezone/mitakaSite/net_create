@@ -227,4 +227,39 @@ mysql -u root -e "update neutron.ml2_vxlan_allocations set allocated='0' where v
 
 
 
+[root@ctl-n1 ~]# mysql -u root -e "select * from neutron.ml2_vxlan_endpoints";
++--------------+----------+----------+
+| ip_address   | udp_port | host     |
++--------------+----------+----------+
+| 10.10.68.4   |     4789 | fnode2-2 |
+| 10.10.72.25  |     4789 | net-n1   |
+| 10.10.72.26  |     4789 | net-n2   |
+| 10.10.72.27  |     4789 | net-n3   |
+| 10.10.72.43  |     4789 | cp11     |
+| 10.10.72.44  |     4789 | svx11    |
+| 10.10.72.8   |     4789 | fnode3-6 |
+| 10.31.252.66 |     4789 | net-vip  |
++--------------+----------+----------+
+[root@ctl-n1 ~]# mysql -u root -e "delete  from neutron.ml2_vxlan_endpoints where ip_address="10.10.68.4""; 
+ERROR 1064 (42000) at line 1: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.68.4' at line 1
+[root@ctl-n1 ~]# mysql -u root -e "delete  from neutron.ml2_vxlan_endpoints where ip_address='10.10.68.4'"; 
+[root@ctl-n1 ~]# mysql -u root -e "delete  from neutron.ml2_vxlan_endpoints where ip_address='10.10.72.8'"; 
+[root@ctl-n1 ~]# mysql -u root -e "delete  from neutron.ml2_vxlan_endpoints where ip_address='10.31.252.66'"; 
+[root@ctl-n1 ~]# mysql -u root -e "select * from neutron.ml2_vxlan_endpoints";
++-------------+----------+--------+
+| ip_address  | udp_port | host   |
++-------------+----------+--------+
+| 10.10.72.25 |     4789 | net-n1 |
+| 10.10.72.26 |     4789 | net-n2 |
+| 10.10.72.27 |     4789 | net-n3 |
+| 10.10.72.43 |     4789 | cp11   |
+| 10.10.72.44 |     4789 | svx11  |
++-------------+----------+--------+
+[root@ctl-n1 ~]# 
+
+
+
+
+
+
 
