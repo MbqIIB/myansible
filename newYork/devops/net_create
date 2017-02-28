@@ -1,0 +1,140 @@
+
+[root@ctl-ccs ccs_project]# neutron net-create pub-net1   -- --router:external=True
+Created a new network:
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | True                                 |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2016-11-28T11:07:08                  |
+| description               |                                      |
+| id                        | 83ee5060-de13-4065-9496-ad61f787cb72 |
+| ipv4_address_scope        |                                      |
+| ipv6_address_scope        |                                      |
+| is_default                | False                                |
+| mtu                       | 1450                                 |
+| name                      | pub-net1                             |
+| provider:network_type     | vxlan                                |
+| provider:physical_network |                                      |
+| provider:segmentation_id  | 27                                   |
+| router:external           | True                                 |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| tenant_id                 | 244653330f234ed991555f6b8a52713d     |
+| updated_at                | 2016-11-28T11:07:08                  |
++---------------------------+--------------------------------------+
+[root@ctl-ccs ccs_project]# neutron subnet-create pub-net1  --allocation-pool start=9.2.133.244,end=9.2.133.254  \
+>                --gateway=9.2.133.130 --enable_dhcp=False  \
+>                9.2.133.130/25
+
+Created a new subnet:
++-------------------+------------------------------------------------+
+| Field             | Value                                          |
++-------------------+------------------------------------------------+
+| allocation_pools  | {"start": "9.2.133.244", "end": "9.2.133.254"} |
+| cidr              | 9.2.133.128/25                                 |
+| created_at        | 2016-11-28T11:07:18                            |
+| description       |                                                |
+| dns_nameservers   |                                                |
+| enable_dhcp       | False                                          |
+| gateway_ip        | 9.2.133.130                                    |
+| host_routes       |                                                |
+| id                | f1c3320c-00c5-447f-ad32-b61ea7f28551           |
+| ip_version        | 4                                              |
+| ipv6_address_mode |                                                |
+| ipv6_ra_mode      |                                                |
+| name              |                                                |
+| network_id        | 83ee5060-de13-4065-9496-ad61f787cb72           |
+| subnetpool_id     |                                                |
+| tenant_id         | 244653330f234ed991555f6b8a52713d               |
+| updated_at        | 2016-11-28T11:07:18                            |
++-------------------+------------------------------------------------+
+[root@ctl-ccs ccs_project]# 
+[root@ctl-ccs ccs_project]# neutron router-create pub-router
+Created a new router:
++-------------------------+--------------------------------------+
+| Field                   | Value                                |
++-------------------------+--------------------------------------+
+| admin_state_up          | True                                 |
+| availability_zone_hints |                                      |
+| availability_zones      |                                      |
+| description             |                                      |
+| distributed             | False                                |
+| external_gateway_info   |                                      |
+| ha                      | False                                |
+| id                      | 0469ead1-40f9-4f73-baef-b024a38a0145 |
+| name                    | pub-router                           |
+| routes                  |                                      |
+| status                  | ACTIVE                               |
+| tenant_id               | 244653330f234ed991555f6b8a52713d     |
++-------------------------+--------------------------------------+
+[root@ctl-ccs ccs_project]# neutron router-gateway-set 0469ead1-40f9-4f73-baef-b024a38a0145 83ee5060-de13-4065-9496-ad61f787cb72
+Set gateway for router 0469ead1-40f9-4f73-baef-b024a38a0145
+[root@ctl-ccs ccs_project]# neutron net-create priv-net-vlan1
+Created a new network:
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | True                                 |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2016-11-28T11:08:23                  |
+| description               |                                      |
+| id                        | a3979bed-dcaa-4d3f-b38a-678d24391161 |
+| ipv4_address_scope        |                                      |
+| ipv6_address_scope        |                                      |
+| mtu                       | 1450                                 |
+| name                      | priv-net-vlan1                       |
+| provider:network_type     | vxlan                                |
+| provider:physical_network |                                      | | provider:segmentation_id  | 38                                   | | router:external           | False                                | | shared                    | False                                | | status                    | ACTIVE                               | | subnets                   |                                      | | tags                      |                                      | | tenant_id                 | 244653330f234ed991555f6b8a52713d     | | updated_at                | 2016-11-28T11:08:24                  | +---------------------------+--------------------------------------+ 
+
+neutron subnet-create --name priv-subnet-vxlan1 \
+>               --enable_dhcp=True \
+>               priv-net-vlan1 10.100.0.0/16
+Created a new subnet:
++-------------------+--------------------------------------------------+
+| Field             | Value                                            |
++-------------------+--------------------------------------------------+
+| allocation_pools  | {"start": "10.100.0.2", "end": "10.100.255.254"} |
+| cidr              | 10.100.0.0/16                                    |
+| created_at        | 2016-11-28T11:10:26                              |
+| description       |                                                  |
+| dns_nameservers   |                                                  |
+| enable_dhcp       | True                                             |
+| gateway_ip        | 10.100.0.1                                       |
+| host_routes       |                                                  |
+| id                | 10699fb4-cc68-46bd-8e5c-779fca004a9f             |
+| ip_version        | 4                                                |
+| ipv6_address_mode |                                                  |
+| ipv6_ra_mode      |                                                  |
+| name              | priv-subnet-vxlan1                               |
+| network_id        | a3979bed-dcaa-4d3f-b38a-678d24391161             |
+| subnetpool_id     |                                                  |
+| tenant_id         | 244653330f234ed991555f6b8a52713d                 |
+| updated_at        | 2016-11-28T11:10:26                              |
++-------------------+--------------------------------------------------+
+
+
+
+[root@ctl-ccs ccs_project]# neutron net-list
++--------------------------------------+----------------+-----------------------------------------------------+
+| id                                   | name           | subnets                                             |
++--------------------------------------+----------------+-----------------------------------------------------+
+| a3979bed-dcaa-4d3f-b38a-678d24391161 | priv-net-vlan1 | 10699fb4-cc68-46bd-8e5c-779fca004a9f 10.100.0.0/16  |
+| 83ee5060-de13-4065-9496-ad61f787cb72 | pub-net1       | f1c3320c-00c5-447f-ad32-b61ea7f28551 9.2.133.128/25 |
++--------------------------------------+----------------+-----------------------------------------------------+
+[root@ctl-ccs ccs_project]# neutron subnet-list
++--------------------------------------+--------------------+----------------+--------------------------------------------------+
+| id                                   | name               | cidr           | allocation_pools                                 |
++--------------------------------------+--------------------+----------------+--------------------------------------------------+
+| 10699fb4-cc68-46bd-8e5c-779fca004a9f | priv-subnet-vxlan1 | 10.100.0.0/16  | {"start": "10.100.0.2", "end": "10.100.255.254"} |
+| f1c3320c-00c5-447f-ad32-b61ea7f28551 |                    | 9.2.133.128/25 | {"start": "9.2.133.244", "end": "9.2.133.254"}   |
++--------------------------------------+--------------------+----------------+--------------------------------------------------+
+[root@ctl-ccs ccs_project]# neutron router-interface-add 0469ead1-40f9-4f73-baef-b024a38a0145 10699fb4-cc68-46bd-8e5c-779fca004a9f
+Added interface 07c1511d-25c5-4e1a-b96c-2975b848911a to router 0469ead1-40f9-4f73-baef-b024a38a0145.
+
+
+neutron subnet-update --name  pub-subnet1 f1c3320c-00c5-447f-ad32-b61ea7f28551
