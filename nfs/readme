@@ -44,3 +44,16 @@ Export list for 10.0.0.18:
 /data/openstack/glance/images *
 
 
+
+exportfs -arv
+[root@bluem4 Mitaka]# exportfs -arv
+exporting *:/data/openstack/glance/images
+
+firewall-cmd --list-all
+firewall-cmd --permanent --add-service=nfs
+firewall-cmd --permanent --add-service=mountd
+firewall-cmd --permanent --add-service=rpc-bind
+firewall-cmd --reload
+iptables -S
+
+
