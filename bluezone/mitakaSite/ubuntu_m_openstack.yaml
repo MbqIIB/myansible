@@ -1,0 +1,9 @@
+#- hosts: compute-server
+- hosts: neucloud5
+  gather_facts: no
+  tasks:
+  - name: apt-get install command tools
+    apt : name=sysfsutils,python-pip,git,python-dev,tree,system-storage-manager state=latest
+
+  - name: apt-get install openstack linzhbj
+    apt : name=nova-compute,python-novaclient,python-heatclient,neutron-plugin-ml2,neutron-plugin-openvswitch-agent state=latest
