@@ -26,3 +26,13 @@ PublicID=32670b8e-e0eb-4cb9-8c58-10c779d3bb17
  neutron floatingip-create ${PublicID}
 
 neutron floatingip-associate  ${floatingipid} ${portid}
+
+neutron lb-pool-list  --tenant-id 461ac8f4615746a59a88d66427448fdd
+neutron lb-pool-update --lb-method SOURCE_IP  lb-BlueScan --tenant-id 461ac8f4615746a59a88d66427448fdd
+
+neutron lb-pool-update 57c6384e-2eff-4c86-b283-025c6f930802 --lb-method SOURCE_IP
+
+neutron help lb-pool-create | grep "lb-method"
+[--description DESCRIPTION] --lb-method
+--lb-method {ROUND_ROBIN,LEAST_CONNECTIONS,SOURCE_IP}
+
