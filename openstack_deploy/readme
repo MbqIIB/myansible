@@ -49,3 +49,12 @@ python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_c
 输入密码后确认
 
 会生成一长窜字符替换playbook中的即可
+
+
+
+#### install shade moudle
+
+yum install python-pip 
+pip install --upgrade pip
+pip search shade
+pip install shade
