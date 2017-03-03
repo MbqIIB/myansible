@@ -1,4 +1,5 @@
-- hosts : compute-server
+#- hosts : compute-server
+- hosts : install-server
   remote_user: root
   gather_facts: no
   tasks:
