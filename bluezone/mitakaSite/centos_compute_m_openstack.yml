@@ -12,10 +12,13 @@
     yum : name=python-novaclient,python-neutronclient,ipset,python-glanceclient,python-heatclient,openstack-neutron-openvswitch state=latest
 
   - name: yum install openstack linzhbj
-    yum : name=openstack-nova-compute,openstack-neutron-openvswitch state=latest
+    yum : name=libvirt,qemu-kvm state=latest
+
+  - name: yum install libguestfs-tools linzhbj
+    yum : name=libguestfs-tools state=latest
 
   - name: yum install openstack linzhbj
-    yum : name=libvirt,qemu-kvm state=latest
+    yum : name=openstack-nova-compute,openstack-neutron-openvswitch state=latest
   
   - name : service openvswitch
     service : name=openvswitch state=started enabled=yes

@@ -4,10 +4,10 @@
   tasks:
 
   - name: Yum install epel repo
-    yum : name=epel-release state=latest
+    yum : name=epel-release state=latest disable_gpg_check=yes
 
   - name: Yum install shellinabox
-    yum : name=shellinabox state=latest
+    yum : name=shellinabox state=latest disable_gpg_check=yes
 
 #  - name : firewalld for shellinaboxd
 #    firewalld: permanent=true state=enabled immediate=yes service=shellinaboxd

@@ -33,7 +33,7 @@ if [ $? != 0 ];then
         echo "Don't have flavor ${FlavorOption}"
         exit 1
 fi
-fid=$(grep ${FlavorOption} $fp | awk -F '|' '{print $2}')
+fid=$(grep " ${FlavorOption} " $fp | awk -F '|' '{print $2}')
 
 #exit 0
 for ((i=${Number_start};i<${Number_end};i++))
