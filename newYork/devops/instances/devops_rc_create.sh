@@ -39,7 +39,6 @@ do
     InstanceId=$(nova boot \
          --flavor ${FlavorOption} \
          --image   ${ImageName} \
-         --availability-zone nova:${Node}  \
          --nic net-id=${net_id} \
          ${insname} | grep ' id '| awk -F ' ' '{print $4}')
 
@@ -85,3 +84,4 @@ done
          #--nic net-id=${mang_net} \
 
          #--flavor $(echo ${FlavorOption} | sed "s/\.//g") \
+         #--availability-zone nova:${Node}  \
