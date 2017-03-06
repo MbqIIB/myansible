@@ -1,0 +1,14 @@
+- hosts : els-n1,els-n2,els-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: install keepalived,haproxy
+      yum : name=keepalived,haproxy state=latest
+
+    - name : copy keepalived.conf
+      copy : src=keepalived.conf dest=/etc/keepalived/keepalived.conf mode=0644
+
+    - name : service keepalived
+      service : name=keepalived state=restarted enabled=yes
+
+

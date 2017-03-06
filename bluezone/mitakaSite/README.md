@@ -190,6 +190,10 @@ check mysql cluster
 mysql -u root -e "SHOW STATUS LIKE 'wsrep%';"
 ```
 
+```shell
+
+ansible  m-els-server -m ping
+```
 
 ELK service
 http://9.4.241.7:9200/_plugin/head/

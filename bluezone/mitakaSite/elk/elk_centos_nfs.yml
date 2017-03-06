@@ -1,0 +1,24 @@
+- hosts: m-elk-server
+  gather_facts: no
+  tasks:
+
+  - name: yum install openstack linzhbj
+    yum : name=nfs-utils state=latest
+
+  - name : create /data
+    file : path=/data owner=root group=root state=directory mode=0755
+
+  - name: nfs mount bluem4
+    lineinfile: dest=/etc/rc.local state=present regexp='^mount -t nfs' line='{{item}}' insertbefore='exit 0'
+    with_items:
+      - "mount -t nfs bluem4:/data/openstack/log /data"
+
+  - name: file /etc/rc.d/rc.local
+    file: path=/etc/rc.d/rc.local  owner=root group=root state=file mode=0755
+
+#  - name: Mount up device by nfs
+#    mount:
+#      path: /data
+#      src: bluem4:/data/openstack/log
+#      fstype: nfs
+#      state: present
