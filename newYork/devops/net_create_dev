@@ -148,4 +148,7 @@ Added interface 2a0e541c-10a1-4f05-8516-6b8847b8c5eb to router a9dc3c85-f77f-415
 neutron subnet-update --name   pub-subnet1 15b9c32d-621a-4bb8-8bfc-4ee33da419c5
 
 
+neutron subnet-update  15b9c32d-621a-4bb8-8bfc-4ee33da419c5 --allocation-pool start=172.31.252.68,end=172.31.252.72 --allocation-pool start=172.31.216.1,end=172.31.219.254
+Updated subnet: 15b9c32d-621a-4bb8-8bfc-4ee33da419c5
+
 

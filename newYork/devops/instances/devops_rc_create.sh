@@ -24,24 +24,41 @@ mang_net=
 
 echo "${Prefix}-${Node}-${FlavorOption}-${ImageName}"
 
+fp=flavorlist.log
+nova flavor-list --all --extra-specs  > $fp
 
-nova flavor-list | grep ${FlavorOption}
+grep ${FlavorOption} $fp
 if [ $? != 0 ];then
         echo "Don't have flavor ${FlavorOption}"
         exit 1
 fi
+fid=$(grep " ${FlavorOption} " $fp | awk -F '|' '{print $2}')
+
+
 
 #exit 0
 for ((i=${Number_start};i<${Number_end};i++))
 do
     nodename=$(echo ${Node} | sed "s/ent-//g" | sed "s/.ibm.com//g")
-    insname=${Prefix}-${nodename}-$(echo ${FlavorOption} | sed "s/\.//g")-n${i}-${DateTime}
+    insname=${Prefix}-${nodename}-$(echo ${FlavorOption} | sed "s/\.//g")-${DateTime}n${i}
+
+    if [ "X${KeyName}" != "X" ];then
     InstanceId=$(nova boot \
-         --flavor ${FlavorOption} \
+         --flavor ${fid} \
+        --key-name=${KeyName} \
          --image   ${ImageName} \
          --nic net-id=${net_id} \
+         --availability-zone nova:${Node}  \
+         ${insname} | grep ' id '| awk -F ' ' '{print $4}')
+    else
+    InstanceId=$(nova boot \
+         --flavor ${fid} \
+         --image   ${ImageName} \
+         --nic net-id=${net_id} \
+         --availability-zone nova:${Node}  \
          ${insname} | grep ' id '| awk -F ' ' '{print $4}')
 
+    fi
 
     if [ $? != 0 ];then
 
@@ -84,4 +101,3 @@ done
          #--nic net-id=${mang_net} \
 
          #--flavor $(echo ${FlavorOption} | sed "s/\.//g") \
-         #--availability-zone nova:${Node}  \

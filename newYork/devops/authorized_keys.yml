@@ -1,0 +1,44 @@
+- hosts:  install-server
+  remote_user : root
+  gather_facts: true
+  vars:
+    filepath : /etc/ssh/ssh_config
+    options : StrictHostKeyChecking
+  tasks:
+
+    - name: PermitRootLogin yes
+      lineinfile: dest=/etc/ssh/sshd_config state=present regexp='^PermitRootLogin' line='{{item}}'
+      with_items:
+        - "PermitRootLogin yes"
+        
+
+
+    - name: Config {{filepath}}
+      lineinfile: dest={{filepath}} state=present regexp='^{{options}}' line='{{item}}'
+      with_items:
+        - "{{ options}} no"
+          #- "Defaults: {{user}}  !requiretty"
+
+    - name : rm /root/.ssh/known_hosts
+      file : path=/root/.ssh/known_hosts state=absent
+
+    - name : service sshd
+      service : name=sshd state=restarted enabled=yes
+      when : ansible_os_family =="RedHat" 
+
+    - name : service ssh
+      service : name=ssh state=restarted enabled=yes
+      when : ansible_os_family =="Debian" 
+
+
+    - name : update  ansible for install server key
+      authorized_key: user=root key="{{ lookup('file', '/root/.ssh/id_rsa.pub') }}" 
+
+
+
+#    - name : update  ent-op-server key
+#      authorized_key: user=root key="{{ lookup('file', 'blueent_id_rsa.pub') }}" 
+#
+#    - name : update  ent-op-server key
+#      authorized_key: user=root key="{{ lookup('file', 'bluexcat_id_rsa.pub') }}" 
+ 

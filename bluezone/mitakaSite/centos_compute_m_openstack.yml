@@ -9,7 +9,7 @@
     yum : name=centos-release-openstack-mitaka state=latest
 
   - name: yum install openstack linzhbj
-    yum : name=python-novaclient,python-neutronclient,ipset,python-glanceclient,python-heatclient,openstack-neutron-openvswitch state=latest
+    yum : name=python-novaclient,python-neutronclient,ipset,python-glanceclient,python-heatclient,openstack-neutron-openvswitch,python-ironicclient state=latest
 
   - name: yum install openstack linzhbj
     yum : name=libvirt,qemu-kvm state=latest
