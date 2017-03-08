@@ -24,3 +24,27 @@ ansible install-server  -m shell -a "ipmitool lan print 1"
 ipmitool -I lanplus -H 192.168.33.71 -U ADMIN -P admin power status
 
 ```
+
+
+ansible install-server  -m shell -a "/root/mitaka_servicerestart.sh stop"
+ansible install-server  -m shell -a "ovs-vsctl del-br br-int"
+ansible install-server  -m shell -a "ovs-vsctl del-br br-tun"
+ansible install-server  -m shell -a "/root/mitaka_servicerestart.sh start"
+
+
+
+ansible install-server  -m shell -a "ifconfig br-int 0 up"
+ansible install-server  -m shell -a "ifconfig br-tun 0 up"
+
+
+ansible install-server  -m shell -a "route add  -net 10.10.64.0/18 gw 10.10.83.254"
+
+
+x86:
+route add  -net 10.10.64.0/18 gw 10.10.75.254  eth1
+
+
+
+
+ansible install-server  -m shell -a "grep -nr "^my_ip" /etc/nova/nova.conf"
+ansible install-server  -m shell -a "grep  -nr "^local_ip" /etc/neutron/plugins/ml2/openvswitch_agent.ini"

@@ -5,7 +5,8 @@
 #- hosts: phy-server2
 #- hosts: cp16
 #- hosts: phy-server-rhel
-- hosts: gongyan-gpu
+#- hosts: gongyan-gpu
+- hosts: ironic
   gather_facts: no
   tasks:
 

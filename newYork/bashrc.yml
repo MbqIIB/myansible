@@ -1,5 +1,5 @@
-#- hosts:  poc-server
-- hosts:  install-server
+- hosts:  poc-server
+#- hosts:  install-server
   remote_user : root
   gather_facts: true
   vars:
@@ -19,7 +19,7 @@
       lineinfile: " dest={{filepath}} state=present regexp='^HISTIGNORE' line='HISTIGNORE=\"ls\"' "
 
     - name: Config {{filepath}}
-      lineinfile: dest={{filepath}} state=present regexp='^HISTCONTROL' line='HISTCONTROL=ignoreboth'
+      lineinfile: dest={{filepath}} state=absent regexp='^HISTCONTROL' line='HISTCONTROL=ignoreboth'
 
     - name: Config {{filepath}}
       lineinfile: dest={{filepath}} state=present regexp='^shopt -s' line='shopt -s histappend'

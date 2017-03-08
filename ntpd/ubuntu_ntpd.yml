@@ -1,5 +1,6 @@
 #- hosts: controller-server,net-server
 - hosts: compute-server
+#- hosts: install-server
   gather_facts: no
   tasks:
 
@@ -9,3 +10,9 @@
   - name : enable ntp
     service : name=ntp state=started enabled=yes
   
+
+
+  - name: set timezone to America/New_York
+    timezone:
+      #name: Asia/Tokyo
+      name: America/New_York

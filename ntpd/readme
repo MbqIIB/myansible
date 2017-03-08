@@ -1,2 +1,7 @@
 
 ansible poc-server -m shell -a "date"
+
+
+ansible install-server -m shell -a "date"
+
+ansible compute-server -m shell -a "date"
