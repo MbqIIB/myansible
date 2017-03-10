@@ -12,7 +12,8 @@ MY_IMAGE_UUID=$(glance image-list | grep ubuntu-14.04.5-server-baremetal-ansible
 
 
 nova list
-NodeName=fnode6_11
+#NodeName=fnode6_11
+NodeName=fnode6_7
 nova boot --flavor ppc64le-baremetal  \
           --image $MY_IMAGE_UUID --nic net-id=$net_id  \
           --security-groups default  --key-name nova_key \
