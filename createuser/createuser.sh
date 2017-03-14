@@ -27,7 +27,20 @@ keystone  user-create  --name ${username} --pass ${password}  --tenant ${tenanti
 
 }
 
+function addport()
+{
+export OS_TENANT_NAME=$1
+export OS_USERNAME=$1
+export OS_PASSWORD=$2
 
+nova secgroup-list-rules default
+nova secgroup-add-rule default icmp -1 -1 0.0.0.0/0
+nova secgroup-add-rule default tcp 22 22 0.0.0.0/0
+nova secgroup-add-rule default tcp 4200 4200 0.0.0.0/0
+nova secgroup-list-rules default
+
+
+}
 
 passwdfile=passwdfile.txt
 
@@ -40,6 +53,7 @@ do
 
     echo $user $passwd $email
     createuser $user $passwd $email
+    addport $user $passwd $email
 
 done
 
