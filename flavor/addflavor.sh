@@ -30,7 +30,12 @@ CpuNum=4
 CPU_THREADS=4
 CPU_CORES=1
 CPU_SOCKETS=1
-Disk=100
+
+#Disk=100
+for Disk in 20 100
+do
+	echo "Disk = $Disk G"
+
 for MemGB in 8 16 20 32 64
 do
         fname="smt${CpuNum}c.1s1c${CpuNum}t${MemGB}g${Disk}G"
@@ -47,3 +52,7 @@ do
         nova flavor-show ${fid}
         sleep 1
 done
+
+done
+
+echo " Done "
