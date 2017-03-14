@@ -1,4 +1,4 @@
-OS_name=ubuntu_14_lts_docker_aufs_ppc64le_v0.1.0
+OS_name=centos_7.2_docker_aufs_ppc64le_v1.0.2
 OS_container_format=docker
 OS_disk_format=raw
 #OS_is_public=true
@@ -11,6 +11,7 @@ OS_hw_video_model=vga
 OS_os_type="Linux"
 OS_base_type=base
 OS_image_type=image
-OS_sys_type=ubuntu
+OS_sys_type=centos
 OS_webshell=true
-
+OS_imageUuid=centos7.2
+OS_diskSize=20

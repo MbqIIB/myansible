@@ -187,3 +187,10 @@ qemu-img convert -c  -O qcow2 ${IMAGENAME}-200G-nocheck.qcow2 compress_${IMAGENA
 
 
 
+ 5433  2017-03-13 23:25:40 :: glance image-show --visibility=private 68194d26-fed2-46ea-8ead-28d6b27b67c0
+ 5434  2017-03-13 23:25:48 :: glance image-update --visibility=private 68194d26-fed2-46ea-8ead-28d6b27b67c0
+ 5435  2017-03-13 23:25:58 :: glance image-update --visibility=private 94898845-c6c0-4438-ba56-e27a42bd9c95
+ 5436  2017-03-13 23:26:17 :: glance image-update --visibility=private 463ae53d-7bc6-4c7b-98ee-3fcaa4e382eb
+ 5438  2017-03-13 23:29:04 :: glance image-update --visibility=private ad893840-c8f6-4ced-9c00-91eba1e96468
+ 5439  2017-03-13 23:29:16 :: history  | grep private
+
