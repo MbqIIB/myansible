@@ -122,6 +122,7 @@ neutron lb-healthmonitor-create --tenant-id  461ac8f4615746a59a88d66427448fdd \
 
   neutron lb-healthmonitor-update --url-path='/bluescan' b1a7e451-2b52-4098-a663-cb8fe4f40f24
 
+  neutron lb-healthmonitor-update --url-path='/bluescan/login.jsp' b1a7e451-2b52-4098-a663-cb8fe4f40f24
 
 
   ref:
