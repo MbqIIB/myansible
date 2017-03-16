@@ -10,6 +10,7 @@ user="wxubj@cn.ibm.com"
 user="xuechao@cn.ibm.com"
 user="yanrong@cn.ibm.com"
 user="linzhbj@cn.ibm.com"
+user="sempleb@us.ibm.com"
 
 
 tenantid=$(keystone tenant-list | grep " ${user} " | awk -F ' ' '{print $2}')

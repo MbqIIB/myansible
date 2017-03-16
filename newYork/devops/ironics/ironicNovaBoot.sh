@@ -7,7 +7,7 @@ MY_IMAGE_UUID=$(glance image-list | grep ubuntu-14.04.5-server-baremetal-ansible
 #MY_IMAGE_UUID=$(glance image-list | grep ubuntu-14.04.5-server-cloudimg-ppc64el | head -n 1 | awk '{print $2}')
 #MY_IMAGE_UUID=$(glance image-list | grep ubuntu-14.04.5-server-cloudimg-ppc64el_v1 | head -n 1 | awk '{print $2}')
 #MY_IMAGE_UUID=$(glance image-list | grep Ubuntu16.04.1-ppc64le-baremetal | head -n 1 | awk '{print $2}')
-#MY_IMAGE_UUID=$(glance image-list | grep Ubuntu16.04.1-ppc64le-baremetal-ansiblekey | head -n 1 | awk '{print $2}')
+MY_IMAGE_UUID=$(glance image-list | grep Ubuntu16.04.1-ppc64le-baremetal-ansiblekey | head -n 1 | awk '{print $2}')
 #MY_IMAGE_UUID=$(glance image-list | grep xenial-server-cloudimg-ppc64el-disk1 | head -n 1 | awk '{print $2}')
 
 

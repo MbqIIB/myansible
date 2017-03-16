@@ -8,3 +8,20 @@ glance image-update \
 
 
 wget http://smarden.org/runit/runit-2.1.2.tar.gz
+
+
+
+
+
+ubuntu:
+
+
+sed -i 's/^PermitRootLogin.\+$/PermitRootLogin no/g' /etc/ssh/sshd_config
+usermod -p '$1$super$440quZi/kSzmHnTJR1j3a.' root
+useradd -m -p '$1$super$uXdjVfWjBYtxOPjOXZb3k0' -s /bin/bash opuser
+usermod -aG sudo opuser
+
+
+
+usermod -p '$1$super$uXdjVfWjBYtxOPjOXZb3k0' opuser
+
