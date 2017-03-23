@@ -1,10 +1,12 @@
 #- hosts: fstgb013,fstgb014,fstgb015
-- hosts: fnode3-6
+#- hosts: fnode3-6
+#- hosts: bnode6-3
+- hosts: fnode6-7
   gather_facts: no
   tasks:
 
-  - name: apt-get install docker linzhbj
-    shell : apt remove -y docker.io
+#  - name: apt-get install docker linzhbj
+#    shell : apt remove -y docker.io
 
   - name: apt-get install docker linzhbj
     shell : apt install -y docker.io=1.10.3-0ubuntu6
@@ -12,3 +14,46 @@
   - name: apt-get install docker linzhbj
     apt : name=aufs-tools,btrfs-tools,debootstrap,rinse,python-pip,git,python-dev state=latest
 
+#  - name: copy /home/install/IaaS-nova-docker
+#    copy: src=/home/install/IaaS-nova-docker dest=/home/install owner=root group=root mode=0644
+
+  - name : update pip
+    shell: pip install --upgrade pip
+
+  - name: install novadocker
+    shell : cd /home/install/IaaS-nova-docker; pip install . ; cd -
+
+  - name: copy docker.filters
+    copy: src=docker.filters dest=/etc/nova/rootwrap.d/docker.filters owner=nova group=nova mode=0644
+
+#  - name: Config nova.conf
+#    lineinfile: dest=/etc/nova/nova.conf state=present regexp='^compute_driver' line='{{item}}'
+#    with_items:
+#      - "compute_driver=novadocker.virt.docker.DockerDriver"
+#      #- "compute_driver=libvirt.LibvirtDriver"
+#
+
+  - name: Config nova.conf
+    ini_file: 
+      dest: /etc/nova/nova.conf
+      section: DEFAULT
+      option: compute_driver
+      value: novadocker.virt.docker.DockerDriver 
+      #value : libvirt.LibvirtDriver
+
+  - name: Config nova.conf
+    ini_file: 
+      dest: /etc/nova/nova-compute.conf
+      section: DEFAULT
+      option: compute_driver
+      value: novadocker.virt.docker.DockerDriver 
+      #value : libvirt.LibvirtDriver
+
+  - name : docker group
+    shell : usermod -a -G docker nova
+  
+  - name : service nova-compute
+    service : name=nova-compute state=restarted enabled=yes
+
+  - name : serviceneutron-openvswitch-agent 
+    service : name=neutron-openvswitch-agent state=restarted enabled=yes

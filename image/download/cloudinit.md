@@ -2,7 +2,8 @@
 
 
 
-IMAGENAME=CentOS-7-x86_64-GenericCloud.qcow2
+#IMAGENAME=CentOS-7-x86_64-GenericCloud.qcow2
+IMAGENAME=ubuntu-16.04-server-cloudimg-ppc64el-disk1.img
 mkdir tmp
 guestunmount tmp/
 

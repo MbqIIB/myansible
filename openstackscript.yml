@@ -38,3 +38,4 @@
   tasks:
     - name : copy openrc /root/openrc
       copy: src=/root/openrc  dest={{toolsdir}}  owner=root group=root mode=0600
+
