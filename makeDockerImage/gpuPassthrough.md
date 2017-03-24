@@ -145,6 +145,17 @@ sh ./NVIDIA-Linux-ppc64le-352.93.run
 apt-get install nvidia-cuda-toolkit
                                      
 
+### rhel7 install cuda7.5
+```shell
+#wget http://developer.download.nvidia.com/compute/cuda/repos/rhel7/ppc64le/cuda-repo-rhel7-7.5-23.ppc64le.rpm
+#loca install 
+wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda-repo-rhel7-7-5-local-7.5-23.ppc64le.rpm
+ Installation Instructions:
+`sudo rpm -i cuda-repo-rhel7-7-5-local-7.5-23.ppc64le.rpm`
+`sudo yum clean all`
+`sudo yum install cuda`
+
+```
 
 
 
