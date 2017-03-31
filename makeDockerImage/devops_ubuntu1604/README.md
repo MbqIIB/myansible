@@ -18,3 +18,8 @@ wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/ppc64el/
    10  exit
    11  ls
 
+
+
+
+root@fnode6-7:~# docker pull ppc64le/ubuntu
+root@fnode6-7:~# docker pull ppc64le/ubuntu:16.04

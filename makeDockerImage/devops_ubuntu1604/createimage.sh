@@ -8,7 +8,8 @@ set -x
 #name=ubuntu_14_lts_docker_aufs_ppc64le_fftapp_v0.0.1
 
 #name=ubuntu_ppc64le_1604_v0.1
-name=ubuntu1604_ppc64le_v1
+#name=ubuntu1604_ppc64le_v1
+name=ubuntu1604_ppc64le_v2
 imagedir=/tmp
 
 function dockerbuild(){
@@ -26,7 +27,7 @@ glance image-create \
 	       --container-format=docker \
 	       --disk-format=raw \
 	       --name ${name} \
-	       --file ${imagedir}/${name} \
+	       --file ${imagedir}/${name}.raw \
 	       --property hypervisor_type=docker \
 	       --property image_type=image \
 	       --property webshell=True \
@@ -69,6 +70,9 @@ glance image-update \
 	       --property hw_disk_bus=virtio \
 	       --property hw_video_model=vga \
 	       --property imageUuid=ubuntu_1604 \
+	       --property os_name="Ubuntu 1604" \
+	       --property os_version="Ubuntu 1604 - LTS" \
+	       --property os_override="16.04.2" \
 	       --property diskSize=20 \
 	       ${imgid}
 
@@ -76,8 +80,8 @@ glance image-update \
 
 
 ##main##
-dockerbuild
-saveimage
+#dockerbuild
+#saveimage
 ##glanceupload
 glanceimage
 glanceupdate

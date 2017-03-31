@@ -12,6 +12,9 @@ RUN apt-get install -fy make cscope ctags doxygen git
 #RUN apt-get -y update
 #RUN apt-get -y install advance-toolchain-at10.0-runtime advance-toolchain-at10.0-perf advance-toolchain-at10.0-devel advance-toolchain-at10.0-mcore-libs
 
+# install shellinabox
+RUN apt install -y shellinabox
+RUN sed -i '/^exit 0$/i\/usr\/bin\/shellinaboxd  -b -t' /etc/rc.local
 
 ADD . /bd_build
 #RUN mkdir /opt/RunOnce
@@ -28,6 +31,14 @@ RUN useradd -m -p '$1$super$uXdjVfWjBYtxOPjOXZb3k0' -s /bin/bash opuser
 RUN usermod -aG sudo opuser
 RUN sed -i 's/^SSHD_OPTS=$/SSHD_OPTS=-u0/' /etc/default/ssh
 RUN sed -i 's/^exit 0$/service ssh start\nexit 0/' /etc/rc.local
+RUN chage -d 0 root
+RUN chage -m 1 root
+RUN chage -M 90 root
+RUN chage -W 7 root 
+RUN chage -d 0 opuser
+RUN chage -m 1 opuser
+RUN chage -M 90 opuser
+RUN chage -W 7 opuser
 
 RUN  /bd_build/update.sh
 

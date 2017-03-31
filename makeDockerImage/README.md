@@ -25,3 +25,5 @@ usermod -aG sudo opuser
 
 usermod -p '$1$super$uXdjVfWjBYtxOPjOXZb3k0' opuser
 
+
+glance image-update --visibility private 20efb108-6a7b-46e9-b12a-e24d796b4c24
