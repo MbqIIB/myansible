@@ -126,13 +126,22 @@ https://developer.nvidia.com/cuda-downloads
 
 https://developer.nvidia.com/cuda-75-downloads-archive
 
+
+RUN apt-get install -y  iputils-ping
+RUN apt-get install -y  initramfs-tools
+
 wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/ppc64el/cuda-repo-ubuntu1604_8.0.61-1_ppc64el.deb
 sudo dpkg -i cuda-repo-ubuntu1604_8.0.61-1_ppc64el.deb
 sudo apt-get update
+sudo apt install -y nvidia-361
+#sudo rm /var/lib/dpkg/info/nvidia-361.postinst
+sudo apt install nvidia-361-dev nvidia-361-uvm
 sudo apt-get install cuda
 
 
 
+   15  wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/ppc64el/cuda-repo-ubuntu1604_8.0.61-1_ppc64el.deb
+   
 glance image-update d4ab56be-8d53-4c6e-8627-e216f16e6b94 --property accelerator_type=gpu_pcie --property image_type=image --visibility public
 
 
