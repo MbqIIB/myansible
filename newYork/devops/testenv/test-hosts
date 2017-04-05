@@ -4,3 +4,16 @@
 
 192.168.191.199 tctl-n0       tctl0
 192.168.191.208 tnet-n0       tnet0
+
+172.31.252.71 tctl-n0-pub
+172.31.252.72 tnet-n0-pub
+
+10.10.72.30 tctl-n0-data
+10.10.72.31 tnet-n0-data
+
+
+192.168.128.145 bnode6-1    svb01
+172.31.253.145  bnode6-1-pub  bnode6-1.pub.pic2.ibm.com
+10.10.80.1       bnode6-1-data
+192.168.33.61  bnode6-1-bmc
+

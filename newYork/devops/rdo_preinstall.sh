@@ -1,7 +1,10 @@
 #!/bin/bash
 set -x
 
-perl -pi -e 's/SELINUX=enforcing/SELINUX= permissive/g' /etc/selinux/config
+#perl -pi -e 's/SELINUX=enforcing/SELINUX= permissive/g' /etc/selinux/config
+#perl -pi -e 's/SELINUX=disabled/SELINUX=permissive/g' /etc/selinux/config
+sed -i 's/^SELINUX=.\+$/SELINUX=permissive/g' /etc/selinux/config
+setenforce 0
 echo 'ulimit -n 8192' >> /etc/profile
 echo "LANG=en_US.utf-8" >> /etc/environment
 echo "LC_ALL=en_US.utf-8" >> /etc/environment
