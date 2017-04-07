@@ -44,9 +44,11 @@ nova secgroup-list-rules default
 
 passwdfile=passwdfile.txt
 
-for user in `awk '{print $1}' ${passwdfile}`
+#for user in `awk '{print $1}' ${passwdfile}`
+for user in `cat ${passwdfile} | grep -v '^#'| awk '{print $1}'`
 
 do
+    source /root/openrc
 
     passwd=`awk -v I="$user" '{if(I==$1)print $2}' ${passwdfile}`
     email=`awk -v I="$user" '{if(I==$1)print $3}' ${passwdfile}`

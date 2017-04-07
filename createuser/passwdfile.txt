@@ -1,1 +1,3 @@
-sempleb@us.ibm.com Sempleb!Beta sempleb@us.ibm.com
+#teant&user      password email
+#test3@cn.ibm.com passw0rd test3@cn.ibm.com
+toddbloom@cn.ibm.com todd2pass toddbloom@cn.ibm.com

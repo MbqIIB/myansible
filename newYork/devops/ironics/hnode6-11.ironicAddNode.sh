@@ -8,7 +8,7 @@ NODE_MAC_ADDRESS="7c:fe:90:96:7c:f0"
 MY_DEPLOY_VMLINUZ_UUID=`glance image-list | grep p8el-deploy-vmlinuz | awk '{print $2}'`
 MY_DEPLOY_INITRD_UUID=`glance image-list | grep p8el-deploy-initrd | awk '{print $2}'`
 
-NodeName="p8lefnode611"
+NodeName="p8lehnode611"
 
 IRONIC_NODE=`ironic node-create --driver pxe_ipmitool --name ${NodeName} \
                     -i ipmi_address=$IRONIC_NODE_IPMI_ADDRESS   \
