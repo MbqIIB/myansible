@@ -90,16 +90,23 @@ VMID=87dcea1f-e3b7-4e74-a7a2-f2c942e83082
 
 IMAGENAME=CentOS-7.3-ppc64le-cloudimage-anydisk-v2
 VMID=a1530150-e50b-4979-9263-c9f56cb8bf16
+
+IMAGENAME=CentOS-7.3-ppc64le-cloudimage-anydisk-GPUcuda7.5-v2
+VMID=fa1c8d17-ac31-4ab3-b51d-ac807c3f9b1d
 nova image-create --show ${VMID} ${IMAGENAME}
 
 IMAGEID=$(nova image-list | grep ${IMAGENAME} | awk -F '|' '{print $2}')
 echo $IMAGEID
 #IMAGEID=fbaf5327-c9bf-4814-a004-5f446dd3b4f4
 glance image-update \
-	--property accelerator_type=none \
 	--property image_type=image \
 	--visibility public \
         ${IMAGEID}
+
+
+	#--property accelerator_type=none \
+
+
 #ExecStart=/usr/sbin/shellinaboxd -u $USER -g $GROUP --cert=${CERTDIR} --port=${PORT} $OPTS
 #sed -i "s/^ExecStart.\+$/ExecStart=\/usr\/sbin\/shellinaboxd -u \$USER -g \$GROUP  --port=\${PORT} --disable-ssl \$OPTS/g" /usr/lib/systemd/system/shellinaboxd.service
 sed -i "s/^ExecStart.\+$/ExecStart=\/usr\/sbin\/shellinaboxd -u \$USER -g \$GROUP  --cert=\${CERTDIR} --port=\${PORT} --disable-ssl \$OPTS/g" /usr/lib/systemd/system/shellinaboxd.service
@@ -134,8 +141,68 @@ vim /etc/cloud/cloud.cfg
 bootcmd:
   ## Turn off SELinux
   - setenforce 0
-
-
-#disable old image
-glance image-update --visibility private 347186ff-c576-42bd-b825-43ad73e208ba
 ```
+#### disable old image
+``` shell
+glance image-update --visibility private 347186ff-c576-42bd-b825-43ad73e208ba
+glance image-update --visibility private 1b9d6b78-45b4-4c1e-a617-31c0450f5759 
+```
+
+#### ubuntu
+``` shell
+apt update
+apt install -y shellinabox 
+apt clean
+#SHELLINABOX_ARGS="--no-beep --disable-ssl"
+sed -i "s/^SHELLINABOX_ARGS.\+$/SHELLINABOX_ARGS=\"--no-beep --disable-ssl\"/g" /etc/default/shellinabox
+service shellinabox restart
+ps -ef |  grep shellinabox
+```
+##### make image
+```
+ssh xnode6-9
+
+virt-sysprep -d instance-00000619
+OLDIMAGENAME=ubuntu-16.04-server-cloudimg-amd64-anydisk-v1
+IMAGENAME=ubuntu-16.04-server-cloudimg-amd64-anydisk-v2
+VMID=adc4edd1-1d20-48e2-aa6c-92dddb91b9c3
+
+virt-sysprep -d instance-00000622
+IMAGENAME=ubuntu-16.04.2-server-cloudimg-ppc64el-anydisk1-v2
+VMID=7e530db5-ab3f-42ee-895c-f7477beea300
+
+
+virt-sysprep -d instance-00000625
+IMAGENAME=ubuntu-16.04.2-server-cloudimg-ppc64el-anydisk1-GPUcuda7.5-v2
+VMID=253f9a99-64ab-4e91-8976-3745d01772dc
+
+virt-sysprep -d instance-00000628
+IMAGENAME=ubuntu-16.04.2-server-cloudimg-ppc64el-anydisk1-GPUcuda7.5-v4
+VMID=9c68cb37-b46c-42f7-b515-ac0b094055b3
+
+
+nova image-create --show ${VMID} ${IMAGENAME}
+
+IMAGEID=$(nova image-list | grep ${IMAGENAME} | awk -F '|' '{print $2}')
+echo $IMAGEID
+nova image-list | grep  $IMAGEID
+glance image-update \
+        --property image_type=image \
+        --visibility public \
+        ${IMAGEID}
+
+
+#### disable old image
+``` shell
+OLDIMAGENAME=ubuntu-16.04.2-server-cloudimg-ppc64el-anydisk1-v1
+OLDIMAGENAME=ubuntu-16.04-server-cloudimg-amd64-anydisk-v1
+OLDIMAGENAME=ubuntu-16.04-server-cloudimg-ppc64le-anydisk-v1
+OLDIMAGENAME=ubuntu-16.04.2-server-cloudimg-ppc64el-anydisk1-GPUcuda7.5-v1
+OLDIMAGEID=$(glance image-list | grep $OLDIMAGENAME | awk -F '|' '{print $2}')
+echo $OLDIMAGEID
+glance image-update --visibility private $OLDIMAGEID
+```
+
+
+
+
