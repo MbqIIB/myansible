@@ -59,7 +59,7 @@ apt-get -y install spl spl-dkms
 
 mkdir -p /home/install
 
-scp -r svf4:/home/install/packages /home/install/
+scp -r svf6:/home/install/packages /home/install/
 
 pushd /home/install/packages
 
@@ -112,7 +112,7 @@ zfs list
 service docker start
 
 echo "install containerplus"
-scp -r svf4:/home/install/containerplus-master /home/install
+scp -r svf6:/home/install/containerplus-master /home/install
 
 pushd /home/install/containerplus-master
 pip install -r requirements.txt
@@ -120,7 +120,7 @@ pip install -r requirements.txt
 popd
 
 echo "install nova-docker"
-scp -r svf4:/home/install/nova-docker-alchemy/ /home/install
+scp -r svf6:/home/install/nova-docker-alchemy/ /home/install
 
 pushd /home/install/nova-docker-alchemy/nova-docker/
 pip install ./
@@ -132,11 +132,11 @@ cp /usr/lib/python2.7/dist-packages/nova/objects/compute_node.py /usr/lib/python
 cp /usr/lib/python2.7/dist-packages/nova/compute/resource_tracker.py  /usr/lib/python2.7/dist-packages/nova/compute/resource_tracker.py.bak20160531
 rm -rf /usr/lib/python2.7/dist-packages/nova/objects/compute_node.pyc
 rm -rf /usr/lib/python2.7/dist-packages/nova/compute/resource_tracker.pyc
-scp svf4:/usr/lib/python2.7/dist-packages/nova/objects/compute_node.py   /usr/lib/python2.7/dist-packages/nova/objects/compute_node.py
-scp svf4:/usr/lib/python2.7/dist-packages/nova/compute/resource_tracker.py /usr/lib/python2.7/dist-packages/nova/compute/resource_tracker.py
-scp svf4:/usr/lib/python2.7/dist-packages/nova/compute/capi_states.py     /usr/lib/python2.7/dist-packages/nova/compute/
-scp svf4:/usr/lib/python2.7/dist-packages/nova/compute/sdaccel_states.py  /usr/lib/python2.7/dist-packages/nova/compute/
-scp svf4:/usr/lib/python2.7/dist-packages/nova/compute/gpu_states.py      /usr/lib/python2.7/dist-packages/nova/compute/
+scp svf6:/usr/lib/python2.7/dist-packages/nova/objects/compute_node.py   /usr/lib/python2.7/dist-packages/nova/objects/compute_node.py
+scp svf6:/usr/lib/python2.7/dist-packages/nova/compute/resource_tracker.py /usr/lib/python2.7/dist-packages/nova/compute/resource_tracker.py
+scp svf6:/usr/lib/python2.7/dist-packages/nova/compute/capi_states.py     /usr/lib/python2.7/dist-packages/nova/compute/
+scp svf6:/usr/lib/python2.7/dist-packages/nova/compute/sdaccel_states.py  /usr/lib/python2.7/dist-packages/nova/compute/
+scp svf6:/usr/lib/python2.7/dist-packages/nova/compute/gpu_states.py      /usr/lib/python2.7/dist-packages/nova/compute/
 
 echo "configure nova"
 mv /etc/nova/nova.conf /etc/nova/nova.conf.old

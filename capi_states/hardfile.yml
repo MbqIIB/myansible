@@ -1,7 +1,9 @@
 ---
 #- hosts: compute-server
 #- hosts: fstgb013,fstgb014,fstgb015
-- hosts: fnode3-6
+#- hosts: fnode3-6
+#- hosts: bnode6-3
+- hosts: fnode6-7,bnode6-3
 #- hosts: svf12
   remote_user: root
   gather_facts: true
@@ -11,6 +13,10 @@
 
     - name : copy gpu_states.py
       copy: src=gpu_states.py  dest={{toolsdir}}  owner=root group=root mode=0644
+      when: ansible_os_family =="Debian"
+
+    - name : copy gpu_volume.py
+      copy: src=gpu_volume.py  dest={{toolsdir}}  owner=root group=root mode=0644
       when: ansible_os_family =="Debian"
 
     - name : copy capi_states.py

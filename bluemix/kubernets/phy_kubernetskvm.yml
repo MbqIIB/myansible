@@ -1,0 +1,52 @@
+---
+- hosts : svx1,svx2,svx3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : ping
+      ping :
+
+#    - name: yum install  system-storage-manager
+#      yum : name=system-storage-manager state=latest
+
+
+- hosts : svx1
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: dir kubernets-n1
+      file :
+        path : /var/lib/libvirt/images/kubernets-n1
+        state: directory
+        mode: 0755
+        owner: qemu
+        group: qemu
+
+
+- hosts : svx2
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: dir kubernets-n1
+      file :
+        path : /var/lib/libvirt/images/kubernets-n2
+        state: directory
+        mode: 0755
+        owner: qemu
+        group: qemu
+
+
+- hosts : svx3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: dir kubernets-n1
+      file :
+        path : /var/lib/libvirt/images/kubernets-n3
+        state: directory
+        mode: 0755
+        owner: qemu
+        group: qemu
+
+
+

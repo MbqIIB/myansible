@@ -1,0 +1,15 @@
+---
+- hosts: install-server
+  gather_facts: no
+  tasks:
+  - name : add repo for cuda
+    apt_repository:
+      repo: deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/ppc64el /
+      state: present
+      filename: 'cuda'
+
+  - name: Install latest version of cuda 8.0
+    apt:
+      name: cuda
+      state: latest
+      install_recommends: no

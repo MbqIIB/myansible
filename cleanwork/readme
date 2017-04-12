@@ -5,3 +5,9 @@ keystone tenant-list > alltenantlist.txt
 getmail.sh
 
 awk -F " " '{print $4}' mail.txt | wc -l
+
+
+
+#image clean
+nova image-list > allimagelist
+cat allimagelist  | grep "\-15\-"  | grep -v management | grep -v linyh

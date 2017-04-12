@@ -1,0 +1,49 @@
+#- hosts: controller-server
+- hosts: bluem4
+  gather_facts: no
+  tasks:
+
+  - name: yum install openstack linzhbj
+    yum : name=rpcbind,nfs-utils state=latest
+
+  - name : service nfs-server.service
+    service : name=nfs-server.service state=restarted enabled=yes
+
+  - name : firewalld for nfs
+    firewalld: permanent=true state=enabled immediate=yes service=nfs
+
+  - name : firewalld for rpc-bind
+    firewalld: permanent=true state=enabled immediate=yes service=rpc-bind
+
+  - name : firewalld for mountd
+    firewalld: permanent=true state=enabled immediate=yes service=mountd
+  
+#  - name : firewalld 2049 tcp for nfs
+#    firewalld: port=2049/tcp permanent=true state=enabled immediate=yes
+#
+#  - name : firewalld 2049 udp for nfs
+#    firewalld: port=2049/udp permanent=true state=enabled immediate=yes
+#
+#  - name : firewalld 57136 tcp for nlockmgr
+#    firewalld: port=57136/tcp permanent=true state=enabled immediate=yes
+#
+#  - name : firewalld 40241 udp for nlockmgr
+#    firewalld: port=40241/udp permanent=true state=enabled immediate=yes
+#
+#  - name : firewalld 111 tcp for portmapper
+#    firewalld: port=111/tcp permanent=true state=enabled immediate=yes
+#
+#  - name : firewalld 111 udp for portmapper
+#    firewalld: port=111/udp permanent=true state=enabled immediate=yes
+#
+#  - name : firewalld 889 udp for rpcbind
+#    firewalld: port=889/udp permanent=true state=enabled immediate=yes
+#
+#
+#  - name : firewalld 20048 tcp for mountd
+#    firewalld: port=20048/tcp permanent=true state=enabled immediate=yes
+#
+#  - name : firewalld 20048 udp for mountd
+#    firewalld: port=20048/udp permanent=true state=enabled immediate=yes
+
+

@@ -1,0 +1,433 @@
+heat_template_version: 2013-05-23
+description: A template to create a autoport cluster which has its own net subnet and router.
+
+parameters:
+  # Paramters to define the network topology in stack
+  public_net_id:
+    type: string
+    description: >
+      ID of public network for which floating IP addresses will be allocated
+    # Use the actual public network ID here
+    default: c24ebbf6-8d64-4dd5-b59d-c9a5d66274c0 
+  private_net_name:
+    type: string
+    description: Name of private network to be created
+    default: autoport_network
+  private_subnet_name:
+    type: string
+    description: Name of private network to be created
+    default: autoport_subnet
+  private_net_cidr:
+    type: string
+    description: Private network address (CIDR notation)
+    default: 192.168.1.0/24
+  private_net_gateway:
+    type: string
+    description: Private network gateway address
+    default: 192.168.1.1
+  router_name:
+    type: string
+    description: Name of private network to be created
+    default: autoport_router
+  fixedip_driver:
+    type: string
+    description: Private ip address for driver node
+    default: 192.168.1.109
+  fixedip_master:
+    type: string
+    description: Private ip address for master node
+    default: 192.168.1.110
+  fixedip_slave_c_power:
+    type: string
+    description: Private ip address for centos power slave node
+    default: 192.168.1.211
+  fixedip_slave_c_x86:
+    type: string
+    description: Private ip address for centos x86 slave node
+    default: 192.168.1.212
+  fixedip_slave_u_power:
+    type: string
+    description: Private ip address for ubuntu power slave node
+    default: 192.168.1.213
+  fixedip_slave_u_x86:
+    type: string
+    description: Private ip address for ubuntu x86 slave node
+    default: 192.168.1.214
+
+  # Parameter to define Nova instances
+  image_driver:
+    type: string
+    description: Image used for driver node
+    default: d4e6480a-4bd4-4059-915b-f96de612c0f1
+  image_master:
+    type: string
+    description: Image used for master node
+    default: ff0c5d9b-73e8-49c4-84dd-6443d7afca7d
+  image_slave_c_power:
+    type: string
+    description: Image used for centos power slave node
+    default: 72d57a49-b687-45e3-8614-1df6be66ada5
+  image_slave_c_x86:
+    type: string
+    description: Image used for centos x86 slave node
+    default: f60ee815-f8eb-41bd-9198-be49bac9e31d
+  image_slave_u_power:
+    type: string
+    description: Image used for ubuntu power slave node
+    default: 9c07a994-196c-4dfe-bf5f-b66c58c79f6a
+  image_slave_u_x86:
+    type: string
+    description: Image used for ubuntu x86 slave node
+    default: 840c7872-c183-4efc-873b-24e7210930a6
+  flavor_driver:
+    type: string
+    description: flavor used for driver node
+    default: docker.small # use correct flavor as needed
+  flavor_master:
+    type: string
+    description: flavor used for master node
+    default: kvm.8c16g20G
+  flavor_slave:
+    type: string
+    description: flavor used for slave node
+    default: kvm.2c4g20G
+
+  # Parameters about SuperVessel/OpenStack user
+  os_username:
+    type: string
+    description: Name of SuperVessel/OpenStack user
+  os_password:
+    type: string
+    description: Password of SuperVessel/OpenStack user
+  os_tenant_name:
+    type: string
+    description: Tenant Name
+  os_auth_url:
+    type: string
+    description: Auth URL of SuperVessel/OpenStack
+
+
+resources:
+  # driver_server will be the last created node
+  driver_server:
+    type: OS::Nova::Server
+    depends_on: master_server
+    properties:
+      flavor: { get_param: flavor_driver }
+      image: { get_param: image_driver }
+      metadata: {"stack_id": {get_param: "OS::stack_id"}, "SPN":"Autoport"}
+      networks:
+        - port: { get_resource: port_driver }
+      user_data_format: RAW
+      user_data:
+        str_replace:
+          template: |
+           #!/bin/bash
+
+           # Set Hosts
+           echo "172.16.10.51 keystone.kilo" >> /etc/hosts
+           echo "172.16.10.120 crl.ptopenlab.com" >> /etc/hosts
+
+           # Replace username in logstash config file
+           sed -i "s/username/$OS_USERNAME/g" /usr/local/logstash/etc/autoport.conf
+           
+           # Startup Logstash Service
+           /usr/local/logstash-2.1.1/bin/logstash -f /usr/local/logstash-2.1.1/etc/autoport.conf &
+
+           # Set autoport config.ini
+           # Replace jenkinsUrl
+           sed -i "/jenkinsUrl/c\jenkinsUrl: https://crl.ptopenlab.com:8800/$JENKINS_MASTER_EXTERNAL_IP:8080/" /home/opuser/autoport/config.ini
+           sed -i "/jenkinsHostname/c\jenkinsHostname: 192.168.1.110" /home/opuser/autoport/config.ini
+           # Set jenkinsPassword
+           sed -i "/jenkinsPassword/c\jenkinsPassword: poss2015" /home/opuser/autoport/config.ini
+           # Remove SFTP-related parameters if existed
+           sed -i '/SFTP/d' /home/opuser/autoport/config.ini
+           sed -i '/hostname:/d' /home/opuser/autoport/config.ini
+           sed -i '/username:/d' /home/opuser/autoport/config.ini
+           sed -i '/password:/d' /home/opuser/autoport/config.ini
+           sed -i '/pathForTestResults:/d' /home/opuser/autoport/config.ini
+           sed -i '/pathForBatchTestResults:/d' /home/opuser/autoport/config.ini
+           sed -i '/pathForBatchFiles:/d' /home/opuser/autoport/config.ini
+           sed -i '/expiryForTmp:/d' /home/opuser/autoport/config.ini
+           # Remove SuperVessel-related parameters if existed
+           sed -i '/OpenStack/d' /home/opuser/autoport/config.ini
+           sed -i '/os_username = /d' /home/opuser/autoport/config.ini
+           sed -i '/os_password = /d' /home/opuser/autoport/config.ini
+           sed -i '/os_tenant_name = /d' /home/opuser/autoport/config.ini
+           sed -i '/os_auth_url = /d' /home/opuser/autoport/config.ini
+           # Add Swift-related parameters
+           echo '' >> /home/opuser/autoport/config.ini
+           echo '[Archive - Swift]' >> /home/opuser/autoport/config.ini
+           echo 'hostname: 172.16.10.10' >> /home/opuser/autoport/config.ini
+           echo 'port: 8022' >> /home/opuser/autoport/config.ini
+           echo 'username: $OS_TENANT_NAME:$OS_USERNAME' >> /home/opuser/autoport/config.ini
+           echo 'password: $OS_PASSWORD' >> /home/opuser/autoport/config.ini
+           echo 'pathForTestResults: /autoport/test_results/' >> /home/opuser/autoport/config.ini
+           echo 'pathForBatchTestResults: /autoport/batch_test_results/' >> /home/opuser/autoport/config.ini
+           echo "pathForBatchFiles: /autoport/batch_files/" >> /home/opuser/autoport/config.ini
+           echo "expiryForTmp: 1800" >> /home/opuser/autoport/config.ini
+           # Add OpenStack-related parameters
+           echo '' >> /home/opuser/autoport/config.ini
+           echo '[OpenStack]' >> /home/opuser/autoport/config.ini
+           echo 'os_username = $OS_USERNAME' >> /home/opuser/autoport/config.ini
+           echo 'os_password = $OS_PASSWORD' >> /home/opuser/autoport/config.ini
+           echo 'os_tenant_name = $OS_TENANT_NAME' >> /home/opuser/autoport/config.ini
+           echo 'os_auth_url = $OS_AUTH_URL' >> /home/opuser/autoport/config.ini
+           # Enable knowledge base
+           sed -i "/enableKnowledgeBase/c\enableKnowledgeBase: True" /home/opuser/autoport/config.ini
+           sed -i "/connectionURL/c\connectionURL: 172.16.13.8" /home/opuser/autoport/config.ini
+
+           # Remove files if existed
+           if [ -e /home/opuser/autoport/data/autoport.log ]
+           then
+             rm -rf /home/opuser/autoport/data/autoport.log
+           fi
+           if [ -e /home/opuser/autoport/data/config/cloudNodeInfo.json ]
+           then
+             rm -rf /home/opuser/autoport/data/cloudNodeInfo.json
+           fi
+           if [ -e /home/opuser/autoport/data/config/getSharedchef-repo-version.json ]
+           then
+             rm -rf /home/opuser/autoport/data/getSharedchef-repo-version.json
+           fi
+
+           # Check Jenkins Master port 22
+           for i in 1 2 3 4 5 6 7 8 9 10
+           do
+             status=$(ssh -o BatchMode=yes -o ConnectTimeout=5 -i /home/opuser/autoport/data/security/jenkins jenkins@192.168.1.110 echo ok 2>&1)
+             if [[ $status == ok ]]
+             then
+               echo "Jenkins SSH service is up. `date`" >> /root/output.txt
+               break
+             else
+               sleep 10
+               echo "Retry.. " $i `date` >> /root/output.txt
+             fi
+           done
+
+           # Check the Jenkins Master service
+           for i in 1 2 3 4 5 6 7 8 9 10
+           do
+             resp=`curl -s -I http://$JENKINS_MASTER_EXTERNAL_IP:8080/computer/api/json?pretty=true | grep HTTP/1.1 | awk {'print $2'}`
+             if [ "$resp" = 200 ]
+             then
+               echo "Jenkins API is up and running. `date`" >> /root/output.txt
+               break
+             else
+               sleep 10
+               echo "Retry .. " $i `date` >> /root/output.txt
+             fi
+           done
+
+           sleep 30
+
+           # Start up Autoport service
+           su - opuser <<EOF
+             cd /home/opuser/autoport
+             nohup python main.py -d -p &
+           EOF
+
+          params:
+            $JENKINS_MASTER_EXTERNAL_IP: { get_attr: [fip_master, floating_ip_address] }
+            $OS_USERNAME: { get_param: os_username }
+            $OS_PASSWORD: { get_param: os_password }
+            $OS_TENANT_NAME: { get_param: os_tenant_name }
+            $OS_AUTH_URL: { get_param: os_auth_url }
+
+  # Neutron port for driver server
+  port_driver:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_resource: private_net }
+      fixed_ips:
+        - ip_address: { get_param: fixedip_driver }
+
+  # Neutron floatingip for driver server
+  fip_driver:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network_id: { get_param: public_net_id }
+      port_id: { get_resource: port_driver }
+
+  master_server:
+    type: OS::Nova::Server
+    depends_on: private_subnet
+    properties:
+      flavor: { get_param: flavor_master }
+      image: { get_param: image_master }
+      metadata: {"stack_id": {get_param: "OS::stack_id"}, "SPN":"Autoport"}
+      networks:
+        - port: { get_resource: port_master }
+      user_data_format: RAW
+      user_data:
+        str_replace:
+          template: |
+           #!/bin/bash
+           echo 'This is the master server. My internal IP is $INTERNAL_IP' >> /tmp/test_master.log
+          params:
+            $INTERNAL_IP: { get_param: fixedip_master}
+
+
+  # Neutron port for master server
+  port_master:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_resource: private_net }
+      fixed_ips:
+        - ip_address: { get_param: fixedip_master }
+
+  # Neutron floatingip for master server
+  fip_master:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network_id: { get_param: public_net_id }
+      port_id: { get_resource: port_master }
+
+  slave_c_power:
+    type: OS::Nova::Server
+    depends_on: private_subnet
+    properties:
+      flavor: { get_param: flavor_slave }
+      image: { get_param: image_slave_c_power }
+      metadata: {"stack_id": {get_param: "OS::stack_id"}, "SPN":"Autoport"}
+      networks:
+        - port: { get_resource: port_slave_c_power }
+      user_data_format: RAW
+      user_data:
+        str_replace:
+          template: |
+           #!/bin/bash
+           echo 'This is the slave_c_power server. My internal IP is $INTERNAL_IP' >> /tmp/test_slave_c_power.log
+          params:
+            $INTERNAL_IP: { get_param: fixedip_slave_c_power}
+
+  # Neutron port for slave_c_power server
+  port_slave_c_power:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_resource: private_net }
+      fixed_ips:
+        - ip_address: { get_param: fixedip_slave_c_power }
+
+  slave_c_x86:
+    type: OS::Nova::Server
+    depends_on: private_subnet
+    properties:
+      flavor: { get_param: flavor_slave }
+      image: { get_param: image_slave_c_x86 }
+      metadata: {"stack_id": {get_param: "OS::stack_id"}, "SPN":"Autoport"}
+      networks:
+        - port: { get_resource: port_slave_c_x86 }
+      user_data_format: RAW
+      user_data:
+        str_replace:
+          template: |
+           #!/bin/bash
+           echo 'This is the slave_c_x86 server. My internal IP is $INTERNAL_IP' >> /tmp/test_slave_c_x86.log
+          params:
+            $INTERNAL_IP: { get_param: fixedip_slave_c_x86}
+
+  # Neutron port for slave_c_x86 server
+  port_slave_c_x86:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_resource: private_net }
+      fixed_ips:
+        - ip_address: { get_param: fixedip_slave_c_x86 }
+
+  slave_u_power:
+    type: OS::Nova::Server
+    depends_on: private_subnet
+    properties:
+      flavor: { get_param: flavor_slave }
+      image: { get_param: image_slave_u_power }
+      metadata: {"stack_id": {get_param: "OS::stack_id"}, "SPN":"Autoport"}
+      networks:
+        - port: { get_resource: port_slave_u_power }
+      user_data_format: RAW
+      user_data:
+        str_replace:
+          template: |
+           #!/bin/bash
+           echo 'This is the slave_u_power server. My internal IP is $INTERNAL_IP' >> /tmp/test_slave_u_power.log
+          params:
+            $INTERNAL_IP: { get_param: fixedip_slave_u_power}
+
+  # Neutron port for slave_u_power server
+  port_slave_u_power:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_resource: private_net }
+      fixed_ips:
+        - ip_address: { get_param: fixedip_slave_u_power }
+
+  slave_u_x86:
+    type: OS::Nova::Server
+    depends_on: private_subnet
+    properties:
+      flavor: { get_param: flavor_slave }
+      image: { get_param: image_slave_u_x86 }
+      metadata: {"stack_id": {get_param: "OS::stack_id"}, "SPN":"Autoport"}
+      networks:
+        - port: { get_resource: port_slave_u_x86 }
+      user_data_format: RAW
+      user_data:
+        str_replace:
+          template: |
+           #!/bin/bash
+           echo 'This is the slave_u_x86 server. My internal IP is $INTERNAL_IP' >> /tmp/test_slave_u_x86.log
+          params:
+            $INTERNAL_IP: { get_param: fixedip_slave_u_x86}
+
+  # Neutron port for slave_u_x86 server
+  port_slave_u_x86:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_resource: private_net }
+      fixed_ips:
+        - ip_address: { get_param: fixedip_slave_u_x86 }
+
+
+  # Neutron private net
+  private_net:
+    type: OS::Neutron::Net
+    properties:
+      name: { get_param: private_net_name }
+
+  # Neutron private subnet
+  private_subnet:
+    type: OS::Neutron::Subnet
+    properties:
+      name: { get_param: private_subnet_name }
+      network_id: { get_resource: private_net }
+      cidr: { get_param: private_net_cidr }
+      gateway_ip: { get_param: private_net_gateway }
+
+  # Neutron router
+  router:
+    type: OS::Neutron::Router
+    properties:
+      name: { get_param: router_name }
+
+  # Neutron router gateway
+  router_gateway:
+    type: OS::Neutron::RouterGateway
+    properties:
+      router_id: { get_resource: router }
+      network_id: { get_param: public_net_id }
+
+  # Neutron router interface
+  router_interface:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router }
+      subnet_id: { get_resource: private_subnet }
+
+
+outputs:
+  driver_server_floating_ip:
+    value: {get_attr: [fip_driver, floating_ip_address]}
+  master_server_floating_ip:
+    value: {get_attr: [fip_master, floating_ip_address]}
+  username:
+    value: {get_param: user_name}

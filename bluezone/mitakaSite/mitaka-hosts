@@ -1,0 +1,60 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+
+### phy Managment IP
+10.0.0.18   bluem4
+
+### phy Public IP
+### phy Data IP
+########## OS #################
+10.0.19.189  ansible
+10.0.19.190  els-vip
+10.0.19.191  els-n1
+10.0.19.192  els-n2
+10.0.19.193  els-n3
+10.0.19.194  log-server
+
+10.0.19.200  ctl-vip
+10.0.19.201  ctl-n1        ctl1
+10.0.19.202  ctl-n2        ctl2
+10.0.19.203  ctl-n3        ctl3
+10.0.19.204  net-vip
+10.0.19.205  net-n1        net1
+10.0.19.206  net-n2        net2
+10.0.19.207  net-n3        net3
+
+10.0.0.130   neucloud5 
+10.0.0.43    cp11
+10.0.0.199   svx11
+
+
+### data ##
+10.10.72.21  ctl-n1-data
+10.10.72.22  ctl-n2-data
+10.10.72.23  ctl-n3-data
+
+10.10.72.25  net-n1-data
+10.10.72.26  net-n2-data
+10.10.72.27  net-n3-data
+
+10.10.72.43  cp11-data
+10.10.72.44  svx11-data
+10.10.72.45  neucloud5-data
+
+### pub ###
+172.71.15.213 ansible-pub
+172.71.15.214 els-n1-pub
+172.71.15.215 els-n2-pub
+172.71.15.216 els-n3-pub
+172.71.15.217 log-server-pub
+
+172.71.15.201 ctl-n1-pub
+172.71.15.202 ctl-n2-pub
+172.71.15.203 ctl-n3-pub
+
+172.71.15.205 net-n1-pub
+172.71.15.206 net-n2-pub
+172.71.15.207 net-n3-pub
+
+172.71.15.254 bluem4-pub

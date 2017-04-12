@@ -1,0 +1,23 @@
+- hosts: makeimage
+  remote_user : root
+  gather_facts: true
+  tasks:
+
+  - name: Yum install epel repo
+    yum : name=epel-release state=latest disable_gpg_check=yes
+
+  - name: Yum install shellinabox
+    yum : name=shellinabox state=latest disable_gpg_check=yes
+
+#  - name : firewalld for shellinaboxd
+#    firewalld: permanent=true state=enabled immediate=yes service=shellinaboxd
+
+  - name : firewalld 4200 tcp for shellinaboxd
+    firewalld: port=4200/tcp permanent=true state=enabled immediate=yes
+  
+  - name : CentOS shellinaboxd sshd
+    service : name=shellinaboxd state=restarted enabled=yes
+    when : ansible_os_family =="RedHat" 
+
+
+

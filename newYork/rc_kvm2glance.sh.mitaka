@@ -37,4 +37,3 @@ glance image-create --name=${OS_name} \
 
                     #--is-public=${OS_is_public} \
                     #--protected=${OS_is_public} \
-

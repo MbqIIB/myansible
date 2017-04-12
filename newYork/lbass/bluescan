@@ -1,0 +1,111 @@
+
+
++ NameSuffix=BlueScan
++ SubnetID=f4250ae1-36c5-499c-8c38-151d8ec8dc2f
++ TENANT_ID=461ac8f4615746a59a88d66427448fdd
++ Port=8080
++ Protocol=TCP
++ neutron lb-pool-create --tenant-id 461ac8f4615746a59a88d66427448fdd --name lb-BlueScan --lb-method ROUND_ROBIN --protocol TCP --subnet-id f4250ae1-36c5-499c-8c38-151d8ec8dc2f
+Created a new pool:
++------------------------+--------------------------------------+
+| Field                  | Value                                |
++------------------------+--------------------------------------+
+| admin_state_up         | True                                 |
+| description            |                                      |
+| health_monitors        |                                      |
+| health_monitors_status |                                      |
+| id                     | 57c6384e-2eff-4c86-b283-025c6f930802 |
+| lb_method              | ROUND_ROBIN                          |
+| members                |                                      |
+| name                   | lb-BlueScan                          |
+| protocol               | TCP                                  |
+| provider               | haproxy                              |
+| status                 | PENDING_CREATE                       |
+| status_description     |                                      |
+| subnet_id              | f4250ae1-36c5-499c-8c38-151d8ec8dc2f |
+| tenant_id              | 461ac8f4615746a59a88d66427448fdd     |
+| vip_id                 |                                      |
++------------------------+--------------------------------------+
++ sleep 5
++ neutron lb-vip-create --tenant-id 461ac8f4615746a59a88d66427448fdd --name vip-BlueScan --protocol-port 8080 --protocol TCP --subnet-id f4250ae1-36c5-499c-8c38-151d8ec8dc2f lb-BlueScan
+Created a new vip:
++---------------------+--------------------------------------+
+| Field               | Value                                |
++---------------------+--------------------------------------+
+| address             | 10.0.46.122                          |
+| admin_state_up      | True                                 |
+| connection_limit    | -1                                   |
+| description         |                                      |
+| id                  | 3c7ed70f-da95-49b4-b460-67542e63df48 |
+| name                | vip-BlueScan                         |
+| pool_id             | 57c6384e-2eff-4c86-b283-025c6f930802 |
+| port_id             | 912c01a9-8eae-45b0-84d8-c07a6138a5d6 |
+| protocol            | TCP                                  |
+| protocol_port       | 8080                                 |
+| session_persistence |                                      |
+| status              | PENDING_CREATE                       |
+| status_description  |                                      |
+| subnet_id           | f4250ae1-36c5-499c-8c38-151d8ec8dc2f |
+| tenant_id           | 461ac8f4615746a59a88d66427448fdd     |
++---------------------+--------------------------------------+
++ sleep 5
++ Address=(10.0.45.70 10.0.45.71)
+    + for ip in '${Address[@]}'
+    + echo 10.0.45.70
+    10.0.45.70
+    + neutron lb-member-create --tenant-id 461ac8f4615746a59a88d66427448fdd --address 10.0.45.70 --protocol-port 8080 lb-BlueScan
+    Created a new member:
+    +--------------------+--------------------------------------+
+    | Field              | Value                                |
+    +--------------------+--------------------------------------+
+    | address            | 10.0.45.70                           |
+    | admin_state_up     | True                                 |
+    | id                 | 6b2e784e-430b-4eab-9548-cc9022d823ae |
+    | pool_id            | 57c6384e-2eff-4c86-b283-025c6f930802 |
+    | protocol_port      | 8080                                 |
+    | status             | PENDING_CREATE                       |
+    | status_description |                                      |
+    | tenant_id          | 461ac8f4615746a59a88d66427448fdd     |
+    | weight             | 1                                    |
+    +--------------------+--------------------------------------+
+    + sleep 5
+    + for ip in '${Address[@]}'
+    + echo 10.0.45.71
+    10.0.45.71
+    + neutron lb-member-create --tenant-id 461ac8f4615746a59a88d66427448fdd --address 10.0.45.71 --protocol-port 8080 lb-BlueScan
+    Created a new member:
+    +--------------------+--------------------------------------+
+    | Field              | Value                                |
+    +--------------------+--------------------------------------+
+    | address            | 10.0.45.71                           |
+    | admin_state_up     | True                                 |
+    | id                 | a27ed48d-452e-4e03-8cdb-b2c16a74ee07 |
+    | pool_id            | 57c6384e-2eff-4c86-b283-025c6f930802 |
+    | protocol_port      | 8080                                 |
+    | status             | PENDING_CREATE                       |
+    | status_description |                                      |
+    | tenant_id          | 461ac8f4615746a59a88d66427448fdd     |
+    | weight             | 1                                    |
+    +--------------------+--------------------------------------+
+    + sleep 5
+    + PublicID=32670b8e-e0eb-4cb9-8c58-10c779d3bb17
+    + sleep 5
+    + neutron floatingip-create 32670b8e-e0eb-4cb9-8c58-10c779d3bb17 --tenant-id 461ac8f4615746a59a88d66427448fdd
+    Created a new floatingip:
+    +---------------------+--------------------------------------+
+    | Field               | Value                                |
+    +---------------------+--------------------------------------+
+    | fixed_ip_address    |                                      |
+    | floating_ip_address | 172.29.163.139                       |
+    | floating_network_id | 32670b8e-e0eb-4cb9-8c58-10c779d3bb17 |
+    | id                  | bdf7ef8f-b59b-43df-b890-eaab1a1d4d98 |
+    | port_id             |                                      |
+    | router_id           |                                      |
+    | status              | DOWN                                 |
+    | tenant_id           | 461ac8f4615746a59a88d66427448fdd     |
+    +---------------------+--------------------------------------+
+    + sleep 5
+
+     neutron floatingip-associate bdf7ef8f-b59b-43df-b890-eaab1a1d4d98 912c01a9-8eae-45b0-84d8-c07a6138a5d6
+     Associated floating IP bdf7ef8f-b59b-43df-b890-eaab1a1d4d98
+

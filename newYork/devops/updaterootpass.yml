@@ -1,0 +1,14 @@
+---
+- hosts: cmd-server,net-server,controller-server,elk-server
+#- hosts: cmd-server
+  vars:
+    user: root
+    # love123456
+    password: "$6$H0GDVntl$oHr7IVs4a9Q8jB3ROff18qS4Nbu9k7xnViKh/7HoRo5NIi2Dy2l3rIt7XagpjeUF50QywhhpIMhYoDk3vuofk/"
+
+  remote_user: root
+  tasks:
+    - name: Add user {{ user }}
+      user: name={{user}} shell=/bin/bash password={{ password }} createhome=yes remove=yes state=present
+      #user: name={{user}} shell=/bin/bash password={{ password }} expires=1468503387 createhome=yes
+

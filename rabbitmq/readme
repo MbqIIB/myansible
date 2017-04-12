@@ -15,3 +15,15 @@ ansible controller-server -m shell -a "chown  rabbitmq:rabbitmq -R /etc/rabbitmq
 ansible controller-server -m shell -a "chown  rabbitmq:rabbitmq -R /var/log/rabbitmq/"
 
 
+
+
+
+rabbitmq-plugins enable rabbitmq_shovel rabbitmq_management
+
+#ansible syh1,syh2,syh3 -m shell -a "cat /etc/rabbitmq/enable*"
+
+#ansible controller-server -m shell -a "cat /etc/rabbitmq/enabled_plugins"
+ansible controller-server -m shell -a "rabbitmq-plugins list"
+ansible controller-server -m shell -a "rabbitmq-plugins disable rabbitmq_management rabbitmq_management_visualiser rabbitmq_shovel rabbitmq_shovel_management rabbitmq_tracing"
+
+

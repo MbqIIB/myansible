@@ -348,3 +348,22 @@ sed -i "s/^local_ip.*/local_ip=10.10.68.4/g" /etc/neutron/plugins/ml2/openvswitc
 
 
 
+/etc/systemd/system/rabbitmq-server.service.d/limits.conf
+[Service]
+LimitNOFILE=10000
+
+
+
+pcs resource create HAPROXY_PUB_VIP ocf:heartbeat:IPaddr2 ip=172.31.252.70 cidr_netmask=18 op monitor interval=10s
+
+[root@ctl-n1 scripts]# pcs resource show HAPROXY_PUB_VIP
+ Resource: HAPROXY_PUB_VIP (class=ocf provider=heartbeat type=IPaddr2)
+  Attributes: ip=172.31.252.70 cidr_netmask=18 
+  Operations: start interval=0s timeout=20s (HAPROXY_PUB_VIP-start-interval-0s)
+              stop interval=0s timeout=20s (HAPROXY_PUB_VIP-stop-interval-0s)
+              monitor interval=10s (HAPROXY_PUB_VIP-monitor-interval-10s)
+
+
+pcs constraint colocation add HAPROXY_PUB_VIP HAPROXY INFINITY
+pcs constraint order HAPROXY_PUB_VIP then HAPROXY
+

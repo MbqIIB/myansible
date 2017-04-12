@@ -60,12 +60,12 @@ logallpause=${logname}.log.err.pause
 #ComputeNode=compute-cp10-ppc-LE-kvm.ibm.com
 #ComputeNode=compute-cp11-ppc-LE-kvm.ibm.com
 #ComputeNode=compute-cp12-ppc-LE-kvm.ibm.com
-#ComputeNode=compute-cp13-ppc-LE-docker
+ComputeNode=compute-cp13-ppc-LE-docker
 #ComputeNode=x3550m5n01.ibm.com
 #ComputeNode=chuanghe1.ibm.com
 #ComputeNode=chuanghe2.ibm.com
 #ComputeNode=chuanghe3.ibm.com
-ComputeNode=neucloud4
+#ComputeNode=neucloud4
 
 
 nova list --all-tenants  --host ${ComputeNode} > ${logall}

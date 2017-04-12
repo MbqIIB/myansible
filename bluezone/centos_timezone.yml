@@ -1,0 +1,11 @@
+#- hosts:  ent-op-server
+#- hosts:  neucloud5
+#- hosts:  redpower8
+#- hosts: ansible 
+- hosts: cp16
+  remote_user : root
+  gather_facts: true
+  tasks:
+  - name: set timezone to Asia/Shanghai
+    timezone:
+      name: Asia/Shanghai 

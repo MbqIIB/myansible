@@ -1,0 +1,19 @@
+#- hosts:  ent-op-server
+#- hosts:  neucloud5
+#- hosts:  redpower8
+#- hosts: ansible 
+- hosts:  cp11
+  remote_user : root
+  gather_facts: true
+  vars:
+    filepath : /etc/environment
+    options : LANG
+    options2 : LC_ALL
+  tasks:
+    - name: Config {{filepath}}
+      lineinfile: dest={{filepath}} state=present regexp='^{{options}}' line='{{options}}=en_US.utf-8'
+      when : ansible_os_family =="RedHat" 
+
+    - name: Config {{filepath}}
+      lineinfile: dest={{filepath}} state=present regexp='^{{options2}}' line='{{options2}}=en_US.utf-8'
+      when : ansible_os_family =="RedHat" 

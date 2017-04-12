@@ -1,0 +1,53 @@
+systemctl status  firewalld
+systemctl enable  firewalld.service
+systemctl start  firewalld.service
+
+firewall-cmd --permanent --add-port=5900-5910/tcp
+firewall-cmd --add-port=5900-5910/tcp
+
+systemctl reload  firewalld.service
+
+firewall-cmd --list-all-zones
+vim /usr/lib/systemd/system/firewalld.service
+
+firewall-cmd --zone=public --list-services
+service firewalld status
+firewall-cmd --list-rich-rules --zone=public
+firewall-cmd --list-rich-rules
+cd /usr/lib/firewalld/zones
+firewall-cmd --reload
+
+firewall-cmd --permanent --direct --passthrough ipv4 -t nat -I POSTROUTING -o br-public -j MASQUERADE -s 10.0.0.0/16
+
+firewall-cmd --permanent --direct --add-rule ipv4 filter FWDO_public 0 -j ACCEPT
+
+firewall-cmd --direct --add-rule ipv4 filter FWDO_public 0 -j ACCEPT
+firewall-cmd --reload
+iptables -S
+
+
+
+ firewall-cmd --permanent --direct --passthrough ipv4 -t nat -I POSTROUTING -o virbr1 -j MASQUERADE -s 10.0.0.0/16
+
+
+
+
+
+firewall-cmd --direct --passthrough ipv4 0 -A FWR -p tcp -m multiport --dports 8004 -m comment --comment openstack-orchestration-api -j ACCEPT
+
+firewall-cmd --direct --get-rules ipv4 filter IN_public_allow
+firewall-cmd --direct --add-rule ipv4 filter IN_public_allow 0 -m tcp -p tcp --dport 25 -j ACCEPT
+firewall-cmd --direct --add-rule ipv4 filter IN_public_allow 0 -m tcp -p tcp --sport 26 --dport 25  -j ACCEPT
+
+firewall-cmd --direct --add-rule ipv4 filter IN_public_allow  0 -p tcp -m multiport --dports 8004 -m comment --comment openstack-orchestration-api -j ACCEPT
+
+firewall-cmd --direct --add-rule ipv4 filter FORWARD  0 -p tcp -m multiport --dports 8004 -m comment --comment openstack-orchestration-api -j ACCEPT
+
+
+firewall-cmd --direct --get-rules ipv4 filter IN_public_allow
+
+
+
+9.186.106.216：/data/dataset/imagenet-12/train.tar.gz 
+
+9.186.106.216：/data/dataset/imagenet-12/val.tar.gz

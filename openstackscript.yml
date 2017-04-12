@@ -1,7 +1,8 @@
 ---
-- hosts: compute-server
+#- hosts: compute-server
 #- hosts: compute
 #- hosts: ceph-server
+- hosts: install-server
  
   remote_user: root
   gather_facts: true
@@ -21,15 +22,15 @@
       #when : ansible_os_family =="CentOS"
 
 
-    - name : copy tools p8servicerestart.sh
-      copy: src=openstackfile/p8servicerestart.sh  dest={{toolsdir}}  owner=root group=root mode=0755
-      when: ansible_os_family =="Debian"
+#    - name : copy tools p8servicerestart.sh
+#      copy: src=openstackfile/p8servicerestart.sh  dest={{toolsdir}}  owner=root group=root mode=0755
+#      when: ansible_os_family =="Debian"
 
     - name : copy tools mitaka_servicerestart.sh
       copy: src=openstackfile/mitaka_servicerestart.sh  dest={{toolsdir}}  owner=root group=root mode=0755
       when: ansible_os_family =="Debian"
 
-- hosts: poc-server
+- hosts: install-server
   remote_user: root
   gather_facts: true
   vars :
@@ -37,3 +38,4 @@
   tasks:
     - name : copy openrc /root/openrc
       copy: src=/root/openrc  dest={{toolsdir}}  owner=root group=root mode=0600
+

@@ -1,0 +1,26 @@
+---
+#- hosts:  op-server
+- hosts:  elk-server
+  remote_user : root
+  gather_facts: true
+  vars:
+    filepath : /root/.bashrc
+    options : StrictHostKeyChecking
+  tasks:
+    - name: Config {{filepath}}
+      lineinfile: dest={{filepath}} state=present regexp='^HISTSIZE' line='HISTSIZE=10000'
+
+    - name: Config {{filepath}}
+      lineinfile: dest={{filepath}} state=present regexp='^HISTFILESIZE' line='HISTFILESIZE=20000'
+
+    - name: Config {{filepath}}
+      lineinfile: "dest={{filepath}} state=present regexp='^HISTTIMEFORMAT' line='HISTTIMEFORMAT=\"%F %T :: \"' "
+
+    - name: Config {{filepath}}
+      lineinfile: " dest={{filepath}} state=present regexp='^HISTIGNORE' line='HISTIGNORE=\"ls\"' "
+
+    - name: Config {{filepath}}
+      lineinfile: dest={{filepath}} state=present regexp='^HISTCONTROL' line='HISTCONTROL=ignoreboth'
+
+    - name: Config {{filepath}}
+      lineinfile: dest={{filepath}} state=present regexp='^shopt -s' line='shopt -s histappend'

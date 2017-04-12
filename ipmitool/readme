@@ -1,0 +1,6 @@
+
+modprobe ipmi_devintf
+ipmitool lan print 1
+
+
+

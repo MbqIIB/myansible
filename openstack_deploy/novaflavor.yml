@@ -1,0 +1,19 @@
+
+#- hosts:  ctl-n1
+- hosts:  localhost
+  remote_user: root
+  gather_facts: true
+  tasks:
+  - name : ping
+    ping :
+
+  # Create 'tiny' flavor with 1024MB of RAM, 1 virtual CPU, and 10GB of
+  # local disk, and 10GB of ephemeral.
+  - name : create flavor
+    os_nova_flavor:
+      state=present
+      name=linflavor
+      ram=1024
+      vcpus=1
+      disk=10
+      ephemeral=10

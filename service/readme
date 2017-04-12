@@ -1,0 +1,58 @@
+
+  neutron-dhcp-agent.service
+  neutron-l3-agent.service
+  neutron-metadata-agent.service
+  neutron-metering-agent.service
+  neutron-openvswitch-agent.service
+  neutron-server.service
+
+  rabbitmq-server.service
+
+  openstack-aodh-evaluator.service
+  openstack-aodh-listener.service
+  openstack-aodh-notifier.service
+
+  openstack-ceilometer-central.service
+  openstack-ceilometer-collector.service
+  openstack-ceilometer-compute.service
+  openstack-ceilometer-notification.service
+
+  openstack-cinder-api.service
+  openstack-cinder-backup.service
+  openstack-cinder-scheduler.service
+  openstack-cinder-volume.service
+
+  openstack-glance-api.service
+  openstack-glance-registry.service
+
+  openstack-gnocchi-metricd.service
+  openstack-gnocchi-statsd.service
+
+  openstack-heat-api-cfn.service
+  openstack-heat-api.service
+  openstack-heat-engine.service
+
+  openstack-losetup.service
+
+  openstack-nova-api.service
+  openstack-nova-cert.service
+  openstack-nova-compute.service
+  openstack-nova-conductor.service
+  openstack-nova-consoleauth.service
+  openstack-nova-novncproxy.service
+  openstack-nova-scheduler.service
+
+  openstack-swift-account-auditor.service
+  openstack-swift-account-reaper.service
+  openstack-swift-account-replicator.service
+  openstack-swift-account.service
+  openstack-swift-container-auditor.service
+  openstack-swift-container-replicator.service
+  openstack-swift-container-updater.service
+  openstack-swift-container.service
+  openstack-swift-object-auditor.service
+  openstack-swift-object-expirer.service
+  openstack-swift-object-replicator.service
+  openstack-swift-object-updater.service
+  openstack-swift-object.service
+  openstack-swift-proxy.service

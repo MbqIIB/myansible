@@ -1,5 +1,5 @@
 ---
-- hosts : poc-server,phy-server
+- hosts : poc-server,phy-server,elk-server,zabbix,install-server
   remote_user: root
   gather_facts: no
   tasks :

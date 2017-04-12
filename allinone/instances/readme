@@ -1,0 +1,41 @@
+
+# openstack role list  --user admin
++----------------------------------+------------------+---------+-------+
+| ID                               | Name             | Project | User  |
++----------------------------------+------------------+---------+-------+
+| c0b04838e34f458285e8c690daf86c2e | admin            | admin   | admin |
+| eaf4943b10384d618519d6cbedafb786 | heat_stack_owner | admin   | admin |
++----------------------------------+------------------+---------+-------+
+
+openstack role add --project admin --user admin heat_stack_owner
+
+
+openstack network list
+
+export NET_ID=$(openstack network list | awk '/ provider / { print $2 }')
+
+openstack stack create -t demo-template.yml --parameter "NetID=$NET_ID" stack
+
+
+ openstack role add --project admin --user admin _member_
++-----------+----------------------------------+
+| Field     | Value                            |
++-----------+----------------------------------+
+| domain_id | None                             |
+| id        | 9fe2ff9ee4384b1894a90878d3e92bab |
+| name      | _member_                         |
++-----------+----------------------------------+
+
+
+
+openstack user create --password 42ae1b61514af2c2 heat_admin
++----------+----------------------------------+
+| Field    | Value                            |
++----------+----------------------------------+
+| email    | None                             |
+| enabled  | True                             |
+| id       | 5d50344dfa584c46abc798585193e7ca |
+| name     | heat_admin                       |
+| username | heat_admin                       |
++----------+----------------------------------+
+

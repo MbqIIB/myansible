@@ -1,0 +1,12 @@
+- hosts : m-cp-server
+  remote_user: root
+  gather_facts: no
+  tasks:
+
+    - name : copy compute_openstack_agent.conf
+      copy : src=compute_openstack_agent.conf dest=/etc/rsyslog.d/60-openstack-compute.conf mode=0644
+
+    - name : rsyslog start
+      service : name=rsyslog state=restarted enabled=yes
+
+

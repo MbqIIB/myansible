@@ -1,0 +1,9 @@
+---
+#- hosts : op-server,svx-server,kb-server,es-server
+- hosts : op-server,svx-server,es-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: update /etc/hosts
+      copy: src=/etc/hosts  dest=/etc/hosts
+                 owner=root group=root mode=0644
