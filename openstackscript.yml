@@ -1,8 +1,9 @@
 ---
 #- hosts: compute-server
-#- hosts: compute
+#- hosts: compute-server
+- hosts: poc-server
 #- hosts: ceph-server
-- hosts: install-server
+#- hosts: install-server
  
   remote_user: root
   gather_facts: true

@@ -167,6 +167,16 @@ wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers
 ```
 
 
+## test cuda 8
+```
+export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64 ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+cuda-install-samples-8.0.sh ~
+cd ~/NVIDIA_CUDA-8.0_Samples/0_Simple/vectorAdd
+make
+./vectorAdd
+```
+
 
 
 

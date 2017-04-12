@@ -15,7 +15,11 @@ ovs-vsctl show  > ovs-vsctl-bak-${DateTime}.txt
 brctl show >  brctl-bak-${DateTime}.txt
 route -n > route-bak-${DateTime}.txt
 
-cp -r /etc/network/ ./
+
+cp -r /etc/rc.local ./
+cp -r /etc/nova  ./
+cp -r /etc/neutron ./
+cp -r /etc/network ./
 
 
 popd
