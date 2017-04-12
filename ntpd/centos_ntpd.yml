@@ -1,11 +1,15 @@
 #- hosts: controller-server,net-server
-- hosts: other-server
+#- hosts: other-server
+- hosts: elk-server
   gather_facts: no
   tasks:
 
-  - name: yum install openstack linzhbj
-    yum : name=ntp state=latest
+#  - name: yum install openstack linzhbj
+#    yum : name=ntp state=latest
+#
+#  - name : enable ntp
+#    service : name=ntpd state=started enabled=yes
 
-  - name : enable ntp
-    service : name=ntpd state=started enabled=yes
-  
+  - name: set timezone to Asia/Tokyo
+    timezone:
+      name: Asia/Shanghai
