@@ -1,3 +1,3 @@
 #teant&user      password email
-#test3@cn.ibm.com passw0rd test3@cn.ibm.com
-toddbloom@cn.ibm.com todd2pass toddbloom@cn.ibm.com
+test3@cn.ibm.com passw0rd test3@cn.ibm.com
+#toddbloom@cn.ibm.com todd2pass toddbloom@cn.ibm.com
