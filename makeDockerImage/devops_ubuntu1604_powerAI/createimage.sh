@@ -1,17 +1,7 @@
 #!/bin/bash
 set -x
-#name=ubuntu_14_lts_docker_aufs_ppc64le_cuda7_caffe_v1.7.1
-#name=ubuntu_14_lts_docker_aufs_ppc64le_cuda7_v1.4.1
-#name=ubuntu_14_lts_docker_aufs_ppc64le_opencv_v1.0.1
-#name=ubuntu_14_lts_docker_aufs_ppc64le_xfce_v0.0.3
-#name=ubuntu_14_lts_docker_aufs_ppc64le_capiinformix_v0.0.2
-#name=ubuntu_14_lts_docker_aufs_ppc64le_fftapp_v0.0.1
 
-#name=ubuntu_ppc64le_1604_v0.1
-#name=ubuntu1604_ppc64le_v1
-#name=ubuntu1604_ppc64le_v2
-#name=ubuntu1604_ppc64le_v3
-name=ubuntu1604_ppc64le_v4
+name=ubuntu1604_ppc64le_mldl_v1
 imagedir=/tmp
 
 function dockerbuild(){

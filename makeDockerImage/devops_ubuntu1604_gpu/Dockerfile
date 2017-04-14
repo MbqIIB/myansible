@@ -21,9 +21,9 @@ RUN sed -i '/^exit 0$/i\/usr\/bin\/shellinaboxd  -b -t' /etc/rc.local
 # install cuda
 RUN wget -q http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/ppc64el/7fa2af80.pub ; apt-key add 7fa2af80.pub  ; rm 7fa2af80.pub
 RUN add-apt-repository  -u "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/ppc64el /"
-RUN apt install -y nvidia-361
+#RUN apt install -y nvidia-* nvidia-361-dev nvidia-361-uvm
 #RUN rm /var/lib/dpkg/info/nvidia-361.postinst
-RUN apt install nvidia-361-dev nvidia-361-uvm
+RUN apt install 
 RUN apt-get install -y cuda
 
 
@@ -31,6 +31,7 @@ ADD . /bd_build
 #RUN mkdir /opt/RunOnce
 #RUN cp -r /bd_build/bin/FlashGT /opt/RunOnce/
 
+RUN apt install -y locales
 RUN sudo locale-gen 'en_US.UTF-8'
 RUN echo 'LC_ALL=en_US.UTF-8' >> /etc/environment 
 RUN echo 'LANG=en_US.UTF-8' >> /etc/environment 
