@@ -19,6 +19,7 @@ RUN apt-get install -fy make cscope ctags doxygen git
 RUN apt install -y shellinabox
 RUN sed -i '/^exit 0$/i\/usr\/bin\/shellinaboxd  -b -t' /etc/rc.local
 
+RUN apt install -y  nvidia-361-dev nvidia-361-uvm nvidia-361
 
 #add Jupyter
 RUN pip install --upgrade pip

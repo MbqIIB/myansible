@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-name=ubuntu1604_ppc64le_mldl_v1
+name=ubuntu1604_ppc64le_mldl_v2
 imagedir=/tmp
 
 function dockerbuild(){
@@ -70,7 +70,7 @@ imgid=`glance image-list | grep ${name} | awk '{print $2}'`
 	       --property sys_type=ubuntu \
 	       --property os_type="Linux" \
 	       --property architecture=ppc64le \
-	       --property accelerator_type=none \
+	       --property accelerator_type=gpu_pcie \
 	       --property base_type=base \
 	       --property hw_disk_bus=virtio \
 	       --property hw_video_model=vga \
