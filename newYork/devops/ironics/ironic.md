@@ -158,3 +158,7 @@ glance image-create --name ubuntu-14.04.5-server-baremetal-ansiblekey_v1  --disk
 
 
 
+http://wiki.baserock.org/guides/openstack-on-baserock/#index6h2
+
+https://docs.openstack.org/developer/ironic/deploy/multitenancy.html#multitenancy
+https://docs.openstack.org/developer/ironic/deploy/install-guide.html

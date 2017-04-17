@@ -5,6 +5,7 @@ IRONIC_NODE_IPMI_ADDRESS="192.168.33.65"
 IRONIC_NODE_IPMI_USERNAME=ADMIN
 IRONIC_NODE_IPMI_PASSWORD=c6j6Ptz6
 NODE_MAC_ADDRESS="7c:fe:90:96:85:40"
+F_NODE_MAC_ADDRESS="0c:c4:7a:d2:dc:02"
 MY_DEPLOY_VMLINUZ_UUID=`glance image-list | grep p8el-deploy-vmlinuz | awk '{print $2}'`
 MY_DEPLOY_INITRD_UUID=`glance image-list | grep p8el-deploy-initrd | awk '{print $2}'`
 
@@ -20,7 +21,10 @@ IRONIC_NODE=`ironic node-create --driver pxe_ipmitool --name ${NodeName} \
                      | grep uuid | grep -v chassis_uuid | \
                      awk '{print $4}'`
  
+
 ironic port-create -a $NODE_MAC_ADDRESS -n $IRONIC_NODE
+#ironic port-create -a $F_NODE_MAC_ADDRESS -n $IRONIC_NODE
+
 # whole disk image, local boot
 ironic node-update $IRONIC_NODE add properties/capabilities='boot_option:local'
  
