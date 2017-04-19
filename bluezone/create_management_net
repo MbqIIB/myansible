@@ -1,0 +1,51 @@
+
+
+
+
+############################################
+
+ 1015  ovs-vsctl show
+ 1016  brctl addbr br-managent
+
+
+
+brctl addbr br-management
+brctl addif br-management eth0
+brctl addif br-management enP3p9s0f0
+
+ifconfig  br-management 10.0.0.71/16 up
+route add default gw 10.0.0.17 br-management
+brctl addif br-management eth0
+
+
+ 1080* neutron net-create
+ 1081  neutron net-create  management   --shared
+ 1082  neutron subnet-list
+ 1085  neutron subnet-create --allocation-pool start=10.0.15.2,end=10.0.18.254 --gateway 10.0.0.17 --ip-version 4  --name subnet_management management 10.0.0.0/16 
+
+ 1125  ovs-vsctl add-port br-eth1 eth3 tag=1000
+
+
+ovs-vsctl show
+EXT_NET_NAME="management"
+ip link add name ${EXT_NET_NAME}-INT type veth peer name ${EXT_NET_NAME}-EXT
+ifconfig ${EXT_NET_NAME}-INT up
+ifconfig ${EXT_NET_NAME}-EXT up
+
+ifconfig 
+brctl addif br-management ${EXT_NET_NAME}-EXT
+ovs-vsctl add-port br-eth1 ${EXT_NET_NAME}-INT tag=1000
+ovs-vsctl show
+
+
+brctl addif br-management management-EXT
+brctl show
+
+
+
+neutron net-create  --shared --provider:segmentation_id=1200   --provider:network_type=vlan --provider:physical_network=default lin2
+
+
+update ml2_network_segments set segmentation_id=1201 where network_id='52951b18-4245-41f5-b205-ccd9f42adcdf';
+
+
