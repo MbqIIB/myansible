@@ -116,9 +116,44 @@ brctl addif br-management ${EXT_NET_NAME}-EXT
 ovs-vsctl add-port br-int ${EXT_NET_NAME}-INT tag=6
 ovs-vsctl show
 
+ovs-vsctl show  | grep 6
+        Port "tapaa3931e6-6f"
+            tag: 6
+            Interface "tapaa3931e6-6f"
+
+
+
 brctl addif br-management management-EXT
 brctl show
 neutron  subnet-update  --dns-nameserver 114.114.114.114 --dns-nameserver 8.8.8.8 --dns-nameserver 30.30.0.1 550339d0-5b33-4abc-9ea9-f970219f2fc4
+
+ neutron port-show aa3931e6-6fdf-4b20-815f-8289f0f22d9d
++-----------------------+-------------------------------------------------------------------------------------+
+| Field                 | Value                                                                               |
++-----------------------+-------------------------------------------------------------------------------------+
+| admin_state_up        | True                                                                                |
+| allowed_address_pairs |                                                                                     |
+| binding:host_id       | net-n1                                                                              |
+| binding:profile       | {}                                                                                  |
+| binding:vif_details   | {"port_filter": true, "ovs_hybrid_plug": true}                                      |
+| binding:vif_type      | ovs                                                                                 |
+| binding:vnic_type     | normal                                                                              |
+| created_at            | 2017-04-19T02:40:15                                                                 |
+| description           |                                                                                     |
+| device_id             | dhcp90bfc535-7142-51cb-be45-ceacc2e11e8e-7e3cbae1-5b90-4a54-807d-f453c8eb2494       |
+| device_owner          | network:dhcp                                                                        |
+| dns_name              |                                                                                     |
+| extra_dhcp_opts       |                                                                                     |
+| fixed_ips             | {"subnet_id": "95582b5f-9c6b-4356-aeb8-1ca5a1a52583", "ip_address": "192.168.33.3"} |
+| id                    | aa3931e6-6fdf-4b20-815f-8289f0f22d9d                                                |
+| mac_address           | fa:16:3e:cb:12:d6                                                                   |
+| name                  |                                                                                     |
+| network_id            | 7e3cbae1-5b90-4a54-807d-f453c8eb2494                                                |
+| security_groups       |                                                                                     |
+| status                | ACTIVE                                                                              |
+| tenant_id             | 074b2880fec348e8aa766f64a4ac6e08                                                    |
+| updated_at            | 2017-04-19T02:40:16                                                                 |
++-----------------------+-------------------------------------------------------------------------------------+
 
 
 ```
