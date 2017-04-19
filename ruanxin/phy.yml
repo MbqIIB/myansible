@@ -1,0 +1,9 @@
+---
+#- hosts : els-n1,els-n2,els-n3
+- hosts : phy-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+
+    - name : firewalld 5900 5999tcp
+      firewalld: port=5900-5999/tcp permanent=true state=enabled immediate=yes
