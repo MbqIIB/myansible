@@ -1,0 +1,60 @@
+---
+#- hosts : install-server
+- hosts : compute-server-ppc64le-docker
+  remote_user: root
+  gather_facts: no
+  tasks :
+  - name: Config nova.conf
+    ini_file: 
+      dest: /etc/nova/nova.conf
+      section: DEFAULT
+      option: compute_driver
+      value: novadocker.virt.docker.DockerDriver 
+      #value : libvirt.LibvirtDriver
+
+  - name: Config nova-compute.conf
+    ini_file: 
+      dest: /etc/nova/nova-compute.conf
+      section: DEFAULT
+      option: compute_driver
+      value: novadocker.virt.docker.DockerDriver 
+      #value : libvirt.LibvirtDriver
+ 
+  - name: Config nova.conf
+    ini_file: 
+      dest: /etc/nova/nova.conf
+      section: docker 
+      option: cpu_capping
+      value: true
+      #value : libvirt.LibvirtDriver
+      backup: yes
+ 
+  - name: Config nova.conf
+    ini_file: 
+      dest: /etc/nova/nova.conf
+      section: docker 
+      option: set_fs_size
+      value: true
+      backup: yes
+ 
+  - name: Config nova.conf
+    ini_file: 
+      dest: /etc/nova/nova.conf
+      section: docker 
+      option: client_timeout
+      value: 3600
+      backup: yes
+
+  - name: Config nova.conf
+    ini_file: 
+      dest: /etc/nova/nova.conf
+      section: docker 
+      option: network_device_mtu
+      value: 1450
+      backup: yes
+
+  - name : service nova-compute
+    service : name=nova-compute state=restarted enabled=yes
+
+  - name : service neutron-openvswitch-agent
+    service : name=neutron-openvswitch-agent state=restarted enabled=yes

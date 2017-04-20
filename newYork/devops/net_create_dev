@@ -172,3 +172,168 @@ MariaDB [neutron]> select * from subnets;
 
 
 neutron subnet-update  15b9c32d-621a-4bb8-8bfc-4ee33da419c5 --allocation-pool start=172.31.216.1,end=172.31.219.254
+
+neutron net-create pub-net2   \
+        -- --router:external=True  
+
+neutron subnet-create pub-net2  \
+        --name   pub-subnet2 \
+	--allocation-pool start=172.31.250.2,end=172.31.250.254  \
+	--gateway=172.31.255.254 --enable_dhcp=False  \
+	--dns-nameserver 8.8.8.8 \
+	172.31.192.0/18
+
+
+[root@ansible devops]# neutron net-create pub-net2   -- --router:external=True
+        --name   pub-subnet2 \
+        --allocation-pool start=172.31.250.1,end=172.31.250.210  \
+        --gateway=172.31.255.254 --enable_dhcp=False  \
+        --dns-nameserver 8.8.8.8 \
+        172.31.192.0/18
+
+Created a new network:
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | True                                 |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2017-04-17T09:02:54                  |
+| description               |                                      |
+| id                        | 1bcf1008-c001-42cc-8f99-6a663017b150 |
+| ipv4_address_scope        |                                      |
+| ipv6_address_scope        |                                      |
+| is_default                | False                                |
+| mtu                       | 1450                                 |
+| name                      | pub-net2                             |
+| provider:network_type     | vxlan                                |
+| provider:physical_network |                                      |
+| provider:segmentation_id  | 94                                   |
+| router:external           | True                                 |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| tenant_id                 | 7de3dec9204e4f52b704f391cd4413c4     |
+| updated_at                | 2017-04-17T09:02:54                  |
++---------------------------+--------------------------------------+
+[root@ansible devops]# neutron subnet-create pub-net2  \
+>         --name   pub-subnet2 \
+>         --allocation-pool start=172.31.250.1,end=172.31.250.210  \
+>         --gateway=172.31.255.254 --enable_dhcp=False  \
+>         --dns-nameserver 8.8.8.8 \
+>         172.31.192.0/18
+Created a new subnet:
++-------------------+----------------------------------------------------+
+| Field             | Value                                              |
++-------------------+----------------------------------------------------+
+| allocation_pools  | {"start": "172.31.250.1", "end": "172.31.250.210"} |
+| cidr              | 172.31.192.0/18                                    |
+| created_at        | 2017-04-17T09:02:55                                |
+| description       |                                                    |
+| dns_nameservers   | 8.8.8.8                                            |
+| enable_dhcp       | False                                              |
+| gateway_ip        | 172.31.255.254                                     |
+| host_routes       |                                                    |
+| id                | 91efb5fb-92e8-4ca5-a7cc-0090a0bc9dc0               |
+| ip_version        | 4                                                  |
+| ipv6_address_mode |                                                    |
+| ipv6_ra_mode      |                                                    |
+| name              | pub-subnet2                                        |
+| network_id        | 1bcf1008-c001-42cc-8f99-6a663017b150               |
+| subnetpool_id     |                                                    |
+| tenant_id         | 7de3dec9204e4f52b704f391cd4413c4                   |
+| updated_at        | 2017-04-17T09:02:55                                |
++-------------------+----------------------------------------------------+
+
+neutron router-create pub-router2
+
+Created a new router:
++-------------------------+--------------------------------------+
+| Field                   | Value                                |
++-------------------------+--------------------------------------+
+| admin_state_up          | True                                 |
+| availability_zone_hints |                                      |
+| availability_zones      |                                      |
+| description             |                                      |
+| distributed             | False                                |
+| external_gateway_info   |                                      |
+| ha                      | True                                 |
+| id                      | 7cfc6848-e004-402d-9677-ccfcf92ddf2e |
+| name                    | pub-router2                          |
+| routes                  |                                      |
+| status                  | ACTIVE                               |
+| tenant_id               | 7de3dec9204e4f52b704f391cd4413c4     |
++-------------------------+--------------------------------------+
+
+
+neutron router-gateway-set 7cfc6848-e004-402d-9677-ccfcf92ddf2e 1bcf1008-c001-42cc-8f99-6a663017b150
+Set gateway for router 7cfc6848-e004-402d-9677-ccfcf92ddf2e
+
+
+neutron net-create priv-net-vxlan2
+
+neutron subnet-create --name priv-subnet-vxlan2 \
+                --enable_dhcp=True \
+                priv-net-vxlan2 10.12.0.0/16
+
+[root@ansible devops]# neutron net-create priv-net-vxlan2
+Created a new network:
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | True                                 |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2017-04-17T10:26:08                  |
+| description               |                                      |
+| id                        | 5cada35f-a757-460c-9fe9-8f78abe0e62b |
+| ipv4_address_scope        |                                      |
+| ipv6_address_scope        |                                      |
+| mtu                       | 1450                                 |
+| name                      | priv-net-vxlan2                      |
+| provider:network_type     | vxlan                                |
+| provider:physical_network |                                      |
+| provider:segmentation_id  | 87                                   |
+| router:external           | False                                |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| tenant_id                 | 7de3dec9204e4f52b704f391cd4413c4     |
+| updated_at                | 2017-04-17T10:26:08                  |
++---------------------------+--------------------------------------+
+[root@ansible devops]#
+[root@ansible devops]# neutron subnet-create --name priv-subnet-vxlan2 \
+>                 --enable_dhcp=True \
+>                 priv-net-vxlan2 10.12.0.0/16
+Created a new subnet:
++-------------------+------------------------------------------------+
+| Field             | Value                                          |
++-------------------+------------------------------------------------+
+| allocation_pools  | {"start": "10.12.0.2", "end": "10.12.255.254"} |
+| cidr              | 10.12.0.0/16                                   |
+| created_at        | 2017-04-17T10:26:09                            |
+| description       |                                                |
+| dns_nameservers   |                                                |
+| enable_dhcp       | True                                           |
+| gateway_ip        | 10.12.0.1                                      |
+| host_routes       |                                                |
+| id                | a2c19f8e-eace-4396-b21b-98ffad3fa295           |
+| ip_version        | 4                                              |
+| ipv6_address_mode |                                                |
+| ipv6_ra_mode      |                                                |
+| name              | priv-subnet-vxlan2                             |
+| network_id        | 5cada35f-a757-460c-9fe9-8f78abe0e62b           |
+| subnetpool_id     |                                                |
+| tenant_id         | 7de3dec9204e4f52b704f391cd4413c4               |
+| updated_at        | 2017-04-17T10:26:09                            |
++-------------------+------------------------------------------------+
+
+ neutron router-interface-add   7cfc6848-e004-402d-9677-ccfcf92ddf2e a2c19f8e-eace-4396-b21b-98ffad3fa295 
+Added interface ca4506c4-547f-4b09-839f-8cc16688f9ad to router 7cfc6848-e004-402d-9677-ccfcf92ddf2e.
+neutron net-update  5cada35f-a757-460c-9fe9-8f78abe0e62b --shared=true
+172.31.250.1 - 172.31.250.255
+129.33.250.1 - 129.33.250.255
+
+neutron subnet-update  91efb5fb-92e8-4ca5-a7cc-0090a0bc9dc0 --allocation-pool start=172.31.250.1,end=172.31.250.254
