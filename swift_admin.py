@@ -1,6 +1,9 @@
 import swiftclient
 from oslo_utils import timeutils
 
+
+# DOCKER_OPTS="--mtu 1450"
+
 username = "test8@cn.ibm.com"
 #token = "2045f12b97f84a54b2c3abf36de4b010"
 #token = "1ece6f38125a41ecb33c4441b48f14a8"
