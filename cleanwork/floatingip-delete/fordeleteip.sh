@@ -3,21 +3,21 @@
 set -x
 source /root/openrc
 
-pushd /home/linzhbj/floatingip-delete/
+maindir=/opt/servicemonitor
+pushd ${maindir}
 DATETIME=$(date  '+%Y%m%d_%H%M%S')
 
-logdir=floatingip_log_${DATETIME}
+logdir=/var/log/servicemonitor/floatingip_log_${DATETIME}
 
 if [ ! -d ${logdir} ]
 then
     mkdir ${logdir}
 fi
 
-pushd ${logdir}
 
 
 
-logfile=floatingip
+logfile=${logdir}/floatingip
 neutron floatingip-list | grep "| 172" | grep "| \+ |" > ${logfile}
 
 #exit 0
@@ -33,5 +33,4 @@ do
     neutron floatingip-delete ${ip}
 done
 
-popd
 popd # /home/linzhbj/floatingip-delete/

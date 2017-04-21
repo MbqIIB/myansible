@@ -1,0 +1,79 @@
+
+
+
+++ ironic node-create --driver pxe_ipmitool --name p8lefnode67 -i ipmi_address=192.168.33.67 -i ipmi_username=ADMIN -i ipmi_password=c6j6Ptz6 -i deploy_kernel=194e854a-96fd-4223-ad21-726d3dde8dc8 -i deploy_ramdisk=524fac97-ceb3-47d2-9abd-d9136e9799b7 -p memory_mb=32768 -p cpus=192 -p local_gb=300 -p cpu_arch=ppc64le
+++ awk '{print $4}'
+++ grep -v chassis_uuid
++ IRONIC_NODE=744acb68-85b8-4625-b382-2653bd96a34e
++ ironic port-create -a 7c:fe:90:96:86:90 -n 744acb68-85b8-4625-b382-2653bd96a34e
++-----------+--------------------------------------+
+| Property  | Value                                |
++-----------+--------------------------------------+
+| address   | 7c:fe:90:96:86:90                    |
+| extra     | {}                                   |
+| node_uuid | 744acb68-85b8-4625-b382-2653bd96a34e |
+| uuid      | ed5b8713-02d8-4263-a61b-5fc7ddf3692e |
++-----------+--------------------------------------+
++ ironic node-update 744acb68-85b8-4625-b382-2653bd96a34e add properties/capabilities=boot_option:local
++------------------------+-----------------------------------------------------------------------+
+| Property               | Value                                                                 |
++------------------------+-----------------------------------------------------------------------+
+| chassis_uuid           |                                                                       |
+| clean_step             | {}                                                                    |
+| console_enabled        | False                                                                 |
+| created_at             | 2017-03-07T00:59:53+00:00                                             |
+| driver                 | pxe_ipmitool                                                          |
+| driver_info            | {u'ipmi_password': u'******', u'ipmi_address': u'192.168.33.67',      |
+|                        | u'ipmi_username': u'ADMIN', u'deploy_kernel': u'194e854a-             |
+|                        | 96fd-4223-ad21-726d3dde8dc8', u'deploy_ramdisk': u'524fac97-ceb3-47d2 |
+|                        | -9abd-d9136e9799b7'}                                                  |
+| driver_internal_info   | {}                                                                    |
+| extra                  | {}                                                                    |
+| inspection_finished_at | None                                                                  |
+| inspection_started_at  | None                                                                  |
+| instance_info          | {}                                                                    |
+| instance_uuid          | None                                                                  |
+| last_error             | None                                                                  |
+| maintenance            | False                                                                 |
+| maintenance_reason     | None                                                                  |
+| name                   | p8lefnode67                                                           |
+| power_state            | None                                                                  |
+| properties             | {u'memory_mb': 32768, u'cpu_arch': u'ppc64le', u'local_gb': 300,      |
+|                        | u'cpus': 192, u'capabilities': u'boot_option:local'}                  |
+| provision_state        | available                                                             |
+| provision_updated_at   | None                                                                  |
+| raid_config            |                                                                       |
+| reservation            | None                                                                  |
+| target_power_state     | None                                                                  |
+| target_provision_state | None                                                                  |
+| target_raid_config     |                                                                       |
+| updated_at             | None                                                                  |
+| uuid                   | 744acb68-85b8-4625-b382-2653bd96a34e                                  |
++------------------------+-----------------------------------------------------------------------+
+
+
+   65  2017-04-20 03:48:51 :: scp /usr/lib/python2.7/dist-packages/nova/gpus_kvm.py fnode6-7:/usr/lib/python2.7/dist-packages/nova/gpus_kvm.py
+   66  2017-04-20 03:49:12 :: history  | grep nova
+root@fnode3-6:~# ll /usr/lib/python2.7/dist-packages/nova/compute/gpu_*
+-rw-r--r-- 1 root root 28356 Dec  7 00:19 /usr/lib/python2.7/dist-packages/nova/compute/gpu_states.py
+-rw-r--r-- 1 root root  3009 Feb 28 03:48 /usr/lib/python2.7/dist-packages/nova/compute/gpu_volume.py
+
+
+
+mysql -u root -e "update  nova.compute_nodes set extra_resources='4' where host='fnode6-7'"
+
+mysql -u root -e "select extra_resources,host from nova.compute_nodes where host='fnode6-7'"
+mysql -u root -e "select cpu_info,host from nova.compute_nodes where host='fnode6-7'"
+
+kvm image
+image_id=5c2458d7-4d78-4991-8e16-b89d368c39ae
+image_id=4292842f-21dd-4566-a18f-e1d99d7d4c4a
+glance image-update  --property hw_disk_bus=virtio   \
+                     --property hw_video_model=vga  \
+                     --property hypervisor_type=kvm \
+                     --property architecture=ppc64le \
+                     --property accelerator_type=none \
+                    $image_id
+ 
+docker image
+glance image-update  --property hw_disk_bus=virtio   --property hw_video_model=vga  --property hypervisor_type=docker  image_id

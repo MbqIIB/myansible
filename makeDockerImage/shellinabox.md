@@ -180,6 +180,9 @@ virt-sysprep -d instance-00000628
 IMAGENAME=ubuntu-16.04.2-server-cloudimg-ppc64el-anydisk1-GPUcuda7.5-v4
 VMID=9c68cb37-b46c-42f7-b515-ac0b094055b3
 
+virt-sysprep -d instance-000007c7
+IMAGENAME=ubuntu-16.04.2-server-cloudimg-ppc64el-GPUcuda8-powerAI-v1
+VMID=453ac0ad-8849-4d2e-9735-2f2e17336979
 
 nova image-create --show ${VMID} ${IMAGENAME}
 
@@ -187,6 +190,12 @@ IMAGEID=$(nova image-list | grep ${IMAGENAME} | awk -F '|' '{print $2}')
 echo $IMAGEID
 nova image-list | grep  $IMAGEID
 glance image-update \
+        --property image_type=image \
+        --visibility public \
+        ${IMAGEID}
+
+glance image-update \
+        --property accelerator_type=gpu_pcie\
         --property image_type=image \
         --visibility public \
         ${IMAGEID}

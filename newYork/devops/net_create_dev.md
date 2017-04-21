@@ -303,7 +303,7 @@ Created a new network:
 | tenant_id                 | 7de3dec9204e4f52b704f391cd4413c4     |
 | updated_at                | 2017-04-17T10:26:08                  |
 +---------------------------+--------------------------------------+
-[root@ansible devops]#
+
 [root@ansible devops]# neutron subnet-create --name priv-subnet-vxlan2 \
 >                 --enable_dhcp=True \
 >                 priv-net-vxlan2 10.12.0.0/16
@@ -330,8 +330,9 @@ Created a new subnet:
 | updated_at        | 2017-04-17T10:26:09                            |
 +-------------------+------------------------------------------------+
 
- neutron router-interface-add   7cfc6848-e004-402d-9677-ccfcf92ddf2e a2c19f8e-eace-4396-b21b-98ffad3fa295 
+neutron router-interface-add   7cfc6848-e004-402d-9677-ccfcf92ddf2e a2c19f8e-eace-4396-b21b-98ffad3fa295 
 Added interface ca4506c4-547f-4b09-839f-8cc16688f9ad to router 7cfc6848-e004-402d-9677-ccfcf92ddf2e.
+
 neutron net-update  5cada35f-a757-460c-9fe9-8f78abe0e62b --shared=true
 172.31.250.1 - 172.31.250.255
 129.33.250.1 - 129.33.250.255
