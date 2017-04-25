@@ -3,8 +3,8 @@
 #uuids=$(awk -F ' ' '{print $2}' cp0_ACTIVE.txt)
 #uuids=$(awk -F ' ' '{print $2}' cp4_ACTIVE.txt)
 #uuids=$(awk -F ' ' '{print $2}' cp5_ACTIVE.txt)
-#uuids=$(awk -F ' ' '{print $2}' alltenants.log.err.active)
-uuids=$(awk -F '|' '{print $5}' allimage.log.saving)
+uuids=$(awk -F ' ' '{print $2}' alltenants.log.err.active)
+#uuids=$(awk -F '|' '{print $5}' allimage.log.saving)
 
 set -x
 for id in ${uuids[@]}
