@@ -1,3 +1,5 @@
+# clean old instance
+
 cat tenantlist  | awk -F "|" '{print $4}'  > vmtenantlist.txt
 
 keystone tenant-list > alltenantlist.txt

@@ -1,8 +1,8 @@
+# Test nfs
 
-
+## deploy in blue zone for mitaka
+```shell
 in bluem4:
-
-
 
 [root@bluem4 ~]# rpcinfo -p 10.0.0.18
    program vers proto   port  service
@@ -33,8 +33,6 @@ in bluem4:
     100021    3   tcp  57136  nlockmgr
     100021    4   tcp  57136  nlockmgr
 
-
-
 in ctl-n3:
 
 [root@ctl-n3 ~]# showmount -e  10.0.0.18
@@ -43,12 +41,15 @@ rpc mount export: RPC: Unable to receive; errno = No route to host
 Export list for 10.0.0.18:
 /data/openstack/glance/images *
 
-
-
 exportfs -arv
 [root@bluem4 Mitaka]# exportfs -arv
 exporting *:/data/openstack/glance/images
+```
 
+# firewall
+```shell
+systemctl status firewalld
+systemctl start firewalld
 firewall-cmd --list-all
 firewall-cmd --permanent --add-service=nfs
 firewall-cmd --permanent --add-service=mountd
@@ -57,3 +58,14 @@ firewall-cmd --reload
 iptables -S
 
 
+[root@ent-n1-x86 ~]# cat /etc/exports
+/gpfs/gpfs_community/community_openstack   *(rw,sync,no_root_squash)
+exportfs -arv
+
+mount -t nfs 172.16.10.71:/gpfs/gpfs_community/community_openstack /gpfs/gpfs_community
+mount -vvv -t nfs 172.16.10.76:/gpfs/gpfs_community/community_openstack /mnt/nfs/
+mount -t nfs 172.16.10.76:/gpfs/gpfs_community/community_openstack /gpfs/gpfs_community
+umount /gpfs/gpfs_community
+
+
+```
