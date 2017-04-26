@@ -7,6 +7,8 @@ set -x
 #sleep 5
 pushd /gpfs/gpfs_community/community_openstack
 title='16-12-28'
+title='16-12-29'
+title='16-12-30'
 
 Time=$(date '+%Y%m%d_%H%M%S')
 bakdir=imagebak_${title}_${Time}
@@ -49,4 +51,5 @@ done
 popd
 popd
 
+echo "pushd /gpfs/gpfs_community/community_openstack/${bakdir}"
 echo "Finish"

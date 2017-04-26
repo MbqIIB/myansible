@@ -1,0 +1,27 @@
+---
+- hosts: ansible
+  remote_user: root
+  gather_facts: no
+  vars :
+    - monitordir : /opt/servicemonitor
+    - logdir: /var/log/servicemonitor
+  tasks:
+    - name : create service dir
+      file : name={{monitordir}} state=directory
+
+    - name : create log dir
+      file : name={{logdir}}/dockerImagesCleanLog state=directory
+
+    - name : config docker images clean script
+      copy : src=cpDockerImagesClean.sh dest={{monitordir}} owner=root group=root mode=0755
+      tags : tag_copy
+
+    - name : config docker images clean script
+      copy : src=dockerimageclean.sh dest={{monitordir}} owner=root group=root mode=0755
+      tags : tag_copy
+
+    - name : config crontab
+      cron : name="Monitor clean up compute docker images" minute=0 hour=2 weekday=1
+          job="{{monitordir}}/dockerimageclean.sh >> {{logdir}}/dockerImagesCleanLog/dockerimagesclear.log 2>>{{logdir}}/dockerImagesCleanLog/dockerimagesclear.log.err"
+
+
