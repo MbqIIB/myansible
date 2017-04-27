@@ -6,12 +6,14 @@ set -x
 #df 
 #sleep 5
 pushd /gpfs/gpfs_community/community_openstack
-title='16-12-28'
-title='16-12-29'
-title='16-12-30'
+#Key='16-12-28'
+#Key='16-12-29'
+#Key='16-12-30'
+Key='16-12-31'
+Key='17-01'
 
 Time=$(date '+%Y%m%d_%H%M%S')
-bakdir=imagebak_${title}_${Time}
+bakdir=imagebak_${Key}_${Time}
 
 mkdir -p ${bakdir}
 
@@ -26,8 +28,8 @@ glance image-list > $Gimagelist
 nova image-list > $Nimagelist
 
 
-GlanceFile=${Nimagelist}.${title}.log
-grep "| ${title}" ${Nimagelist}  > $GlanceFile
+GlanceFile=${Nimagelist}.${Key}.log
+grep "| ${Key}" ${Nimagelist}  > $GlanceFile
 
 
 imagelist=$(awk -F '|' '{print $2}' $GlanceFile )
@@ -43,6 +45,8 @@ do
     echo "start download ${name}"
     glance image-download \
         --file image_${id} ${id}
+
+    md5sum image_${id} > image_${id}.md5sum
 
     echo "sleep 10 s"
     sleep 10

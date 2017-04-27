@@ -1,7 +1,7 @@
 ---
 #- hosts: compute-server
-#- hosts: cp9,cp10,cp11,cp12,cp13,chuanghe1,chuanghe2,chuanghe3,cp8,x3550m5n01,neucloud4
-- hosts: redpower5,cp17,cp9
+- hosts: cp9,cp10,cp12,cp13,chuanghe1,chuanghe2,chuanghe3,cp8,x3550m5n01,neucloud4,redpower7
+#- hosts: redpower5,cp17,cp9
   remote_user: root
   gather_facts: no
   vars :
@@ -31,7 +31,7 @@
       copy : src=openstackfile/crontab_servicemoitor.sh dest={{monitordir}} owner=root group=root mode=0755
       tags : tag_copy
 
-    - name : copy novainfo.py 
+    - name : copy novainfo.py
       copy : src=openstackfile/novainfo.py dest={{monitordir}} owner=root group=root mode=0755
       tags : tag_copy
 

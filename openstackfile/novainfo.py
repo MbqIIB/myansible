@@ -506,7 +506,7 @@ class NovaInformations:
         elif iplen < 5 and len(ip_ok) > 0 :
             print "ping test p2"
             return True
-        elif iplen > 5 :
+        elif iplen >= 5 :
             if len(ip_ok) >= 5 :
                 print "ping test p3"
                 return True
@@ -571,7 +571,7 @@ class NovaInformations:
                             print "no",addresses
 
 #                print len(floatingiplist)
-                
+
                 if len(floatingiplist) >= serverlistlen :
                     print "all server list "
                     print floatingiplist
@@ -595,14 +595,14 @@ class NovaInformations:
             #self.restartcomputeservice()
             self.restartcomputeopenswitch()
             return False
-            
 
 
-        
+
+
 
 
 if __name__ == '__main__' :
-    
+
     novainfo= NovaInformations()
     #novainfo.hypetest()
     #novainfo.novalisttest()

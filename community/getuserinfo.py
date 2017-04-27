@@ -101,7 +101,7 @@ class SvUser:
         for id in UserList :
             print             datetime.datetime.utcfromtimestamp(
                                  id['timestamp']/1000 
-                             ).strftime('%Y-%m-%d'),
+                             ).strftime('%Y-%m-%d_%H%M%S'),
                              #).strftime('%Y-%m-%d %H:%M:%S'),
         
             print "%s,   %s,   %d,   %s,   %s" % (
@@ -189,7 +189,7 @@ class SvUser:
             tableend = """</tbody></table>"""
             content+=tableend
             #print content
-            
+
             return content
 
         except Exception as e:
@@ -327,7 +327,7 @@ class SvUser:
     def GetUserInfo(self, UserList, PassFile):
 
         fp=open(PassFile, 'w')
-       
+
         for user in UserList: 
             #print user
             #print "====== user %s =======" % user[1]
@@ -345,7 +345,7 @@ class SvUser:
                 print "%s," % user[0],
                 print  "%s,"   %    datetime.datetime.utcfromtimestamp(
                                      id['timestamp']/1000 
-                                 ).strftime('%Y-%m-%d'),
+                                 ).strftime('%Y-%m-%d_%H%M%S'),
                 print "%s,   %s,   %d,   %s,   %s" % (
                                  id['balance'],
                                  id['isActivated'],
@@ -353,7 +353,7 @@ class SvUser:
                                  id['username'],
                                  id['rawPasswd'],
                                 )
-                      
+
                 info= "%s, %s, %s, %s, %d, %s, %s\n" % (
                                  user[0],
                                  datetime.datetime.utcfromtimestamp(
@@ -381,7 +381,9 @@ if __name__ == '__main__' :
     #svuser.GetUserList('alluserlist.txt')
     #svuser.GetUserList('mail.txt')
     #svuser.GetUserList('stackTenantList.txt.uniq')
-    svuser.GetUserList('tenantid.log')
+    #svuser.GetUserList('tenantid.log')
+    #svuser.GetUserList('User_alltenant20170426_170409.txt.new')
+    svuser.GetUserList('User_alltenant20170427_162223.txt.new')
     #print svuser.UserList
     svuser.GetUserInfo(svuser.UserList , "pass.log")
     #svuser.AllUserPrint(svuser.AllUserList)
