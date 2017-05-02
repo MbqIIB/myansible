@@ -10,9 +10,9 @@
 #uuids=$(awk -F ' ' '{print $2}' cp5_20150824_ACTIVE.txt)
 #uuids=$(awk -F ' ' '{print $2}' x0_ACTIVE.txt)
 #uuids=$(awk -F ' ' '{print $2}' x1)
-uuids=$(awk -F ' ' '{print $2}' alltenants.log.err.active)
+#uuids=$(awk -F ' ' '{print $2}' alltenants.log.err.active)
+uuids=$(awk -F ' ' '{print $2}' alltenants.log.active)
 
-#HOST="op-icehouse-cp5-lxc.ibm.com"
 HOST="neucloud4"
 set -x
 for id in ${uuids[@]}
@@ -34,8 +34,8 @@ do
     #        sleep 5
 
     #done
-    echo "sleep 5 to next"
-    sleep 5
+    echo "sleep 1 to next"
+    sleep 1
 
 
 done
