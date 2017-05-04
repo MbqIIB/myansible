@@ -37,3 +37,27 @@ That’s it. You can check the status of each of the cluster nodes by running th
 
 [root@rhel1 ~]$ mysql -e "SHOW GLOBAL STATUS LIKE 'wsrep%';"
 
+
+mysql -e "SHOW GLOBAL STATUS LIKE 'wsrep%';" -u root -p123456
+
+
+pcs cluster start --all
+
+ pcs cluster status
+ Cluster Status:
+  Last updated: Tue May  2 12:18:23 2017        Last change: Sat Apr 29 13:20:34 2017 by hacluster via crmd on
+  HA-svyz-ctl-n1.ibm.com
+   Stack: corosync
+    Current DC: NONE
+     3 nodes and 57 resources configured
+      OFFLINE: [ HA-svyz-ctl-n1.ibm.com HA-svyz-ctl-n2.ibm.com HA-svyz-ctl-n3.ibm.com ]
+
+      PCSD Status:
+        HA-svyz-ctl-n1.ibm.com (192.168.11.121): Online
+                                                   HA-svyz-ctl-n2.ibm.com (192.168.11.122): Online
+                                                                                              HA-svyz-ctl-n3.ibm.com
+                                                                                            (192.168.11.123): Online
+
+
+
+pcs cluster unstandby --all

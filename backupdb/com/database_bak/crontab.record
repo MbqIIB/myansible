@@ -1,0 +1,11 @@
+0 7,12,18 * * * /home/linzhbj/openpower/crontask.sh >> /os-image1/OpenPowerLog/crontab_task.txt 2>&1
+#0 0 * * * /home/hightall/daily_check/daily_check.py
+#50 17,23 * * * /home/hightall/check_vm_stat/check_vm.py
+#40 8,20 * * *  /home/linzhbj/openpower/reportvm/contab_vmlog.sh >> /os-image1/OpenPowerLog/crontab_task_VMreport.txt
+50 21 * * *  /home/linzhbj/openpower/database_bak/bigdata_backup.sh >> /os-image1/OpenPowerDataBak/crontab_task_database_bak_bigdata.txt
+0 22 * * *  /home/linzhbj/openpower/database_bak/database_backup.sh >> /os-image1/OpenPowerDataBak/crontab_task_database_bak.txt
+#10 2 * * *  /home/linzhbj/script/crontab_testbigdata.py >> /os-image1/OpenPowerLog/crontab_testbigdata.txt
+# Chef Name: glance-cache-pruner
+*/30 * * * * /usr/bin/glance-cache-pruner > /dev/null 2>&1
+# Chef Name: glance-cache-cleaner
+01 00 * * * /usr/bin/glance-cache-cleaner > /dev/null 2>&1
