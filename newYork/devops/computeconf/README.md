@@ -48,3 +48,6 @@ route add  -net 10.10.64.0/18 gw 10.10.75.254  eth1
 
 ansible install-server  -m shell -a "grep -nr "^my_ip" /etc/nova/nova.conf"
 ansible install-server  -m shell -a "grep  -nr "^local_ip" /etc/neutron/plugins/ml2/openvswitch_agent.ini"
+
+# check compute config
+cat /etc/nova/nova.conf  | grep -v '^$'  | grep -v "^#"

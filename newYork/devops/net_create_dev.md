@@ -270,11 +270,13 @@ Created a new router:
 neutron router-gateway-set 7cfc6848-e004-402d-9677-ccfcf92ddf2e 1bcf1008-c001-42cc-8f99-6a663017b150
 Set gateway for router 7cfc6848-e004-402d-9677-ccfcf92ddf2e
 
+neutron router-gateway-clear 55c78fde-88ad-4b42-901f-80c307b2634c
 
 neutron net-create priv-net-vxlan2
 
 neutron subnet-create --name priv-subnet-vxlan2 \
                 --enable_dhcp=True \
+                --shared=True
                 priv-net-vxlan2 10.12.0.0/16
 
 [root@ansible devops]# neutron net-create priv-net-vxlan2
@@ -338,3 +340,7 @@ neutron net-update  5cada35f-a757-460c-9fe9-8f78abe0e62b --shared=true
 129.33.250.1 - 129.33.250.255
 
 neutron subnet-update  91efb5fb-92e8-4ca5-a7cc-0090a0bc9dc0 --allocation-pool start=172.31.250.1,end=172.31.250.254
+neutron net-create pub-net3   \
+            --provider:network_type=vxlan \
+            --provider:physical_network=ext-net2 \
+        - --router:external=True  

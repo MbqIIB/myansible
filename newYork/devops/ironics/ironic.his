@@ -319,7 +319,7 @@
   319  2016-12-02 12:26:49 :: scp setup_vxlan.sh ctl-n3:/root/
   320  2016-12-02 12:29:09 :: vim  /etc/sysconfig/network-scripts/ifcfg-eth0
   321  2016-12-02 12:31:36 :: vim setup_vxlan.sh 
-  322  2016-12-02 13:03:06 :: perl -pi -e "s/^#auth_strategy.*/auth_strategy=keytstone/g" /etc/glance/*
+  322  2016-12-02 13:03:06 :: perl -pi -e "s/^#auth_strategy.*/auth_strategy=keystone/g" /etc/glance/*
   323  2016-12-02 13:03:12 :: vim setup_vxlan.sh 
   324  2016-12-02 13:03:22 :: ./setup_vxlan.sh
   325  2016-12-02 13:03:34 :: vim /etc/glance/glance-api.conf 

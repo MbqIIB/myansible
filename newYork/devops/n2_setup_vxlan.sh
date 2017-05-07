@@ -24,7 +24,7 @@ perl -pi -e "s/^novncproxy_base_url=http:\/\/0.0.0.0:6080\/vnc_auto.html/novncpr
 perl -pi -e "s/^bind_host = 0.0.0.0/bind_host=$NEWHOSTIP/g" /etc/neutron/*
 perl -pi -e "s/^bind_host = 0.0.0.0/bind_host=$NEWHOSTIP/g" /etc/glance/*
 perl -pi -e "s/^registry_host = 0.0.0.0/registry_host=$NEWHOSTIP/g" /etc/glance/*
-perl -pi -e "s/^#auth_strategy.*/auth_strategy=keytstone/g" /etc/glance/*
+perl -pi -e "s/^#auth_strategy.*/auth_strategy=keystone/g" /etc/glance/*
 perl -pi -e "s/^admin_bind_host=0.0.0.0/admin_bind_host=$NEWHOSTIP/g" /etc/keystone/*
 perl -pi -e "s/^public_bind_host=0.0.0.0/public_bind_host=$NEWHOSTIP/g" /etc/keystone/*
 perl -pi -e "s/^osapi_volume_listen = 0.0.0.0/osapi_volume_listen=$NEWHOSTIP/g" /etc/cinder/*

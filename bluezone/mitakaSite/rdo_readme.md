@@ -53,7 +53,7 @@ sysctl -p
 
 pcs resource disable GLANCE_API-clone
 pcs resource disable GLANCE_REGISTRY-clone
-
+pcs resource
 pcs resource enable GLANCE_API-clone
 pcs resource enable GLANCE_REGISTRY-clone
 
