@@ -1,0 +1,42 @@
+---
+- hosts : m-ctl-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+  - name : ping
+    ping :
+
+  - name: Config /etc/glance/glance-api.conf
+    ini_file: 
+      dest: /etc/glance/glance-api.conf
+      section: DEFAULT
+      option: debug
+      #value: True
+      value: False
+      backup: yes
+
+  - name: Config /etc/glance/glance-api.conf
+    ini_file: 
+      dest: /etc/glance/glance-api.conf
+      section: DEFAULT
+      option: workers
+      value: 4
+      backup: yes
+
+  - name: Config /etc/glance/glance-api.conf
+    ini_file: 
+      dest: /etc/glance/glance-api.conf
+      section: DEFAULT
+      option: auth_strategy
+      value: keystone
+      backup: yes
+
+  - name: Config /etc/glance/glance-registry.conf
+    ini_file: 
+      dest: /etc/glance/glance-registry.conf
+      section: DEFAULT
+      option: workers
+      value: 4
+      backup: yes
+
+
