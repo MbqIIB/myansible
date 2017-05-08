@@ -383,7 +383,8 @@ if __name__ == '__main__' :
     #svuser.GetUserList('stackTenantList.txt.uniq')
     #svuser.GetUserList('tenantid.log')
     #svuser.GetUserList('User_alltenant20170426_170409.txt.new')
-    svuser.GetUserList('User_alltenant20170427_162223.txt.new')
+    #svuser.GetUserList('User_alltenant20170427_162223.txt.new')
+    svuser.GetUserList('curtenantid.log')
     #print svuser.UserList
     svuser.GetUserInfo(svuser.UserList , "pass.log")
     #svuser.AllUserPrint(svuser.AllUserList)

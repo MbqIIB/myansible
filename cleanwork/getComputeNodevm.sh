@@ -67,7 +67,7 @@ ComputeNode=compute-cp13-ppc-LE-docker
 #ComputeNode=chuanghe3.ibm.com
 #ComputeNode=neucloud4
 
-ComputeNode=ent-cp6-ppc64le.ibm.com
+#ComputeNode=ent-cp6-ppc64le.ibm.com
 
 nova list --all-tenants  --host ${ComputeNode} > ${logall}
 

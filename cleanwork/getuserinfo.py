@@ -41,20 +41,20 @@ class SvUser:
                       'end' : end,
                       'fields' : options }
             headers = { 'User-Agent' : user_agent }
-        
+
         else :
             i_headers = {"User-Agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1) Gecko/20090624 Firefox/3.5"}
-        
+
         Debug=False
         if Debug==True:
             httpHandler = urllib2.HTTPHandler(debuglevel=1)
             httpsHandler = urllib2.HTTPSHandler(debuglevel=1)
             opener = urllib2.build_opener(httpHandler, httpsHandler)
             urllib2.install_opener(opener)
-        
+
         #useipv4=True
         useipv4=False
-        
+
         retry =0
         MaxRetry=3
         while True :
@@ -100,10 +100,10 @@ class SvUser:
 
         for id in UserList :
             print             datetime.datetime.utcfromtimestamp(
-                                 id['timestamp']/1000 
+                                 id['timestamp']/1000
                              ).strftime('%Y-%m-%d'),
                              #).strftime('%Y-%m-%d %H:%M:%S'),
-        
+
             print "%s,   %s,   %d,   %s,   %s" % (
                              id['balance'],
                              id['isActivated'],
@@ -163,7 +163,7 @@ class SvUser:
                              id['isActivated'],
                              id['balance'],
                              datetime.datetime.utcfromtimestamp(
-                                 id['timestamp']/1000 
+                                 id['timestamp']/1000
                                 ).strftime('%Y-%m-%d %H:%M:%S'),
                         )
 
@@ -179,7 +179,7 @@ class SvUser:
                 #             id['isActivated'],
                 #             id['balance'],
                 #             datetime.datetime.utcfromtimestamp(
-                #                 id['timestamp']/1000 
+                #                 id['timestamp']/1000
                 #                ).strftime('%Y-%m-%d %H:%M:%S'),
                 #        )
 
@@ -189,7 +189,7 @@ class SvUser:
             tableend = """</tbody></table>"""
             content+=tableend
             #print content
-            
+
             return content
 
         except Exception as e:
@@ -236,7 +236,7 @@ class SvUser:
             for id in self.NewUserList:
                 if count % 2 == 1 :
                     trhead="""<tr style="background-color: rgb(220,220,220);line-height: 22px;">"""
-                    
+
                 else :
                     trhead="""<tr style=";line-height: 22px;">"""
                 count +=1
@@ -250,7 +250,7 @@ class SvUser:
                              id['username'],
                              id['isActivated'],
                              datetime.datetime.utcfromtimestamp(
-                                 id['timestamp']/1000 
+                                 id['timestamp']/1000
                                 ).strftime('%Y-%m-%d %H:%M:%S'),
                         )
                 fmt=trhead+fmt2
@@ -271,7 +271,7 @@ class SvUser:
         #print type(DATETIME)
         for id in self.AllUserList:
             date=datetime.datetime.utcfromtimestamp(
-                    id['timestamp']/1000 
+                    id['timestamp']/1000
                     ).strftime('%Y%m%d'),
             #print date
             #print type(date[0])
@@ -281,7 +281,7 @@ class SvUser:
                 self.NewUserList.append(id.copy())
             else :
                 pass
-        
+
         self.NewUserCounts=len(self.NewUserList)
         #self.AllUserPrint(self.NewUserList)
 
@@ -327,8 +327,8 @@ class SvUser:
     def GetUserInfo(self, UserList, PassFile):
 
         fp=open(PassFile, 'w')
-       
-        for user in UserList: 
+
+        for user in UserList:
             #print "====== user %s =======" % user[1]
             try:
                 url='https://accountservice.ptopenlab.com/cloudlab/api/user/account/%s/withraw' % user[1]
@@ -343,7 +343,7 @@ class SvUser:
                 #print info
                 print "%s," % user[0],
                 print  "%s,"   %    datetime.datetime.utcfromtimestamp(
-                                     id['timestamp']/1000 
+                                     id['timestamp']/1000
                                  ).strftime('%Y-%m-%d'),
                 print "%s,   %s,   %d,   %s,   %s" % (
                                  id['balance'],
@@ -352,7 +352,7 @@ class SvUser:
                                  id['username'],
                                  id['rawPasswd'],
                                 )
-                      
+
                 info= "%s,   %s,   %d,   %s,   %s\n" % (
                                  id['balance'],
                                  id['isActivated'],
@@ -375,7 +375,8 @@ if __name__ == '__main__' :
     svuser=SvUser()
     #svuser.GetUserList('alluserlist.txt')
     #svuser.GetUserList('mail.txt')
-    svuser.GetUserList('stackTenantList.txt.uniq')
+    #svuser.GetUserList('stackTenantList.txt.uniq')
+    svuser.GetUserList('tenantids.txt.uniq')
     #print svuser.UserList
     svuser.GetUserInfo(svuser.UserList , "pass.log")
     #svuser.AllUserPrint(svuser.AllUserList)
