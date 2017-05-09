@@ -33,3 +33,6 @@ ls -ld /var/log/ntpstats
 drwxr-xr-x. 2 ntp ntp 6 Dec 20  2014 /var/log/ntpstats
 
 chown ntp:ntp -R /var/log/ntpstats
+
+
+ansible rabbit-server -m shell -a "date"

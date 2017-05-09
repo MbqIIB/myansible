@@ -4,7 +4,8 @@
 #- hosts: cp16
 #- hosts: phy-server-rhel
 #- hosts: gongyan-gpu
-- hosts: ironic
+#- hosts: ironic
+- hosts: rabbit-server
   gather_facts: no
   tasks:
 
