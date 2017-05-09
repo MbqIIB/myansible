@@ -366,8 +366,6 @@ pcs resource create HAPROXY_PUB_VIP ocf:heartbeat:IPaddr2 ip=172.31.252.70 cidr_
 pcs constraint colocation add HAPROXY_PUB_VIP HAPROXY INFINITY
 pcs constraint order HAPROXY_PUB_VIP then HAPROXY
 
-
-
 openstack-swift-account-auditor.service       disabled
 openstack-swift-account-reaper.service        disabled
 openstack-swift-account-replicator.service    disabled
@@ -468,3 +466,6 @@ systemctl status rsyncd
 systemctl enable rsyncd
 systemctl start rsyncd
 systemctl start rsyncd
+
+# crash power down , run the command it's will be restore all cluster service
+pcs cluster enable --all
