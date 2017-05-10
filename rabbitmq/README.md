@@ -1,3 +1,12 @@
+# Rabbit
+## enable / disable rabbit plugins
+```shell
+ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins enable rabbitmq_management rabbitmq_shovel rabbitmq_shovel_management"
+
+ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins disable rabbitmq_management rabbitmq_shovel rabbitmq_shovel_management"
+
+ansible syh1,syh2,syh3 -m shell -a "rabbitmq-plugins list"
+```
 
 
 pcs resource disable RABBITMQ-clone
@@ -64,11 +73,6 @@ pcs resource $ACTION CINDER_VOLUME-clone [CINDER_VOLUME]
 
 pcs resource $ACTION HEAT_API-clone [HEAT_API]
 pcs resource $ACTION HEAT_ENGINE-clone [HEAT_ENGINE]
-
-
-
-
-
 
 
 
