@@ -1,4 +1,5 @@
-- hosts:  poc-server
+#- hosts:  poc-server
+- hosts:  ansible
 #- hosts:  install-server
   remote_user : root
   gather_facts: true

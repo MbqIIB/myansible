@@ -4,7 +4,9 @@
 #uuids=$(awk -F ' ' '{print $2}' alltenants.log.err.active)
 #uuids=$(awk -F ' ' '{print $2}' alltenants.log.err.shutdown)
 #uuids=$(awk -F ' ' '{print $2}' Spark-1.4.0-RHEL-7.1-ppc64le-docker-bigdata-v0.0.6RC-shell.log)
-uuids=$(awk -F ' ' '{print $2}' alltenants.log.err)
+#uuids=$(awk -F ' ' '{print $2}' alltenants.log.err)
+#uuids=$(awk -F ' ' '{print $2}' alltenants.log.server)
+uuids=$(awk -F ' ' '{print $2}' alltenants.log.shutdown.nonet)
 #uuids=$(awk -F ' ' '{print $2}' tidvm.log)
 
 HOST=""
