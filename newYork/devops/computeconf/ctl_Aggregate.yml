@@ -1,0 +1,12 @@
+---
+- hosts : ctl-n1, ctl-n2,ctl-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+  - name: Config nova.conf
+    ini_file: 
+      dest: /etc/nova/nova.conf
+      section: DEFAULT
+      option: scheduler_default_filters
+      value : RetryFilter,AvailabilityZoneFilter,RamFilter,ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,CoreFilter,AggregateInstanceExtraSpecsFilter,AggregateMultiTenancyIsolation
+      #value : RetryFilter,AvailabilityZoneFilter,RamFilter,ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,CoreFilter
