@@ -194,3 +194,26 @@ qemu-img convert -c  -O qcow2 ${IMAGENAME}-200G-nocheck.qcow2 compress_${IMAGENA
  5438  2017-03-13 23:29:04 :: glance image-update --visibility=private ad893840-c8f6-4ced-9c00-91eba1e96468
  5439  2017-03-13 23:29:16 :: history  | grep private
 
+
+
+
+imagename=ubuntu1604_ppc64le_v4
+glance image-create \
+	--name=${imagename}  \
+	--container-format=docker \
+	--disk-format=raw \
+	--property architecture=ppc64le \
+	--property accelerator_type=none \
+	--property hypervisor_type=docker \
+	--property hw_disk_bus=virtio \
+	--property hw_video_model=vga \
+	--property os_type=Linux \
+	--property base_type=base \
+	--property image_type=image \
+	--property sys_type=ubuntu \
+	--property webshell=true \
+	--property imageUuid=ubuntu_1604 \
+	--property diskSize=20 \
+	--visibility=public \
+	--file ${imagename}.raw
+

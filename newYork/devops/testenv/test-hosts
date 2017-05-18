@@ -17,3 +17,6 @@
 10.10.80.1       bnode6-1-data
 192.168.33.61  bnode6-1-bmc
 
+192.168.191.189  ansible
+10.10.72.20  ansible-data
+172.31.252.53 ansible-pub
