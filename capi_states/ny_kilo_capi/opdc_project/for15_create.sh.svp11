@@ -1,0 +1,134 @@
+#!/bin/bash                                                                                                                                                                          
+
+set -x
+
+if [ ! $# == 1 ];then
+    echo "Please usage : ./rc_create.sh  XXX.cfg"
+    exit 1
+fi
+
+configfile=$1
+echo "Done"
+echo "${configfile}"
+
+source  ${configfile}
+
+set -x                                                                                                                                                                               
+
+# us
+net_id=066a1f7d-40ea-455a-ad03-33ae82c6705d
+ext_net=32670b8e-e0eb-4cb9-8c58-10c779d3bb17
+mang_net=7099a27b-f514-4613-8c9f-44b4d1ec61a1
+
+
+
+
+function createuser()
+{
+tenantname=$1
+username=$1
+password=$2
+emailaddr=$3
+
+tenantid=$(keystone tenant-create  \
+        --name ${tenantname}  \
+        --description "${tenantname}" \
+        --enabled true | grep " id " | awk -F " " '{print $4}')
+
+echo "${tenantid}"
+
+keystone  user-create  --name ${username} --pass ${password}  --tenant ${tenantid} --email ${emailaddr} --enabled true
+
+}
+
+
+function addport()
+{
+export OS_TENANT_NAME=$1
+export OS_USERNAME=$1
+export OS_PASSWORD=$2
+
+nova secgroup-list-rules default
+#nova secgroup-add-rule default icmp -1 -1 0.0.0.0/0
+#nova secgroup-add-rule default tcp 22 22 0.0.0.0/0
+#nova secgroup-add-rule default tcp 4200 4200 0.0.0.0/0
+#nova secgroup-list-rules default
+
+
+}
+
+function createInstace()
+{
+export OS_TENANT_NAME=$1
+export OS_USERNAME=$1
+export OS_PASSWORD=$2
+
+
+
+echo "${Prefix}-${Node}-${FlavorOption}-${ImageName}"
+
+nova flavor-list | grep ${FlavorOption}
+if [ $? != 0 ];then
+	echo "Don't have flavor ${FlavorOption}"
+	exit 1
+fi
+
+
+
+#exit 0
+for ((i=${Number_start};i<${Number_end};i++))
+do
+    nodename=$(echo ${Node} | sed "s/ent-//g" | sed "s/.ibm.com//g")
+    #insname=${Prefix}-${nodename}-${FlavorOption}-n${i}
+    insname=Instance-${OS_PASSWORD}
+    InstanceId=$(nova boot \
+         --flavor ${FlavorOption} \
+         --availability-zone nova:${Node}  \
+         --image   ${ImageName} \
+         --nic net-id=${net_id} \
+         ${insname} | grep ' id '| awk -F ' ' '{print $4}')
+
+    if [ $? != 0 ];then
+
+        echo "nova error ................"
+        exit 1
+    fi
+         sleep 5
+     fip2=$(nova floating-ip-create ${ext_net} | grep ext-net | awk -F ' ' '{print $4}')
+         sleep 2
+     nova floating-ip-associate ${InstanceId} ${fip2}
+         sleep 5
+
+done
+
+nova list
+}
+
+
+
+
+
+
+
+passwdfile=account.svp11
+
+#for user in `awk '{print $1}' ${passwdfile}`
+for user in `cat ${passwdfile} | grep -v '^#'| awk '{print $1}'`
+
+do
+    source /root/openrc
+
+    email=`awk -v I="$user" '{if(I==$1)print $2}' ${passwdfile}`
+    passwd=`awk -v I="$user" '{if(I==$1)print $3}' ${passwdfile}`
+
+    echo $user $passwd $email
+    #createuser $user $passwd $email
+    #addport $user $passwd $email
+    createInstace $user $passwd $email
+
+done
+
+
+echo "Done"
+
+
