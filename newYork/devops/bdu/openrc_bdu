@@ -1,0 +1,8 @@
+unset OS_SERVICE_TOKEN
+export OS_USERNAME=bdu@ibm.com
+export OS_TENANT_NAME=${OS_USERNAME}
+export OS_PASSWORD=Bdu@2pass
+export OS_AUTH_URL=http://ctl-vip:5000/v2.0
+#export PS1='[\u@\h \W(keystone_admin)]\$ '
+
+export OS_REGION_NAME=NY-DevOps1
