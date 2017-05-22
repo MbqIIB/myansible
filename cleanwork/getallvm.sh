@@ -21,7 +21,7 @@ set -o nounset                              # Treat unset variables as an error
 
 DATETIME=$(date  '+%Y%m%d_%H%M%S')
 
-logdir=log_${DATETIME}
+logdir=allvm_log_${DATETIME}
 
 if [ ! -d ${logdir} ]
 then
@@ -34,13 +34,13 @@ pushd ${logdir}
 logname=alltenants
 logall=${logname}.log
 logallerror=${logname}.log.err
-logallactive=${logname}.log.err.active
-logallshutdown=${logname}.log.err.shutdown
-logalldeleteing=${logname}.log.err.del
-logallpoweron=${logname}.log.err.on
-logallpoweroff=${logname}.log.err.off
-logallpause=${logname}.log.err.pause
-logallnostate=${logname}.log.err.nostate
+logallactive=${logname}.log.active
+logallshutdown=${logname}.log.shutdown
+logalldeleteing=${logname}.log.del
+logallpoweron=${logname}.log.on
+logallpoweroff=${logname}.log.off
+logallpause=${logname}.log.pause
+logallnostate=${logname}.log.nostate
 
 nova list --all-tenants  > ${logall}
 
