@@ -36,10 +36,10 @@ Created a new network:
 
 neutron subnet-create pub-net1  \
         --name   pub-subnet1 \
-	--allocation-pool start=172.31.252.68,end=172.31.252.72  \
-	--gateway=172.31.255.254 --enable_dhcp=False  \
-	--dns-nameserver 8.8.8.8 \
-	172.31.255.254/16
+        --allocation-pool start=172.31.252.68,end=172.31.252.72  \
+        --gateway=172.31.255.254 --enable_dhcp=False  \
+        --dns-nameserver 8.8.8.8 \
+        172.31.255.254/16
 
 Created a new subnet:
 +-------------------+----------------------------------------------------+
@@ -178,13 +178,14 @@ neutron net-create pub-net2   \
 
 neutron subnet-create pub-net2  \
         --name   pub-subnet2 \
-	--allocation-pool start=172.31.250.2,end=172.31.250.254  \
-	--gateway=172.31.255.254 --enable_dhcp=False  \
-	--dns-nameserver 8.8.8.8 \
-	172.31.192.0/18
+        --allocation-pool start=172.31.250.2,end=172.31.250.254  \
+        --gateway=172.31.255.254 --enable_dhcp=False  \
+        --dns-nameserver 8.8.8.8 \
+        172.31.192.0/18
 
 
 [root@ansible devops]# neutron net-create pub-net2   -- --router:external=True
+
         --name   pub-subnet2 \
         --allocation-pool start=172.31.250.1,end=172.31.250.210  \
         --gateway=172.31.255.254 --enable_dhcp=False  \

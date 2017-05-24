@@ -20,8 +20,9 @@ source  ${configfile}
 
 #net_id=06bdbd3e-e21e-42bd-a003-944e889bdfb3
 #ext_net=21f68f9c-db79-4c58-ad5e-7072f615cc97
-net_id=5cada35f-a757-460c-9fe9-8f78abe0e62b
-ext_net=32bd6756-d327-4381-84eb-1740c9115f82
+#net_id=5cada35f-a757-460c-9fe9-8f78abe0e62b
+net_id=06bdbd3e-e21e-42bd-a003-944e889bdfb3
+ext_net=613a1a7d-dcbc-45ad-b716-5ab6ac99dcb9
 mang_net=
 
 echo "${Prefix}-${Node}-${FlavorOption}-${ImageName}"
