@@ -19,7 +19,7 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-set -x
+#set -x
 
 pushd /tmp/
 wget http://172.16.10.119/itcheck.20170522.tar.gz
