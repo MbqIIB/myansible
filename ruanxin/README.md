@@ -32,3 +32,9 @@ network_device_mtu=1440
 client_timeout=3600
 
 ```
+
+# check public ip
+```
+
+ansible op-server -m shell -a "ip addr | grep 10.111.25"
+```

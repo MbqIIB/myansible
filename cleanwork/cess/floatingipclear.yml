@@ -1,0 +1,23 @@
+---
+- hosts: ansible
+  remote_user: root
+  gather_facts: no
+  vars :
+    - monitordir : /opt/servicemonitor
+    - logdir: /var/log/servicemonitor
+  tasks:
+    - name : create service dir
+      file : name={{monitordir}} state=directory
+
+    - name : create log dir
+      file : name={{logdir}}/curlog state=directory
+
+    - name : config flaotingip clean script
+      copy : src=fordeleteip.sh dest={{monitordir}} owner=root group=root mode=0755
+      tags : tag_copy
+
+    - name : config crontab
+      cron : name="Monitor clean up floating ip" minute=0 hour=*/1
+             job="{{monitordir}}/fordeleteip.sh >> {{logdir}}/curlog/floatingipclear.log 2>>{{logdir}}/curlog/floatingipclear.log.err"
+
+
