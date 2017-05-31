@@ -51,3 +51,20 @@ ansible install-server  -m shell -a "grep  -nr "^local_ip" /etc/neutron/plugins/
 
 # check compute config
 cat /etc/nova/nova.conf  | grep -v '^$'  | grep -v "^#"
+
+# check compute kvm config
+``` shell
+ansible compute-server-ppc64le-kvm  -m shell -a "lscpu | grep 'CPU(s)' "
+ansible install-server -m shell -a "grep -rn '^compute_driver' /etc/nova/nova.conf| grep -v docker
+ansible compute-server-ppc64le-kvm -m shell -a "grep -rn '^compute_driver' /etc/nova/nova.conf"
+
+ansible compute-server-ppc64le-docker -m shell -a "grep -rn '^compute_driver' /etc/nova/nova.conf"
+ansible compute-server-ppc64le-docker -m shell -a "lscpu | grep 'CPU(s)' "
+ansible compute-server-ppc64le-docker -m shell -a "ppc64_cpu --smt=on"
+```
+
+
+
+
+
+# End
