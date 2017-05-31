@@ -24,5 +24,13 @@ RUN usermod -p '$1$super$440quZi/kSzmHnTJR1j3a.' root
 
 RUN useradd -m -p '$1$super$uXdjVfWjBYtxOPjOXZb3k0' -s /bin/bash opuser
 
+RUN chage -d 0 root
+RUN chage -m 1 root
+RUN chage -M 90 root
+RUN chage -W 7 root
+RUN chage -d 0 opuser
+RUN chage -m 1 opuser
+RUN chage -M 90 opuser
+RUN chage -W 7 opuser
 
 CMD ["/opinit"]
