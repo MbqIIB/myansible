@@ -1,0 +1,40 @@
+#!/bin/bash
+# THIS FILE IS ADDED FOR COMPATIBILITY PURPOSES
+#
+# It is highly advisable to create own systemd services or udev rules
+# to run scripts during boot instead of using this file.
+#
+# In contrast to previous versions due to parallel execution during boot
+# this script will NOT be run after all other services.
+#
+# Please note that you must run 'chmod +x /etc/rc.d/rc.local' to ensure
+# that this script will be executed during boot.
+
+set +e
+
+ifconfig br-int 0 up
+ifconfig br-tun 0 up
+
+umount /cephfs
+mount -t ceph svx1,svx2,svx3:6789:/ /cephfs  -o name=admin,secretfile=/etc/ceph/admin.secret
+
+#rbd map docker_rbd/docker_bd6
+
+touch /var/lock/subsys/local
+
+#check containerplus
+containerplus=`netstat -natp|grep 8000`
+
+if [ -z "$containerplus" ] ; then
+  cd /root/containerplus
+  ./start-daemon
+fi
+
+#check zfs mount for docker
+dockerdir=`df | grep "/var/lib/docker"`
+
+if [ -z "$dockerdir" ] ; then
+  rm -rf /var/lib/docker/*
+  zfs mount -a
+  systemctl start docker
+fi
