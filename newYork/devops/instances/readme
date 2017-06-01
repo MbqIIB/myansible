@@ -77,3 +77,8 @@ glance image-update  --property hw_disk_bus=virtio   \
  
 docker image
 glance image-update  --property hw_disk_bus=virtio   --property hw_video_model=vga  --property hypervisor_type=docker  image_id
+
+
+
+nova aggregate-add-host lintest  brnode13-7
+Host brnode13-7 has been successfully added for aggregate 5 

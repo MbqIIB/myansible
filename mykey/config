@@ -1,0 +1,8 @@
+Host github.ibm.com
+User git
+IdentityFile ~/.ssh/linzhbj_id_rsa
+
+Host github.com
+User git
+IdentityFile ~/.ssh/linzhbj_id_rsa
+
