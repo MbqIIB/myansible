@@ -79,13 +79,17 @@ wget http://172.16.10.119/itcheck.20170522.tar.gz
 tar xvf itcheck.20170522.tar.gz
 cd itcheck
 dpkg -i BESAgent-9.5.5.196-ubuntu10.amd64.deb
+
+rpm -ivh BESAgent-9.5.5.196-rhe6.x86_64.rpm
+chkconfig besclient on
+
 cp besclient.config /var/opt/BESClient/besclient.config
 mkdir /etc/opt/BESClient
 cp actionsite.afxm /etc/opt/BESClient/actionsite.afxm
 cp TEM-Owner.txt  /
 /etc/init.d/besclient start
 vim /var/opt/BESClient/besclient.config
-tail -f /var/opt/BESClient/__BESData/__Global/Logs/20170525.log
+tail -f /var/opt/BESClient/__BESData/__Global/Logs/20170602.log
 ```
 
 
