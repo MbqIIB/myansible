@@ -29,6 +29,7 @@ docker info
 # nova.conf
 
 ``` shell
+vim /etc/nova/nova.conf
 [docker]
 cpu_capping = True
 set_fs_size = True
@@ -40,16 +41,23 @@ network_device_mtu = 1450
 # plus
 
 ``` shell
+cd /home/install
 # git clone git@github.ibm.com:dockeronpower/containerplus.git
 wget http://ansible/containerplus.tar.gz
 
-cd install/containerplus/
+tar xvf containerplus.tar.gz
+cd containerplus/
 apt-get install  -y libpython-dev python-pip python-setuptools
 pip install -r requirements.txt
 ./start-daemon
 
-#edit /etc/rc.local
+vim /etc/rc.local
 
+##########
+ifconfig br-int 0 up
+ifconfig br-tun 0 up
+
+####### Add For ZFS ###
 #check containerplus
 containerplus=`netstat -natp|grep 8000`
 
@@ -59,7 +67,7 @@ if [ -z "$containerplus" ] ; then
 fi
 
 #check zfs mount for docker
-modpro
+modprobe zfs
 dockerdir=`df | grep "/var/lib/docker"`
 
 if [ -z "$dockerdir" ] ; then
@@ -67,6 +75,7 @@ if [ -z "$dockerdir" ] ; then
     zfs mount -a
     systemctl start docker
 fi
+##########
 
 ```
 # nova docker
@@ -74,4 +83,14 @@ fi
 git clone git@github.ibm.com:alchemy-containers/docker-infra-nova-docker.git                                                                                                                           
 git co -b docker1.12 remotes/origin/docker1.12.0
 
+```
+
+# install nova docker
+```
+cd /home/install
+wget http://172.31.252.53/IaaS-nova-docker.tar.gz
+tar xvf IaaS-nova-docker.tar.gz 
+cd IaaS-nova-docker/
+pip install .
+/root/mitaka_servicerestart.sh restart
 ```
