@@ -93,9 +93,13 @@ git co -b docker1.12 remotes/origin/docker1.12.0
 
 # install nova docker
 ```
+tar cvf IaaS-nova-docker.tar.gz IaaS-nova-docker
+mv  IaaS-nova-docker.tar.gz /var/www/html/
+ls -l /var/www/html/
+
 cd /home/install
 rm -rf IaaS-nova-docker.tar.gz
-wget http://172.31.252.53/IaaS-nova-docker.tar.gz
+wget http://ansible/IaaS-nova-docker.tar.gz
 tar xvf IaaS-nova-docker.tar.gz 
 cd IaaS-nova-docker/
 pip install .
