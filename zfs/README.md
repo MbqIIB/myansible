@@ -98,10 +98,26 @@ mv  IaaS-nova-docker.tar.gz /var/www/html/
 ls -l /var/www/html/
 
 cd /home/install
+# /root/getcomputevm.sh  > curlinstances.log
+#pip install --upgrade pip
 rm -rf IaaS-nova-docker.tar.gz
 wget http://ansible/IaaS-nova-docker.tar.gz
 tar xvf IaaS-nova-docker.tar.gz 
 cd IaaS-nova-docker/
 pip install .
 /root/mitaka_servicerestart.sh restart
+```
+# docker
+```
+service docker stop
+cd /etc/yum.repos.d
+mkdir tmp
+mv *.repo tmp
+scp svx7:/etc/yum.repos.d/CentOS-Base.repo .
+yum repolist
+yum install docker
+service docker start
+docker info
+
+/root/cpservice_act.sh restart
 ```
