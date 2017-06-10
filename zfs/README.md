@@ -93,18 +93,38 @@ git co -b docker1.12 remotes/origin/docker1.12.0
 
 # install nova docker
 ```
+tar cvf IaaS-nova-docker.tar.gz IaaS-nova-docker
+mv  IaaS-nova-docker.tar.gz /var/www/html/
+ls -l /var/www/html/
+
 cd /home/install
+# /root/getcomputevm.sh  > curlinstances.log
+#pip install --upgrade pip
 rm -rf IaaS-nova-docker.tar.gz
-wget http://172.31.252.53/IaaS-nova-docker.tar.gz
+wget http://ansible/IaaS-nova-docker.tar.gz
 tar xvf IaaS-nova-docker.tar.gz 
 cd IaaS-nova-docker/
 pip install .
 /root/mitaka_servicerestart.sh restart
 ```
+# ref
+[zfsdoc](https://github.com/zfsonlinux/zfs/wiki/RHEL-%26-CentOS)
+[zfs](http://download.zfsonlinux.org/epel/zfs-release.el7.noarch.rpm)
 
 # install zfs in centos 7
 yum install http://download.zfsonlinux.org/epel/zfs-release.el7.noarch.rpm
 
-# ref
-[zfsdoc](https://github.com/zfsonlinux/zfs/wiki/RHEL-%26-CentOS)
-[zfs](http://download.zfsonlinux.org/epel/zfs-release.el7.noarch.rpm)
+# docker
+```
+service docker stop
+cd /etc/yum.repos.d
+mkdir tmp
+mv *.repo tmp
+scp svx7:/etc/yum.repos.d/CentOS-Base.repo .
+yum repolist
+yum install docker
+service docker start
+docker info
+
+/root/cpservice_act.sh restart
+```

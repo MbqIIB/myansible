@@ -31,6 +31,11 @@ set_fs_size=true
 network_device_mtu=1440
 client_timeout=3600
 
+
+scp gpu_volume.py svx7:/usr/lib/python2.7/site-packages/nova/compute/
+
+pip install --upgrade pip
+
 ```
 
 # check public ip

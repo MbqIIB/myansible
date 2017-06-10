@@ -55,3 +55,7 @@ mysql -u root -e "update  nova.compute_nodes set extra_resources='4' where host=
 
 ```
 
+# cess x86 centos
+```
+scp gpu_volume.py svx7:/usr/lib/python2.7/site-packages/nova/compute/
+```
