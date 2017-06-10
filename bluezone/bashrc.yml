@@ -2,7 +2,8 @@
 #- hosts:  svx11
 #- hosts:  redpower8
 #- hosts:  gongyan-gpu
-- hosts:  cp11
+#- hosts:  cp11
+- hosts:  redpower6,ibms812lc1
   remote_user : root
   gather_facts: true
   vars:
@@ -22,7 +23,7 @@
       lineinfile: " dest={{filepath}} state=present regexp='^HISTIGNORE' line='HISTIGNORE=\"ls\"' "
 
     - name: Config {{filepath}}
-      lineinfile: dest={{filepath}} state=present regexp='^HISTCONTROL' line='HISTCONTROL=ignoreboth'
+      lineinfile: dest={{filepath}} state=absent regexp='^HISTCONTROL' line='HISTCONTROL=ignoreboth'
 
     - name: Config {{filepath}}
       lineinfile: dest={{filepath}} state=present regexp='^shopt -s' line='shopt -s histappend'

@@ -101,3 +101,10 @@ cd IaaS-nova-docker/
 pip install .
 /root/mitaka_servicerestart.sh restart
 ```
+
+# install zfs in centos 7
+yum install http://download.zfsonlinux.org/epel/zfs-release.el7.noarch.rpm
+
+# ref
+[zfsdoc](https://github.com/zfsonlinux/zfs/wiki/RHEL-%26-CentOS)
+[zfs](http://download.zfsonlinux.org/epel/zfs-release.el7.noarch.rpm)
