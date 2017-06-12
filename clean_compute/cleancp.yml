@@ -1,0 +1,34 @@
+---
+- hosts: clean-server
+ 
+  remote_user: root
+  gather_facts: true
+  vars :
+    - toolsdir : /tmp
+  tasks:
+
+    - name : ping all
+      ping :
+
+    - name : copy tools cleanbakcompute.sh
+      copy: src=cleanbakcompute.sh  dest={{toolsdir}}/cleanbakcompute.sh  owner=root group=root mode=0755
+
+    - name  : bak data
+      shell : bash {{toolsdir}}/cleanbakcompute.sh
+
+#    - name : fetch file
+#      fetch:
+#        src: /tmp/bakinfo
+#        dest: /tmp/fetchbakinfo-{{ inventory_hostname }}
+
+- hosts: clean-server
+  vars:
+    user: root
+    # passw0rd
+    password: "$6$riXZpAkg$tICsJH.1UYs1EfCPU5m/lXEXY.mFzZyqFZoevg0Fx0sPVAsF6FGMbZkeL5ykdL03/dl2UsgqvHOIKcDMek4xO/"
+
+  remote_user: root
+  tasks:
+    - name: Add user {{ user }}
+      user: name={{user}} shell=/bin/bash password={{ password }} createhome=yes remove=yes state=present
+
