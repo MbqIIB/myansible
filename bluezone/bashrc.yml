@@ -1,9 +1,9 @@
 #- hosts:  neucloud5
 #- hosts:  svx11
-#- hosts:  redpower8
+- hosts:  supermicr1
 #- hosts:  gongyan-gpu
 #- hosts:  cp11
-- hosts:  redpower6,ibms812lc1
+#- hosts:  redpower6,ibms812lc1
   remote_user : root
   gather_facts: true
   vars:

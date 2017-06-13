@@ -1,0 +1,6 @@
+---
+- ping :
+
+- debug:
+    #msg: "System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
+    msg: "hostname {{ inventory_hostname }}"

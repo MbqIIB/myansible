@@ -1,0 +1,15 @@
+---
+- hosts: ansible
+  remote_user: root
+  gather_facts: true
+  tasks:
+
+  # first ensure our target directory exists
+  - file: dest=/tmp/fooapp state=directory
+  
+  # copy each file over that matches the given pattern
+  - name: add several users
+    copy: src={{ item }} dest=/tmp/fooapp/ owner=root mode=600
+    with_fileglob:
+      - /root/myansible/study/*
+      - /root/openrc

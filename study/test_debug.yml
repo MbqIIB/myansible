@@ -1,0 +1,28 @@
+---
+- hosts: ansible
+  remote_user: root
+  gather_facts: true
+  vars :
+    - toolsdir : /root
+    - alpha: [ 'a', 'b', 'c', 'd' ]
+    - numbers:  [ 1, 2, 3, 4 ]
+
+  tasks:
+
+#  - ping :
+
+#  - debug:
+#      msg: "System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
+
+  - debug:
+      msg: "System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}"
+      #when: ansible_default_ipv4.gateway is defined
+
+  - debug:
+      msg : "{{toolsdir}}"
+
+#  - debug :
+#      msg : "{{ item.0 }} and {{ item.1 }}"
+#      with_together:
+#        - "{{alpha}}"
+#        - "{{numbers}}"

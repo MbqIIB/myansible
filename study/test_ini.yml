@@ -1,0 +1,7 @@
+---
+- hosts: ansible
+  remote_user: root
+  gather_facts: true
+  tasks:
+  - debug: msg="{{item}}"
+    with_ini: value[1-2] section=section1 file=test.conf re=true

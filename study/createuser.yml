@@ -1,0 +1,15 @@
+---
+- hosts: ansible
+  remote_user: root
+  gather_facts: true
+  vars :
+    - toolsdir : /root
+  tasks:
+  - name: add several users
+    user: name={{ item }} state=present groups=root
+    with_sequence: start=0 end=3 format=testuser%02x
+  
+    # create a series of directories with even numbers for some reason
+  - file: dest=/tmp/{{ item }} state=directory
+    with_sequence: start=4 end=16 stride=2
+   

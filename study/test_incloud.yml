@@ -1,0 +1,6 @@
+---
+- hosts: ansible
+  remote_user: root
+  gather_facts: true
+  tasks:
+  - include : tasks/ping.yml
