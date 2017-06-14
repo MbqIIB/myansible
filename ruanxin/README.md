@@ -43,3 +43,12 @@ pip install --upgrade pip
 
 ansible op-server -m shell -a "ip addr | grep 10.111.25"
 ```
+
+mysql -u root -e "SHOW STATUS LIKE 'wsrep%';"
+
+mysql -uroot -e "select @@max_connections;"
+
+
+mysqladmin -u root status
+
+ mysqladmin -u root processlist
