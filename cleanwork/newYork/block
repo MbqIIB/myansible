@@ -1,0 +1,15 @@
+
+ansible svx11,svx12,svx13,svx14,svx15,svp6 -m shell -a "virsh list --all"
+
+ansible svx11 -m shell -a "virsh shutdown blockchain-kewei-x86_64-n0 "
+ansible svx12 -m shell -a "virsh shutdown blockchain-kewei-x86_64-n1 "   
+ansible svx12 -m shell -a "virsh shutdown blockchain-kewei-x86_64-n2 "   
+ansible svx13 -m shell -a "virsh shutdown blockchain-kewei-x86_64-n3 "   
+ansible svx14 -m shell -a "virsh shutdown blockchain-kewei-x86_64-n4 "   
+
+ansible svp6 -m shell -a "virsh shutdown blockchain-kewei-ppc64le-n5"
+ansible svp6 -m shell -a "virsh shutdown blockchain-kewei-ppc64le-n6"
+ansible svp6 -m shell -a "virsh shutdown blockchain-kewei-ppc64le-n7"
+ansible svp6 -m shell -a "virsh shutdown blockchain-kewei-ppc64le-n8"
+ansible svp6 -m shell -a "virsh shutdown blockchain-kewei-ppc64le-n9"
+ansible svp6 -m shell -a "virsh shutdown blockchain-kewei-ppc64le-n10"

@@ -1,0 +1,13 @@
+---
+- hosts: compute-server-ubuntu-x86-2
+  remote_user : root
+  gather_facts: no
+  tasks:
+  - name: install ipmitool
+    apt : name=ipmitool state=latest
+
+  - name: modprobe ipmi_devintf
+    shell :  modprobe ipmi_devintf
+
+  - name: show ip  address
+    shell :  ipmitool lan print 1

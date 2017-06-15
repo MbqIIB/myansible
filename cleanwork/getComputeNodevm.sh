@@ -34,12 +34,12 @@ pushd ${logdir}
 logname=alltenants
 logall=${logname}.log
 logallerror=${logname}.log.err
-logallactive=${logname}.log.err.active
-logallshutdown=${logname}.log.err.shutdown
-logalldeleteing=${logname}.log.err.del
-logallpoweron=${logname}.log.err.on
-logallpoweroff=${logname}.log.err.off
-logallpause=${logname}.log.err.pause
+logallactive=${logname}.log.active
+logallshutdown=${logname}.log.shutdown
+logalldeleteing=${logname}.log.del
+logallpoweron=${logname}.log.on
+logallpoweroff=${logname}.log.off
+logallpause=${logname}.log.pause
 
 #ComputeNode=op-icehouse-cp0.ibm.com
 #ComputeNode=op-icehouse-cp2.ibm.com
@@ -68,6 +68,10 @@ ComputeNode=compute-cp8-ppc-LE-docker
 #ComputeNode=neucloud4
 
 #ComputeNode=ent-cp6-ppc64le.ibm.com
+#ComputeNode=svp6
+#ComputeNode=svp9
+#ComputeNode=svp10
+ComputeNode=svp11
 
 nova list --all-tenants  --host ${ComputeNode} > ${logall}
 

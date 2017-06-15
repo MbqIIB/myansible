@@ -17,3 +17,5 @@ cat shutdownlist.txt | awk -F " " '{print $6}'  > tenants.txt
 keystone tenant-list > alltenantslist.txt
 ../getmailbyvmtenant.sh
 cat mail.txt | sort |  uniq     > uniq.csv
+
+nova list --all-tenants --status ACTIVE
