@@ -46,9 +46,9 @@ do
         
         if [ ${dbname} == "keystone" ]
         then
-	    /usr/bin/mysqldump -uroot -p123456 -h 192.168.11.51 --opt ${dbname} | gzip > ${filepath}
+	    /usr/bin/mysqldump -uroot -pyourpass -h 192.168.11.51 --opt ${dbname} | gzip > ${filepath}
         else
-	    /usr/bin/mysqldump -uroot -p123456 --opt ${dbname} | gzip > ${filepath}
+	    /usr/bin/mysqldump -uroot -pyourpass --opt ${dbname} | gzip > ${filepath}
         fi
 
 done

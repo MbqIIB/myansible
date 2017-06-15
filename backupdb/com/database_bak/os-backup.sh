@@ -4,7 +4,7 @@ backup_dir="/home/zhuchao/backup"
 filename="${backup_dir}/mysql-`hostname`-`eval date +%Y%m%d`.sql.gz"
 
 # Dump the entire MySQL database
-/usr/bin/mysqldump -uroot -p123456 --opt --all-databases | gzip > $filename
+/usr/bin/mysqldump -uroot -pyourpass --opt --all-databases | gzip > $filename
 
 # Backup configurations
 tmp_config_dir="${backup_dir}/config-`hostname`-`eval date +%Y%m%d`"

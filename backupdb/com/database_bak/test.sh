@@ -16,7 +16,7 @@ do
 #filepath="${backup_dir}/${dbname}-${dbfilesuffix}"
 #	echo ${filepath}
 
-#/usr/bin/mysqldump -uroot -p123456 --opt ${dbname} | gzip > ${filepath}
+#/usr/bin/mysqldump -uroot -pyourpass --opt ${dbname} | gzip > ${filepath}
 
         if [ ${dbname} == "keystone" ]
         then

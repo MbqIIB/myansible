@@ -1,0 +1,37 @@
+#- hosts:  brnode13-9
+#- hosts:  install-server
+- hosts:  compute-server
+
+  remote_user : root
+  gather_facts: true
+  vars:
+    filepath : /etc/ssh/ssh_config
+    options : StrictHostKeyChecking
+  tasks:
+    - name : ping
+      ping :
+
+    - name: ifconfig up br-int br-tun
+    #lineinfile: dest=/etc/rc.local state=present regexp='^exit 0' insertbefore='^exit 0' line='{{item}}'
+      lineinfile: dest=/etc/rc.local state=present insertbefore='^exit 0' line='{{item}}'
+      with_items:
+        - "ifconfig br-int 0 up"
+        - "ifconfig br-tun 0 up"
+        
+
+#- hosts: fnode2-5
+- hosts : compute-server-ppc64le-kvm
+
+  remote_user : root
+  gather_facts: true
+  tasks:
+
+    - name : ping
+      ping :
+    - name: ppc64_cpu --smt=off for qemu compute
+      lineinfile: dest=/etc/rc.local state=present insertbefore='^exit 0' line='{{item}}'
+      with_items:
+        - "ppc64_cpu --smt=off &"
+
+
+

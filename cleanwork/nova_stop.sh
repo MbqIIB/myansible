@@ -7,6 +7,7 @@
 #uuids=$(awk -F '|' '{print $5}' allimage.log.saving)
 uuids=$(awk -F ' ' '{print $2}' alltenants.log.active)
 
+t=1
 set -x
 for id in ${uuids[@]}
 do
@@ -27,8 +28,8 @@ do
     #        sleep 5
 
     #done
-    echo "sleep 5 to next"
-    sleep 1
+    echo "sleep ${t} to next"
+    sleep ${t}
 
 done
 

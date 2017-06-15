@@ -37,7 +37,7 @@ do
 	filepath="${backup_dir}/${dbname}-${dbfilesuffix}"
 	echo ${filepath}
 
-        #/usr/bin/mysqldump -uroot -p123456 --opt ${dbname} | gzip > ${filepath}
+        #/usr/bin/mysqldump -uroot -pyourpass --opt ${dbname} | gzip > ${filepath}
 #mysql -u root --password=gong401030 -h 172.16.9.77
 #/usr/bin/mysqldump -uroot -pgong401030 -h 172.16.9.77 --opt bigdata  | gzip > bigdata.sql.gz 
 #	/usr/bin/mysqldump -uroot -pgong401030 -h 172.16.9.77 --opt ${dbname} | gzip > ${filepath}
