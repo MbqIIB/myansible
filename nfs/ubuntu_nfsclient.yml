@@ -1,0 +1,7 @@
+---
+- hosts: dashboard-dbcenter
+  gather_facts: no
+  tasks:
+  - name: install nfs-common
+    apt : name=nfs-common state=latest
+
