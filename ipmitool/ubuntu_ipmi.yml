@@ -1,8 +1,16 @@
 ---
-- hosts: compute-server-ubuntu-x86-2
+#- hosts: compute-server-ubuntu-x86-2
+- hosts: install-server
   remote_user : root
   gather_facts: no
   tasks:
+
+
+  - name: resolv.conf 8.8.8.8
+    lineinfile: dest=/etc/resolv.conf state=present insertbefore='^nameserver 192.168.128.254' line='{{item}}'
+    with_items:
+      - "nameserver 8.8.8.8"
+
   - name: install ipmitool
     apt : name=ipmitool state=latest
 

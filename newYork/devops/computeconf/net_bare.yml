@@ -1,0 +1,31 @@
+---
+- hosts : ctl-n1, ctl-n2,ctl-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+  - name: Config ext-net,ext-net1,ext-net2,ext-bare
+    ini_file: 
+      dest: /etc/neutron/plugins/ml2/ml2_conf.ini
+      section: ml2_type_vlan
+      option: network_vlan_ranges
+      value : ext-net,ext-net1,ext-net2,ext-bare
+
+  - name: Config ext-net,ext-net1,ext-net2,ext-bare
+    ini_file: 
+      dest: /etc/neutron/plugin.ini
+      section: ml2_type_vlan
+      option: network_vlan_ranges
+      value : ext-net,ext-net1,ext-net2,ext-bare
+
+
+
+- hosts : net-n1, net-n2,net-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+  - name: Config ext-net,ext-net1,ext-net2,ext-bare
+    ini_file: 
+      dest: /etc/neutron/plugins/ml2/openvswitch_agent.ini
+      section: ovs
+      option: bridge_mappings
+      value : ext-net1:br-ex,ext-net2:br-ex2,ext-bare:br-bare

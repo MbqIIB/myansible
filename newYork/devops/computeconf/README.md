@@ -57,6 +57,8 @@ cat /etc/nova/nova.conf  | grep -v '^$'  | grep -v "^#"
 ansible compute-server-ppc64le-kvm  -m shell -a "lscpu | grep 'CPU(s)' "
 ansible install-server -m shell -a "grep -rn '^compute_driver' /etc/nova/nova.conf| grep -v docker
 ansible compute-server-ppc64le-kvm -m shell -a "grep -rn '^compute_driver' /etc/nova/nova.conf"
+ansible compute-server-ppc64le-kvm -m shell -a "/root/mitaka_servicerestart.sh restart"
+
 
 ansible compute-server-ppc64le-docker -m shell -a "grep -rn '^compute_driver' /etc/nova/nova.conf"
 ansible compute-server-ppc64le-docker -m shell -a "lscpu | grep 'CPU(s)' "
@@ -64,7 +66,24 @@ ansible compute-server-ppc64le-docker -m shell -a "ppc64_cpu --smt=on"
 ```
 
 
+# check compute route
+``` shell
+ansible compute-server -m shell -a "route -n"
+bnode6-3,bnode6-4, tnode6-14
+route add  -net 10.10.64.0/18  gw  10.10.83.254
+#ping 10.10.72.25
+#ping 10.10.72.26
+#ping 10.10.72.27
+```
 
-
+# heat stack-list -g
+```
+n1/n2/n3
+vim /etc/heat/policy.json
+#context_is_admin
+"stacks:global_index": "rule:deny_everybody",
+	to
+"stacks:global_index": "rule:context_is_admin",
+```
 
 # End

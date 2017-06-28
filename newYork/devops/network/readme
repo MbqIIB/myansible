@@ -1,0 +1,222 @@
+
+
+# #neutron router-gateway-clear a9dc3c85-f77f-4154-99e3-5edffd196968  21f68f9c-db79-4c58-ad5e-7072f615cc97
+[(DevOps)root@ansible network]# neutron router-gateway-clear a9dc3c85-f77f-4154-99e3-5edffd196968
+21f68f9c-db79-4c58-ad5e-7072f615cc97
+Gateway cannot be updated for router a9dc3c85-f77f-4154-99e3-5edffd196968, since a gateway to external network
+21f68f9c-db79-4c58-ad5e-7072f615cc97 is required by one or more floating IPs.
+Neutron server returns request_ids: ['req-e87e376b-7e57-42b2-a2ca-7278bb6c3e41']
+[(DevOps)root@ansible network]# neutron floatingip-list | grep 216
+| 02b62472-5e32-4942-a89a-3a8d5b3b6af6 | 10.16.0.140      | 172.31.216.106      | b27cd1cf-db28-4b6e-b16e-76becf3806c0 |
+| 0555b395-903c-4300-8d78-6414135df663 | 10.15.0.80       | 172.31.216.100      | 044db47f-d345-42a0-8303-bbb0b22ab870 |
+| 2faf8ea3-6e2a-4244-9d34-d32f221d4855 | 10.16.0.139      | 172.31.216.105      | 08ebe53a-aafc-495b-8b42-07f07970c8bd |
+| 42636180-b1b6-45e9-b254-1d60eaff6071 | 10.17.0.79       | 172.31.216.202      | 9e2f7ac1-7f1b-447e-a7f6-e9a7886c3377 |
+| 5d4adb4f-f35f-4c21-a91d-916a3dd31a15 | 10.16.0.142      | 172.31.216.108      | 071e6b33-3610-4ef6-94e5-56ec7d50f38d |
+| 7e77e6bc-f10c-46fa-b59d-a03f20546188 | 10.16.0.141      | 172.31.216.107      | 555eb313-492d-49d4-bfd7-0de2ac91071b |
+| 880f3bf0-d0a8-48ba-9c14-a9d622670a15 | 10.17.0.218      | 172.31.216.99       | b3f6f2f6-6b49-463c-a3b0-4cbf75ad8fec |
+| c8812d2f-b13f-4359-a304-aadbe1b969a4 | 10.11.0.245      | 172.31.216.86       | 2238c151-c0b7-4bcf-88ee-f8313f3123b9 |
+[(DevOps)root@ansible network]# neutron floatingip-delete c8812d2f-b13f-4359-a304-aadbe1b969a4
+Deleted floatingip: c8812d2f-b13f-4359-a304-aadbe1b969a4
+[(DevOps)root@ansible network]# neutron router-gateway-clear a9dc3c85-f77f-4154-99e3-5edffd196968
+21f68f9c-db79-4c58-ad5e-7072f615cc97
+Removed gateway from router a9dc3c85-f77f-4154-99e3-5edffd196968
+
+
+ neutron router-interface-delete a9dc3c85-f77f-4154-99e3-5edffd196968 d3a51b71-cf66-4076-a142-ab810132bd8c
+ Removed interface from router a9dc3c85-f77f-4154-99e3-5edffd196968.
+
+
+  neutron router-port-list 6503ce62-86e1-4f10-a270-456826d7dc8f
+  +--------------------------------------+-------------------------------------------------+-------------------+---------------------------------------------------------------------------------------+
+  | id                                   | name                                            | mac_address       | fixed_ips                                                                             |
+  +--------------------------------------+-------------------------------------------------+-------------------+---------------------------------------------------------------------------------------+
+  | 6d6669a0-50dd-468a-8491-2f961b2a3ca7 |                                                 | fa:16:3e:0f:ea:01 | {"subnet_id": "d46da519-f3ce-42a9-a733-977fe84d3670", "ip_address": "172.31.250.240"} |
+  | 7e79eeda-e13a-47aa-b10a-04e9a3b1ba48 | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:d5:c4:dd | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.15"} |
+  | bd00d2af-5c61-4976-83b1-65f6c60a85ff | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:62:b4:46 | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.14"} |
+  | cce1d296-dc0e-44f8-a1cd-d3b7c978810f |                                                 | fa:16:3e:78:f5:4c | {"subnet_id": "a2c19f8e-eace-4396-b21b-98ffad3fa295", "ip_address": "10.12.0.1"}      |
+
+
+
+
+  neutron router-port-list 6503ce62-86e1-4f10-a270-456826d7dc8f
+  +--------------------------------------+-------------------------------------------------+-------------------+---------------------------------------------------------------------------------------+
+  | id                                   | name                                            | mac_address       | fixed_ips                                                                             |
+  +--------------------------------------+-------------------------------------------------+-------------------+---------------------------------------------------------------------------------------+
+  | 6d6669a0-50dd-468a-8491-2f961b2a3ca7 |                                                 | fa:16:3e:0f:ea:01 | {"subnet_id": "d46da519-f3ce-42a9-a733-977fe84d3670", "ip_address": "172.31.250.240"} |
+  | 7e79eeda-e13a-47aa-b10a-04e9a3b1ba48 | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:d5:c4:dd | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.15"} |
+  | bd00d2af-5c61-4976-83b1-65f6c60a85ff | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:62:b4:46 | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.14"} |
+  | cce1d296-dc0e-44f8-a1cd-d3b7c978810f |                                                 | fa:16:3e:78:f5:4c | {"subnet_id": "a2c19f8e-eace-4396-b21b-98ffad3fa295", "ip_address": "10.12.0.1"}      |
+  | d3654438-bee1-44c9-80c8-9eb4fa6af57e | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:34:27:5a | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.13"} |
+  +--------------------------------------+-------------------------------------------------+-------------------+---------------------------------------------------------------------------------------+
+  [(DevOps)root@ansible network]# neutron floatingip-list | grep 10.12
+  [(DevOps)root@ansible network]# neutron  router-interface-delete 6503ce62-86e1-4f10-a270-456826d7dc8f "a2c19f8e-eace-4396-b21b-98ffad3fa295"
+  Removed interface from router 6503ce62-86e1-4f10-a270-456826d7dc8f.
+
+
+
+  neutron  router-interface-add 6503ce62-86e1-4f10-a270-456826d7dc8f d3a51b71-cf66-4076-a142-ab810132bd8c
+  Added interface d306d273-499b-4e0e-bc97-8e722f620aee to router 6503ce62-86e1-4f10-a270-456826d7dc8f.
+
+
+
+
+
+  neutron floatingip-list
+  +--------------------------------------+------------------+---------------------+--------------------------------------+
+  | id                                   | fixed_ip_address | floating_ip_address | port_id                              |
+  +--------------------------------------+------------------+---------------------+--------------------------------------+
+  | 02b62472-5e32-4942-a89a-3a8d5b3b6af6 | 10.16.0.140      | 172.31.216.106      | b27cd1cf-db28-4b6e-b16e-76becf3806c0 |
+  | 054454df-75ed-40c8-abbc-0079e635e9f5 | 10.13.0.109      | 172.31.250.48       | d29ee670-f791-4fe1-bf8c-8e82f81ba5c7 |
+  | 0555b395-903c-4300-8d78-6414135df663 | 10.15.0.80       | 172.31.216.100      | 044db47f-d345-42a0-8303-bbb0b22ab870 |
+  | 1100bf9e-7640-4aca-a458-b62f71c8762d | 10.13.0.85       | 172.31.250.22       | 8d1103eb-fe6b-4167-85d5-0307929d34f8 |
+  | 113c11d0-1974-475c-a8a2-7a77e085e21a | 10.19.0.6        | 172.31.250.46       | 06fc38e9-61e5-4531-8b4c-e4d0afb87bb7 |
+  | 2faf8ea3-6e2a-4244-9d34-d32f221d4855 | 10.16.0.139      | 172.31.216.105      | 08ebe53a-aafc-495b-8b42-07f07970c8bd |
+  | 42636180-b1b6-45e9-b254-1d60eaff6071 | 10.17.0.79       | 172.31.216.202      | 9e2f7ac1-7f1b-447e-a7f6-e9a7886c3377 |
+  | 5d4adb4f-f35f-4c21-a91d-916a3dd31a15 | 10.16.0.142      | 172.31.216.108      | 071e6b33-3610-4ef6-94e5-56ec7d50f38d |
+  | 7439031e-d7ca-406d-9c31-e2cd576b7152 | 10.13.0.106      | 172.31.250.43       | 265a96fb-3af2-4a60-91a5-f032654f731c |
+  | 7e77e6bc-f10c-46fa-b59d-a03f20546188 | 10.16.0.141      | 172.31.216.107      | 555eb313-492d-49d4-bfd7-0de2ac91071b |
+  | 880f3bf0-d0a8-48ba-9c14-a9d622670a15 | 10.17.0.218      | 172.31.216.99       | b3f6f2f6-6b49-463c-a3b0-4cbf75ad8fec |
+  | a79a3b57-7958-469e-a755-26dab3cb6f6d | 10.13.0.84       | 172.31.250.21       | 7abf9e98-226d-4d32-97f9-7f1f73ec7943 |
+  | af890fad-9201-43fb-b41c-f5702456d223 | 10.11.1.208      | 172.31.250.246      | 8fe637a2-9f76-49b2-a622-6ed0e10ca85e |
+  | b47cc3db-9d78-40b2-be7d-a6e3a27ada5e | 10.13.0.8        | 172.31.250.7        | def72342-949c-4687-8715-8786cd309f9f |
+  | ce44fb93-85a5-4d0e-b44e-3fd38ec59c37 | 10.13.0.9        | 172.31.250.8        | 2a219f5e-aed2-4cd6-9cbd-b226b6e85451 |
+  | e4328e3c-a6b4-40cd-98d9-08471aef1306 | 10.13.0.81       | 172.31.250.20       | 4e38d7a9-6012-4429-93bc-55d2199226ee |
+  +--------------------------------------+------------------+---------------------+--------------------------------------+
+  [(DevOps)root@ansible bdu]# neutron floatingip-list | grep 216
+  | 0555b395-903c-4300-8d78-6414135df663 | 10.15.0.80       | 172.31.216.100      | 044db47f-d345-42a0-8303-bbb0b22ab870 |
+  | 42636180-b1b6-45e9-b254-1d60eaff6071 | 10.17.0.79       | 172.31.216.202      | 9e2f7ac1-7f1b-447e-a7f6-e9a7886c3377 |
+  | 2faf8ea3-6e2a-4244-9d34-d32f221d4855 | 10.16.0.139      | 172.31.216.105      | 08ebe53a-aafc-495b-8b42-07f07970c8bd |
+  | 02b62472-5e32-4942-a89a-3a8d5b3b6af6 | 10.16.0.140      | 172.31.216.106      | b27cd1cf-db28-4b6e-b16e-76becf3806c0 |
+  | 7e77e6bc-f10c-46fa-b59d-a03f20546188 | 10.16.0.141      | 172.31.216.107      | 555eb313-492d-49d4-bfd7-0de2ac91071b |
+  | 5d4adb4f-f35f-4c21-a91d-916a3dd31a15 | 10.16.0.142      | 172.31.216.108      | 071e6b33-3610-4ef6-94e5-56ec7d50f38d |
+  | 880f3bf0-d0a8-48ba-9c14-a9d622670a15 | 10.17.0.218      | 172.31.216.99       | b3f6f2f6-6b49-463c-a3b0-4cbf75ad8fec |
+
+
+  neutron floatingip-delete 
+
+
+neutron floatingip-delete 02b62472-5e32-4942-a89a-3a8d5b3b6af6
+neutron floatingip-delete 0555b395-903c-4300-8d78-6414135df663
+neutron floatingip-delete 2faf8ea3-6e2a-4244-9d34-d32f221d4855
+neutron floatingip-delete 5d4adb4f-f35f-4c21-a91d-916a3dd31a15
+neutron floatingip-delete 7e77e6bc-f10c-46fa-b59d-a03f20546188
+
+neutron floatingip-delete 42636180-b1b6-45e9-b254-1d60eaff6071
+neutron floatingip-delete 880f3bf0-d0a8-48ba-9c14-a9d622670a15
+
+neutron floatingip-delete 2faf8ea3-6e2a-4244-9d34-d32f221d4855
+neutron floatingip-delete 02b62472-5e32-4942-a89a-3a8d5b3b6af6
+neutron floatingip-delete 7e77e6bc-f10c-46fa-b59d-a03f20546188
+neutron floatingip-delete 5d4adb4f-f35f-4c21-a91d-916a3dd31a15
+
+
+
+"172.31.216.144" 
+neutron router-gateway-set e64fefa8-20e7-4308-9b31-4070a536688d f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --fixed-ip subnet_id=d46da519-f3ce-42a9-a733-977fe84d3670,ip_address=172.31.216.144
+Set gateway for router e64fefa8-20e7-4308-9b31-4070a536688d
+
+
+# neutron router-gateway-clear a6d40d44-bdf7-4613-9729-590eba74d527
+ Removed gateway from router a6d40d44-bdf7-4613-9729-590eba74d527
+
+neutron router-gateway-set a6d40d44-bdf7-4613-9729-590eba74d527 f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --fixed-ip subnet_id=d46da519-f3ce-42a9-a733-977fe84d3670,ip_address=172.31.216.194
+
+
+neutron router-gateway-clear d6aefe6b-a386-4276-b721-0751f4cda919
+neutron router-gateway-set d6aefe6b-a386-4276-b721-0751f4cda919 f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --fixed-ip subnet_id=d46da519-f3ce-42a9-a733-977fe84d3670,ip_address=172.31.216.195
+
+neutron router-gateway-set 6503ce62-86e1-4f10-a270-456826d7dc8f f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --fixed-ip subnet_id=d46da519-f3ce-42a9-a733-977fe84d3670,ip_address=172.31.216.2
+
+
+ neutron floatingip-create    --floating-ip-address 172.31.250.240 f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --tenant-id 68993eec2c5e4931903bc949af53bff4
+
+
+
+ [(DevOps)root@ansible network]# neutron floatingip-list | grep 246
+ | af890fad-9201-43fb-b41c-f5702456d223 | 10.11.1.208      | 172.31.250.246      | 8fe637a2-9f76-49b2-a622-6ed0e10ca85e |
+ [(DevOps)root@ansible network]# neutron floatingip-delete af890fad-9201-43fb-b41c-f5702456d223
+ Deleted floatingip: af890fad-9201-43fb-b41c-f5702456d223
+ [(DevOps)root@ansible network]# nova floating-ip-associate 9a4d9dbe-058d-4248-9737-a177fc5fa516 172.31.250.240
+
+
+
+ | e407be0b-dab6-43af-868d-07bd947a0ef0 | mytestvm3      | 7de3dec9204e4f52b704f391cd4413c4 | ACTIVE  | -          | Running     | qa_net=10.17.0.218, 172.31.216.99          |
+ | 85ee5c9f-03fe-4a1e-b08d-3cc3a56aeb51 | qaUbu1604VM01  | e2b7bf3be33547619bd8cb9b5d4f267f | SHUTOFF | -          | Shutdown    | qa_net=10.17.0.79,   172.31.216.202          |
+ | 932fa2ec-1f94-4e35-af3f-d0463a86d69c | sys-87841      | dc9ac7739b4e4f78847ebad7f4b01614 | ACTIVE  | -          | Running     | prod_net=10.15.0.80,  172.31.216.100   
+
+
+ | 0522519b-64d3-485a-9783-7eba71610bc4 | sys-6734       | 25b83860eb144425a323f74f73ed753a | ACTIVE  | -          | Running     | test_net=10.16.0.140, 172.31.216.106       |
+ | b53bc93c-1329-442d-8142-392a460b388e | sys-6735       | 25b83860eb144425a323f74f73ed753a | ACTIVE  | -          | Running     | test_net=10.16.0.141, 172.31.216.107       |
+ | 2b804274-f111-4275-aec2-2d26aa5ff7fc | sys-6736       | 25b83860eb144425a323f74f73ed753a | ACTIVE  | -          | Paused      | test_net=10.16.0.139, 172.31.216.105       |
+ | 7d171f64-5962-4171-9e09-38fe0e719441 | sys-6738       | 25b83860eb144425a323f74f73ed753a | ACTIVE  | -          | Running     | test_net=10.16.0.142, 172.31.216.108       |
+
+
+
+
+ neutron floatingip-create    --floating-ip-address 172.31.216.105 f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --tenant-id 25b83860eb144425a323f74f73ed753a 
+ neutron floatingip-create    --floating-ip-address 172.31.216.106 f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --tenant-id 25b83860eb144425a323f74f73ed753a 
+ neutron floatingip-create    --floating-ip-address 172.31.216.107 f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --tenant-id 25b83860eb144425a323f74f73ed753a 
+ neutron floatingip-create    --floating-ip-address 172.31.216.108 f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --tenant-id 25b83860eb144425a323f74f73ed753a 
+
+nova floating-ip-associate  0522519b-64d3-485a-9783-7eba71610bc4  172.31.216.106 
+nova floating-ip-associate  b53bc93c-1329-442d-8142-392a460b388e  172.31.216.107  
+nova floating-ip-associate  2b804274-f111-4275-aec2-2d26aa5ff7fc  172.31.216.105  
+nova floating-ip-associate  7d171f64-5962-4171-9e09-38fe0e719441  172.31.216.108  
+
+ neutron floatingip-create    --floating-ip-address 172.31.216.99  f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --tenant-id 7de3dec9204e4f52b704f391cd4413c4
+ neutron floatingip-create    --floating-ip-address 172.31.216.202 f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --tenant-id e2b7bf3be33547619bd8cb9b5d4f267f
+ neutron floatingip-create    --floating-ip-address 172.31.216.100 f1537d14-2b6c-4ca8-82aa-bda8f02873b0 --tenant-id dc9ac7739b4e4f78847ebad7f4b01614
+
+
+nova floating-ip-associate e407be0b-dab6-43af-868d-07bd947a0ef0  172.31.216.99
+nova floating-ip-associate 85ee5c9f-03fe-4a1e-b08d-3cc3a56aeb51  172.31.216.202
+nova floating-ip-associate 932fa2ec-1f94-4e35-af3f-d0463a86d69c  172.31.216.100
+
+
+ neutron router-port-list  a9dc3c85-f77f-4154-99e3-5edffd196968
+ +--------------------------------------+-------------------------------------------------+-------------------+----------------------------------------------------------------------------------------+
+ | id                                   | name                                            | mac_address       | fixed_ips                                                                              |
+ +--------------------------------------+-------------------------------------------------+-------------------+----------------------------------------------------------------------------------------+
+ | 29a0b5ad-a44e-4c32-9050-e6c814850723 | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:68:c4:7d | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.2"}   |
+ | 46a96236-70e6-451f-89f3-9484eeef8546 | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:23:04:99 | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.1"}   |
+ | 5298d33c-28dc-4bef-b545-7739b4308bd8 | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:79:1a:13 | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.3"}   |
+ | 9a7129a1-e7e2-4c72-9481-24ef983299bf |                                                 | fa:16:3e:a3:90:3b | {"subnet_id": "f4eb3420-c5f6-4c6f-a9c0-cfe340a4a56e", "ip_address": "192.168.128.160"} |
+ +--------------------------------------+-------------------------------------------------+-------------------+----------------------------------------------------------------------------------------+
+
+
+ delete
+
+ neutron router-interface-delete a9dc3c85-f77f-4154-99e3-5edffd196968 "f4eb3420-c5f6-4c6f-a9c0-cfe340a4a56e"
+ neutron router-interface-add 6503ce62-86e1-4f10-a270-456826d7dc8f "f4eb3420-c5f6-4c6f-a9c0-cfe340a4a56e"
+
+
+  neutron router-port-list  6503ce62-86e1-4f10-a270-456826d7dc8f
+  +--------------------------------------+-------------------------------------------------+-------------------+---------------------------------------------------------------------------------------+
+  | id                                   | name                                            | mac_address       | fixed_ips                                                                             |
+  +--------------------------------------+-------------------------------------------------+-------------------+---------------------------------------------------------------------------------------+
+  | 6d6669a0-50dd-468a-8491-2f961b2a3ca7 |                                                 | fa:16:3e:0f:ea:01 | {"subnet_id": "d46da519-f3ce-42a9-a733-977fe84d3670", "ip_address": "172.31.216.2"}   |
+  | 7e79eeda-e13a-47aa-b10a-04e9a3b1ba48 | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:d5:c4:dd | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.15"} |
+  | bd00d2af-5c61-4976-83b1-65f6c60a85ff | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:62:b4:46 | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.14"} |
+  | d306d273-499b-4e0e-bc97-8e722f620aee |                                                 | fa:16:3e:31:a5:cd | {"subnet_id": "d3a51b71-cf66-4076-a142-ab810132bd8c", "ip_address": "10.11.0.1"}      |
+  | d3654438-bee1-44c9-80c8-9eb4fa6af57e | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:34:27:5a | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.13"} |
+  +--------------------------------------+-------------------------------------------------+-------------------+---------------------------------------------------------------------------------------+
+  [(DevOps)root@ansible network]#  neutron router-interface-add 6503ce62-86e1-4f10-a270-456826d7dc8f "f4eb3420-c5f6-4c6f-a9c0-cfe340a4a56e"
+  Added interface 2ddaedda-7bbb-4e83-80e4-53b844643e2d to router 6503ce62-86e1-4f10-a270-456826d7dc8f.
+  [(DevOps)root@ansible network]# neutron router-port-list  6503ce62-86e1-4f10-a270-456826d7dc8f
+  +--------------------------------------+-------------------------------------------------+-------------------+----------------------------------------------------------------------------------------+
+  | id                                   | name                                            | mac_address       | fixed_ips                                                                              |
+  +--------------------------------------+-------------------------------------------------+-------------------+----------------------------------------------------------------------------------------+
+  | 2ddaedda-7bbb-4e83-80e4-53b844643e2d |                                                 | fa:16:3e:d8:12:00 | {"subnet_id": "f4eb3420-c5f6-4c6f-a9c0-cfe340a4a56e", "ip_address": "192.168.128.160"} |
+  | 6d6669a0-50dd-468a-8491-2f961b2a3ca7 |                                                 | fa:16:3e:0f:ea:01 | {"subnet_id": "d46da519-f3ce-42a9-a733-977fe84d3670", "ip_address": "172.31.216.2"}    |
+  | 7e79eeda-e13a-47aa-b10a-04e9a3b1ba48 | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:d5:c4:dd | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.15"}  |
+  | bd00d2af-5c61-4976-83b1-65f6c60a85ff | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:62:b4:46 | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.14"}  |
+  | d306d273-499b-4e0e-bc97-8e722f620aee |                                                 | fa:16:3e:31:a5:cd | {"subnet_id": "d3a51b71-cf66-4076-a142-ab810132bd8c", "ip_address": "10.11.0.1"}       |
+  | d3654438-bee1-44c9-80c8-9eb4fa6af57e | HA port tenant 7de3dec9204e4f52b704f391cd4413c4 | fa:16:3e:34:27:5a | {"subnet_id": "38247e2a-0fed-4e19-98e7-61a6305c5073", "ip_address": "169.254.192.13"}  |
+  +--------------------------------------+-------------------------------------------------+-------------------+----------------------------------------------------------------------------------------+
+
+
+
+
+
+
+

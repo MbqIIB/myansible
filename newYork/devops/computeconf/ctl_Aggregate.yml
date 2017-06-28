@@ -9,4 +9,5 @@
       section: DEFAULT
       option: scheduler_default_filters
       value : RetryFilter,AvailabilityZoneFilter,RamFilter,ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,CoreFilter,AggregateInstanceExtraSpecsFilter,AggregateMultiTenancyIsolation
+      #value : RetryFilter,AvailabilityZoneFilter,RamFilter,ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,CoreFilter,AggregateInstanceExtraSpecsFilter,AggregateMultiTenancyIsolation,PciPassthroughFilter
       #value : RetryFilter,AvailabilityZoneFilter,RamFilter,ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,CoreFilter
