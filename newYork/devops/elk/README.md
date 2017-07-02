@@ -31,6 +31,10 @@ yum install httpd-tools
 
  htpasswd -b -c site_pass admin sv1xxxxx
 
+htpasswd -b -c site_pass admin SV@AdminNY1
+
+wget --user=admin --password=SV@AdminNY1 --no-check-certificate https://ny1.ptopenlab.com/software/docker.io.1.9.1_ppc64el.deb
+
 
 
 # delete index

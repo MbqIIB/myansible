@@ -406,5 +406,23 @@ nameserver 10.13.0.3
 
 
 
+# add net vlan2 to router1
+neutron router-interface-add 6503ce62-86e1-4f10-a270-456826d7dc8f a2c19f8e-eace-4396-b21b-98ffad3fa295
+Added interface 10e8b06f-3b28-49da-8932-1f80fc31fcfa to router 6503ce62-86e1-4f10-a270-456826d7dc8f.
+
+ip netns exec qrouter-6503ce62-86e1-4f10-a270-456826d7dc8f bash
+
+route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+10.11.0.0       0.0.0.0         255.255.0.0     U     0      0        0 qr-d306d273-49
+10.12.0.0       0.0.0.0         255.255.0.0     U     0      0        0 qr-10e8b06f-3b
+169.254.0.0     0.0.0.0         255.255.255.0   U     0      0        0 ha-7e79eeda-e1
+169.254.192.0   0.0.0.0         255.255.192.0   U     0      0        0 ha-7e79eeda-e1
+172.31.192.0    0.0.0.0         255.255.192.0   U     0      0        0 qg-6d6669a0-50
+
+#route add default gw 172.31.255.254
+
+
 
 

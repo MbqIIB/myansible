@@ -1,0 +1,7 @@
+{
+  "appId": "myAppId",
+  "masterKey": "myMasterKey",
+  "appName": "MyApp",
+  "cloud": "./cloud/main",
+  "databaseURI": "mongodb://linzhbj:passw0rd@localhost/parse"
+}

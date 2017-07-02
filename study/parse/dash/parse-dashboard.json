@@ -1,0 +1,15 @@
+{
+  "apps": [
+    {
+      "serverURL": "https://172.31.250.21:1337/parse",
+      "appId": "myAppId",
+      "masterKey": "myMasterKey",
+      "appName": "MyApp"
+    }
+  ],
+  "users":[
+   {"user":"linzhbj",
+     "pass":"passw0rd"
+   }
+   ]
+}
