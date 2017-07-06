@@ -75,3 +75,10 @@ apt-get update
 apt-get install nfs-common
 mount -t nfs bluem4:/data/openstack/glance/images /var/lib/glance/images
 ```
+
+
+# power kvm neucloud1
+```
+systemctl start nfs-server.service
+systemctl start rpcbind.service
+
