@@ -1,0 +1,9 @@
+- hosts: ping-test
+  remote_user: root
+  gather_facts: no
+  tasks:
+    - include : tasks/ping.yml
+
+    - name: install iperf fio
+      apt : name=iperf,fio state=latest
+

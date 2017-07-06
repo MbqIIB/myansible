@@ -1,0 +1,5 @@
+
+[ping-test]
+svx3_n1 ansible_host=10.111.25.206 ansible_user=opuser ansible_become=true ansible_become_pass=zaq123wsx
+svx2_n1 ansible_host=10.111.25.207 ansible_user=opuser ansible_become=true ansible_become_pass=zaq123wsx
+svx3_n2 ansible_host=10.111.25.209 ansible_user=opuser ansible_become=true ansible_become_pass=zaq123wsx

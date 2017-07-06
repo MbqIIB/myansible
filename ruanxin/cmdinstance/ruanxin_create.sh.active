@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set +x
 
 DateTime=$(date +%Y%m%d_%H%M%S)
 
@@ -71,6 +71,14 @@ do
     fi
 
     time=5
+    AttachFloatip=true
+    if $AttachFloatip;then
+         fip2=$(nova floating-ip-create ${ext_net} | grep ext_net | awk -F ' ' '{print $4}')
+         echo "floatingip ${fip2}"
+         sleep 2
+         nova floating-ip-associate ${InstanceId} ${fip2}
+    fi
+
     while true;
     do
          nova list | grep ${InstanceId} | grep "ACTIVE"
@@ -84,14 +92,6 @@ do
 	 fi
     done
     
-    AttachFloatip=false
-    if $AttachFloatip;then
-     fip2=$(nova floating-ip-create ${ext_net} | grep ext_net | awk -F ' ' '{print $4}')
-         sleep 2
-     nova floating-ip-associate ${InstanceId} ${fip2}
-         sleep 5
-    fi
-
  
      if [ "X${Volume}" != "X" ];then
         #cinder create --display-name ${VolumePrefix}_${Volume}_v${i} --availability-zone gpfs ${Volume}
