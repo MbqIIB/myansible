@@ -1,0 +1,18 @@
+
+
+
+
+#- hosts: controller-server,net-server
+#- hosts: other-server
+- hosts: elk-server
+#- hosts: cmd-server
+#- hosts: phy-server2
+  gather_facts: no
+  tasks:
+
+  - name: yum install nfs-utils
+    yum : name=nfs-utils state=latest
+
+#  - name : enable ntp
+#    service : name=ntpd state=started enabled=yes
+#  

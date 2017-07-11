@@ -1,0 +1,56 @@
+---
+- hosts : ctl-n1, ctl-n2,ctl-n3
+  remote_user: root
+  gather_facts:  true
+  tasks :
+
+  - name: Config novnc nova.conf
+    ini_file:
+      dest: /etc/nova/nova.conf
+      section: vnc
+      option: "{{ item.option }}"
+      value: "{{ item.value }}"
+    with_items:
+      - { option: 'enabled', value: 'true' }
+      - { option: 'keymap', value: 'en-us' }
+      - { option: 'vncserver_proxyclient_address', value: 'ctl-vip' }
+      - { option: 'vncserver_listen', value: '{{ inventory_hostname }}' }
+      - { option: 'novncproxy_host', value: '{{ inventory_hostname }}' }
+      - { option: 'novncproxy_port', value: '6080' }
+      - { option: 'novncproxy_base_url', value: 'http://ctl-vip:6080/vnc_auto.html' }
+
+  - name: Config cache nova.conf
+    ini_file:
+      dest: /etc/nova/nova.conf
+      section: cache
+      option: "{{ item.option }}"
+      value: "{{ item.value }}"
+    with_items:
+      - { option: 'enabled', value: 'true' }
+      - { option: 'backend', value: 'oslo_cache.memcache_pool' }
+      - { option: 'memcache_servers', value: 'ctl-n1:11211,ctl-n2:11211,ctl-n3:11211' }
+
+
+
+
+
+
+#- hosts : xnode6-8,xnode6-9
+#  remote_user: root
+#  gather_facts:  true
+#  tasks :
+#
+#  - name: Config novnc nova.conf
+#    ini_file:
+#      dest: /etc/nova/nova.conf
+#      section: vnc
+#      option: "{{ item.option }}"
+#      value: "{{ item.value }}"
+#    with_items:
+#      - { option: 'enabled', value: 'true' }
+#      - { option: 'keymap', value: 'en-us' }
+#      - { option: 'vncserver_proxyclient_address', value: '{{ inventory_hostname }}' }
+#      - { option: 'vncserver_listen', value: '0.0.0.0' }
+##      - { option: 'novncproxy_host', value: '{{ inventory_hostname }}' }
+##      - { option: 'novncproxy_port', value: '6080' }
+#      - { option: 'novncproxy_base_url', value: 'http://ctl-vip:6080/vnc_auto.html' }

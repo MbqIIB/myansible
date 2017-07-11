@@ -1,0 +1,9 @@
+---
+- hosts : ansible
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : firewalld 9080 tcp
+      firewalld: port=9080/tcp permanent=true state=enabled immediate=yes
+
+
