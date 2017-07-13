@@ -27,6 +27,7 @@
 #      copy: src=openstackfile/p8servicerestart.sh  dest={{toolsdir}}  owner=root group=root mode=0755
 #      when: ansible_os_family =="Debian"
 
+
     - name : copy tools mitaka_servicerestart.sh
       copy: src=openstackfile/mitaka_servicerestart.sh  dest={{toolsdir}}  owner=root group=root mode=0755
       when: ansible_os_family =="Debian"
