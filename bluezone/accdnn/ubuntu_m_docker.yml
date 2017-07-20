@@ -1,0 +1,10 @@
+- hosts: accdnn-server
+  gather_facts: no
+  tasks:
+
+  - name: install docker
+    apt: name=docker.io state=latest
+
+  - name: apt-get install docker linzhbj
+    apt : name=aufs-tools,btrfs-tools,debootstrap,rinse,python-pip,git,python-dev state=latest
+
