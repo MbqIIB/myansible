@@ -1,4 +1,6 @@
 #!/bin/bash
+set -x
+
 if [ $# != 1 ]
 then
 echo "usage : service_restart.sh  status|restart|stop"
