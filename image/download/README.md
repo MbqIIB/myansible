@@ -18,13 +18,15 @@ https://access.redhat.com/downloads/content/69/ver=/rhel---6/6.6/x86_64/product-
 # ubuntu
 ``` shell
 mv ubuntu-16.04-server-cloudimg-amd64-disk1.img ubuntu-16.04-server-x86_64-AnyDisk-v1.qcow2
-IMAGENAME=ubuntu-16.04-server-x86_64-AnyDisk-v1.qcow2
+#IMAGENAME=ubuntu-16.04-server-x86_64-AnyDisk-v1.qcow2
+IMAGENAME=ubuntu-16.04-server-cloudimg-ppc64el-disk1.qcow2
 ls -l $IMAGENAME
 mkdir tmp
 guestmount -w -a ${IMAGENAME} -i tmp/
 vimdiff ubuntu16.04_cloud.cfg tmp/etc/cloud/cloud.cfg
 cp ubuntu16.04_cloud.cfg tmp/etc/cloud/cloud.cfg
 vim tmp/etc/cloud/cloud.cfg
+tmp/etc/cloud/cloud.cfg.d/99-warnings.cfg
 guestunmount tmp/
 ./rc_kvm2glance.sh.mitaka  ubuntu-16.04-server-x86_64-AnyDisk-v1.cfg
 

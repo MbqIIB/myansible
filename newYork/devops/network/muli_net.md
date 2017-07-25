@@ -426,3 +426,12 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 
 
+| d3a51b71-cf66-4076-a142-ab810132bd8c | priv-subnet-vxlan1                                | 10.11.0.0/16     | {"start": "10.11.0.2", "end": "10.11.255.254"}         |
+
+neutron subnet-update d3a51b71-cf66-4076-a142-ab810132bd8c --allocation-pool start=10.11.0.2,end=10.11.1.208
+Updated subnet: d3a51b71-cf66-4076-a142-ab810132bd8c
+
+
+neutron subnet-update d3a51b71-cf66-4076-a142-ab810132bd8c --allocation-pool start=10.11.0.2,end=10.11.0.4 --allocation-pool start=10.11.1.208,end=10.11.1.208
+Updated subnet: d3a51b71-cf66-4076-a142-ab810132bd8c
+

@@ -1,5 +1,6 @@
 #- hosts : compute-server
-- hosts : install-server
+#- hosts : install-server
+- hosts : brnode13-6,brnode13-7,brnode13-8,brnode13-9
   remote_user: root
   gather_facts: no
   tasks:

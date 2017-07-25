@@ -33,11 +33,15 @@ nova secgroup-add-rule default tcp 8080 8080 0.0.0.0/0
 nova secgroup-add-rule default tcp 8090 8090 0.0.0.0/0
 nova secgroup-add-rule default tcp 9088 9088 0.0.0.0/0
 nova secgroup-add-rule default tcp 12632 12632 0.0.0.0/0
-nova secgroup-add-rule default tcp 9080 9080 0.0.0.0/0
 
+# elk
+nova secgroup-add-rule default tcp 5601 5601 0.0.0.0/0
 nova secgroup-add-rule default tcp 9200 9200 0.0.0.0/0
 nova secgroup-add-rule default tcp 9300 9300 0.0.0.0/0
 
+# custem nginx
+nova secgroup-add-rule default tcp 9080 9080 0.0.0.0/0
 
+# other
 nova secgroup-add-rule default tcp 1 65535 0.0.0.0/0
 
