@@ -1,7 +1,8 @@
 #- hosts:  ent-op-server
 #- hosts:  neucloud5
 #- hosts:  redpower8
-- hosts:  mitaka-op-server
+#- hosts:  mitaka-op-server
+- hosts:  blue212
 #- hosts: ansible 
   remote_user : root
   gather_facts: true

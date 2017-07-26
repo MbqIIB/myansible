@@ -35,6 +35,8 @@ rabbitmq-plugins enable rabbitmq_shovel rabbitmq_management
 ansible controller-server -m shell -a "rabbitmq-plugins list"
 ansible controller-server -m shell -a "rabbitmq-plugins disable rabbitmq_management rabbitmq_management_visualiser rabbitmq_shovel rabbitmq_shovel_management rabbitmq_tracing"
 
+ansible controller-server -m shell -a "rabbitmq-plugins enable rabbitmq_management rabbitmq_management_visualiser rabbitmq_shovel rabbitmq_shovel_management rabbitmq_tracing"
+
 
 ansible ctl-n1,ctl-n2,ctl-n3  -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit\@ctl-n1/msg_store_persistent/*"
 ansible ctl-n1,ctl-n2,ctl-n3  -m shell -a "rm -rf /var/lib/rabbitmq/mnesia/rabbit\@ctl-n1/msg_store_transient/*"

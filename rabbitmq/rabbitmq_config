@@ -1,4 +1,7 @@
 
+pcs resource unmanage RABBITMQ-clone
+pcs resource
+
 poc0
 rabbitmqctl stop_app
 rabbitmqctl reset
@@ -9,7 +12,8 @@ rabbitmqctl start_app
 poc1 / poc2 
 rabbitmqctl stop_app
 rabbitmqctl reset
-rabbitmqctl join_cluster rabbit@poc-ctl0
+#rabbitmqctl join_cluster rabbit@poc-ctl0
+rabbitmqctl join_cluster rabbit@ctl-n1
 
 rabbitmqctl start_app
 
@@ -26,7 +30,11 @@ rabbitmqctl set_permissions -p /  amqp_user '.*' '.*' '.*'
 rabbitmqctl set_policy ha-all '^(?!amq\.).*' '{"ha-mode": "all"}'
 
 
-rabbitmqctl set_cluster_name  DevOps
+#rabbitmqctl set_cluster_name  DevOps
+rabbitmqctl set_cluster_name  BlueMitaka
+pcs resource manage RABBITMQ-clone
+
+
 
 
 poc0/1/2
