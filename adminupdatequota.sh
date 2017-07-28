@@ -11,7 +11,8 @@ user="xuechao@cn.ibm.com"
 user="yanrong@cn.ibm.com"
 user="linzhbj@cn.ibm.com"
 #user="sempleb@us.ibm.com"
-user="bdu@ibm.com"
+#user="bdu@ibm.com"
+user="accdnnservice@cn.ibm.com"
 
 
 tenantid=$(keystone tenant-list | grep " ${user} " | awk -F ' ' '{print $2}')
@@ -37,7 +38,7 @@ nova quota-update \
     --user ${username} ${tenantid}
 
 
-exit 1
+#exit 1
 #neutron quota-show
 neutron quota-update \
             --router 1000 \

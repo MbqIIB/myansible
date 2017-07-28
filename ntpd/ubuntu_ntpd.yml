@@ -1,12 +1,13 @@
 #- hosts: controller-server,net-server
 #- hosts: compute-server
-- hosts:  redpower6,ibms812lc1
+#- hosts:  redpower6,ibms812lc1
 #- hosts: install-server
+- hosts: accdnnservice
   gather_facts: no
   tasks:
 
-#  - name: apt install openstack linzhbj
-#    apt : name=ntp state=latest
+  - name: install ntp
+    apt : name=ntp state=latest
 
   - name : enable ntp
     service : name=ntp state=started enabled=yes

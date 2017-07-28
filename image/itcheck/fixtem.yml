@@ -3,7 +3,8 @@
 #- hosts : compute-server-ppc64le-docker
 #- hosts : syh2,syh3
 #- hosts : iot-001,com-n1-x86
-- hosts : syh4
+#- hosts : syh4
+- hosts : ansible
   remote_user: root
   gather_facts: no
   vars:
@@ -27,13 +28,13 @@
       option: value
       value: http://129.34.20.42:52311/bfmirror/downloads/
 
-  - name: Config nova.conf
+  - name: Config besclient.config
     ini_file:
-      dest: /var/opt/BESClient/besclient.config
+      dest: "{{ filepath }}"
       section: Software\BigFix\EnterpriseClient\Settings\Client\__RelaySelect_Automatic
       option: value
       value: 0
-      backup: yes
+#      backup: yes
 
 
   - name : /etc/init.d/besclient start

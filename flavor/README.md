@@ -57,3 +57,16 @@ nova flavor-key devops.kvm.extralarge set hw:cpu_cores=${CPU_CORES} hw:cpu_socke
 8c16g50G
 4c4g50G 
 4c8g50G 
+
+
+# smt8c.1s1c8t32g300G
+
+nova flavor-create smt16c.2s1c8t32g300G  auto 32768 300 16
+CPU_SOCKETS=2
+CPU_CORES=1
+CPU_THREADS=8
+nova flavor-key smt16c.2s1c8t32g300G set hw:cpu_cores=${CPU_CORES} hw:cpu_sockets=${CPU_SOCKETS} hw:cpu_threads=${CPU_THREADS}
+
+
+
+

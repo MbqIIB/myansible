@@ -1,10 +1,12 @@
 ---
 #- hosts:  op-server
-- hosts:  elk-server
+#- hosts:  elk-server
+- hosts:  accdnnservice
   remote_user : root
   gather_facts: true
   vars:
     filepath : /root/.bashrc
+    #filepath : /home/opuser/.bashrc
     options : StrictHostKeyChecking
   tasks:
     - name: Config {{filepath}}
@@ -19,8 +21,8 @@
     - name: Config {{filepath}}
       lineinfile: " dest={{filepath}} state=present regexp='^HISTIGNORE' line='HISTIGNORE=\"ls\"' "
 
-    - name: Config {{filepath}}
-      lineinfile: dest={{filepath}} state=present regexp='^HISTCONTROL' line='HISTCONTROL=ignoreboth'
+#    - name: Config {{filepath}}
+#      lineinfile: dest={{filepath}} state=present regexp='^HISTCONTROL' line='HISTCONTROL=ignoreboth'
 
     - name: Config {{filepath}}
       lineinfile: dest={{filepath}} state=present regexp='^shopt -s' line='shopt -s histappend'
