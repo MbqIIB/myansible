@@ -1,6 +1,7 @@
 #- hosts:  poc-server
 #- hosts:  ansible
-- hosts:  pc-server
+#- hosts:  pc-server
+- hosts:  ironic
 #- hosts:  install-server
   remote_user : root
   gather_facts: true

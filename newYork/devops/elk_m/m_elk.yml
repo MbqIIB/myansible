@@ -1,0 +1,73 @@
+- hosts : elk-server
+  remote_user: root
+  gather_facts: yes
+  tasks :
+
+    - name: install epel
+      yum:
+        name: epel-release
+
+    - name: Add elasticsearch-5.x repository
+      yum_repository:
+        name: elasticsearch-5.x
+        description: Elasticsearch repository for 5.x packages
+        file :  elasticsearch
+        baseurl: https://artifacts.elastic.co/packages/5.x/yum
+        enabled : yes
+        gpgcheck: no
+
+    - name: install elasticsearch
+      yum : name=elasticsearch,java-1.8.0-openjdk,curl,wget state=latest
+
+#    - name: install firewalld 
+#      yum : name=firewalld state=latest
+#
+#    - name : service firewalld
+#      service : name=firewalld state=started enabled=yes
+
+    - name: install python
+      yum : name=python,python-devel state=latest
+
+    - name : elasticsearch /data
+      file : path=/data owner=elasticsearch group=elasticsearch state=directory mode=0755
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=stopped enabled=yes
+
+    #- name : rm elasticsearch
+    #  shell : rm -rf /data/elasticsearch*
+
+    #    - name : firewalld 9080 tcp
+    #      firewalld: port=9080/tcp permanent=true state=enabled immediate=yes
+    #
+    #    - name : firewalld 9200 tcp for es
+    #      firewalld: port=9200/tcp permanent=true state=enabled immediate=yes
+    #
+    #    - name : firewalld 9300 tcp for es
+    #      firewalld: port=9300/tcp permanent=true state=enabled immediate=yes
+
+- hosts : elk-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: config elasticsearch.yml
+      lineinfile: dest=/etc/elasticsearch/elasticsearch.yml state=present regexp='^{{item.option}}' line="{{item.option}}:{{item.value}}"
+      with_items:
+        - { option: 'cluster.name', value: ' ELK' } 
+        - { option: 'node.name', value: ' {{inventory_hostname}}' } 
+        - { option: 'node.data', value: ' true' } 
+        - { option: 'path.data', value: ' /data' } 
+        - { option: 'path.logs', value: ' /var/log/elasticsearch' } 
+        - { option: 'network.host', value: ' 0.0.0.0' }
+        - { option: 'network.publish_host', value: ' {{inventory_hostname}}'}
+        - { option: 'http.port', value: ' 9200' }
+        - { option: 'discovery.zen.ping.unicast.hosts', value : ' ["elk-n1", "elk-n2", "elk-n3"]' }
+        - { option: 'discovery.zen.minimum_master_nodes', value : ' 2' }
+        - { option: 'gateway.recover_after_nodes', value : ' 3' }
+        - { option: 'xpack.security.enabled', value : ' false' }
+        - { option: 'xpack.monitoring.enabled', value : ' true' }
+        - { option: 'xpack.graph.enabled', value : ' true' }
+        - { option: 'xpack.watcher.enabled', value : ' true' }
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=restarted enabled=yes

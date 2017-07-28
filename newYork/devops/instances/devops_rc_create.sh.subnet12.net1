@@ -43,7 +43,8 @@ fid=$(grep " ${FlavorOption} " $fp | awk -F '|' '{print $2}')
 for ((i=${Number_start};i<${Number_end};i++))
 do
     nodename=$(echo ${Node} | sed "s/ent-//g" | sed "s/.ibm.com//g")
-    insname=${Prefix}-${nodename}-$(echo ${FlavorOption} | sed "s/\.//g")-${DateTime}n${i}
+    #insname=${Prefix}-${nodename}-$(echo ${FlavorOption} | sed "s/\.//g")-${DateTime}n${i}
+    insname=${Prefix}-n${i}
 
     if [ "X${KeyName}" != "X" ];then
     InstanceId=$(nova boot \
