@@ -21,6 +21,7 @@ mv ubuntu-16.04-server-cloudimg-amd64-disk1.img ubuntu-16.04-server-x86_64-AnyDi
 IMAGENAME=ubuntu-16.04-server-x86_64-AnyDisk-v1.qcow2
 IMAGENAME=ubuntu16.04-itcheck-n3.qcow2
 IMAGENAME=ubuntu-16.04-server-cloudimg-ppc64el-disk1.qcow2
+IMAGENAME=ubuntu-16.04-server-cloudimg-amd64-disk1.qcow2
 ls -l $IMAGENAME
 mkdir tmp
 guestmount -w -a ${IMAGENAME} -i tmp/

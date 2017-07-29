@@ -1,5 +1,6 @@
 ---
-- hosts: cmd-server,net-server,controller-server,elk-server
+#- hosts: cmd-server,net-server,controller-server,elk-server
+- hosts: sensu
 #- hosts: cmd-server
   vars:
     user: root
