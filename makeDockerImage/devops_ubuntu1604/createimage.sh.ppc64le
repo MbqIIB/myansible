@@ -1,0 +1,49 @@
+#!/bin/bash
+set -x
+#name=ubuntu1604_ppc64le_t1
+name=ubuntu1604_ppc64le_v5
+imagedir=/tmp
+
+function dockerbuild(){
+	docker build -f Dockerfile.ppc64le -t  ${name} ./
+}
+
+
+function saveimage(){
+docker save -o ${imagedir}/${name}.raw ${name}
+}
+
+
+function glanceupload(){
+glance image-create \
+	       --visibility public \
+	       --container-format=docker \
+	       --disk-format=raw \
+	       --property hypervisor_type=docker \
+	       --property image_type=image \
+	       --property webshell=True \
+	       --property architecture=ppc64le \
+	       --property accelerator_type=none \
+	       --property sys_type=ubuntu \
+	       --property os_type="Linux" \
+	       --property imageUuid=ubuntu_1604 \
+	       --property os_name="Ubuntu 1604" \
+	       --property os_version="Ubuntu 1604 - LTS" \
+	       --property os_override="16.04.2" \
+	       --property diskSize=20 \
+               --file ${imagedir}/${name}.raw \
+	       --name ${name} 
+
+}
+
+	       #--property os_type="Linux - Ubuntu" \
+	       #--property base_type=base \
+	       #--property hw_disk_bus=virtio \
+	       #--property hw_video_model=vga \
+
+
+##main##
+dockerbuild
+saveimage
+glanceupload
+

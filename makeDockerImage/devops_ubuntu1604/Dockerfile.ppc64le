@@ -1,0 +1,30 @@
+FROM ppc64le/ubuntu:16.04
+
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update -y && apt-get install -y apt-utils
+RUN apt-get install -y  openssh-server sudo net-tools wget telnet vim python python3 locales curl iputils-ping
+RUN apt-get install -y  initramfs-tools
+RUN apt-get upgrade -y 
+
+
+RUN sudo locale-gen 'en_US.UTF-8'
+RUN printf 'LC_ALL=en_US.UTF-8\nLANG=en_US.UTF-8' >> /etc/environment 
+
+
+
+ADD . /bd_build
+
+# install shellinabox
+RUN  /bd_build/installwebshell.sh
+
+# set pass
+RUN  /bd_build/setpass.sh
+
+# sshkey
+ADD  ./setsshkey.sh /sbin/
+RUN sed -i '/^exit 0$/ i\sudo -u opuser \/sbin\/setsshkey.sh &' /etc/rc.local
+
+
+# Runit
+RUN  /bd_build/update.sh
+CMD ["/sbin/my_init"]

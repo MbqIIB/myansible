@@ -30,6 +30,8 @@ ln -s /etc/container_environment.sh /etc/profile.d/
 
 #apt-get install -y linux-libc-dev gcc openssh-server net-tools apt-utils vim python3
 
+# for ubuntu16.04
+#apt install -y upstart-sysv
 ## Install runit.
 apt-get install -y --no-install-recommends runit
 
