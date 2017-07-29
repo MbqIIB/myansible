@@ -27,7 +27,6 @@
       option: cpu_capping
       value: true
       #value : libvirt.LibvirtDriver
-      backup: yes
  
   - name: Config nova.conf
     ini_file: 
@@ -35,7 +34,6 @@
       section: docker 
       option: set_fs_size
       value: true
-      backup: yes
  
   - name: Config nova.conf
     ini_file: 
@@ -43,7 +41,6 @@
       section: docker 
       option: client_timeout
       value: 3600
-      backup: yes
 
   - name: Config nova.conf
     ini_file: 
@@ -51,7 +48,20 @@
       section: docker 
       option: network_device_mtu
       value: 1450
-      backup: yes
+
+  - name: Config nova.conf
+    ini_file:
+      dest: /etc/nova/nova.conf
+      section: docker
+      option: ssh_key_bind_path
+      value: /var/lib/nova/instances
+
+  - name: Config nova.conf
+    ini_file:
+      dest: /etc/nova/nova.conf
+      section: docker
+      option: metadata_storage_dir
+      value: /var/lib/nova/metadata
 
   - name : service nova-compute
     service : name=nova-compute state=restarted enabled=yes
