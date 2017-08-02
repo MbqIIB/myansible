@@ -1,0 +1,19 @@
+- hosts : ctl-n1, ctl-n2 , ctl-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : epel-release
+      yum : name=epel-release state=latest
+
+    - name : firewalld 9080 tcp
+      firewalld: port=9080/tcp permanent=true state=enabled immediate=yes
+
+    - name : config nginx
+      yum : name=nginx,httpd-tools state=latest
+    
+#    - name : copy nginx.conf
+#      copy : src=nginx.conf dest=/etc/nginx/nginx.conf mode=0644
+
+#    - name : service nginx
+#      service : name=nginx state=started enabled=yes
+ 
