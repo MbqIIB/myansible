@@ -1,0 +1,44 @@
+#- hosts: elk-server
+#- hosts: controller-server
+#- hosts: ent-ctl0-x86
+- hosts: ent-cp6-ppc64le,dockerrepos
+  remote_user : root
+  gather_facts: true
+  vars:
+    filesshd: /etc/ssh/sshd_config
+    filessh: /etc/ssh/ssh_config
+    filepath: /etc/ssh/ssh_config
+    options : StrictHostKeyChecking
+  tasks:
+
+#    - name: PermitRootLogin yes
+#      lineinfile: dest=/etc/ssh/sshd_config state=present regexp='^PermitRootLogin' line='{{item}}'
+#      with_items:
+#        - "PermitRootLogin yes"
+
+#    - name: Config {{filepath}}
+#      lineinfile: dest={{filepath}} state=present regexp='^{{options}}' line='{{item}}'
+#      with_items:
+#        - "{{ options}} no"
+#          #- "Defaults: {{user}}  !requiretty"
+
+    - name: Config {{filesshd}}
+      lineinfile:
+        dest: "{{filessh}}"
+        state: present
+        regexp: "^{{ item.option }}"
+        line: "{{ item.option }} {{ item.value }}"
+      with_items:
+        - { option: 'Ciphers', value: 'aes128-ctr,aes192-ctr,aes256-ctr' }
+
+#    - name : rm /root/.ssh/known_hosts
+#      file : path=/root/.ssh/known_hosts state=absent
+#
+    - name : service sshd
+      service : name=sshd state=restarted enabled=yes
+      when : ansible_os_family =="RedHat"
+
+    - name : service ssh
+      service : name=ssh state=restarted enabled=yes
+      when : ansible_os_family =="Debian"
+

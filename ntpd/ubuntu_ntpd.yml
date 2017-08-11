@@ -2,7 +2,8 @@
 #- hosts: compute-server
 #- hosts:  redpower6,ibms812lc1
 #- hosts: install-server
-- hosts: accdnnservice
+#- hosts: accdnnservice
+- hosts: ent-cp5-ppc64le
   gather_facts: no
   tasks:
 
