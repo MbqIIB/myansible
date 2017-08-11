@@ -36,6 +36,7 @@ value = 0
 ``` shell
 
 cd /tmp/
+wget http://9.186.61.119/itcheck.20170522.tar.gz
 wget http://172.16.10.119/itcheck.20170522.tar.gz
 tar xvf itcheck.20170522.tar.gz
 cd itcheck
@@ -53,7 +54,15 @@ cp actionsite.afxm /etc/opt/BESClient/actionsite.afxm
 cp TEM-Owner.txt  /
 /etc/init.d/besclient start
 ps -ef | grep BESClient
-tail -f /var/opt/BESClient/__BESData/__Global/Logs/20170522.log
+ls -l /var/opt/BESClient
+ls -l /var/opt/BESClient/__BESData/__Global/Logs/
+tree -f /var/opt/BESClient/__BESData/__Global/Logs/
+tail -f /var/opt/BESClient/__BESData/__Global/Logs/20170726.log
+
+# kvm
+systemctl enable besclient.service
+systemctl status besclient.service
+systemctl start besclient.service
 
 rm -rf /tmp/itcheck
 history -c
@@ -81,17 +90,34 @@ cd itcheck
 dpkg -i BESAgent-9.5.5.196-ubuntu10.amd64.deb
 
 rpm -ivh BESAgent-9.5.5.196-rhe6.x86_64.rpm
-chkconfig besclient on
+#chkconfig besclient on
 
 cp besclient.config /var/opt/BESClient/besclient.config
 mkdir /etc/opt/BESClient
 cp actionsite.afxm /etc/opt/BESClient/actionsite.afxm
 cp TEM-Owner.txt  /
+
+systemctl enable besclient.service
+systemctl status besclient.service
+systemctl start besclient.service
+
 /etc/init.d/besclient start
 vim /var/opt/BESClient/besclient.config
 tail -f /var/opt/BESClient/__BESData/__Global/Logs/20170602.log
 ```
 
 
+# repo
 
+# enterprise
+ln -s /gpfs/gpfs_enterprise/repositories/CentOS/7.3/ppc64le /var/www/html/CentOS7.3-ppc64le
+ln -s /gpfs/gpfs_enterprise/repositories/RHEL7/7.3/ppc64le /var/www/html/rhel7.3-ppc64le
+ln -s /gpfs/gpfs_enterprise/repositories/RHEL7/7.2/x86_64 /var/www/html/RHEL7.2-x86_64
+ln -s /gpfs/gpfs_enterprise/repositories/CentOS/7.3/x86_64 /var/www/html/CentOS7.3-x86_64
+ln -s /gpfs/gpfs_enterprise/repositories/CentOS/7.3/ppc64le /var/www/html/CentOS7.3-ppc64le
+ln -s /gpfs/gpfs_enterprise/repositories/RHEL7/7.3/ppc64le /var/www/html/RHEL7.3-ppc64le
+ln -s /gpfs/gpfs_enterprise/repositories/RHEL7/7.3/x86_64/ /var/www/html/RHEL7.3-x86_64
 
+# community
+ln -s /gpfs/iso/yumrepos/CentOS/7.3/ppc64le /var/www/html/CentOS7.3-ppc64le
+wget http://172.16.10.12/imageclean/centos7.3-ppc64le.repo

@@ -36,7 +36,8 @@ fi
 for ((i=${Number_start};i<${Number_end};i++))
 do
     nodename=$(echo ${Node} | sed "s/ent-//g" | sed "s/.ibm.com//g")
-    insname=${Prefix}-${nodename}-${FlavorOption}-n${i}
+    #insname=${Prefix}-${nodename}-${FlavorOption}-n${i}
+    insname=${Prefix}-n${i}
     InstanceId=$(nova boot \
          --flavor ${FlavorOption} \
          --image   ${ImageName} \
