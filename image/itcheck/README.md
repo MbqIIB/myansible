@@ -106,6 +106,14 @@ vim /var/opt/BESClient/besclient.config
 tail -f /var/opt/BESClient/__BESData/__Global/Logs/20170602.log
 ```
 
+# fixssh
+```
+grep -rn "Ciphers" /etc/ssh
+
+# update /etc/ssh/ssh_config
+Ciphers aes128-ctr,aes192-ctr,aes256-ctr
+
+```
 
 # repo
 

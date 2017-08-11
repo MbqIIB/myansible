@@ -3,7 +3,9 @@
 
 
 ### phy Managment IP
+10.0.0.17   blue212
 10.0.0.18   bluem4
+10.0.0.42   cp9
 
 ### phy Public IP
 ### phy Data IP
@@ -24,8 +26,8 @@
 10.0.19.206  net-n2        net2
 10.0.19.207  net-n3        net3
 
-10.0.0.130   neucloud5 
 10.0.0.43    cp11
+10.0.0.130   neucloud5
 10.0.0.199   svx11
 
 

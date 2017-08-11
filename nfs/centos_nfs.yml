@@ -1,14 +1,12 @@
 #- hosts: controller-server
 #- hosts: bluem4
-- hosts: neucloud1
+#- hosts: neucloud1
+- hosts: cp9
   gather_facts: no
   tasks:
 
-  - name: yum install openstack linzhbj
+  - name: install nfs
     yum : name=rpcbind,nfs-utils state=latest
-
-  - name : service nfs-server.service
-    service : name=nfs-server.service state=restarted enabled=yes
 
   - name : firewalld for nfs
     firewalld: permanent=true state=enabled immediate=yes service=nfs
@@ -18,6 +16,10 @@
 
   - name : firewalld for mountd
     firewalld: permanent=true state=enabled immediate=yes service=mountd
+
+  - name : start nfs-server.service
+    service : name=nfs-server.service state=restarted enabled=yes
+
   
 #  - name : firewalld 2049 tcp for nfs
 #    firewalld: port=2049/tcp permanent=true state=enabled immediate=yes

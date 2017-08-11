@@ -45,3 +45,9 @@ nova secgroup-add-rule default tcp 9080 9080 0.0.0.0/0
 # other
 nova secgroup-add-rule default tcp 1 65535 0.0.0.0/0
 
+
+# accdnn
+nova secgroup-add-rule default tcp 9000 9001 0.0.0.0/0
+nova secgroup-add-rule default tcp 8001 8001 0.0.0.0/0
+nova secgroup-add-rule default tcp 8080 8080 0.0.0.0/0
+

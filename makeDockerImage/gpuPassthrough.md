@@ -122,8 +122,8 @@ cat /etc/apt/sources.list.d/cuda.list
 deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/ppc64el /
 
 
+# install cuda8
 https://developer.nvidia.com/cuda-downloads
-
 https://developer.nvidia.com/cuda-75-downloads-archive
 
 
@@ -133,19 +133,35 @@ RUN apt-get install -y  initramfs-tools
 wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/ppc64el/cuda-repo-ubuntu1604_8.0.61-1_ppc64el.deb
 sudo dpkg -i cuda-repo-ubuntu1604_8.0.61-1_ppc64el.deb
 sudo apt-get update
-sudo apt install -y nvidia-361
-#sudo rm /var/lib/dpkg/info/nvidia-361.postinst
-sudo apt install nvidia-361-dev nvidia-361-uvm
 sudo apt-get install cuda
+reboot
+# default latest driver 375
+
+if you need install 361
+#### sudo apt install -y nvidia-361
+#### #sudo rm /var/lib/dpkg/info/nvidia-361.postinst
+#### sudo apt install nvidia-361-dev nvidia-361-uvm
 
 
 
-   15  wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/ppc64el/cuda-repo-ubuntu1604_8.0.61-1_ppc64el.deb
-   
+# only install driver
+
+# doc
+http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#verify-you-have-supported-version-of-linux
+
+apt install nvidia-modprobe nvidia-375*
+nvidia-smi
+root@neucloud5:~# lsmod  | grep nvidia
+nvidia_uvm            846652  0
+nvidia_drm             62388  0
+nvidia_modeset       1090284  1 nvidia_drm
+nvidia              15574621  2 nvidia_modeset,nvidia_uvm
+drm_kms_helper        180371  3 ast,nouveau,nvidia_drm
+drm                   453521  6 ast,ttm,drm_kms_helper,nouveau,nvidia_drm
+
+
+wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/ppc64el/cuda-repo-ubuntu1604_8.0.61-1_ppc64el.deb
 glance image-update d4ab56be-8d53-4c6e-8627-e216f16e6b94 --property accelerator_type=gpu_pcie --property image_type=image --visibility public
-
-
-
 
 # ubuntu 16.04 install cuda
 wget http://us.download.nvidia.com/Ubuntu/352.93/NVIDIA-Linux-ppc64le-352.93.run
