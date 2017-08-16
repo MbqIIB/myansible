@@ -29,22 +29,25 @@ mang_net=35974342-cfe7-45bb-b81f-b9ea53a6ab91
 
 echo "${Prefix}-${Node}-${FlavorOption}-${ImageName}"
 
+fp=flavorlist.log
+nova flavor-list --all --extra-specs  > $fp
 
-nova flavor-list | grep ${FlavorOption}
+grep ${FlavorOption} $fp
 if [ $? != 0 ];then
-	echo "Don't have flavor ${FlavorOption}"
-	exit 1
+        echo "Don't have flavor ${FlavorOption}"
+        exit 1
 fi
+fid=$(grep " ${FlavorOption} " $fp | awk -F '|' '{print $2}')
 
 
 
 #exit 0
-for ((i=0;i<${Number};i++))
+for ((i=${Number_start};i<${Number_end};i++))
 do
     nodename=$(echo ${Node} | sed "s/ent-//g" | sed "s/.ibm.com//g")
     insname=${Prefix}-${nodename}-${FlavorOption}-n${i}
     InstanceId=$(nova boot \
-         --flavor ${FlavorOption} \
+         --flavor ${fid} \
          --image   ${ImageName} \
          --nic net-id=${net_id} \
          --nic net-id=${mang_net} \

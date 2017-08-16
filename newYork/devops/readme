@@ -395,9 +395,22 @@ pcs resource create SWIFT_PROXY systemd:openstack-swift-proxy op monitor interva
 
 pcs resource clone SWIFT_PROXY 
 
-systemctl reload haproxy
+#systemctl reload haproxy
+pcs resource restart HAPROXY
 pcs resource enable SWIFT_PROXY-clone
 pcs resource disable SWIFT_PROXY-clone
+
+
+# check swift
+cd /etc/swift
+swift-ring-builder account.builder
+swift-ring-builder container.builder
+swift-ring-builder object.builder
+
+# rebalance
+swift-ring-builder account.builder rebalance
+swift-ring-builder container.builder rebalance
+swift-ring-builder object.builder rebalance
 
 
 swift-ring-builder account.builder  set_info   --ip 192.168.191.200 --change-ip 10.0.19.201 --change-replication-ip 10.0.19.201
@@ -425,21 +438,48 @@ swift-ring-builder account.builder   remove --ip 10.0.19.203
 swift-ring-builder container.builder remove --ip 10.0.19.203
 swift-ring-builder object.builder    remove --ip 10.0.19.203
 
-swift-ring-builder account.builder add --ip 10.0.19.203 --region 1 --zone 1 --port 6002 --replication-ip 10.0.19.203 --replication-port 6002 --device swiftloopback --weight 10
-swift-ring-builder container.builder add --ip 10.0.19.203 --region 1 --zone 1 --port 6002 --replication-ip 10.0.19.203 --replication-port 6002 --device swiftloopback --weight 10
-swift-ring-builder object.builder add --ip 10.0.19.203 --region 1 --zone 1 --port 6002 --replication-ip 10.0.19.203 --replication-port 6002 --device swiftloopback --weight 10
 
+
+# config swift
+rm -rf *.gz *.builder
+swift-ring-builder account.builder create 10 3 1
+swift-ring-builder account.builder add --ip 10.0.19.201 --region 1 --zone 1 --port 6002 --replication-ip 10.0.19.201 --replication-port 6002 --device swiftloopback --weight 10
+swift-ring-builder account.builder add --ip 10.0.19.202 --region 1 --zone 2 --port 6002 --replication-ip 10.0.19.202 --replication-port 6002 --device swiftloopback --weight 10
+swift-ring-builder account.builder add --ip 10.0.19.203 --region 1 --zone 3 --port 6002 --replication-ip 10.0.19.203 --replication-port 6002 --device swiftloopback --weight 10
+swift-ring-builder account.builder
+swift-ring-builder account.builder rebalance
+
+swift-ring-builder container.builder create 10 3 1
+swift-ring-builder container.builder add --ip 10.0.19.201 --region 1 --zone 1 --port 6001 --replication-ip 10.0.19.201 --replication-port 6001 --device swiftloopback --weight 10
+swift-ring-builder container.builder add --ip 10.0.19.202 --region 1 --zone 2 --port 6001 --replication-ip 10.0.19.202 --replication-port 6001 --device swiftloopback --weight 10
+swift-ring-builder container.builder add --ip 10.0.19.203 --region 1 --zone 3 --port 6001 --replication-ip 10.0.19.203 --replication-port 6001 --device swiftloopback --weight 10
+swift-ring-builder container.builder
+swift-ring-builder container.builder rebalance
+
+swift-ring-builder object.builder create 10 3 1
+swift-ring-builder object.builder add --ip 10.0.19.201 --region 1 --zone 1 --port 6000 --replication-ip 10.0.19.201 --replication-port 6000 --device swiftloopback --weight 10
+swift-ring-builder object.builder add --ip 10.0.19.202 --region 1 --zone 2 --port 6000 --replication-ip 10.0.19.202 --replication-port 6000 --device swiftloopback --weight 10
+swift-ring-builder object.builder add --ip 10.0.19.203 --region 1 --zone 3 --port 6000 --replication-ip 10.0.19.203 --replication-port 6000 --device swiftloopback --weight 10
+swift-ring-builder object.builder 
+swift-ring-builder object.builder rebalance
+
+
+scp account.ring.gz container.ring.gz object.ring.gz ctl-n2:/etc/swift/
+scp account.ring.gz container.ring.gz object.ring.gz ctl-n3:/etc/swift/
+
+
+# or add way
 swift-ring-builder account.builder add z1-10.0.19.201:6002/swiftloopback 2
 swift-ring-builder container.builder add z1-10.0.19.201:6001/swiftloopback 2
 swift-ring-builder object.builder add z1-10.0.19.201:6000/swiftloopback 2
 
-swift-ring-builder account.builder add z1-10.0.19.202:6002/swiftloopback 2
-swift-ring-builder container.builder add z1-10.0.19.202:6001/swiftloopback 2
-swift-ring-builder object.builder add z1-10.0.19.202:6000/swiftloopback 2
+swift-ring-builder account.builder add z2-10.0.19.202:6002/swiftloopback 2
+swift-ring-builder container.builder add z2-10.0.19.202:6001/swiftloopback 2
+swift-ring-builder object.builder add z2-10.0.19.202:6000/swiftloopback 2
 
-swift-ring-builder account.builder add z1-10.0.19.203:6002/swiftloopback 2
-swift-ring-builder container.builder add z1-10.0.19.203:6001/swiftloopback 2
-swift-ring-builder object.builder add z1-10.0.19.203:6000/swiftloopback 2
+swift-ring-builder account.builder add z3-10.0.19.203:6002/swiftloopback 2
+swift-ring-builder container.builder add z3-10.0.19.203:6001/swiftloopback 2
+swift-ring-builder object.builder add z3-10.0.19.203:6000/swiftloopback 2
 
 
 swift-ring-builder account.builder 
@@ -450,18 +490,9 @@ swift-ring-builder account.builder rebalance
 swift-ring-builder container.builder rebalance
 swift-ring-builder object.builder rebalance
 
-scp account.ring.gz ctl-n1:/etc/swift/account.ring.gz
-scp container.ring.gz ctl-n1:/etc/swift/container.ring.gz
-scp object.ring.gz ctl-n1:/etc/swift/account.ring.gz
 
-scp account.ring.gz ctl-n2:/etc/swift/account.ring.gz
-scp container.ring.gz ctl-n2:/etc/swift/container.ring.gz
-scp object.ring.gz ctl-n2:/etc/swift/account.ring.gz
-
-
-scp *.builder ctl-n1:/etc/swift/
-scp *.builder ctl-n2:/etc/swift/
-
+# for swift rsyn
+# don't start rsync in controller
 systemctl status rsyncd
 systemctl enable rsyncd
 systemctl start rsyncd

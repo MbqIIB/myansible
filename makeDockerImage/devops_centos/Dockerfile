@@ -2,7 +2,7 @@ FROM ppc64le/centos:7
 
 RUN yum update -y
 RUN yum -y update; yum clean all
-RUN yum -y install openssh-server passwd; yum clean all
+RUN yum -y install openssh-server openssh-clients passwd wget sudo; yum clean all
 RUN mkdir /var/run/sshd
 RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
 

@@ -1,0 +1,24 @@
+
+
+yum install openstack-swift-account openstack-swift-container openstack-swift-object python-swiftclient openstack-swift
+
+
+mkdir -p /srv/loopback-device
+truncate -s 50GB /srv/loopback-device/swiftloopback
+qemu-img info /srv/loopback-device/swiftloopback
+mkfs.ext4 /srv/loopback-device/swiftloopback
+
+
+/srv/loopback-device/swiftloopback  /srv/node/swiftloopback ext4 noatime,nodiratime,nobarrier,loop,user_xattr  0 0
+
+mkdir -p /srv/node/swiftloopback
+
+chown  -R swift:swift /srv/node/
+
+
+if disk
+
+mkdir -p /srv/node/sdb1
+fdisk /dev/sdb
+mkfs.ext4 /dev/sdb1
+/dev/sdb1  /srv/node/sdb1 ext4 noatime,nodiratime,nobarrier,logbufs=8 0 2

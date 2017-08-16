@@ -199,3 +199,27 @@ ELK service
 http://9.4.241.7:9200/_plugin/head/
 
 http://9.4.241.7:9200/_plugin/head/
+
+
+# config novnc
+```
+ansible-playbook ctl_novnc.yml 
+
+# restart service in ctl-vip
+pcs resource restart NOVA_CONSOLE-clone
+pcs resource restart NOVA_CONSOLEAUTH-clone
+pcs resource restart NOVA_NOVNCPROXY-clone
+# compute
+service openstack-nova-compute restart
+nova stop uuid
+nova start uuid
+netstat -nap | grep 590
+
+```
+
+# config nova meta
+```
+Don't need start meta in mitaka
+pcs resource create NOVA_METADATA systemd:openstack-nova-metadata-api op monitor interval=20s timeout=30s
+pcs resource clone NOVA_METADATA
+```

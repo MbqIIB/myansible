@@ -1,7 +1,8 @@
 #- hosts: controller-server
 #- hosts: bluem4
 #- hosts: neucloud1
-- hosts: cp9
+#- hosts: cp9
+- hosts: ent2
   gather_facts: no
   tasks:
 

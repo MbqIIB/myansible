@@ -70,3 +70,5 @@ nova flavor-key smt16c.2s1c8t32g300G set hw:cpu_cores=${CPU_CORES} hw:cpu_socket
 
 
 
+nova flavor-create kvm.4c8g100Gs4  auto 8192 100 4  --swap 4096 --ephemeral 1
+

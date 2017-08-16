@@ -2,17 +2,23 @@
   remote_user: root
   gather_facts: no
   tasks :
-    - name : epel-release
-      yum : name=epel-release state=latest
-
-    - name : firewalld 9080 tcp
-      firewalld: port=9080/tcp permanent=true state=enabled immediate=yes
-
-    - name : config nginx
-      yum : name=nginx,httpd-tools state=latest
+#    - name : epel-release
+#      yum : name=epel-release state=latest
+#
+##    - name : firewalld 9080 tcp
+##      firewalld: port=9080/tcp permanent=true state=enabled immediate=yes
+#
+#    - name : install nginx
+#      yum : name=nginx,httpd-tools state=latest
+#
+    - name : copy main.html
+      copy : src=main.html dest=/usr/share/nginx/html/main.html mode=0644
     
-#    - name : copy nginx.conf
-#      copy : src=nginx.conf dest=/etc/nginx/nginx.conf mode=0644
+    - name : copy kibana.conf
+      copy : src=conf.d/kibana.conf dest=/etc/nginx/conf.d/kibana.conf mode=0644
+
+    - name : copy nginx.conf
+      copy : src=nginx.conf dest=/etc/nginx/nginx.conf mode=0644
 
 #    - name : service nginx
 #      service : name=nginx state=started enabled=yes

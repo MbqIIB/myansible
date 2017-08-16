@@ -1,0 +1,25 @@
+---
+- hosts : ctl-n1, ctl-n2,ctl-n3
+  remote_user: root
+  gather_facts:  true
+  tasks :
+
+  - name: Config cache .conf
+    ini_file:
+      dest: /etc/swift/proxy-server.conf
+      section: "filter:cache"
+      option: "{{ item.option }}"
+      value: "{{ item.value }}"
+    with_items:
+      - { option: 'memcache_servers', value: 'ctl-n1:11211,ctl-n2:11211,ctl-n3:11211' }
+
+  - name: Config cache .conf
+    ini_file:
+      dest: /etc/swift/proxy-server.conf
+      section: "DEFAULT"
+      option: "{{ item.option }}"
+      value: "{{ item.value }}"
+    with_items:
+      - { option: 'workers', value: '2' }
+
+
