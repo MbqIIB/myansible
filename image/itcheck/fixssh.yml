@@ -1,7 +1,8 @@
 #- hosts: elk-server
 #- hosts: controller-server
 #- hosts: ent-ctl0-x86
-- hosts: ent-cp6-ppc64le,dockerrepos
+#- hosts: ent-cp6-ppc64le,dockerrepos
+- hosts: syh1
   remote_user : root
   gather_facts: true
   vars:

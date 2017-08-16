@@ -1,0 +1,10 @@
+
+1.删掉旧版本  rpm -qa |grep gpfs |xargs rpm -e
+2. 装新版本 rpm -ivh gpfs*.rpm 
+
+3. 编译
+    cd /usr/lpp/mmfs/src
+    make Autoconfig
+    make World
+    make InstallImages
+    mmstartup 

@@ -5,7 +5,8 @@
 
 set -x
 
-tenantid=bb5f92980da54ca2903a07c27808a8f6
+#tenantid=bb5f92980da54ca2903a07c27808a8f6
+tenantid=55de741d321847b3bda114279232e440
 
 
 oldinfo=$(neutron security-group-list --tenant-id  ${tenantid})
