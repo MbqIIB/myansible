@@ -1,0 +1,10 @@
+---
+#- hosts: els-n1,els-n2,els-n3
+- hosts: op-server
+  remote_user: root
+  gather_facts: no
+  tasks:
+  - name : config crontab
+    cron : name="Monitor NTP" minute=0 hour=*/1
+             job="/usr/sbin/ntpdate -u 192.168.32.2; /usr/sbin/hwclock -w"
+
