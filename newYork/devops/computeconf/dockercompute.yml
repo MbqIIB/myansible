@@ -1,6 +1,7 @@
 ---
 #- hosts : install-server
-- hosts : compute-server-ppc64le-docker
+#- hosts : compute-server-ppc64le-docker
+- hosts : svp4
   remote_user: root
   gather_facts: no
   tasks :

@@ -9,6 +9,8 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 
 
 
+user mysql;
+select host,user,password from user;
 
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456';
 FLUSH PRIVILEGES;

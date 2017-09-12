@@ -36,3 +36,5 @@ chown ntp:ntp -R /var/log/ntpstats
 
 
 ansible rabbit-server -m shell -a "date"
+
+ansible svx11-18 -m shell -a "ntpdate -u ntp.ubuntu.com"
