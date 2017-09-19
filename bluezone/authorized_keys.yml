@@ -2,9 +2,9 @@
 #- hosts:  neucloud5
 #- hosts:  redpower8
 #- hosts:  mitaka-op-server
-#- hosts:  blue212
+- hosts:  blue212
 #- hosts: ansible 
-- hosts:  redpower5
+#- hosts:  redpower5
   remote_user : root
   gather_facts: true
   vars:

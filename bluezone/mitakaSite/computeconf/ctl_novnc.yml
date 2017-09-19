@@ -17,7 +17,8 @@
       - { option: 'vncserver_listen', value: '{{ inventory_hostname }}' }
       - { option: 'novncproxy_host', value: '{{ inventory_hostname }}' }
       - { option: 'novncproxy_port', value: '6080' }
-      - { option: 'novncproxy_base_url', value: 'http://ctl-vip:6080/vnc_auto.html' }
+      - { option: 'novncproxy_base_url', value: 'http://9.186.106.212/vncws' }
+#      - { option: 'novncproxy_base_url', value: 'http://ctl-vip:6080/vnc_auto.html' }
 
   - name: Config cache nova.conf
     ini_file:
@@ -53,4 +54,5 @@
       - { option: 'vncserver_listen', value: '0.0.0.0' }
 #      - { option: 'novncproxy_host', value: '{{ inventory_hostname }}' }
 #      - { option: 'novncproxy_port', value: '6080' }
-      - { option: 'novncproxy_base_url', value: 'http://ctl-vip:6080/vnc_auto.html' }
+#      - { option: 'novncproxy_base_url', value: 'http://ctl-vip:6080/vnc_auto.html' }
+      - { option: 'novncproxy_base_url', value: 'http://9.186.106.212/vncws' }

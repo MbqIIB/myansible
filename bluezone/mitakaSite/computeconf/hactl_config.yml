@@ -6,6 +6,28 @@
   - name : ping
     ping :
 
+  - name: Config /etc/nova/nova.conf
+    ini_file: 
+      dest: /etc/nova/nova.conf
+      section: conductor
+      option: workers
+      value: 4
+
+  - name: Config /etc/nova/nova.conf
+    ini_file: 
+      dest: /etc/nova/nova.conf
+      section: DEFAULT
+      option: osapi_compute_workers
+      value: 4
+
+  - name: Config /etc/nova/nova.conf
+    ini_file: 
+      dest: /etc/nova/nova.conf
+      section: DEFAULT
+      option: metadata_workers
+      value: 4
+
+
   - name: Config /etc/glance/glance-api.conf
     ini_file: 
       dest: /etc/glance/glance-api.conf
@@ -13,7 +35,6 @@
       option: debug
       #value: True
       value: False
-      backup: yes
 
   - name: Config /etc/glance/glance-api.conf
     ini_file: 
@@ -21,7 +42,6 @@
       section: DEFAULT
       option: workers
       value: 4
-      backup: yes
 
   - name: Config /etc/glance/glance-api.conf
     ini_file: 
@@ -29,7 +49,6 @@
       section: DEFAULT
       option: auth_strategy
       value: keystone
-      backup: yes
 
   - name: Config /etc/glance/glance-registry.conf
     ini_file: 
@@ -37,6 +56,3 @@
       section: DEFAULT
       option: workers
       value: 4
-      backup: yes
-
-

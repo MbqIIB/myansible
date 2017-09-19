@@ -68,4 +68,17 @@ glance image-show 41a69c3d-cae7-4dbe-9105-34c8fdbff073
 glance  image-update --property sys_type=centos --property imageUuid=CentOS7 41a69c3d-cae7-4dbe-9105-34c8fdbff073 --visibility public
 ```
 
+# disable cloud init
+
+cloud-config.service                       enabled
+cloud-final.service                        enabled
+cloud-init-local.service                   enabled
+cloud-init.service                         enabled
+
+systemctl disable cloud-config.service
+systemctl disable cloud-final.service
+systemctl disable cloud-init-local.service
+systemctl disable cloud-init.service
+
+
 # End

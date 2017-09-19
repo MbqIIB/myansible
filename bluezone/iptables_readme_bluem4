@@ -17,10 +17,10 @@ firewall-cmd --list-rich-rules
 cd /usr/lib/firewalld/zones
 firewall-cmd --reload
 
+
+# for route forward in blue212
 firewall-cmd --permanent --direct --passthrough ipv4 -t nat -I POSTROUTING -o br-public -j MASQUERADE -s 10.0.0.0/16
-
 firewall-cmd --permanent --direct --add-rule ipv4 filter FWDO_public 0 -j ACCEPT
-
 firewall-cmd --direct --add-rule ipv4 filter FWDO_public 0 -j ACCEPT
 firewall-cmd --reload
 iptables -S

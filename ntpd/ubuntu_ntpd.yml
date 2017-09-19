@@ -1,11 +1,11 @@
 #- hosts: controller-server,net-server
 #- hosts: compute-server
-#- hosts:  redpower6,ibms812lc1
 #- hosts: install-server
 #- hosts: accdnnservice
 #- hosts: ent-cp5-ppc64le
 #- hosts: svx12,svx13,svx14,svx15,svx6,svx17,svx18
-- hosts: compute-server-ubuntu-x86-2
+#- hosts: compute-server-ubuntu-x86-2
+- hosts:  redpower6,redpower5,neucloud5,neucloud6
   gather_facts: no
   tasks:
 
@@ -20,6 +20,6 @@
   - name: set timezone 
     timezone:
       #name: Asia/Tokyo
-      name: America/New_York
-      #name: Asia/Shanghai
+      #name: America/New_York
+      name: Asia/Shanghai
 

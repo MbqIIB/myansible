@@ -57,7 +57,7 @@ path.logs: /var/log/elasticsearch
 #
 #network.host: 10.0.19.191
 network.host: 0.0.0.0
-network.publish_host: 10.0.19.191
+network.publish_host: els-n1
 #
 # Set a custom port for HTTP:
 #
@@ -71,7 +71,7 @@ http.port: 9200
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
 #discovery.zen.ping.unicast.hosts: ["host1", "host2"]
-discovery.zen.ping.unicast.hosts: ["els-n2", "els-n3"]
+discovery.zen.ping.unicast.hosts: ["els-n1", "els-n2", "els-n3"]
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
 #

@@ -1,10 +1,10 @@
 #- hosts:  svx11
 #- hosts:  supermicr1
 #- hosts:  gongyan-gpu
-- hosts:  cp16
+#- hosts:  cp16
 #- hosts:  redpower6,ibms812lc1
 #- hosts:  accdnn-server
-#- hosts:  blue212
+- hosts:  blue212
 #- hosts:  redpower5
 #- hosts:  neucloud5
 #- hosts:  svx207
