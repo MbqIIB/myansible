@@ -109,10 +109,18 @@ tail -f /var/opt/BESClient/__BESData/__Global/Logs/20170602.log
 # fixssh
 ```
 grep -rn "Ciphers" /etc/ssh
+grep -rn "hmac" /etc/ssh
 
 # update /etc/ssh/ssh_config
-Ciphers aes128-ctr,aes192-ctr,aes256-ctr
+    Ciphers aes128-ctr,aes192-ctr,aes256-ctr
+    #MACs hmac-sha1,umac-64@openssh.com,hmac-ripemd160
 
+service ssh restart
+systemctl status sshd
+systemctl restart sshd
+
+glance  image-update --property image_type=image --is-public=true dd443da2-c5cb-4a7d-8ed4-465e52819fdb
+glance  image-update --property image_type=image --is-public=true af012631-1ff0-4a91-8dde-8d605ea60c53
 ```
 
 # repo
