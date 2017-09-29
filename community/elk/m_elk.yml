@@ -1,0 +1,76 @@
+- hosts : els-n1,els-n2,els-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+
+    - name: Add elasticsearch-5.x repository
+      yum_repository:
+        name: elasticsearch-5.x
+        description: Elasticsearch repository for 5.x packages
+        file :  elasticsearch
+        baseurl: https://artifacts.elastic.co/packages/5.x/yum
+#        proxy : http://9.115.78.100:8085
+        enabled : yes
+        gpgcheck: no
+
+    - name: install elasticsearch
+      yum : name=elasticsearch,java-1.8.0-openjdk,curl,wget state=latest
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=stopped enabled=yes
+
+    - name : elasticsearch /data
+      file : path=/data owner=elasticsearch group=elasticsearch state=directory mode=0755
+
+
+    #- name : rm elasticsearch
+    #  shell : rm -rf /data/elasticsearch*
+
+    - name : firewalld 9080 tcp
+      firewalld: port=9080/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 9200 tcp for es
+      firewalld: port=9200/tcp permanent=true state=enabled immediate=yes
+
+    - name : firewalld 9300 tcp for es
+      firewalld: port=9300/tcp permanent=true state=enabled immediate=yes
+
+- hosts : els-n1
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : copy node1_elasticsearch.yml
+      copy : src=node1_elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml mode=0644
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=restarted enabled=yes
+
+- hosts : els-n2
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : copy node2_elasticsearch.yml
+      copy : src=node2_elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml mode=0644
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=restarted enabled=yes
+
+- hosts : els-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name : copy node3_elasticsearch.yml
+      copy : src=node3_elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml mode=0644
+
+    - name : service elasticsearch
+      service : name=elasticsearch state=restarted enabled=yes
+
+
+- hosts : els-n1,els-n2,els-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+  - name : service elasticsearch
+    service : name=elasticsearch state=started enabled=yes
+
+

@@ -1,0 +1,80 @@
+- hosts : log-server
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: Add logstash-5.x repository
+      yum_repository:
+        name: logstash-5.x
+        description: Elasticsearch repository for 5.x packages
+        file :  logstash
+        baseurl: https://artifacts.elastic.co/packages/5.x/yum
+        enabled : yes
+        gpgcheck: no
+
+    - name: install logstash
+      yum : name=logstash,java-1.8.0-openjdk state=latest
+
+    - name : service logstash
+      service : name=logstash state=stopped enabled=yes
+
+#    - name : rsyslog /data
+#      file : path=/data/log/openstack owner=root group=root state=directory mode=0755
+
+
+#    - name : copy rsyslog_server_openstack.conf
+#      copy : src=rsyslog_server_openstack.conf dest=/etc/rsyslog.d/60-openstack.conf mode=0644
+#
+#    - name : firewalld 514 udp for rsyslog
+#      firewalld: port=514/udp permanent=true state=enabled immediate=yes
+#
+#    - name : rsyslog start
+#      service : name=rsyslog state=restarted enabled=yes
+
+
+    - name : copy  01-input.conf  03-openstack.conf  99-output.conf
+      copy : src=logstash_conf.d/01-input.conf dest=/etc/logstash/conf.d/01-input.conf  mode=0644
+
+    - name : copy  01-input.conf  03-openstack.conf  99-output.conf
+      copy : src=logstash_conf.d/03-openstack.conf dest=/etc/logstash/conf.d/03-openstack.conf  mode=0644
+
+    - name : copy  01-input.conf  03-openstack.conf  99-output.conf
+      copy : src=logstash_conf.d/99-output.conf dest=/etc/logstash/conf.d/99-output.conf  mode=0644
+
+    - name : service logstash
+      service : name=logstash state=restarted enabled=yes
+
+
+          #
+          #
+          #- hosts : m-ctl-server
+          #  remote_user: root
+          #  gather_facts: no
+          #  tasks:
+          #    - name : copy ctl_rsyslog_openstack_agent.conf ctl
+          #      copy : src=ctl_rsyslog_openstack_agent.conf dest=/etc/rsyslog.d/60-openstack-agent.conf mode=0644
+          #
+          #    - name : rsyslog start ctl
+          #      service : name=rsyslog state=restarted enabled=yes
+          #
+          #- hosts : m-net-server
+          #  remote_user: root
+          #  gather_facts: no
+          #  tasks:
+          #    - name : copy net_rsyslog_openstack_agent.conf net node
+          #      copy : src=net_rsyslog_openstack_agent.conf dest=/etc/rsyslog.d/network-neutron_60-openstack.conf mode=0644
+          #
+          #    - name : rsyslog start
+          #      service : name=rsyslog state=restarted enabled=yes
+          #
+          #- hosts : m-cp-server
+          #  remote_user: root
+          #  gather_facts: no
+          #  tasks:
+          #
+          #    - name : copy compute_openstack_agent.conf
+          #      copy : src=compute_openstack_agent.conf dest=/etc/rsyslog.d/60-openstack-compute.conf mode=0644
+          #
+          #    - name : rsyslog start
+          #      service : name=rsyslog state=restarted enabled=yes
+          #
+          #

@@ -1,5 +1,5 @@
 ---
-- hosts : op-server
+- hosts : op-server,elk-server
   remote_user: root
   gather_facts: no
   tasks :

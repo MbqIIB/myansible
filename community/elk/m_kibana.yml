@@ -1,0 +1,19 @@
+- hosts : els-n1,els-n2,els-n3
+  remote_user: root
+  gather_facts: no
+  tasks :
+    - name: install kibana
+      yum : name=kibana state=latest
+
+    - name : firewalld 5601 tcp
+      firewalld: port=5601/tcp permanent=true state=enabled immediate=yes
+
+    - name : copy kibana.yml
+      copy : src=conf_kibana.yml dest=/etc/kibana/kibana.yml mode=0644
+
+    - name : #chown kibana:kibana -R /usr/share/kibana/optimize/bundles
+      file : path=/usr/share/kibana owner=kibana group=kibana state=directory mode=0755 recurse=yes
+
+    - name : service kibana
+      service : name=kibana state=restarted enabled=yes
+
