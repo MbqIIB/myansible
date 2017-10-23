@@ -27,9 +27,9 @@ if [ -f /var/opt/BESClient/besclient.config ];then
 fi
 
 pushd /tmp/
-#wget http://172.16.10.119/itcheck.20170522.tar.gz
+#wget http://172.16.10.119/software/itcheck.20170522.tar.gz
 #tar xvf itcheck.20170522.tar.gz
-wget http://172.16.10.119/itcheck.20170808.tar.gz
+wget http://172.16.10.119/software/itcheck.20170808.tar.gz
 tar xvf itcheck.20170808.tar.gz
 
 cd itcheck
@@ -76,7 +76,8 @@ ps -ef | grep BESClient
 
 sleep 5
 ls -l /var/opt/BESClient/__BESData/__Global/Logs/
-#tail -f /var/opt/BESClient/__BESData/__Global/Logs/20170522.log
+DATE=$(date +'%Y%m%d')
+#tail -f /var/opt/BESClient/__BESData/__Global/Logs/${DATE}.log
 
 popd
 

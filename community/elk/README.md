@@ -40,3 +40,13 @@ systemctl restart kibana
 
 firewall-cmd --add-port=9080-9081/tcp
 firewall-cmd --permanent --add-port=9080-9081/tcp
+
+
+systemctl status elasticsearch
+systemctl status kibana
+systemctl status logstash
+
+# clear data
+```
+curl -XDELETE "http://localhost:9200/openstack-2017.09.*"
+```

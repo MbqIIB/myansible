@@ -97,4 +97,4 @@ xpack.security.enabled: false
 xpack.monitoring.enabled : true
 xpack.graph.enabled : true
 xpack.watcher.enabled : true
-xpack.ml.enabled : true
+#xpack.ml.enabled : true

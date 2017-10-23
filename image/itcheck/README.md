@@ -74,6 +74,10 @@ cd /tmp
 wget http://172.16.10.119/software/autoInstallTem.sh
 bash autoInstallTem.sh
 
+ls -l /var/opt/BESClient/__BESData/__Global/Logs/
+DATE=$(date +'%Y%m%d')
+tail -f /var/opt/BESClient/__BESData/__Global/Logs/${DATE}.log
+
 vim /etc/rc.local
 /etc/init.d/besclient start &
 history -c
@@ -105,6 +109,11 @@ systemctl start besclient.service
 /etc/init.d/besclient start
 vim /var/opt/BESClient/besclient.config
 tail -f /var/opt/BESClient/__BESData/__Global/Logs/20171016.log
+
+ls -l /var/opt/BESClient/__BESData/__Global/Logs/
+DATE=$(date +'%Y%m%d')
+#tail -f /var/opt/BESClient/__BESData/__Global/Logs/${DATE}.log
+
 ```
 
 # fixssh
