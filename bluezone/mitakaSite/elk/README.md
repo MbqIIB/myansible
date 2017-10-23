@@ -27,6 +27,7 @@ bin/elasticsearch-plugin remove --purge x-pack
 bin/elasticsearch-plugin install x-pack
 
 cd /usr/share/kibana/
+bin/kibana-plugin list
 bin/kibana-plugin remove x-pack
 bin/kibana-plugin install x-pack
 
@@ -50,6 +51,8 @@ cd /usr/share/elasticsearch
 bin/elasticsearch-plugin list
 bin/elasticsearch-plugin install ingest-user-agent
 bin/elasticsearch-plugin install ingest-geoip
+bin/elasticsearch-plugin remove --purge ingest-user-agent
+bin/elasticsearch-plugin remove --purge ingest-geoip
 
 ```
 
@@ -65,13 +68,26 @@ unzip
 
 # template
 ```
+curl -XGET "http://els-vip:9200/_template/openstack"  > op.template.json
+curl -XDELETE 'http://els-vip:9200/_template/openstack'
+curl -XPUT 'http://els-vip:9200/_template/openstack' -d@op.template.json
+
+
 curl -XGET 'http://els-vip:9200/_cat/templates?v'
 curl -XDELETE "http://localhost:9200/_template/filebeat"
 
 curl -XPUT 'http://localhost:9200/_template/filebeat' -d@/etc/filebeat/filebeat.template.json
 
 curl -XGET 'http://els-vip:9200/_cat/indices'
+curl -XDELETE "http://localhost:9200/openstack-*"
 curl -XPUT 'http://localhost:9200/indices/filebeat' -d@/root/beats-dashboards-5.6.1/filebeat/default/index-pattern/filebeat.json
+
+curl -XGET 'http://els-vip:9200/_cat/indices?v'
+curl -XPUT 'http://els-vip:9200/linzhbj?pretty'  
+curl -XGET 'http://els-vip:9200/linzhbj?pretty'  
+curl -XPOST http://els-vip:9200/linzhbj/external?pretty -d '{"name":"lin1","stock":'100'}'
+curl -XPOST http://els-vip:9200/linzhbj/external?pretty -d '{"name":"lin2","stock":'101'}'
+curl -XPOST http://els-vip:9200/linzhbj/external?pretty -d '{"name":"lin3","stock":'102'}'
 
 curl -XGET 'http://localhost:9200/.kibana?pretty'
 curl -XPUT 'http://localhost:9200/.kibana/index-pattern/filebeat-*' -d @dashboards/index-pattern/filebeat.json

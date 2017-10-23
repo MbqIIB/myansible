@@ -36,8 +36,8 @@ value = 0
 ``` shell
 
 cd /tmp/
-wget http://9.186.61.119/itcheck.20170522.tar.gz
-wget http://172.16.10.119/itcheck.20170522.tar.gz
+wget http://9.186.61.119/software/itcheck.20170522.tar.gz
+wget http://172.16.10.119/software/itcheck.20170522.tar.gz
 tar xvf itcheck.20170522.tar.gz
 cd itcheck
 dpkg -i BESAgent-9.5.5.196-ubuntu144.ppc64el.deb
@@ -71,7 +71,7 @@ history -w
 # auto install
 ``` shell
 cd /tmp
-wget http://172.16.10.119/autoInstallTem.sh
+wget http://172.16.10.119/software/autoInstallTem.sh
 bash autoInstallTem.sh
 
 vim /etc/rc.local
@@ -84,7 +84,8 @@ history -w
 # x86
 ``` shell
 cd /tmp/
-wget http://172.16.10.119/itcheck.20170522.tar.gz
+wget http://172.16.10.119/software/itcheck.20170522.tar.gz
+wget http://9.186.61.119/software/itcheck.20170808.tar.gz
 tar xvf itcheck.20170522.tar.gz
 cd itcheck
 dpkg -i BESAgent-9.5.5.196-ubuntu10.amd64.deb
@@ -103,7 +104,7 @@ systemctl start besclient.service
 
 /etc/init.d/besclient start
 vim /var/opt/BESClient/besclient.config
-tail -f /var/opt/BESClient/__BESData/__Global/Logs/20170602.log
+tail -f /var/opt/BESClient/__BESData/__Global/Logs/20171016.log
 ```
 
 # fixssh
