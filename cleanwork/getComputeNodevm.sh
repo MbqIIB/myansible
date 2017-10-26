@@ -71,7 +71,9 @@ ComputeNode=compute-cp8-ppc-LE-docker
 #ComputeNode=svp6
 #ComputeNode=svp9
 #ComputeNode=svp10
-ComputeNode=svp11
+#ComputeNode=svp11
+ComputeNode=ent-cp7-ppc64le.ibm.com
+#ComputeNode=ent-cp6-ppc64le.ibm.com
 
 nova list --all-tenants  --host ${ComputeNode} > ${logall}
 

@@ -17,15 +17,15 @@
 
     - name : service sshd
       service : name=sshd state=restarted enabled=yes
-      when : ansible_os_family =="RedHat" 
+      when : ansible_os_family =="RedHat"
 
     - name : service ssh
       service : name=ssh state=restarted enabled=yes
-      when : ansible_os_family =="Debian" 
+      when : ansible_os_family =="Debian"
 
 #    - name : update  ent-op-server key
-#      authorized_key: user=root key="{{ lookup('file', 'blueent_id_rsa.pub') }}" 
+#      authorized_key: user=root key="{{ lookup('file', 'blueent_id_rsa.pub') }}"
 #
 #    - name : update  ent-op-server key
-#      authorized_key: user=root key="{{ lookup('file', 'bluexcat_id_rsa.pub') }}" 
+#      authorized_key: user=root key="{{ lookup('file', 'bluexcat_id_rsa.pub') }}"
  
